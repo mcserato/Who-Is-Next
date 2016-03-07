@@ -12,12 +12,20 @@ module.exports = function (router) {
         .put(admin.update)
         .delete(admin.delete);
     */
-    
-    router.route('*')
+
+/*    router.route('*')
         .all(function (req, res) {
             return res.status(404).send({ message: 'Nothing to do here.' });
         });
+*/
+    router.route('/class')
+        .post(class_.add);
+
+    router.route('/student')
+        .post(student.add);
+
+    router.route('/class_student')
+        .post(class_student.add);
 
     return router;
 };
-
