@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS CLASS;
 CREATE TABLE CLASS
 	(class_id INT AUTO_INCREMENT,
 	 course_code VARCHAR(10) NOT NULL,
-	 course_title VARCHAR(50) NOT NULL,
+	 course_title VARCHAR(256) NOT NULL,
 	 class_section VARCHAR(10) NOT NULL,
 	 section_number VARCHAR(5),
 	 is_archived BOOLEAN DEFAULT FALSE,
