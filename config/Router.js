@@ -13,11 +13,6 @@ module.exports = function (router) {
         .delete(admin.delete);
     */
 
-/*    router.route('*')
-        .all(function (req, res) {
-            return res.status(404).send({ message: 'Nothing to do here.' });
-        });
-*/
     router.route('/class')
         .post(class_.add);
 
@@ -26,6 +21,11 @@ module.exports = function (router) {
 
     router.route('/class_student')
         .post(class_student.add);
+
+    router.route('*')
+    .all(function (req, res) {
+        return res.status(404).send({ message: 'Nothing to do here.' });
+    });
 
     return router;
 };
