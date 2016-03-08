@@ -14,13 +14,18 @@ module.exports = function (router) {
     */
 
     router.route('/class')
-        .post(class_.add);
+        .post(class_.add)
+        .put(class_.edit);
 
     router.route('/student')
-        .post(student.add);
+        .post(student.add)
+        .put(student.edit);
 
     router.route('/class_student')
         .post(class_student.add);
+
+    router.route('/faculty')
+        .put(faculty.edit);
 
     router.route('*')
     .all(function (req, res) {
