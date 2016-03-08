@@ -13,5 +13,7 @@ echo "[!] Successfully deleted Who-Is-Next folder and contents" &&
 
 #unsets the git user.name and git user.email
 git config --global user.name '' &&
-git config --global user.email ''
+git config --global user.email '' &&
 
+history -c #clears the terminal history to hide confidential commands
+#such as github repo link, db password, etc.
