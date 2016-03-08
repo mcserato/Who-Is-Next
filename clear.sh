@@ -13,5 +13,5 @@ echo "[!] Successfully deleted Who-Is-Next folder and contents" &&
 
 #unsets the git user.name and git user.email
 git config --global user.name '' &&
-git config --global user.email '' &&
+git config --global user.email ''
 
