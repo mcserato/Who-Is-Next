@@ -13,6 +13,12 @@ module.exports = function (router) {
         .delete(admin.delete);
     */
     
+    router.route('/api/letter_section')
+        .delete(class_.removeLetterSection);
+        
+    router.route('/api/number_section')
+        .delete(class_.removeNumberSection);
+    
     router.route('*')
         .all(function (req, res) {
             return res.status(404).send({ message: 'Nothing to do here.' });
