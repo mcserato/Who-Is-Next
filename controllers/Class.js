@@ -1,4 +1,4 @@
-var db = require(__dirname + './../lib/mysql.js');
+var db = require(__dirname + '/../lib/Mysql');
 
 exports.removeLetterSection = function(req, res, next){
     db.query('DELETE from CLASS where class_section = ?', [req.body.class_section], function cb(err, rows){});
