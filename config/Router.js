@@ -11,8 +11,7 @@ module.exports = function (router) {
         .post(admin.add)
         .put(admin.update)
         .delete(admin.delete);
-    */
-    
+    */    
     router.route('/api/letter_section')
         .delete(class_.removeLetterSection);
         
@@ -24,7 +23,10 @@ module.exports = function (router) {
         
     router.route('/api/remove_student_from_class')
         .delete(class_student.removeStudentFromClass);
-    
+
+    router.route('/api/student')
+        .delete(student.remove);
+
     router.route('*')
         .all(function (req, res) {
             return res.status(404).send({ message: 'Nothing to do here.' });
