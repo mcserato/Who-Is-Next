@@ -3,7 +3,9 @@ var admin = require('../controllers/Admin.js'),
     class_student = require('../controllers/ClassStudent.js'),
     faculty = require('../controllers/Faculty.js'),
     student = require('../controllers/Student.js');
-    analytics = require('../controllers/Analytics.js');
+    analytics_most_called_students = require('../controllers/Analytics.js');
+    analytics_most_called_males = require('../controllers/Analytics.js');
+    analytics_most_called_females
 
 module.exports = function (router) {
     /* sample
@@ -28,11 +30,15 @@ module.exports = function (router) {
     router.route('/faculty')
         .put(faculty.edit);
 
-    router.route('/analytics')
+    router.route('analytics/:class_id')
         .get(analytics.getTopTenMostCalledStudents)
         .get(analytics.getTopTenMostCalledMales)
-        .get(analytics.getTopTenMostCalledFemales)
-        .get(analytics.getSectionFrequency)
+        .get(analytics.getTopTenMostCalledFemales);
+
+    router.route('analytics/:class_id/:class_section')
+        .get(analytics.getSectionFrequency);
+
+    router.route('analytics/:class_id/:gender')
         .get(analytics.getGenderFrequency);
 
 
