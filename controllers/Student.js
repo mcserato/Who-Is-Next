@@ -1,7 +1,9 @@
 var db = require(__dirname + './../lib/Mysql');
 
+
 /* Adds the student to the database */
 exports.add = function (req, res, next) {
+	// Checks if the student number is null
     if(req.body.student_number == null || req.body.student_number == "") {
         res.send(400, "Error: Bad Argument!");
     }
