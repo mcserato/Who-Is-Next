@@ -3,6 +3,7 @@ var admin = require('../controllers/Admin.js'),
     class_student = require('../controllers/ClassStudent.js'),
     faculty = require('../controllers/Faculty.js'),
     student = require('../controllers/Student.js');
+    analytics = require('../controllers/Analytics.js');
 
 module.exports = function (router) {
     /* sample
@@ -26,6 +27,9 @@ module.exports = function (router) {
 
     router.route('/faculty')
         .put(faculty.edit);
+
+    router.route('/analytics')
+        .get(analytics.view);
 
     router.route('*')
     .all(function (req, res) {
