@@ -33,7 +33,7 @@ module.exports = function (router) {
         .get(analytics.getTopTenMostCalledStudents);
 
     router.route('/analyticsMale/:class_id')
-        .get(/analytics.getTopTenMostCalledMales);
+        .get(analytics.getTopTenMostCalledMales);
 
     router.route('/analyticsFemale/:class_id')
         .get(analytics.getTopTenMostCalledFemales);
