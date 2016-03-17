@@ -29,19 +29,19 @@ module.exports = function (router) {
     router.route('/faculty')
         .put(faculty.edit);
 
-    router.route('analytics/:class_id')
+    router.route('/analytics/:class_id')
         .get(analytics.getTopTenMostCalledStudents);
 
-    router.route('analyticsMale/:class_id')
-        .get(analytics.getTopTenMostCalledMales);
+    /*router.route('/analyticsMale/:class_id')
+        .get(/analytics.getTopTenMostCalledMales);
 
-    router.route('analyticsFemale/:class_id')
+    router.route('/analyticsFemale/:class_id')
         .get(analytics.getTopTenMostCalledFemales);
 
-    router.route('analyticsLab/:class_id/:class_section')
+    router.route('/analyticsLab/:class_id/:class_section')
         .get(analytics.getSectionFrequency);
-
-    router.route('analyticsGender/:class_id/:gender')
+*/
+    router.route('/analyticsGender/:class_id/:gender')
         .get(analytics.getGenderFrequency);
 
 
