@@ -29,7 +29,12 @@ module.exports = function (router) {
         .put(faculty.edit);
 
     router.route('/analytics')
-        .get(analytics.view);
+        .get(analytics.getTopTenMostCalledStudents)
+        .get(analytics.getTopTenMostCalledMales)
+        .get(analytics.getTopTenMostCalledFemales)
+        .get(analytics.getSectionFrequency)
+        .get(analytics.getGenderFrequency);
+
 
     router.route('*')
     .all(function (req, res) {
