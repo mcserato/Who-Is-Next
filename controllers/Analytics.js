@@ -17,6 +17,25 @@ exports.getTopTenMostCalledStudents = function (req, res, next) {
     });
 }
 
+/*Gets the section frequency in a specific class*/
+exports.getSectionFrequency = function (req, res, next) {
+    db.query("SELECT SUM(CLASS_STUDENT.no_of_times_called) FROM " + 
+        "CLASS_STUDENT, STUDENT WHERE CLASS_STUDENT.student_number = " + 
+        "STUDENT.student_number AND CLASS_STUDENT.class_id = ? AND " +
+        "STUDENT.student_number IN (SELECT STUDENT.student_number FROM " +
+        "CLASS_STUDENT, STUDENT WHERE CLASS_STUDENT.student_number = " +
+        "STUDENT.student_number AND CLASS_STUDENT.class_id = ?)",
+        [req.params.class_id, req.params.class_section],
+
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+
+            res.send(rows);
+    });
+}
+
 /* Gets the gender frequency in a specific class */
 exports.getGenderFrequency = function (req, res, next) {
     db.query("SELECT  SUM(no_of_times_called) FROM STUDENT, CLASS_STUDENT " +
