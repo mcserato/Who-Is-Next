@@ -1,8 +1,11 @@
 var db = require(__dirname + './../lib/Mysql');
 
+/* Adds the student to the database */
 exports.add = function (req, res, next) {
     db.query("SELECT student_number FROM STUDENT WHERE student_number = ?",
     [req.body.student_number], function(err, rows) {
+
+    	// Checks if the student already exists
         if (rows.length === 0) {
         	db.query("INSERT INTO STUDENT VALUES (?, ?, ?, ?, ?, ?, ?, ?, " + 
                 "STR_TO_DATE(?, '%Y-%m-%d'))",
@@ -13,17 +16,19 @@ exports.add = function (req, res, next) {
                 function (err, rows) {
 
                     if (err) {
-                        return(err);
+                        return next(err);
                     }
+
                     res.send(rows);
         	});
-        }
-        else {
+        } else {
             res.send(400, "Error: Student already exists!");
         }
     });
 }
 
+
+/* Edits a specific student in the database */
 exports.edit = function (req, res, next) {
     db.query("UPDATE STUDENT SET student_number = ?, first_name = ?, " +
         "middle_name = ?, last_name = ?, college = ?, course = ?, " +
@@ -36,8 +41,9 @@ exports.edit = function (req, res, next) {
 
         function (err, rows) {
             if (err) {
-                return(err);
+                return next(err);
             }
+
             res.send(rows);
     });
 }

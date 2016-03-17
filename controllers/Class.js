@@ -1,5 +1,7 @@
 var db = require(__dirname + './../lib/Mysql');
 
+
+/* Adds the class to the database */
 exports.add = function (req, res, next) {
 	db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
         + "section_number, emp_num) VALUES(?, ?, ?, ?, ?)",
@@ -8,12 +10,13 @@ exports.add = function (req, res, next) {
 
         function (err, rows) {
             if (err) {
-                return(err);
+                return next(err);
             }
             res.send(rows);
 	});
 }
 
+/* Edits a specific class in the database */
 exports.edit = function (req, res, next) {
     db.query("UPDATE CLASS SET course_code = ?, course_title = ?, " +
         "class_section = ?, section_number = ? WHERE class_id = ?",
@@ -22,7 +25,7 @@ exports.edit = function (req, res, next) {
 
         function (err, rows) {
             if (err) {
-                return(err);
+                return next(err);
             }
             res.send(rows);
     });
