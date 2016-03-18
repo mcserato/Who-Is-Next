@@ -19,13 +19,13 @@ module.exports = function (router) {
         .delete(class_.removeNumberSection);
         
     router.route('/api/remove_class')
-    	.delete(class_.removeClass);
+        .delete(class_.removeClass);
         
     router.route('/api/remove_student_from_class')
         .delete(class_student.removeStudentFromClass);
 
     router.route('/api/student')
-        .delete(student.remove);
+        .delete(student.removeStudent);
 
     router.route('*')
         .all(function (req, res) {
