@@ -10,7 +10,7 @@ var db = require(__dirname + './../lib/Mysql');
 exports.validate = function (req, res, next) {
 	var username = req.body.username;
 
-	db.query("UPDATE FACULTY SET is_validated = true where	username = '"+username+"'", function (err, rows) {
+	db.query("UPDATE FACULTY SET is_validated = true where	username = ?",[username],function (err, rows) {
 		if(err) return(err);
 	});
 }
