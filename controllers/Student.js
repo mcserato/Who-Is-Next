@@ -21,4 +21,4 @@ exports.removeStudent = function (req, res, next) {
         return res.send(rows);
     }
 
-};
+}

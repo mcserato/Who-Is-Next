@@ -1,45 +1,28 @@
 var db = require(__dirname + '/../lib/Mysql');
 
-exports.removeLetterSection = function(req, res, next){
-    if (!req.body.class_section) {
-        res.status(400).send({message: 'Missing class section'});
-    }
-    
-    db.query('DELETE from CLASS where class_section = ?', [req.body.class_section], function cb(err, rows){});
-
-    function cb(err, rows) {
-        if (err) return err;
-        
-        if (!rows.affectedRows) {
-            res.status(400).send({message: 'No section was deleted'});
-        }
-        
-        res.send(rows);
-    }
-};
-
-exports.removeNumberSection = function(req, res, next){
-    if (!req.body.class_section) {
-        res.status(400).send({message: 'Missing class section'});
-    }
-    if (!req.body.section_number) {
-        res.status(400).send({message: 'Missing section number'});
-    }
-    
-    db.query('DELETE from CLASS where class_section = ? AND section_number = ?', [req.body.class_section, req.body.section_number], function cb(err, rows){});
-
-    function cb(err, rows) {
-        if (err) return err;
-        
-        if (!rows.affectedRows) {
-            res.status(400).send({message: 'No section was deleted'});
-        }
-        
-        res.send(rows);
-    }
-};
-
 exports.removeClass = function(req, res, next){
+    if (!req.body.class_section) {
+        res.status(400).send({message: 'Missing class section'});
+    }
+    
+    if (!req.body.course_code) {
+        res.status(400).send({message: 'Missing course code'});
+    }
+    
+    db.query('DELETE from CLASS where course_code = ? and class_section = ?', [req.body.course_code, req.body.class_section], function cb(err, rows){});
+
+    function cb(err, rows) {
+        if (err) return err;
+        
+        if (!rows.affectedRows) {
+            res.status(400).send({message: 'No class was deleted'});
+        }
+        
+        res.send(rows);
+    }
+}
+
+exports.removeSection = function(req, res, next){
     if (!req.body.class_id) {
         res.status(400).send({message: 'Missing class id'});
     }
@@ -50,7 +33,7 @@ exports.removeClass = function(req, res, next){
         if (err) return err;
         
         if (!rows.affectedRows) {
-            res.status(400).send({message: 'No class was deleted'});
+            res.status(400).send({message: 'No section was deleted'});
         }
         
         res.send(rows);

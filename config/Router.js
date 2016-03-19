@@ -5,18 +5,8 @@ var admin = require('../controllers/Admin.js'),
     student = require('../controllers/Student.js');
 
 module.exports = function (router) {
-    /* sample
-    router.route('/api/admin')
-        .get(admin.find)
-        .post(admin.add)
-        .put(admin.update)
-        .delete(admin.delete);
-    */    
-    router.route('/api/letter_section')
-        .delete(class_.removeLetterSection);
-        
-    router.route('/api/number_section')
-        .delete(class_.removeNumberSection);
+    router.route('/api/remove_section')
+        .delete(class_.removeSection);
         
     router.route('/api/remove_class')
         .delete(class_.removeClass);
@@ -24,7 +14,7 @@ module.exports = function (router) {
     router.route('/api/remove_student_from_class')
         .delete(class_student.removeStudentFromClass);
 
-    router.route('/api/student')
+    router.route('/api/remove_student')
         .delete(student.removeStudent);
 
     router.route('*')
@@ -34,4 +24,3 @@ module.exports = function (router) {
 
     return router;
 };
-

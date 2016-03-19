@@ -20,4 +20,4 @@ exports.removeStudentFromClass = function(req, res, next){
         
         res.send(rows);
     }
-};
+}
