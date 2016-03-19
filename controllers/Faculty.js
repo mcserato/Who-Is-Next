@@ -3,23 +3,19 @@ var db = require(__dirname + '/../lib/Mysql');
 //Removes a faculty employee from the database
 exports.removeFaculty = function (req, res, next) {
     if (!req.body.emp_num) {
-        res.status(400).send({message: 'Missing employee number'});
+        res.send(400, "Error: Missing employee number.");
     }
 
-    db.query('DELETE FROM FACULTY WHERE emp_num = ?',
-        [req.body.emp_num],
-        callback);
+    db.query('DELETE FROM FACULTY WHERE emp_num = ?', [req.body.emp_num],
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
 
-    function callback(err, rows) {
-        if (err) {
-            return next(err);
-        }
+            if (!rows.affectedRows) {
+                res.send(400, "Error: No faculty was deleted.");
+            }
 
-        if (!rows.affectedRows) {
-            res.status(400).send({message: 'No faculty was deleted'});
-        }
-
-        return res.send(rows);
-    }
-
+            return res.send(rows);
+    });
 }

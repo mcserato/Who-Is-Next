@@ -16,6 +16,9 @@ module.exports = function (router) {
 
     router.route('/api/remove_student')
         .delete(student.removeStudent);
+        
+    router.route('/api/remove_faculty')
+        .delete(faculty.removeFaculty);
 
     router.route('*')
         .all(function (req, res) {
