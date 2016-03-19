@@ -1,5 +1,6 @@
 var db = require(__dirname + '/../lib/Mysql');
 
+//Removes a faculty employee from the database
 exports.removeFaculty = function (req, res, next) {
     if (!req.body.emp_num) {
         res.status(400).send({message: 'Missing employee number'});

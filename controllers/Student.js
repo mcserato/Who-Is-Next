@@ -1,5 +1,6 @@
 var db = require(__dirname + '/../lib/Mysql');
 
+//Removes a student from the database
 exports.removeStudent = function (req, res, next) {
     if (!req.body.student_number) {
         res.status(400).send({message: 'Missing student number'});
