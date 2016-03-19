@@ -5,43 +5,34 @@ var admin = require('../controllers/Admin.js'),
     student = require('../controllers/Student.js');
     analytics = require('../controllers/Analytics.js');
 
-
 module.exports = function (router) {
-    /* sample
-    router.route('/api/admin')
-        .get(admin.find)
-        .post(admin.add)
-        .put(admin.update)
-        .delete(admin.delete);
-    */
-
-    router.route('/class')
+    router.route('/api/class')
         .post(class_.add)
         .put(class_.edit);
 
-    router.route('/student')
+    router.route('/api/student')
         .post(student.add)
         .put(student.edit);
 
-    router.route('/class_student')
+    router.route('/api/class_student')
         .post(class_student.add);
 
-    router.route('/faculty')
+    router.route('/api/faculty')
         .put(faculty.edit);
 
-    router.route('/analytics/:class_id')
+    router.route('/api/analytics/:class_id')
         .get(analytics.getTopTenMostCalledStudents);
 
-    router.route('/analyticsMale/:class_id')
+    router.route('/api/analyticsMale/:class_id')
         .get(analytics.getTopTenMostCalledMales);
 
-    router.route('/analyticsFemale/:class_id')
+    router.route('/api/analyticsFemale/:class_id')
         .get(analytics.getTopTenMostCalledFemales);
 
-    router.route('/analyticsLab/:class_id/:class_section')
+    router.route('/api/analyticsLab/:class_id/:class_section')
         .get(analytics.getSectionFrequency);
 
-    router.route('/analyticsGender/:class_id/:gender')
+    router.route('/api/analyticsGender/:class_id/:gender')
         .get(analytics.getGenderFrequency);
 
 
