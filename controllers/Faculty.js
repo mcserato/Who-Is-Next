@@ -10,12 +10,31 @@ exports.edit = function (req, res, next) {
     db.query("UPDATE FACULTY SET username = ?, name = ?, password = " +
         "PASSWORD(?), email = ? WHERE emp_num = ?",
         [req.body.username, req.body.name, req.body.password,
-        req.body.email, req.body.emp_num],
+        req.body.email, req.body.emp_num], function (err, rows) {
+            if (err) {
+                return next(err);
+            }
 
+            return res.send(rows);
+    });
+}
+
+//Removes a faculty employee from the database
+exports.removeFaculty = function (req, res, next) {
+    if (!req.body.emp_num) {
+        res.send(400, "Error: Missing employee number.");
+    }
+
+    db.query('DELETE FROM FACULTY WHERE emp_num = ?', [req.body.emp_num],
         function (err, rows) {
             if (err) {
                 return next(err);
             }
+
+            if (!rows.affectedRows) {
+                res.send(400, "Error: No faculty was deleted.");
+            }
+
             res.send(rows);
     });
 }

@@ -8,17 +8,22 @@ var admin = require('../controllers/Admin.js'),
 module.exports = function (router) {
     router.route('/api/class')
         .post(class_.add)
-        .put(class_.edit);
+        .put(class_.edit)
+        .delete(class_.removeClass)
+        .delete(class_.removeSection);
 
     router.route('/api/student')
         .post(student.add)
-        .put(student.edit);
+        .put(student.edit)
+        .delete(student.removeStudent);
 
     router.route('/api/class_student')
-        .post(class_student.add);
+        .post(class_student.add)
+        .delete(class_student.removeStudentFromClass);
 
     router.route('/api/faculty')
-        .put(faculty.edit);
+        .put(faculty.edit)
+        .delete(faculty.removeFaculty);
 
     router.route('/api/analytics/:class_id')
         .get(analytics.getTopTenMostCalledStudents);
