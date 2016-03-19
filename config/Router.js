@@ -5,11 +5,9 @@ var admin = require('../controllers/Admin.js'),
     student = require('../controllers/Student.js');
 
 module.exports = function (router) {
-    router.route('/api/section')
-        .delete(class_.removeSection);
-        
     router.route('/api/class')
-        .delete(class_.removeClass);
+        .delete(class_.removeClass)
+        .delete(class_.removeSection);
         
     router.route('/api/class_student')
         .delete(class_student.removeStudentFromClass);
