@@ -1,16 +1,13 @@
 var db = require(__dirname + './../lib/Mysql');
 
-//validate user
-/**
- * INPUTS: username
- * OUTPUTS: returns a validated user(is_validated = true) with given username
- *
- */
- 
+/* Validates the registration of a user */
 exports.validate = function (req, res, next) {
-	var username = req.body.username;
-
-	db.query("UPDATE FACULTY SET is_validated = true where	username = ?",[username],function (err, rows) {
-		if(err) return(err);
+	db.query("UPDATE FACULTY SET is_validated = true where emp_num = ?", 
+	    [req.body.emp_num], function (err, rows) {
+		    if(err) {
+		        return next(err);
+		    }
+		    
+		    res.send(rows);
 	});
 }
