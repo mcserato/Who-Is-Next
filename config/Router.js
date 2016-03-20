@@ -10,20 +10,31 @@ module.exports = function (router) {
     router.route('/api/class')
         .post(class_.add)
         .put(class_.edit)
+        .get(class_.viewAll)
+        .get(class_.viewOne)
+        .get(class_.search)
         .delete(class_.removeClass)
         .delete(class_.removeSection);
 
     router.route('/api/student')
         .post(student.add)
         .put(student.edit)
+        .get(student.viewAll)
+        .get(student.viewOne)
+        .get(student.search)
         .delete(student.removeStudent);
 
     router.route('/api/class_student')
         .post(class_student.add)
+        .get(class_student.searchStudentInClass)
+        .get(class_student.viewStudentsInClass)
         .delete(class_student.removeStudentFromClass);
 
     router.route('/api/faculty')
         .put(faculty.edit)
+        .get(faculty.viewAll)
+        .get(faculty.viewOne)
+        .get(faculty.search)
         .delete(faculty.removeFaculty);
 
     router.route('/api/analytics/:class_id')
@@ -57,6 +68,6 @@ module.exports = function (router) {
     .all(function (req, res) {
         return res.status(404).send({ message: 'Nothing to do here.' });
     });
-
+        
     return router;
 };

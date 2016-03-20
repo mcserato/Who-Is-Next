@@ -26,7 +26,7 @@ exports.removeStudentFromClass = function(req, res, next){
     db.query('DELETE from CLASS_STUDENT where class_id = ? AND student_number = ?',
         [req.body.class_id, req.body.student_number], function (err, rows){
             if (err) {
-                return next(err);
+                return next (err);
             }
             
             if (!rows.affectedRows) {
@@ -34,5 +34,30 @@ exports.removeStudentFromClass = function(req, res, next){
             }
 
             res.send(rows);
-    });
+    });        
+}
+
+/* Searches a student in a class */
+exports.searchStudentInClass = function(req, res, next) {
+	db.query("SELECT s.* from STUDENT s, CLASS_STUDENT cl where cl.class_id" + 
+	    "like ? and s.student_number like ?", [req.body.class_id, 
+	    req.body.student_number], function (err, rows) {
+            if (err) {
+                return next (err);
+            }
+            
+            res.send(rows[0]);
+	});
+}
+
+/* Shows a list of student in a class */
+exports.viewStudentsInClass = function(req, res, next) {
+    db.query("SELECT s.* from STUDENT s, CLASS_STUDENT cl where cl.class_id like ?;", 
+        [req.body.class_id], function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+            
+            res.send(rows);
+	});
 }
