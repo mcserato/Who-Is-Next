@@ -1,5 +1,6 @@
 var express = require('express'),
 	session = require('express-session'),
+	bodyParser = require('body-parser'),
     app = express(),
     
     server = app.listen(8000, "localhost", 
