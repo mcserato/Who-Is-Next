@@ -19,6 +19,10 @@ module.exports = function (router) {
     router.route('/api/signup')
         .put(faculty.signup);
     
+    router.route('/api/switch_theme')
+        .get(faculty.getTheme)
+        .put(faculty.switchTheme);
+    
     router.route('*')
         .all(function (req, res) {
             return res.status(404).send({ message: 'Nothing to do here.' });

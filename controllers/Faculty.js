@@ -42,3 +42,25 @@ exports.signup = function (req, res, next) {
 		    }	
 	});
 }
+
+/* switch theme */
+exports.getTheme = function (req, res, next) {
+    var username = req.session.username;
+	
+	db.query("SELECT current_theme FROM FACULTY WHERE username = ?", [username], 
+	    function (err, row) {
+		    if(err) return next(err);
+		    return res.send(row[0]);
+	});
+}
+
+exports.switchTheme = function (req, res, next) {
+	var username = req.session.username;
+	var current_theme = req.body.current_theme;
+	
+	db.query("UPDATE FACULTY SET current_theme = ? WHERE username = ?", [current_theme, username], 
+	    function (err, rows) {
+		    if(err) return next(err);
+		    return res.send(rows);
+	});
+}
