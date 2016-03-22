@@ -6,6 +6,8 @@ var authenticate = require('../controllers/Authenticate.js'),
     student = require('../controllers/Student.js');
     analytics = require('../controllers/Analytics.js');
 
+var path = require('path');
+
 module.exports = function (router) {
     router.route('/api/class')
         .post(class_.add)
@@ -66,7 +68,7 @@ module.exports = function (router) {
     
     router.route('*')
     .all(function (req, res) {
-        return res.status(404).send({ message: 'Nothing to do here.' });
+        return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));
     });
         
     return router;
