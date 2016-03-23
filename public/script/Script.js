@@ -1,4 +1,8 @@
+'use strict';
+
 $(document).ready( function () {
-    $('title').html(config.TITLE);
+	document.title += document.title
+		? ' - ' + config.TITLE
+		: config.TITLE;
 
 });

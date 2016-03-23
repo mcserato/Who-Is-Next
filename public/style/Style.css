@@ -1,0 +1,30 @@
+body {
+	background-color: #f5f6f6;
+}
+
+nav {
+	background-color: #f5f6f6;
+	z-index: 0px;
+	color: black;
+}
+
+.logo {
+	margin-top: 15px;
+	height: 120px;
+}
+
+#main-content {
+	margin-top: 100px;
+}
+
+.fixed-action-btn {
+	top: 3px;
+	left: 23px;
+	width: 55.5px;
+}
+
+.fixed-action-btn ul{
+	top: 85px;
+	bottom: 0px;
+	left: 0px;
+}
