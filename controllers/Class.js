@@ -91,7 +91,7 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of a class */
 exports.viewOne = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE class_id = ?", [req.body.class_id],
+    db.query("SELECT * FROM CLASS WHERE class_id = ?", [req.params.class_id],
         function (err, rows) {
 		    if (err) {
 		        return next(err);
@@ -107,7 +107,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a class */
 exports.search = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE class_id = ?", [req.body.class_id],
+    db.query("SELECT * FROM CLASS WHERE course_code = ?", [req.params.course_code],
         function (err, rows) {
 			if (err) {
 				return next(err);
@@ -116,7 +116,7 @@ exports.search = function(req, res, next) {
 			if (rows.length === 0) {
 				res.send(404, "Error: Class not found.");
 			} else {
-				res.send(rows[0]);
+				res.send(rows);
 			}
 	});
 }

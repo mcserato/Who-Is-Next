@@ -95,7 +95,7 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of one faculty member */
 exports.viewOne = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [req.body.emp_num],
+	db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [req.params.emp_num],
 		function (err, rows) {
 		    if (err) {
 		        return next(err);
@@ -110,7 +110,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a faculty member */
 exports.search = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [req.body.emp_num],
+	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.emp_num],
 		function (err, rows) {
 		    if (err) {
 		        return next(err);
@@ -118,7 +118,7 @@ exports.search = function(req, res, next) {
 		    if (rows.length === 0) {
                 res.send(404, "Error: Faculty not found!");
 			} else {
-			    res.send(rows[0]);
+			    res.send(rows);
 			}
 	});
 }
