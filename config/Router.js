@@ -6,6 +6,8 @@ var authenticate = require('../controllers/Authenticate.js'),
     student = require('../controllers/Student.js');
     analytics = require('../controllers/Analytics.js');
 
+var path = require('path');
+
 module.exports = function (router) {
     router.route('/api/class')
         .post(class_.add)
