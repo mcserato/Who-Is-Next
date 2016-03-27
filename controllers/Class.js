@@ -120,3 +120,16 @@ exports.search = function(req, res, next) {
 			}
 	});
 }
+
+/* Archives a class */
+exports.archiveClass = function(req, res, next) {
+    db.query("UPDATE CLASS SET is_archived = TRUE WHERE class_id = ?",
+        [req.body.class_id],
+
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+            res.send(rows);
+    });
+}

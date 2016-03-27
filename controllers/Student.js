@@ -114,3 +114,19 @@ exports.search = function(req, res, next) {
 	    }
 	});
 }
+
+/*Import a Student*/
+exports.import = function(req, res, next) {
+    db.query("INSERT INTO CLASS_STUDENT(class_id, student_number) VALUES "+
+            "(?,?)", [req.body.class_id, req.body.student_number],
+            function (err, rows) {
+                if (err) {
+                    return next(err);
+                }
+
+                if (rows) {
+                    res.send(rows);
+                }
+            }
+    );
+}
