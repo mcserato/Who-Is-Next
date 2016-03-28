@@ -6,35 +6,50 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="style/Materialize.min.css" />
         <link rel="stylesheet" href="style/Style.css" />
-
         <link rel="shortcut icon" href="/favicon/favicon.ico">
-        
+        <script src="script/Jquery.min.js"></script>
+        <script src="script/Materialize.js"></script>
     </head>
     <body>
-        <div class="navbar-fixed">
-            <div class="navbar-wrapper">
-                <nav class="z-depth-0">
-                    <a href="/" class="brand-logo black-text center"><img src="icon/logo1.png" class="logo"/></a>
-                    <span class="right username"></span>
-                </nav>
+
+        <div class="row">
+            <div id="left" class="col s3 right-align">
+                <a id="sign-up"><img src="/icon/SignUp.png"></a>
+            </div>
+            <div class="col s6 center">
+                <img id="logo" src="/icon/logo1.png">
+                <h1 class="title header bold">Who Is Next</h1>
+                <h5 class="title header">Classroom Selector of Volunteers</h5>
+            </div>
+            <div id="right" class="col s3 left-align">
+                <a id="log-in" class="modal-trigger" href="#log-in-modal"><img src="/icon/LogIn.png"></a>
             </div>
         </div>
 
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large red z-depth-0 black">
-                <i class="large material-icons">menu</i>
-            </a>
-            <ul>
-                <li><a href="/views/class" class="btn-floating black" href="" title="Class"><i class="material-icons">class</i></a></li>
-                <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
-                <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
-                <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
-                <li><a href="/views/archived_classes" class="btn-floating black" href="" title="Archived Classes"><i class="material-icons">archive</i></a></li>
-            </ul>
+        <div id="log-in-modal" class="modal" style="width:40%;">
+            <div class="modal-content">
+                <div class="row">
+                    <form id="log-in-form" class="col s10 push-s1">
+                        <div class="input-field col s12">
+                            <i class="mdi-social-person-outline prefix"></i>
+                            <input type='text' id='username' style="margin-bottom: 0px;">
+                            <label class="active" for="username">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="mdi-action-lock-outline prefix"></i>
+                            <input type='password' id='password' style="margin-bottom: 0px;">
+                            <label class="active" for="password">Password</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="center">
+                <button id="login" class="btn waves-effect waves-light" type="submit" onclick="return false;">
+                    Login
+                </button>
+                </div>
+            </div>
         </div>
 
-        <script src="script/Jquery.min.js"></script>
-        <script src="script/Materialize.js"></script>
         <script src="script/Config.js"></script>
         <script src="script/Script.js"></script>
     </body>
