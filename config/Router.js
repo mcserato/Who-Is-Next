@@ -9,6 +9,10 @@ var authenticate = require('../controllers/Authenticate.js'),
 var path = require('path');
 
 module.exports = function (router) {
+    
+
+
+/*
     router.route('/api/class')
         .post(class_.add)
         .put(class_.edit)
@@ -79,10 +83,48 @@ module.exports = function (router) {
     
     router.route('/api/signup')
         .put(faculty.signup);
+*/  
+
+    router.route('/api/class')
+        .post(class_.add)
+        .put(class_.edit)
+        .get(class_.viewAll)
+        .delete(class_.removeClass);
+
+    //binago ko
+    router.route('/api/class/search/:course_code')
+        .get(class_.search);
+
+    router.route('/api/class/:class_id')
+        .get(class_.viewOne)
+        .delete(class_.removeSection);
+
+    router.route('/api/student')
+        .post(student.add)
+        .put(student.edit)
+        .get(student.viewAll)
+        .delete(student.removeStudent);
+
+    router.route('/api/student/:student_number')        
+        .get(student.viewOne);
+
+    router.route('/api/student/search/:last_name')
+        .get(student.search);
+
+    router.route('/api/faculty')
+        .put(faculty.edit)
+        .get(faculty.viewAll)
+        .delete(faculty.removeFaculty);
+
+    router.route('/api/faculty/:emp_num')
+        .get(faculty.viewOne);
     
+    router.route('/api/faculty/search/:name')
+        .get(faculty.search);
+
     router.route('*')
         .all(function (req, res) {		
-            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));		
+            return res.render('404');		
         });
         
     return router;

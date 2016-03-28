@@ -1,14 +1,23 @@
 var express = require('express'),
 	session = require('express-session'),
 	bodyParser = require('body-parser'),
-    app = express(),
+	//dinagdag ko po hihi
+    favicon = require('serve-favicon'),
+    handlebars = require('express-handlebars')
+    	.create({defaultLayout:'Main'}),
     
+    app = express(),
     server = app.listen(8000, "localhost", 
     	function(){
 	        var host = server.address().address;
 	        var port = server.address().port;
 	        console.log('Example app is listening at http://%s:%s', host, port);
     	});
+
+//dinagdag ko ito hihi
+app.use(favicon(__dirname+'/public/favicon/favicon.ico'));
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({
   extended: true
