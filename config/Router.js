@@ -5,6 +5,7 @@ var authenticate = require('../controllers/Authenticate.js'),
     faculty = require('../controllers/Faculty.js'),
     student = require('../controllers/Student.js');
     analytics = require('../controllers/Analytics.js');
+    randomizer = require('../controllers/Randomizer.js');
 
 var path = require('path');
 
@@ -79,7 +80,10 @@ module.exports = function (router) {
     
     router.route('/api/signup')
         .put(faculty.signup);
-    
+        
+    router.route('/api/randomizer/')
+        .get(randomizer.getVolunteers);
+
     router.route('*')
         .all(function (req, res) {		
             return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));		
