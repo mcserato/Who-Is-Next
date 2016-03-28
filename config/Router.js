@@ -19,15 +19,9 @@ module.exports = function (router) {
     router.route('/api/faculty')
         .delete(faculty.removeFaculty);
         
-    router.route('/api/randomizer/getMales/:class_id')
-        .get(randomizer.getMales);
+    router.route('/api/randomizer/')
+        .get(randomizer.getVolunteers);
         
-    router.route('/api/randomizer/getFemales/:class_id')
-        .get(randomizer.getFemales);
-        
-    router.route('/api/randomizer/getNormal/:class_id')
-        .get(randomizer.getNormal);
-
     router.route('*')
         .all(function (req, res) {
             return res.status(404).send({ message: 'Nothing to do here.' });
