@@ -81,8 +81,8 @@ module.exports = function (router) {
         .put(faculty.signup);
     
     router.route('*')
-        .all(function (req, res) {
-            return res.status(404).send({ message: 'Nothing to do here.' });
+        .all(function (req, res) {		
+            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));		
         });
         
     return router;
