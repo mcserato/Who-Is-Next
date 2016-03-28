@@ -86,6 +86,9 @@ module.exports = function (router) {
     router.route('/api/switch_theme')
         .get(faculty.getTheme)
         .put(faculty.switchTheme);
+        
+    router.route('/api/import')
+        .post(class_student.import);  
     
     router.route('*')
         .all(function (req, res) {		

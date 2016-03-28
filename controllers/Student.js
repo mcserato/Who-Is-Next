@@ -52,7 +52,7 @@ exports.edit = function (req, res, next) {
     });
 } 
 
-//Removes a student from the database
+/* Removes a student from the database */
 exports.removeStudent = function (req, res, next) {
     if (!req.body.student_number) {
         res.send(400, "Error: Missing student number.");
@@ -113,20 +113,4 @@ exports.search = function(req, res, next) {
             res.send(rows);
 	    }
 	});
-}
-
-/*Import a Student*/
-exports.import = function(req, res, next) {
-    db.query("INSERT INTO CLASS_STUDENT(class_id, student_number) VALUES "+
-            "(?,?)", [req.body.class_id, req.body.student_number],
-            function (err, rows) {
-                if (err) {
-                    return next(err);
-                }
-
-                if (rows) {
-                    res.send(rows);
-                }
-            }
-    );
 }
