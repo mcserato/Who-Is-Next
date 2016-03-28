@@ -54,6 +54,7 @@ exports.login = function (req, res, next) {
                         
                         if (rows3.length) {
                             req.session.username = rows3[0].username;
+                            req.session.emp_num = rows3[0].emp_num;
                             req.session.role = 'FACULTY';
 
                             delete rows3[0].password;
