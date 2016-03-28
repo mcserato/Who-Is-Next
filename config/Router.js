@@ -22,6 +22,9 @@ module.exports = function (router) {
         
     router.route('/api/class/:course_code')
         .get(class_.search);
+
+    router.route('/api/archiveClass')
+        .post(class_.archiveClass);
         
     router.route('/api/student')
         .post(student.add)
@@ -83,6 +86,13 @@ module.exports = function (router) {
         
     router.route('/api/randomizer/')
         .get(randomizer.getVolunteers);
+    
+    router.route('/api/switch_theme')
+        .get(faculty.getTheme)
+        .put(faculty.switchTheme);
+        
+    router.route('/api/import')
+        .post(class_student.import);  
 
     router.route('*')
         .all(function (req, res) {		
