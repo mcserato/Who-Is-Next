@@ -76,7 +76,7 @@ exports.removeSection = function(req, res, next){
 
 /* Shows the details of all classes */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = FALSE", [req.params.emp_num], function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 0", [req.session.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
@@ -91,7 +91,7 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of all classes */
 exports.viewArchived = function(req, res, next) {
-    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = TRUE", [req.params.emp_num], function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.params.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
