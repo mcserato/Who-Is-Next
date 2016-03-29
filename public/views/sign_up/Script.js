@@ -8,18 +8,19 @@ $(document).ready( function () {
     $(':input','#sign-up-form')
         .keypress(function (e) {
             if (e.keyCode == 13) {
-                login();
+                sign_up();
             }
         });
     
     function sign_up( ) {
-        var full_name = $('#full_name').val(),
-            emp_number = $('#emp-number').val(),
+        console.log("check");
+        var full_name = $('#full-name').val(),
+            emp_number = $('#emp-num').val(),
             email = $('#email').val(),
             username = $('#username').val(),
             password = $('#password').val(),
-            confirm_password = ('#confirm-password').val();
-            
+            confirm_password = $('#confirm-password').val();
+        
         if(!full_name){
             return Materialize.toast("Full Name is missing!", 2500);
         }
@@ -47,7 +48,27 @@ $(document).ready( function () {
         if(password != confirm_password){
             return Materialize.toast("Password confirmation did not match!", 2500);
         }
-
+        
+        //add ajax here
+        $.ajax({
+            url: '/api/signup',
+            method: 'PUT',
+            data: {
+                full_name: full_name,
+                emp_num: emp_number,
+                email: email,
+                username: username,
+                password: password
+                
+            },
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        });
         
     }
-}
+});
