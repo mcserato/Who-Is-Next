@@ -1,4 +1,5 @@
 var db = require(__dirname + './../lib/Mysql');
+var logs = require(__dirname + '/Log');
 
 /* Log-in
  INPUTS:  username, password
@@ -11,16 +12,22 @@ var db = require(__dirname + './../lib/Mysql');
 exports.login = function (req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
+    var action = 'log-in';
+
+    logs.attempt(username, action, req.ip);
 
     if (req.session.username) {
+        logs.error(username, action, 'Someone is already logged in.', req.ip);
         return res.send(400, "Someone is already logged in.");
     }
 
     if (!username) {
-        return res.send(400, "Usename cannot be blank.");
+        logs.error(username, action, 'Username cannot be blank.', req.ip);
+        return res.send(400, "Username cannot be blank.");
     }
 
     if (!password) {
+        logs.error(username, action, 'Password cannot be blank.', req.ip);
         return res.send(400, "Password cannot be blank.");
     }
     
@@ -43,6 +50,7 @@ exports.login = function (req, res, next) {
 
                     delete rows2[0].password;
                     rows2[0].role = 'ADMIN';
+                    logs.success(username, action, req.ip);
                     return res.send(rows2);
                 } else {
                     db.query("SELECT * FROM FACULTY WHERE username = ? AND password = ?",
@@ -59,14 +67,17 @@ exports.login = function (req, res, next) {
 
                             delete rows3[0].password;
                             rows3[0].role = 'FACULTY';
+                            logs.success(username, action, req.ip);
                             return res.send(rows3);
                         } else {
+                            logs.error(username, action, 'Incorrect Password!', req.ip);
                             return res.send(400, "Incorrect Password!");
                         }
                     });
                 }
             });
         } else {
+            logs.error(username, action, 'Username not Found!!', req.ip);
             return res.send(400, "Username not Found!");
         }
     });
@@ -74,10 +85,16 @@ exports.login = function (req, res, next) {
 
 /* Log-out */
 exports.logout = function (req, res, next) {
+    var action = 'log-out';
+
+    logs.attempt(req.session.username, action, req.ip);
+
     if (!req.session.username) {
+        logs.error(req.session.username, action, 'No one is logged in.', req.ip);
         return res.send(400, "No one is logged in.");
     }
 
+    logs.success(req.session.username, action, req.ip);
     req.session.destroy();
 
     return res.send("Successfully logged out!");
