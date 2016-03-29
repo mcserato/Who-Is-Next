@@ -5,7 +5,7 @@ exports.add = function (req, res, next) {
     db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
         + "section_number, emp_num) VALUES(?, ?, ?, ?, ?)",
         [req.body.course_code, req.body.course_title, req.body.class_section,
-        req.body.section_number, req.body.emp_num],
+        req.body.section_number, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
@@ -33,11 +33,11 @@ exports.edit = function (req, res, next) {
 /* Removes an entire class and all of its sections */
 exports.removeClass = function(req, res, next){
     if (!req.body.class_section) {
-        res.send(400, "Error: Missing class section.");
+        return res.send(400, "Error: Missing class section.");
     }
     
     if (!req.body.course_code) {
-        res.send(400, "Error: Missing course code.");
+        return res.send(400, "Error: Missing course code.");
     }
     
     db.query('DELETE from CLASS where course_code = ? and class_section = ?', 
@@ -47,10 +47,10 @@ exports.removeClass = function(req, res, next){
             }
         	
             if (!rows.affectedRows) {
-                res.send(400, "Error: No class was deleted.");
+                return res.send(400, "Error: No class was deleted.");
             }
 		    
-		    res.send(rows);
+		    return res.send(rows);
     });
 }
 
@@ -150,7 +150,7 @@ exports.archiveClass = function(req, res, next) {
 }
 
 exports.viewAllFrontend = function(req, res, next) {
-    db.query("SELECT * FROM CLASS", function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ?", [req.session.emp_num], function (err, rows) {
         if (err) {
             //return next(err);
             res.render('400');
@@ -167,7 +167,7 @@ exports.viewAllFrontend = function(req, res, next) {
 }
 
 exports.viewOneFrontend = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE class_id = ?", [req.params.class_id],
+    db.query("SELECT * FROM CLASS WHERE class_id = ? and emp_num = ?", [req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
                 //return next(err);
@@ -185,7 +185,7 @@ exports.viewOneFrontend = function(req, res, next) {
 }
 
 exports.searchFrontend = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE course_code = ?", [req.params.course_code],
+    db.query("SELECT * FROM CLASS WHERE course_code = ? and emp_num = ?", [req.params.course_code, req.session.emp_num],
         function (err, rows) {
             if (err) {
                 //return next(err);

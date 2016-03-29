@@ -74,7 +74,9 @@ exports.removeStudent = function (req, res, next) {
 
 /* Shows a list of all students */
 exports.viewAll = function(req, res, next) {
-	db.query("SELECT * FROM STUDENT", function (err, rows) {
+	db.query("SELECT s.* FROM STUDENT s, CLASS_STUDENT cs, CLASS c where c.emp_num = ? AND s.student_number = cs.student_number AND c.class_id = cs.class_id", 
+        [req.session.emp_num],
+        function (err, rows) {
         if (err) {
             return next(err);
         }
