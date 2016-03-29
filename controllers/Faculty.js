@@ -146,3 +146,56 @@ exports.switchTheme = function (req, res, next) {
 		    return res.send(rows);
 	});
 }
+
+exports.viewAllFrontend = function(req, res, next) {
+	db.query("SELECT * FROM FACULTY", function (err, rows) {
+        if (err) {
+		    //return next(err);
+            res.render('400');
+		}
+		
+		if (rows.length === 0) {
+		    //res.send(404, "Error: Classes not found.");
+            res.render('404');
+		} else {
+			//res.send(rows);
+            res.render('Faculties', {faculties:rows});
+		}
+	});
+}
+
+exports.viewOneFrontend = function(req, res, next) {
+	db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [req.params.emp_num],
+		function (err, rows) {
+		    if (err) {
+		    //return next(err);
+            res.render('400');
+		}
+		
+		if (rows.length === 0) {
+		    //res.send(404, "Error: Classes not found.");
+            res.render('404');
+		} else {
+			//res.send(rows);
+            res.render('Faculty', {faculty:rows[0]});
+		}
+	});
+}
+
+exports.searchFrontend = function(req, res, next) {
+	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.name],
+		function (err, rows) {
+		    if (err) {
+		    //return next(err);
+            res.render('400');
+		}
+		
+		if (rows.length === 0) {
+		    //res.send(404, "Error: Classes not found.");
+            res.render('404');
+		} else {
+			//res.send(rows);
+            res.render('Faculties', {faculties:rows});
+		}
+	});
+}

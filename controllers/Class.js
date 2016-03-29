@@ -148,3 +148,56 @@ exports.archiveClass = function(req, res, next) {
             res.send(rows);
     });
 }
+
+exports.viewAllFrontend = function(req, res, next) {
+    db.query("SELECT * FROM CLASS", function (err, rows) {
+        if (err) {
+            //return next(err);
+            res.render('400');
+        }
+        
+        if (rows.length === 0) {
+            //res.send(404, "Error: Classes not found.");
+            res.render('404');
+        } else {
+            //res.send(rows);
+            res.render('Classes', {classes:rows});
+        }
+    });
+}
+
+exports.viewOneFrontend = function(req, res, next) {
+    db.query("SELECT * FROM CLASS WHERE class_id = ?", [req.params.class_id],
+        function (err, rows) {
+            if (err) {
+                //return next(err);
+                res.render('400');
+            }
+        
+            if (rows.length === 0) {
+                //res.send(404, "Error: Class not found.");
+                res.render('404');
+            } else {
+                //res.send(rows);
+                res.render('Class', {class:rows[0]});
+            }
+    });
+}
+
+exports.searchFrontend = function(req, res, next) {
+    db.query("SELECT * FROM CLASS WHERE course_code = ?", [req.params.course_code],
+        function (err, rows) {
+            if (err) {
+                //return next(err);
+                res.render('400');
+            }
+        
+            if (rows.length === 0) {
+                //res.send(404, "Error: Class not found.");
+                res.render('404');
+            } else {
+                //res.send(rows);
+                res.render('Classes', {classes:rows});
+            }
+    });
+}

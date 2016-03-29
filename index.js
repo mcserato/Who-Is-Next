@@ -1,6 +1,13 @@
 var express = require('express'),
 	session = require('express-session'),
 	bodyParser = require('body-parser'),
+
+	favicon = require('serve-favicon'),
+    handlebars = require('express-handlebars')
+    	.create({defaultLayout:'Main'}),
+
+
+
     app = express(),
     
     server = app.listen(8000, "localhost", 
@@ -13,6 +20,14 @@ var express = require('express'),
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+
+app.use(favicon(__dirname+'/public/favicon/favicon.ico'));
+
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+
+
 app.use(bodyParser.json());
 app.use(require('method-override')()); //to use put and delete HTTP requests
 app.use(express.static(__dirname + '/public'));

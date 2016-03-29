@@ -114,3 +114,56 @@ exports.search = function(req, res, next) {
 	    }
 	});
 }
+
+exports.viewAllFrontend = function(req, res, next) {
+    db.query("SELECT * FROM STUDENT", function (err, rows) {
+        if (err) {
+            //return next(err);
+            res.render('400');
+        }
+        
+        if (rows.length === 0) {
+            //res.send(404, "Error: Classes not found.");
+            res.render('404');
+        } else {
+            //res.send(rows);
+            res.render('Students', {students:rows});
+        }
+    });
+}
+
+exports.viewOneFrontend = function(req, res, next) {
+    db.query("SELECT * FROM STUDENT WHERE student_number = ?",
+        [req.params.student_number], function (err, rows) {
+        if (err) {
+            //return next(err);
+            res.render('400');
+        }
+        
+        if (rows.length === 0) {
+            //res.send(404, "Error: Classes not found.");
+            res.render('404');
+        } else {
+            //res.send(rows);
+            res.render('Student', {student:rows[0]});
+        }
+    });
+}
+
+exports.searchFrontend = function(req, res, next) {
+    db.query("SELECT * FROM STUDENT WHERE last_name = ?",
+            [req.params.last_name], function (err, rows) {
+        if (err) {
+            //return next(err);
+            res.render('400');
+        }
+        
+        if (rows.length === 0) {
+            //res.send(404, "Error: Classes not found.");
+            res.render('404');
+        } else {
+            //res.send(rows);
+            res.render('Students', {students:rows});
+        }
+    });
+}

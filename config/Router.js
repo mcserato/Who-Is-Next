@@ -10,6 +10,33 @@ var authenticate = require('../controllers/Authenticate.js'),
 var path = require('path');
 
 module.exports = function (router) {
+    router.route('/views/class/:class_id')
+        .get(class_.viewOneFrontend);
+
+    router.route('/views/class/search/:course_code')
+        .get(class_.searchFrontend);
+
+    router.route('/views/class')
+        .get(class_.viewAllFrontend);
+
+    router.route('/views/student')
+        .get(student.viewAllFrontend);
+
+    router.route('/views/student/:student_number')        
+        .get(student.viewOneFrontend);
+
+    router.route('/views/student/search/:last_name')
+        .get(student.searchFrontend);
+
+    router.route('/views/faculty')
+        .get(faculty.viewAllFrontend);
+
+    router.route('/views/faculty/:emp_num')
+        .get(faculty.viewOneFrontend);
+    
+    router.route('/views/faculty/search/:name')
+        .get(faculty.searchFrontend);
+
     router.route('/api/class')
         .post(class_.add)
         .put(class_.edit)
