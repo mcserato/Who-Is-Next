@@ -58,13 +58,12 @@ DROP TABLE IF EXISTS LOG;
 CREATE TABLE LOG
 	(log_number INT AUTO_INCREMENT,
 	 log_date TIMESTAMP DEFAULT NOW(),
-	 description TEXT NOT NULL,
-	 log_type TINYINT(1) NOT NULL,
-	 admin_username VARCHAR(30) NOT NULL,
-	 emp_num INT(9) NOT NULL,
-	 PRIMARY KEY (log_number),
-	 FOREIGN KEY(admin_username) REFERENCES ADMIN(admin_username),
-	 FOREIGN KEY(emp_num) REFERENCES FACULTY(emp_num)
+	 log_type TINYINT(1) NOT NULL DEFAULT 0,
+	 username VARCHAR(30) NOT NULL,
+	 action VARCHAR(64) NOT NULL,
+	 status VARCHAR(12) NOT NULL,
+	 ip_address VARCHAR(24) NOT NULL,
+	 PRIMARY KEY (log_number)
 	);
 
 
