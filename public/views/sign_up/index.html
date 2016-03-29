@@ -4,52 +4,52 @@
         <meta charset="utf-8"/>
         <title></title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="../../style/Materialize.min.css" />
-        <link rel="stylesheet" href="Style.css" />
-        <link rel="shortcut icon" href="../../favicon/favicon.ico">
-        <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.min.js"></script>
+        <link rel="stylesheet" href="/style/Materialize.min.css" />
+        <link rel="stylesheet" href="/views/sign_up/Style.css" />
+        <link rel="shortcut icon" href="/favicon/favicon.ico">
+        <script src="/script/Jquery.min.js"></script>
+        <script src="/script/Materialize.min.js"></script>
         
     </head>
     <body>
         <div class="container">
             <div class="row" >
                 <div class="col s6">
-                    <img class="responsive-img"  src="../../icon/logo1.png"/>
+                    <img class="responsive-img"  src="/icon/logo1.png"/>
                 </div>
                 <div class ="col s6" >
-                    <form class="row" >
+                    <form id="sign-up-form" class="row" >
                         <div class="input-field col s12 ">
                             <h3 class ="center-align">SIGN UP</h3>
                         </div>
-                        <div class = "col s12" style = "background-color:white">
+                        <div class = "col s12" id = "input-fields-div">
                             <div class="input-field col s12 ">
-                                <input id="full_name" type="text" class="validate center-align" >
-                                <label for="full_name">Full Name</label>
+                                <input id="full-name" type="text" class="validate center-align" >
+                                <label for="full-name">Full Name</label>
                             </div>
                             <div class="input-field col s12 ">
-                                <input id="emp_number" type="text" class="validate center-align">
-                                <label for="emp_number">Employee Number</label>
+                                <input id="emp-number" type="text" class="validate center-align">
+                                <label for="emp-number">Employee Number</label>
                             </div>
                             <div class="input-field col s12 ">
                                 <input id="email" type="email" class="validate center-align">
-                                <label for="email" data-error="Invalid Address" data-success="Accepted">Email</label>
+                                <label for="email" data-error="Invalid" data-success="Accepted">Email</label>
                             </div>
                             <div class="input-field col s12 ">
                                 <input id="username" type="text" class="validate center-align" length = "30">
-                                <label for="username " data-error="Invalid Username" data-success="Accepted"> Username</label>
+                                <label for="username " data-error="Invalid" data-success="Accepted"> Username</label>
                             </div>
                             <div class="input-field col s12 ">
                                 <input id="password" type="password" class="center-align" length ="50">
-                                <label for="password"  data-error="Invalid Password" data-success="Accepted">Password</label>
+                                <label for="password"  data-error="Too Long" data-success="Accepted">Password</label>
                             </div>
                             <div class="input-field col s12 ">
-                                <input id="confirm_password" type="password" class="center-align" length="50">
-                                <label for="confirm_password "  data-error="Invalid Password" data-success="Accepted"> Confirm Password</label>
+                                <input id="confirm-password" type="password" class="center-align" length="50">
+                                <label for="confirm-password "  data-error="Too Long" data-success="Accepted"> Confirm Password</label>
                             </div>
                         </div>
                         <div class="input-field center-align col s12 "  >
-                            <button class="btn waves-effect waves-light" type="submit" name="action">Sign Up
+                            <button id="sign-up" class="btn waves-effect waves-light" type="submit" name="action">Sign Up
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>    
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>        
-        <script src="../../script/Config.js"></script>
-        <script src="Script.js"></script>
+        <script src="/script/Config.js"></script>
+        <script src="/views/sign_up/Script.js"></script>
     </body>
 </html>

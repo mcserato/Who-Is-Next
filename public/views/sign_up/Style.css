@@ -2,11 +2,15 @@ body {
     background-color:#f5f6f6;
 }
 
-div.s6 img {
+div..col.s6 img {
     padding-top: 20%;
 }
 
-div#input_fields_div {
+div.col.s6 form div#input-fields-div{
+    background-color: white;
+}
+
+div#input-fields-div {
     background-color:white;
 }
 
