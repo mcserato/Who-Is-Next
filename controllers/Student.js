@@ -52,7 +52,7 @@ exports.edit = function (req, res, next) {
     });
 } 
 
-//Removes a student from the database
+/* Removes a student from the database */
 exports.removeStudent = function (req, res, next) {
     if (!req.body.student_number) {
         res.send(400, "Error: Missing student number.");

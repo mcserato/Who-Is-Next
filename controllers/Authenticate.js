@@ -13,15 +13,15 @@ exports.login = function (req, res, next) {
     var password = req.body.password;
 
     if (req.session.username) {
-        return res.send(401, "Already logged in.");
+        return res.send(400, "Someone is already logged in.");
     }
 
     if (!username) {
-        return res.send(400, "Error: Usename cannot be blank.");
+        return res.send(400, "Usename cannot be blank.");
     }
 
     if (!password) {
-        return res.send(400, "Error: Password cannot be blank.");
+        return res.send(400, "Password cannot be blank.");
     }
     
     db.query("SELECT * FROM ADMIN a,FACULTY f WHERE a.admin_username=? OR f.username=?", 
@@ -42,6 +42,7 @@ exports.login = function (req, res, next) {
                     req.session.role = 'ADMIN';
 
                     delete rows2[0].password;
+                    rows2[0].role = 'ADMIN';
                     return res.send(rows2);
                 } else {
                     db.query("SELECT * FROM FACULTY WHERE username = ? AND password = ?",
@@ -53,18 +54,20 @@ exports.login = function (req, res, next) {
                         
                         if (rows3.length) {
                             req.session.username = rows3[0].username;
+                            req.session.emp_num = rows3[0].emp_num;
                             req.session.role = 'FACULTY';
 
                             delete rows3[0].password;
+                            rows3[0].role = 'FACULTY';
                             return res.send(rows3);
                         } else {
-                            return res.send(404, "Error: Incorrect Password!");
+                            return res.send(400, "Incorrect Password!");
                         }
                     });
                 }
             });
         } else {
-            return res.send(404, "Error: Username not Found!");
+            return res.send(400, "Username not Found!");
         }
     });
 }
@@ -72,7 +75,7 @@ exports.login = function (req, res, next) {
 /* Log-out */
 exports.logout = function (req, res, next) {
     if (!req.session.username) {
-        return res.send(401, "Error: No one is logged in.");
+        return res.send(400, "No one is logged in.");
     }
 
     req.session.destroy();

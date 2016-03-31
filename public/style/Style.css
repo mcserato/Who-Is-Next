@@ -28,3 +28,49 @@ nav {
 	bottom: 0px;
 	left: 0px;
 }
+
+#add-button-div {
+	left: 90%;
+	top: 80%;
+}
+
+#add-icon {
+	background-color: #b42529;
+}
+
+#add-button {
+	background-color: #b42529;
+}
+
+.title {
+	margin :0px;
+}
+
+#logo {
+	margin-top: 2%;
+}
+
+#left, #right {
+	margin-top: 15%;
+}
+
+#login {
+	background-color: #CB494E;
+}
+
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]) {
+	border-bottom: 1px solid #CB494E;
+	box-shadow: 0 1px 0 0 #CB494E;
+}
+
+input[type=text]:focus:not([readonly])+label,
+input[type=password]:focus:not([readonly])+label {
+	color: #CB494E;
+	
+}
+
+.input-field
+.prefix.active{
+	color: #CB494E;
+}

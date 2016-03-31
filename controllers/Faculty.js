@@ -19,7 +19,7 @@ exports.edit = function (req, res, next) {
     });
 }
 
-//Removes a faculty employee from the database
+/* Removes a faculty employee from the database */
 exports.removeFaculty = function (req, res, next) {
     if (!req.body.emp_num) {
         res.send(400, "Error: Missing employee number.");
@@ -39,7 +39,7 @@ exports.removeFaculty = function (req, res, next) {
     });
 }
 
-/* sign-up */
+/* Sign-up for user */
 exports.signup = function (req, res, next) {
 	var emp_num = req.body.emp_num;
 	var username = req.body.username;
@@ -120,5 +120,29 @@ exports.search = function(req, res, next) {
 			} else {
 			    res.send(rows);
 			}
+	});
+}
+
+/* Gets the current theme */
+exports.getTheme = function (req, res, next) {	
+	db.query("SELECT current_theme FROM FACULTY WHERE username = ?",
+	    [req.session.username], function (err, rows) {
+		    if(err) {
+		        return next(err);
+		    }
+		    
+		    return res.send(rows);
+	});
+}
+
+/* Switches the theme */
+exports.switchTheme = function (req, res, next) {
+	db.query("UPDATE FACULTY SET current_theme = ? WHERE username = ?", 
+	    [req.body.current_theme, req.session.username], function (err, rows) {
+		    if(err) {
+		        return next(err);
+		    }
+		    
+		    return res.send(rows);
 	});
 }

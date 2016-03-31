@@ -61,3 +61,16 @@ exports.viewStudentsInClass = function(req, res, next) {
             res.send(rows);
 	});
 }
+
+/* Imports a student */
+exports.import = function(req, res, next) {
+    db.query("INSERT INTO CLASS_STUDENT(class_id, student_number) VALUES " +
+        "(?,?)", [req.body.class_id, req.body.student_number],
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+
+            res.send(rows);
+    });
+}

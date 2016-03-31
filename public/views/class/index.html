@@ -6,8 +6,9 @@
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="../../style/Materialize.min.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
-
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
@@ -23,7 +24,7 @@
             <div id="main-content">
                 <h1 class="center">Classes</h1>
                 <!-- <div class="card"> -->
-                put your main content here
+
                 <!-- </div> -->
             </div>
         </div>
@@ -41,9 +42,84 @@
             </ul>
         </div>
 
+         <div id="add-button-div" class="fixed-action-btn">
+            <!-- Modal Trigger -->
+            <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
+                <i id="add-icon" class="material-icons">add</i></a>
+            </a>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="add_modal" class="modal">
+            <div class="modal-content">
+                <h2>Add Class</h2>
+                <form id="add-class-form">
+                    <div class="input-field">
+                        <input id="course_code" type="text" required="" />
+                        <label for="course_code">Course Code</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="course_title" type="text" required="" />
+                        <label for="course_title">Course Title</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="class_section" type="text" required="" />
+                        <label for="class_section">Class Section</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="section_number" type="text" required="" />
+                        <label for="section_number">Class Section Number</label>
+                    </div>                
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div> 
+
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
         <script src="../../script/Config.js"></script>
         <script src="../../script/Script.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+                $('#add-class-form').submit(function (event) {
+                    var course_code = $("#course_code").val();
+                    var course_title = $("#course_title").val();
+                    var class_section = $("#class_section").val();
+                    var section_number = $("#section_number").val();
+
+                    var emp_num = 128128128;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/class",
+                        data: {
+                            course_code: course_code,
+                            course_title: course_title,
+                            class_section: class_section,
+                            section_number: section_number,
+                            emp_num: emp_num
+                        },
+                        success: function(){
+                            Materialize.toast("Yey!", 1000);
+                        },
+                        dataType: "JSON"
+                    });
+
+                    return false;
+                });
+
+
+                $('.modal-trigger').leanModal();
+            });
+        </script>
     </body>
 </html>

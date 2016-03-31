@@ -76,7 +76,22 @@ exports.removeSection = function(req, res, next){
 
 /* Shows the details of all classes */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT * FROM CLASS", function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 0", [req.session.emp_num], function (err, rows) {
+		if (err) {
+		    return next(err);
+		}
+		
+		if (rows.length === 0) {
+		    res.send(404, "Error: Classes were not found.");
+		} else {
+			res.send(rows);
+		}
+    });
+}
+
+/* Shows the details of all classes */
+exports.viewArchived = function(req, res, next) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.params.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
@@ -107,7 +122,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a class */
 exports.search = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE course_code = ?", [req.params.course_code],
+    db.query("SELECT * FROM CLASS WHERE course_code = ? AND emp_num = ?", [req.params.course_code, req.params.emp_num],
         function (err, rows) {
 			if (err) {
 				return next(err);
@@ -119,4 +134,17 @@ exports.search = function(req, res, next) {
 				res.send(rows);
 			}
 	});
+}
+
+/* Archives a class */
+exports.archiveClass = function(req, res, next) {
+    db.query("UPDATE CLASS SET is_archived = TRUE WHERE class_id = ?",
+        [req.body.class_id],
+
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+            res.send(rows);
+    });
 }
