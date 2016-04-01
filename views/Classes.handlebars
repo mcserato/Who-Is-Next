@@ -40,12 +40,7 @@
         <div class="input-field">
             <input id="class_section" type="text" required="" />
             <label for="class_section">Class Section</label>
-        </div>
-
-        <div class="input-field">
-            <input id="section_number" type="text" required="" />
-            <label for="section_number">Class Section Number</label>
-        </div>                
+        </div>           
 </div>
 <div class="modal-footer">
         <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
@@ -66,7 +61,6 @@ $(document).ready(function(){
         var course_code = $("#course_code").val();
         var course_title = $("#course_title").val();
         var class_section = $("#class_section").val();
-        var section_number = $("#section_number").val();
 
         $.ajax({
             type: "POST",
