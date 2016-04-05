@@ -14,10 +14,7 @@ var express = require('express'),
 	        console.log('Example app is listening at http://%s:%s', host, port);
     	});
 
-//dinagdag ko ito hihi
 app.use(favicon(__dirname+'/public/favicon/favicon.ico'));
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
 
 app.use(bodyParser.urlencoded({
   extended: true
