@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="/favicon/favicon.ico">
         <script src="/script/Jquery.min.js"></script>
         <script src="/script/Materialize.min.js"></script>
-        
+
     </head>
     <body>
         <div class="container">
@@ -28,8 +28,8 @@
                                 <label for="full-name">Full Name</label>
                             </div>
                             <div class="input-field col s12 ">
-                                <input id="emp-num" type="text" class="validate center-align">
-                                <label for="emp-num">Employee Number</label>
+                                <input id="emp-num" type="text" class="validate center-align" length="9" required pattern="[0-9]{9}" >
+                                <label for="emp-num" data-error="Numbers only and length 9" data-success="Accepted">Employee Number</label>
                             </div>
                             <div class="input-field col s12 ">
                                 <input id="email" type="email" class="validate center-align">
@@ -40,7 +40,7 @@
                                 <label for="username " data-error="Invalid" data-success="Accepted"> Username</label>
                             </div>
                             <div class="input-field col s12 ">
-                                <input id="password" type="password" class="center-align" length ="50">
+                                <input id="password" type="password" class="center-align" length ="50" required pattern="[0-9]{9-50}">
                                 <label for="password"  data-error="Too Long" data-success="Accepted">Password</label>
                             </div>
                             <div class="input-field col s12 ">
@@ -53,11 +53,11 @@
                                 Sign Up
                                 <i class="material-icons right">send</i>
                             </button>
-                        </div>    
+                        </div>
                     </form>
                 </div>
             </div>
-        </div>        
+        </div>
         <script src="/script/Config.js"></script>
         <script src="/views/sign_up/Script.js"></script>
     </body>

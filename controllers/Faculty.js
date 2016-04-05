@@ -72,8 +72,9 @@ exports.signup = function (req, res, next) {
 						        if(err3) {
 							        return next(err3);
 							    }
-							    
-						        return res.send("Successfully signed up.");
+							    if(rows3){
+						        	return res.send(rows3);
+						        }
 					        });
 				        }
 			    });
