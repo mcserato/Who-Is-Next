@@ -93,15 +93,16 @@ exports.viewAll = function(req, res, next) {
 /* Shows the details of all classes */
 exports.viewArchived = function(req, res, next) {
     db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.params.emp_num], function (err, rows) {
-        if (err) {
-            return next(err);
-        }
-        
-        if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
-            res.send(rows);
-        }
+
+		if (err) {
+		    return next(err);
+		}
+		
+		if (rows.length === 0) {
+		    res.send(404, "Error: Classes not found.");
+		} else {
+			res.send(rows);
+		}
     });
 }
 
@@ -125,7 +126,7 @@ exports.viewOne = function(req, res, next) {
 exports.search = function(req, res, next) {
     db.query("SELECT * FROM CLASS WHERE course_code = ? AND emp_num = ?", [req.params.course_code, req.params.emp_num],
         function (err, rows) {
-            if (err) {
+			if (err) {
                 return next(err);
             }
         
@@ -134,7 +135,7 @@ exports.search = function(req, res, next) {
             } else {
                 res.send(rows);
             }
-    });
+	});
 }
 
 /* Archives a class */

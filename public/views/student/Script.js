@@ -2,7 +2,6 @@
 
 $(document).ready( function () {
     //document.getElementById("main-content");
-    console.log(window.location.href);
 
 	const content = $('#student-list');
 	//config.checkAuth("FACULTY");

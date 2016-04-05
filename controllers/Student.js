@@ -84,7 +84,7 @@ exports.viewAll = function(req, res, next) {
         } else {
             res.send(rows);
         }
-    });
+	});
 }
 
 /* Shows the details of a student */
@@ -100,7 +100,7 @@ exports.viewOne = function(req, res, next) {
         } else {
             res.send(rows);
         }
-    });
+	});
 }
 
 /* Searches a student */
@@ -116,5 +116,5 @@ exports.search = function(req, res, next) {
         } else {
             res.send(rows);
         }
-    });
+	});
 }
