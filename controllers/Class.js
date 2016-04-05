@@ -27,7 +27,8 @@ exports.edit = function (req, res, next) {
                 return next(err);
             }
             res.send(rows);
-    });
+        }
+    );
 }
 
 /* Removes an entire class and all of its sections */
@@ -93,16 +94,13 @@ exports.viewAll = function(req, res, next) {
 exports.viewArchived = function(req, res, next) {
     db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.params.emp_num], function (err, rows) {
         if (err) {
-            //return next(err);
-            res.render('400');
+            return next(err);
         }
         
         if (rows.length === 0) {
-            //res.send(404, "Error: Classes not found.");
-            res.render('404');
+            res.send(404, "Error: Classes not found.");
         } else {
-            //res.send(rows);
-            res.render('Classes', {classes:rows});
+            res.send(rows);
         }
     });
 }
@@ -116,11 +114,9 @@ exports.viewOne = function(req, res, next) {
             }
         
             if (rows.length === 0) {
-                //res.send(404, "Error: Class not found.");
-                res.render('404');
+                res.send(404, "Error: Class not found.");
             } else {
-                //res.send(rows);
-                res.render('Class', {class:rows[0]});
+                res.send(rows);
             }
     });
 }
@@ -134,11 +130,9 @@ exports.search = function(req, res, next) {
             }
         
             if (rows.length === 0) {
-                //res.send(404, "Error: Class not found.");
-                res.render('404');
+                res.send(404, "Error: Class not found.");
             } else {
-                //res.send(rows);
-                res.render('Classes', {classes:rows});
+                res.send(rows);
             }
     });
 }

@@ -86,16 +86,13 @@ exports.signup = function (req, res, next) {
 exports.viewAll = function(req, res, next) {
 	db.query("SELECT * FROM FACULTY", function (err, rows) {
         if (err) {
-		    //return next(err);
-            res.render('400');
+		    return next(err);
 		}
 		
 		if (rows.length === 0) {
-		    //res.send(404, "Error: Classes not found.");
-            res.render('404');
+		    res.send(404, "Error: Classes not found.");
 		} else {
-			//res.send(rows);
-            res.render('Faculties', {faculties:rows});
+			res.send(rows);
 		}
 	});
 }
@@ -105,16 +102,13 @@ exports.viewOne = function(req, res, next) {
 	db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [req.params.emp_num],
 		function (err, rows) {
 		    if (err) {
-		    //return next(err);
-            res.render('400');
+		    return next(err);
 		}
 		
 		if (rows.length === 0) {
-		    //res.send(404, "Error: Classes not found.");
-            res.render('404');
+		    res.send(404, "Error: Classes not found.");
 		} else {
-			//res.send(rows);
-            res.render('Faculty', {faculty:rows[0]});
+			res.send(rows);
 		}
 	});
 }
@@ -124,16 +118,13 @@ exports.search = function(req, res, next) {
 	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.name],
 		function (err, rows) {
 		    if (err) {
-		    //return next(err);
-            res.render('400');
+		    return next(err);
 		}
 		
 		if (rows.length === 0) {
-		    //res.send(404, "Error: Classes not found.");
-            res.render('404');
+		    res.send(404, "Error: Classes not found.");
 		} else {
-			//res.send(rows);
-            res.render('Faculties', {faculties:rows});
+			res.send(rows);
 		}
 	});
 }
