@@ -13,7 +13,7 @@ $(document).ready( function () {
             window.location.href = '/admin';
         }
         if(user.role == 'FACULTY'){
-            window.location.href = '/faculty';
+            window.location.href = '/views/class';
         }
 
     }
@@ -85,7 +85,7 @@ $(document).ready( function () {
             window.location.href = '/admin';
         }
         if(user.role == "FACULTY"){
-            window.location.href = '/faculty';
+            window.location.href = '/views/class';
         }
     }
 });
