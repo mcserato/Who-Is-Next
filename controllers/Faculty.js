@@ -84,7 +84,7 @@ exports.signup = function (req, res, next) {
 
 /* Shows the list of all faculty members */
 exports.viewAll = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY", function (err, rows) {
+	db.query("SELECT name FROM FACULTY", function (err, rows) {
         if (err) {
             return next(err);
         }
@@ -110,7 +110,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a faculty member */
 exports.search = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.emp_num],
+	db.query("SELECT name FROM FACULTY WHERE name like '%?%'", [req.params.name],
 		function (err, rows) {
 		    if (err) {
 		        return next(err);
