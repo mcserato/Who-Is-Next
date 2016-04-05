@@ -1,10 +1,6 @@
 var express = require('express'),
 	session = require('express-session'),
 	bodyParser = require('body-parser'),
-	//dinagdag ko po hihi
-    favicon = require('serve-favicon'),
-    handlebars = require('express-handlebars')
-    	.create({defaultLayout:'Main'}),
     
     app = express(),
     server = app.listen(8000, "localhost", 
@@ -14,7 +10,6 @@ var express = require('express'),
 	        console.log('Example app is listening at http://%s:%s', host, port);
     	});
 
-app.use(favicon(__dirname+'/public/favicon/favicon.ico'));
 
 app.use(bodyParser.urlencoded({
   extended: true
