@@ -86,10 +86,14 @@ exports.signup = function (req, res, next) {
 exports.viewAll = function(req, res, next) {
 	db.query("SELECT * FROM FACULTY", function (err, rows) {
         if (err) {
-            return next(err);
-        }
-        
-        res.send(rows);
+		    return next(err);
+		}
+		
+		if (rows.length === 0) {
+		    res.send(404, "Error: Classes not found.");
+		} else {
+			res.send(rows);
+		}
 	});
 }
 
@@ -98,28 +102,31 @@ exports.viewOne = function(req, res, next) {
 	db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [req.params.emp_num],
 		function (err, rows) {
 		    if (err) {
-		        return next(err);
-		    }
-		    if (rows.length === 0) {
-                res.send(404, "Error: Faculty not found!");
-			} else {
-			    res.send(rows);
-			}
+		    return next(err);
+		}
+		
+		if (rows.length === 0) {
+		    res.send(404, "Error: Classes not found.");
+            res.render('404');
+		} else {
+			res.send(rows);
+		}
 	});
 }
 
 /* Searches a faculty member */
 exports.search = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.emp_num],
+	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.name],
 		function (err, rows) {
 		    if (err) {
-		        return next(err);
-		    }
-		    if (rows.length === 0) {
-                res.send(404, "Error: Faculty not found!");
-			} else {
-			    res.send(rows);
-			}
+		    return next(err);
+		}
+		
+		if (rows.length === 0) {
+		    res.send(404, "Error: Classes not found.");
+		} else {
+			res.send(rows);
+		}
 	});
 }
 

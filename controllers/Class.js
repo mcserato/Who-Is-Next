@@ -97,7 +97,7 @@ exports.viewArchived = function(req, res, next) {
 		}
 		
 		if (rows.length === 0) {
-		    res.send(404, "Error: Classes were not found.");
+		    res.send(404, "Error: Classes not found.");
 		} else {
 			res.send(rows);
 		}
@@ -125,14 +125,14 @@ exports.search = function(req, res, next) {
     db.query("SELECT * FROM CLASS WHERE course_code = ? AND emp_num = ?", [req.params.course_code, req.params.emp_num],
         function (err, rows) {
 			if (err) {
-				return next(err);
-			}
-		
-			if (rows.length === 0) {
-				res.send(404, "Error: Class not found.");
-			} else {
-				res.send(rows);
-			}
+                return next(err);
+            }
+        
+            if (rows.length === 0) {
+                res.send(404, "Error: Class not found.");
+            } else {
+                res.send(rows);
+            }
 	});
 }
 

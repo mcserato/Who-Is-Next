@@ -20,15 +20,6 @@
             </div>
         </div>
 
-        <div class="container">
-            <div id="main-content">
-                <h1 class="center">Classes</h1>
-                <!-- <div class="card"> -->
-
-                <!-- </div> -->
-            </div>
-        </div>
-
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red z-depth-0 black">
                 <i class="large material-icons">menu</i>
@@ -40,6 +31,17 @@
                 <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
                 <li><a href="/views/archived_classes" class="btn-floating black" href="" title="Archived Classes"><i class="material-icons">archive</i></a></li>
             </ul>
+        </div>
+
+        <div class="container">
+            <div id="main-content">
+                <h1 class="center">Classes</h1>
+                <ul id="class-list" class="collapsible" data-collapsible="accordion">
+                <!-- <div class="card"> -->
+
+                <!-- </div> -->
+                </ul>
+            </div>
         </div>
 
          <div id="add-button-div" class="fixed-action-btn">
@@ -82,44 +84,7 @@
             </div>
         </div> 
 
-        <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.js"></script>
         <script src="../../script/Config.js"></script>
-        <script src="../../script/Script.js"></script>
-
-        <script>
-            $(document).ready(function(){
-                // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-                $('#add-class-form').submit(function (event) {
-                    var course_code = $("#course_code").val();
-                    var course_title = $("#course_title").val();
-                    var class_section = $("#class_section").val();
-                    var section_number = $("#section_number").val();
-
-                    var emp_num = 128128128;
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/class",
-                        data: {
-                            course_code: course_code,
-                            course_title: course_title,
-                            class_section: class_section,
-                            section_number: section_number,
-                            emp_num: emp_num
-                        },
-                        success: function(){
-                            Materialize.toast("Yey!", 1000);
-                        },
-                        dataType: "JSON"
-                    });
-
-                    return false;
-                });
-
-
-                $('.modal-trigger').leanModal();
-            });
-        </script>
+        <script src="./Script.js"></script>
     </body>
 </html>
