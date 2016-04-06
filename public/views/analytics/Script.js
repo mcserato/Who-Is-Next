@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    var gender_frequency=[];
     $.ajax({
         type: "GET",
         url: "/api/analytics/1"
@@ -11,7 +12,7 @@ $( document ).ready(function() {
             temp.push(data[i].no_of_times_called)
             data2.push(temp);
         }
-        $('#top-ten').highcharts({
+        $('#top-ten-div').highcharts({
             chart: {
                 type: 'column'
             },
@@ -52,6 +53,53 @@ $( document ).ready(function() {
                         fontFamily: 'Verdana, sans-serif'
                     }
                 }
+            }]
+        });
+    });
+    $.ajax({
+        type: "GET",
+        url: "/api/analyticsGender/1/M"
+    }).done(function(data) {
+        gender_frequency.push(data[0].frequency);
+    });
+    $.ajax({
+        type: "GET",
+        url: "/api/analyticsGender/1/F"
+    }).done(function(data) {
+        gender_frequency.push(data[0].frequency);
+
+        $('#gender-frequency-div').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Gender Frequency Distribution'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Number of Time Called',
+                data: [
+                    { name: 'Male', y: gender_frequency[0] },
+                    { name: 'Female', y: gender_frequency[1] }
+                ]
             }]
         });
     });
