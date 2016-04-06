@@ -103,4 +103,60 @@ $( document ).ready(function() {
             }]
         });
     });
+    $.ajax({
+            type: "GET",
+            url: "/api/analyticsMale/1"
+        }).done(function(datagg){
+            var data3=[];
+            for(i=0; i<datagg.length; i++){
+                //data2.push(JSON.parse(data[i]));
+                var temp=[];
+                temp.push(datagg[i].first_name);
+                temp.push(datagg[i].no_of_times_called);
+                data3.push(temp);
+            }
+            $('#top-ten-males-div').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Top Ten Most Called Male Students'
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'No. of times called'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Top Ten Most Called Male Students',
+                    data: data3,
+                    dataLabels: {
+                        enabled: true,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        format: '{point.y:.0f}', // one decimal
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+            });
+        });
 });

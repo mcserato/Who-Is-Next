@@ -23,8 +23,8 @@ module.exports = function (router) {
     router.route('/api/class/:course_code')
         .get(class_.search);
 
-    router.route('/api/archiveClass')
-        .post(class_.archiveClass);
+    //router.route('/api/archiveClass')
+        //.post(class_.archiveClass);
         
     router.route('/api/student')
         .post(student.add)
@@ -59,9 +59,9 @@ module.exports = function (router) {
         
     router.route('/api/analytics/:class_id')
         .get(analytics.getTopTenMostCalledStudents);
-
-    router.route('/api/analyticsMale/:class_id')
-        .get(analytics.getTopTenMostCalledMales);
+        
+   router.route('/api/analyticsMale/:class_id')
+        .get(analytics.getTopTenMostCalledMales);     
 
     router.route('/api/analyticsFemale/:class_id')
         .get(analytics.getTopTenMostCalledFemales);
