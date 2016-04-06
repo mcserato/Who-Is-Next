@@ -2,8 +2,29 @@
 
 $(document).ready( function () {
 
-    //document.getElementById("main-content");
 	const content = $('#class-list');
+
+    $('#logout-btn')
+        .click(function(){
+
+            $.ajax({
+                url: '/api/logout',
+                method: 'POST',
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in Logout. Please try again !",2500);
+                    }
+
+                    localStorage.clear();
+                    Materialize.toast(data,2500);
+                    window.location.href = '/';
+                },
+                error: function(err){
+                    return Materialize.toast(err.responseText,2500);
+                }
+            });
+
+        });
 
     $('#add-class-form').submit(function (event) {
         var course_code = $("#course_code").val();

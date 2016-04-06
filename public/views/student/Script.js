@@ -1,23 +1,43 @@
 'use strict';
 
 $(document).ready( function () {
-    //document.getElementById("main-content");
 
 	const content = $('#student-list');
-	//config.checkAuth("FACULTY");
-		$.ajax({
+	config.checkAuth("FACULTY");
+		  
+    $('#logout-btn')
+        .click(function(){
+
+            $.ajax({
+                url: '/api/logout',
+                method: 'POST',
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in Logout. Please try again !",2500);
+                    }
+
+                    localStorage.clear();
+                    Materialize.toast(data,2500);
+                    window.location.href = '/';
+                },
+                error: function(err){
+                    return Materialize.toast(err.responseText,2500);
+                }
+            });
+
+        });
+
+
+        $.ajax({
             url: '/api/student',
             method: 'GET',
             success: function(data){
             	if(!data){
                 	return Materialize.toast("Error in fetching data",2500);
             	}
-
             	//localStorage.clear();
                 //Materialize.toast(data,2500);
                 //window.location.href = '/';
-              	
-
                 for (var student in data){
 
                     var row = $("<li></li>");
@@ -26,25 +46,26 @@ $(document).ready( function () {
                     
                     if(data[student].picture == null){
                         var image = $('<img />',{
-                            src: '',
-                            alt: 'IMAGE'
+                            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                            float: 'left',
+                            position: 'relative',
+                            width: '10%'
                         });                        
                     }else{
                         var image = $('<img />',{
-                            alt: 'IMAGE',
-                            src: '' + data[student].picture + '' 
+                            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                            float: 'left',
+                            position: 'relative',
+                            width: '10%'
                         });
                     }
                     
                     image.addClass("circle")
                     student_header.append(image);
 
-                    var head = $("<span></span>").text(data[student].student_number);
-                    head.addClass("title")
-                    var text = $("<p></p>").text(data[student].last_name + ", " + data[student].first_name);
-                    //text.addClass("center-align");
+                    var text = $("<span></span>").html(data[student].last_name + ", " + data[student].first_name + " (" + data[student].student_number + ")");
+                    text.addClass("center-align");
 
-                    student_header.append(head);
                     student_header.append(text);
 
                     var student_body = $("<div></div>").addClass("collapsible-body");
