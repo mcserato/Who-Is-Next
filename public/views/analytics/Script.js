@@ -103,6 +103,64 @@ $( document ).ready(function() {
             }]
         });
     });
+
+    $.ajax({
+        type: "GET",
+        url: "/api/analyticsFemale/1"
+    }).done(function(datalang){
+        var data4=[];
+        for(i=0; i<datalang.length; i++){
+            //data2.push(JSON.parse(data[i]));
+            var temp=[];
+            temp.push(datalang[i].first_name);
+            temp.push(datalang[i].no_of_times_called)
+            data4.push(temp);
+        }
+        $('#top-ten-females-div').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Top Ten Most Called Female Students'
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'No. of times called'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+                name: 'Top Ten Most Called Female Students',
+                data: data4,
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:.0f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }]
+        });
+    });
+
     $.ajax({
             type: "GET",
             url: "/api/analyticsMale/1"
