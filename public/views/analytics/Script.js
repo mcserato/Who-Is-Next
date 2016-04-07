@@ -217,4 +217,60 @@ $( document ).ready(function() {
                 }]
             });
         });
+        
+    $.ajax({
+            type: "GET",
+            url: "/api/analyticsGetSection/6"
+         }).done(function(section){      
+            var section_list = [];
+            for(var i = 0; i < section.length ; i ++) {
+                section_list.push( section[i].id );             
+            }
+        
+                var values = [];
+                for(var i = 0 ; i < section_list.length ; i ++){
+                    var link = "/api/analyticsLab/"+section_list[i];
+                    $.ajax({
+                         type: "GET",
+                         url: link
+                      }).done(function(frequency){     
+                           var temp = [];
+                           temp.push(frequency[0].section);
+                           temp.push(frequency[0].frequency);
+                           values.push(temp);   
+
+                        $('#section-frequency-div').highcharts({
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: 'Section Frequency Distribution'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.y}</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        style: {
+                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                        }
+                                    }
+                                }
+                            },
+                            series: [{
+                                name: 'No. of Times Called',
+                                data: values
+                            }]
+                        });                        
+                     });     
+                }        
+           });  
 });

@@ -65,8 +65,11 @@ module.exports = function (router) {
 
     router.route('/api/analyticsFemale/:class_id')
         .get(analytics.getTopTenMostCalledFemales);
-
-    router.route('/api/analyticsLab/:class_id/:class_section')
+        
+    router.route('/api/analyticsGetSection/:class_id')
+       .get(analytics.getSection);
+            
+    router.route('/api/analyticsLab/:class_section')
         .get(analytics.getSectionFrequency);
 
     router.route('/api/analyticsGender/:class_id/:gender')
