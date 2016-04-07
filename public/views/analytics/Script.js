@@ -9,9 +9,15 @@ $( document ).ready(function() {
             //data2.push(JSON.parse(data[i]));
             var temp=[];
             temp.push(data[i].last_name);
-            temp.push(data[i].no_of_times_called)
+            temp.push(data[i].no_of_times_called);
             data2.push(temp);
         }
+
+        Highcharts.setOptions({
+        	colors: ['#b42529', '#333333']
+    	});
+
+
         $('#top-ten-div').highcharts({
             chart: {
                 type: 'column'
@@ -29,6 +35,7 @@ $( document ).ready(function() {
                     }
                 }
             },
+
             yAxis: {
                 min: 0,
                 title: {
