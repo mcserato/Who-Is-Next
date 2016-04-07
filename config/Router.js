@@ -17,6 +17,7 @@ module.exports = function (router) {
         .delete(class_.removeClass);
         
     router.route('/api/class/:class_id')
+        .post(class_.addSection)
         .get(class_.viewOne)
         .delete(class_.removeSection);
         
