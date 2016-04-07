@@ -15,6 +15,21 @@ exports.add = function (req, res, next) {
     });
 }
 
+/* Adds a section to a class to the database */
+exports.addSection = function (req, res, next) {
+    db.query("INSERT INTO CLASS(course_code, course_title, class_section, " +
+        "section_number, emp_num) SELECT course_code, course_title, " +
+        "class_section, ?, ? FROM CLASS WHERE class_id=?",
+        [req.body.section_number, req.body.emp_num, req.params.class_id],
+
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+            res.send(rows);
+    });
+}
+
 /* Edits a specific class in the database */
 exports.edit = function (req, res, next) {
     db.query("UPDATE CLASS SET course_code = ?, course_title = ?, " +

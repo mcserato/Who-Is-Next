@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Classes</title>
+        <title>Section</title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="../../style/Materialize.min.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
@@ -22,7 +22,7 @@
 
         <div class="container">
             <div id="main-content">
-                <h1 class="center">Classes</h1>
+                <h1 class="center">Section</h1>
                 <!-- <div class="card"> -->
 
                 <!-- </div> -->
@@ -52,22 +52,12 @@
         <!-- Modal Structure -->
         <div id="add_modal" class="modal">
             <div class="modal-content">
-                <h2>Add Class</h2>
+                <h2>Add Section</h2>
                 <form id="add-class-form">
                     <div class="input-field">
-                        <input id="course_code" type="text" required="" />
-                        <label for="course_code">Course Code</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="course_title" type="text" required="" />
-                        <label for="course_title">Course Title</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="class_section" type="text" required="" />
-                        <label for="class_section">Class Section</label>
-                    </div>
+                        <input id="section_number" type="text" required="" />
+                        <label for="section_number">Section Number</label>
+                    </div>            
             </div>
             <div class="modal-footer">
                     <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
@@ -75,9 +65,7 @@
                     </button>
                 </form>
             </div>
-        </div>
-
-        <a href="Section.html">Click me!</a>
+        </div> 
 
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
@@ -88,23 +76,19 @@
             $(document).ready(function(){
                 // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
                 $('#add-class-form').submit(function (event) {
-                    var course_code = $("#course_code").val();
-                    var course_title = $("#course_title").val();
-                    var class_section = $("#class_section").val();
+                    var section_number = $("#section_number").val();
 
                     var emp_num = 128128128;
 
                     $.ajax({
                         type: "POST",
-                        url: "/api/class",
+                        url: "/api/class/26",
                         data: {
-                            course_code: course_code,
-                            course_title: course_title,
-                            class_section: class_section,
+                            section_number: section_number,
                             emp_num: emp_num
                         },
                         success: function(){
-                            Materialize.toast(course_code + " added!", 1000);
+                            Materialize.toast(section_number + " added!", 1000);
                         },
                         dataType: "JSON"
                     });
