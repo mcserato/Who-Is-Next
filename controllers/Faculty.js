@@ -20,7 +20,7 @@ exports.edit = function (req, res, next) {
 }
 
 /* Removes a faculty employee from the database */
-exports.removeFaculty = function (req, res, next) {
+exports.remove = function (req, res, next) {
     if (!req.body.emp_num) {
         res.send(400, "Error: Missing employee number.");
     }
