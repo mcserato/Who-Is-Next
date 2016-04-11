@@ -65,21 +65,28 @@ $(document).ready( function () {
             	}
 
                 for (var class_ in data){
-                    console.log(data[class_].course_code);
                     var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");                    
                     var head = $("<span></span>").text(data[class_].course_code);
                     var body = $("<i>delete</i>");
                     body.addClass("material-icons right");
-                    //body.addId(data[class_].course_code);
-                    //console.log(body);
+                    row.attr("course_code", data[class_].course_code);
+                    row.addClass("courses");
                     head.addClass("title");
                     
                     class_header.append(body);
                     class_header.append(head);
                     row.append(class_header);
                     content.append(row);
-                };
+                }
+
+                $('.courses')
+                    .click(function(){
+                        console.log($(this).attr("course_code"));
+                        localStorage.course_code = $(this).attr("course_code");
+                        window.location.href = "/views/section";
+
+                    });
 
             },
             error: function(err){

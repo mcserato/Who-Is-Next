@@ -43,12 +43,12 @@ module.exports = function (router) {
         .get(class_.viewAll)
         .delete(class_.removeClass);
         
-    router.route('/api/class/:class_id')
+    router.route('/api/class/:course_code')
         .get(class_.viewOne)
         .delete(class_.removeSection);
         
-    router.route('/api/class/:course_code')
-        .get(class_.search);
+    /*router.route('/api/class/:course_code')
+        .get(class_.search);*/
 
     //---------------------------------------    
     router.route('/api/class_student')

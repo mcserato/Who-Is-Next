@@ -91,7 +91,7 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of all classes from a course code of a faculty user */
 exports.viewOne = function(req, res, next) {
-    db.query("SELECT * FROM CLASS where emp_num = ? and coure_code = ? and is_archived = 0", [req.session.emp_num, req.params.course_code], function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and course_code = ? and is_archived = 0", [req.session.emp_num, req.params.course_code], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
