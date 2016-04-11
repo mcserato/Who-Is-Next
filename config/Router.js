@@ -97,8 +97,8 @@ module.exports = function (router) {
     router.route('/api/student/:student_number')        
         .get(student.viewOne);
         
-    router.route('/api/student/:last_name')
-        .get(student.search);
+    /*router.route('/api/student/:last_name')
+        .get(student.search);*/
 
     router.route('*')
         .all(function (req, res) {		

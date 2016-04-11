@@ -62,7 +62,9 @@ $(document).ready( function () {
                                 method: 'GET',
                                 success: function(student_data){
                                     for(var student in student_data){
-                                        console.log(student_data[student]); 
+                                        var student_name = $("<li></li>").addClass("collection-item");
+                                        student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + student_data[student].middle_name );
+                                        student_info.append(student_name);
                                     }
                                 },
                                 error: function(err){
@@ -70,9 +72,6 @@ $(document).ready( function () {
                                 } 
                             });
 
-                            /*var student_name = $("<li></li>").addClass("collection-item");
-                            student_name.text("gjh");*/
-                        //student_info.append(student_name);
 
                     class_body.append(student_info);
 

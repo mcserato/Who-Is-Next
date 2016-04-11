@@ -55,7 +55,7 @@ $(document).ready( function () {
     $('.modal-trigger').leanModal();
 
 
-	//config.checkAuth("FACULTY");
+	config.checkAuth("FACULTY");
 		$.ajax({
             url: '/api/class',
             method: 'GET',
