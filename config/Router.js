@@ -51,13 +51,15 @@ module.exports = function (router) {
         .get(class_.search);*/
 
     //---------------------------------------    
-    router.route('/api/class_student')
+    router.route('/api/class_student/')
         .post(class_student.add)
-        .get(class_student.view)
         .delete(class_student.remove);
 
-    router.route('/api/class_student/:student_number')
-        .get(class_student.search);
+    router.route('/api/class_student/:class_id')
+        .get(class_student.view);
+
+    /*router.route('/api/class_student/:student_number')
+        .get(class_student.search);*/
         
     router.route('/api/import')
         .post(class_student.import);  

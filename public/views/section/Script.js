@@ -44,7 +44,6 @@ $(document).ready( function () {
 
 
                 for(var class_ in data){
-                    console.log(data[class_]);
                     var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");
                         if(data[class_].section_number == null){
@@ -58,17 +57,22 @@ $(document).ready( function () {
                     var class_body = $("<div></div>").addClass("collapsible-body");
                         var student_info = $("<ul></ul>").addClass("collection");  
 
-                            /*$.ajax({
-                               url: '/api/class_student/',
+                            $.ajax({
+                                url: '/api/class_student/' + data[class_].class_id,
                                 method: 'GET',
-                                success: function(student-data){
-
+                                success: function(student_data){
+                                    for(var student in student_data){
+                                        console.log(student_data[student]); 
+                                    }
+                                },
+                                error: function(err){
+                                    return Materialize.toast(err.responseText,2500);
                                 } 
-                            });*/
+                            });
 
-                            var student_name = $("<li></li>").addClass("collection-item");
-                            student_name.text("gjh");
-                        student_info.append(student_name);
+                            /*var student_name = $("<li></li>").addClass("collection-item");
+                            student_name.text("gjh");*/
+                        //student_info.append(student_name);
 
                     class_body.append(student_info);
 
