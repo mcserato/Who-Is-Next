@@ -75,7 +75,7 @@ exports.login = function (req, res, next) {
 /* Log-out */
 exports.logout = function (req, res, next) {
     if (!req.session.username) {
-        return res.send(400, "No one is logged in.");
+        return res.status(400).send("No one is logged in.");
     }
 
     req.session.destroy();

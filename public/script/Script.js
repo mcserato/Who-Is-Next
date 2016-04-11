@@ -5,18 +5,18 @@ $(document).ready( function () {
         ? ' - ' + config.TITLE
         : config.TITLE;
 
-  /*  if(localStorage.user){
-
+    if(localStorage.user){
         var user = JSON.parse(localStorage.user);
         
         if(user.role == 'ADMIN'){
             window.location.href = 'views/faculty';
         }
+
         if(user.role == 'FACULTY'){
-            window.location.href = 'views/class';
+            window.location.href = '/views/class';
         }
 
-    }*/
+    }
 
     $('.modal-trigger').leanModal();
 
@@ -84,8 +84,9 @@ $(document).ready( function () {
         if(user.role == "ADMIN"){
             window.location.href = 'views/faculty';
         }
+
         if(user.role == "FACULTY"){
-            window.location.href = 'views/class';
+            window.location.href = '/views/class';
         }
     }
 });

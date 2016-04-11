@@ -42,7 +42,8 @@ exports.edit = function (req, res, next) {
                 return next(err);
             }
             res.send(rows);
-    });
+        }
+    );
 }
 
 /* Removes an entire class and all of its sections */
@@ -108,16 +109,32 @@ exports.viewAll = function(req, res, next) {
 exports.viewOne = function(req, res, next) {
     db.query("SELECT * FROM CLASS where emp_num = ? and coure_code = ? and is_archived = 0", [req.session.emp_num, req.params.course_code], function (err, rows) {
 		if (err) {
+            return next(err);
+        }
+        
+        if (rows.length === 0) {
+            res.send(404, "Error: Classes were not found.");
+        } else {
+            res.send(rows);
+        }
+    });
+}
+
+/* Shows the details of all classes */
+exports.viewArchived = function(req, res, next) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.params.emp_num], function (err, rows) {
+		if (err) {
 		    return next(err);
 		}
 
 		if (rows.length === 0) {
-		    res.send(404, "Error: Classes were not found.");
+		    res.send(404, "Error: Classes not found.");
 		} else {
 			res.send(rows);
 		}
     });
 }
+
 
 /* Shows the details of all classes */
 /*exports.viewArchived = function(req, res, next) {

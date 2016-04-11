@@ -15,17 +15,8 @@
             <div class="navbar-wrapper">
                 <nav class="z-depth-0">
                     <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
-                    <span class="right username"></span>
+                    <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
                 </nav>
-            </div>
-        </div>
-
-        <div class="container">
-            <div id="main-content">
-                <h1 class="center">Classes</h1>
-                <!-- <div class="card"> -->
-
-                <!-- </div> -->
             </div>
         </div>
 
@@ -40,6 +31,17 @@
                 <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
                 <li><a href="/views/archived_classes" class="btn-floating black" href="" title="Archived Classes"><i class="material-icons">archive</i></a></li>
             </ul>
+        </div>
+
+        <div class="container">
+            <div id="main-content">
+                <h1 class="center">Classes</h1>
+                <ul id="class-list" class="collapsible" data-collapsible="accordion">
+                <!-- <div class="card"> -->
+
+                <!-- </div> -->
+                </ul>
+            </div>
         </div>
 
          <div id="add-button-div" class="fixed-action-btn">
@@ -78,10 +80,6 @@
         </div>
 
         <a href="Section.html">Click me!</a>
-
-
-        <script src="../../script/Config.js"></script>
-
 
         <script>
             $(document).ready(function(){
