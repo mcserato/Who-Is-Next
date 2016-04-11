@@ -61,13 +61,13 @@ exports.login = function (req, res, next) {
                             rows3[0].role = 'FACULTY';
                             return res.send(rows3);
                         } else {
-                            return res.send(400, "Incorrect Password!");
+                            return res.status(400).send("Incorrect Password!");
                         }
                     });
                 }
             });
         } else {
-            return res.send(400, "Username not Found!");
+            return res.status(400).send("Username not Found!");
         }
     });
 }

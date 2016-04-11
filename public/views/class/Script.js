@@ -77,9 +77,9 @@ $(document).ready( function () {
                     var class_header = $("<div></div>").addClass("collapsible-header");
 
                     if(data[class_].section_number == null){
-                        var head = $("<span></span>").text(data[class_].class_section);
+                        var head = $("<span></span>").text(data[class_].course_code);
                     }else{
-                        var head = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
+                        var head = $("<span></span>").text(data[class_].course_code + "-" + data[class_].section_number);
                     }
                     head.addClass("title")
 
@@ -90,7 +90,7 @@ $(document).ready( function () {
                     var class_info = $("<ul></ul>").addClass("collection");
                     
                     var class_number = $("<li></li>").addClass("collection-item");
-                    class_number.text("Course Number: " + data[class_].course_code);
+                    class_number.text("Course Number: " + data[class_].class_section);
 
                     var class_college = $("<li></li>").addClass("collection-item");
                     class_college.text("Course Title: " + data[class_].course_title);

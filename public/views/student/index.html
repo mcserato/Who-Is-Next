@@ -15,10 +15,20 @@
             <div class="navbar-wrapper">
                 <nav class="z-depth-0">
                     <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
+
                     <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
                 </nav>
             </div>
         </div>
+        <form id="search-form">
+            <div class="input-field">
+                <input id="course_code" type="text" required="" />
+                <label for="course_code">Course Code</label>
+            </div>
+        <form>
+        <input id="search-button" type="submit" class="modal-action btn waves-light waves-effect">
+            <i class="material-icons">Search</i>
+        </input>
 
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red z-depth-0 black">
@@ -44,6 +54,7 @@
             </div>
         </div>
 
+        <script src="../../script/Helper.js"></script>
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
     </body>
