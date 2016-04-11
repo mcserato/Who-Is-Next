@@ -53,7 +53,7 @@ exports.edit = function (req, res, next) {
 } 
 
 /* Removes a student from the database */
-exports.removeStudent = function (req, res, next) {
+exports.remove = function (req, res, next) {
     if (!req.body.student_number) {
         res.status(400).send("Error: Missing student number.");
     }
@@ -74,7 +74,7 @@ exports.removeStudent = function (req, res, next) {
 
 /* Shows a list of all students */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT * FROM STUDENT", function (err, rows) {
+	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s, CLASS_STUDENT cs, CLASS c WHERE s.student_number = cs.student_number and c.class_id = cs.class_id and c.emp_num = ?", [req.session.emp_num], function (err, rows) {
         if (err) {
             return next(err);
         }
@@ -103,10 +103,11 @@ exports.viewOne = function(req, res, next) {
 	});
 }
 
-/* Searches a student */
+/* Searches a student by last name from all classes */
 exports.search = function(req, res, next) {
-    db.query("SELECT * FROM STUDENT WHERE last_name = ?",
-            [req.params.last_name], function (err, rows) {
+	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s," + 
+	"CLASS_STUDENT cs where s.last_name like '%?%'", [req.params.last_name], 
+	function (err, rows) {
         if (err) {
             return next(err);
         }
