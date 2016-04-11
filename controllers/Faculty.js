@@ -20,7 +20,7 @@ exports.edit = function (req, res, next) {
 }
 
 /* Removes a faculty employee from the database */
-exports.removeFaculty = function (req, res, next) {
+exports.remove = function (req, res, next) {
     if (!req.body.emp_num) {
         res.send(400, "Error: Missing employee number.");
     }
@@ -84,7 +84,7 @@ exports.signup = function (req, res, next) {
 
 /* Shows the list of all faculty members */
 exports.viewAll = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY", function (err, rows) {
+	db.query("SELECT name FROM FACULTY", function (err, rows) {
         if (err) {
 		    //return next(err);
             res.render('400');
@@ -121,7 +121,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a faculty member */
 exports.search = function(req, res, next) {
-	db.query("SELECT * FROM FACULTY WHERE name = ?", [req.params.name],
+	db.query("SELECT name FROM FACULTY WHERE name like '%?%'", [req.params.name],
 		function (err, rows) {
 		    if (err) {
 		    //return next(err);
