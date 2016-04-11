@@ -75,6 +75,19 @@ $( document ).ready(function() {
     }).done(function(data) {
         gender_frequency.push(data[0].frequency);
 
+        Highcharts.getOptions().plotOptions.pie.colors = (function () {
+	        var colors = [],
+	            base = Highcharts.getOptions().colors[0],
+	            i;
+
+	        for (i = 0; i < 10; i += 1) {
+	            // Start out with a darkened base color (negative brighten), and end
+	            // up with a much brighter color
+	            colors.push(Highcharts.Color(base).brighten((i-1) / 7).get());
+	        }
+	        return colors;
+	    }());
+
         $('#gender-frequency-div').highcharts({
             chart: {
                 plotBackgroundColor: null,
