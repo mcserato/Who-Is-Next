@@ -14,7 +14,7 @@ exports.add = function (req, res, next) {
 }
 
 /* Deletes a student from class */
-exports.removeStudentFromClass = function(req, res, next){
+exports.remove = function(req, res, next){
     if (!req.body.class_id) {
         res.send(400, "Error: Missing class id.");
     }
@@ -38,7 +38,7 @@ exports.removeStudentFromClass = function(req, res, next){
 }
 
 /* Searches a student in a class by last name */
-exports.searchStudentInClass = function(req, res, next) {
+exports.search = function(req, res, next) {
 	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s,"+
 	"CLASS_STUDENT cs WHERE cs.class_id = ? and s.last_name like '%?%'",
 	[req.params.class_id, req.params.student_number], function (err, rows) {
@@ -51,8 +51,10 @@ exports.searchStudentInClass = function(req, res, next) {
 }
 
 /* Shows a list of student in a class */
-exports.viewStudentsInClass = function(req, res, next) {
-    db.query("SELECT s.* from STUDENT s, CLASS_STUDENT cl where cl.class_id = ?", 
+exports.view = function(req, res, next) {
+    db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s," + 
+        "CLASS_STUDENT cs, CLASS c WHERE s.student_number = cs.student_number" +
+        "and c.class_id = cs.class_id and c.class_id = ?", 
         [req.params.class_id], function (err, rows) {
             if (err) {
                 return next(err);

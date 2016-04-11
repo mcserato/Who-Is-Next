@@ -53,7 +53,7 @@ exports.edit = function (req, res, next) {
 } 
 
 /* Removes a student from the database */
-exports.removeStudent = function (req, res, next) {
+exports.remove = function (req, res, next) {
     if (!req.body.student_number) {
         res.send(400, "Error: Missing student number.");
     }
@@ -79,27 +79,23 @@ exports.viewAll = function(req, res, next) {
             return next(err);
         }
         
-        if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
-            res.send(rows);
-        }
+        res.send(rows);
 	});
 }
 
 /* Shows the details of a student */
 exports.viewOne = function(req, res, next) {
-    db.query("SELECT * FROM STUDENT WHERE student_number = ?",
-        [req.params.student_number], function (err, rows) {
+	db.query("SELECT * FROM STUDENT WHERE student_number = ?",
+		[req.params.student_number], function (err, rows) {
         if (err) {
             return next(err);
         }
         
         if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
+            res.send(404, "Error: Student not found!");
+	    } else {
             res.send(rows);
-        }
+	    }
 	});
 }
 
@@ -113,9 +109,9 @@ exports.search = function(req, res, next) {
         }
         
         if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
+            res.send(404, "Error: Student not found!");
+	    } else {
             res.send(rows);
-        }
+	    }
 	});
 }

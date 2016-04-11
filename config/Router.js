@@ -21,10 +21,6 @@ module.exports = function (router) {
         .get(class_.viewOne)
         .delete(class_.removeSection);
 
-    router.route('/api/class/:course_code')
-        .get(class_.search);
-
-
     router.route('/api/class_of_employee')
         .get(class_.searchClassOfEmployee);
 
@@ -35,27 +31,34 @@ module.exports = function (router) {
     router.route('/api/student')
         .post(student.add)
         .put(student.edit)
-        .get(student.viewAll)
-        .delete(student.removeStudent);
+        .get(student.viewAll);
+//        .delete(student.removeStudent);
 
     router.route('/api/student/:student_number')
         .get(student.viewOne);
 
     router.route('/api/student/:last_name')
         .get(student.search);
+        
+    router.route('/api/class/:course_code')
+        .get(class_.viewOne)
+        .delete(class_.removeSection)
+        .get(class_.search);
 
     router.route('/api/class_student')
         .post(class_student.add)
-        .get(class_student.viewStudentsInClass)
-        .delete(class_student.removeStudentFromClass);
+        .delete(class_student.remove);
 
-    router.route('/api/class_student/:student_number')
-        .get(class_student.searchStudentInClass);
+    router.route('/api/class_student/:class_id')
+        .get(class_student.view);
+
+    //router.route('/api/class_student/:student_number')
+    //    .get(class_student.searchStudentInClass);
 
     router.route('/api/faculty')
         .put(faculty.edit)
         .get(faculty.viewAll)
-        .delete(faculty.removeFaculty);
+        .delete(faculty.remove);
 
     router.route('/api/faculty/:emp_num')
         .get(faculty.viewOne);
@@ -104,8 +107,8 @@ module.exports = function (router) {
         .post(class_student.import);
 
     router.route('*')
-        .all(function (req, res) {
-            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));
+        .all(function (req, res) {		
+            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));		
         });
 
     return router;

@@ -2,13 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Classes</title>
+        <title>Students</title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="../../style/Materialize.min.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
@@ -35,51 +35,14 @@
 
         <div class="container">
             <div id="main-content">
-                <h1 class="center">Classes</h1>
-                <ul id="class-list" class="collapsible" data-collapsible="accordion">
+                <h1 id="course-id" class="center"></h1>
+                <ul id="section-list" class="collapsible" data-collapsible="accordion">
                 <!-- <div class="card"> -->
-
+                <!--put your main content here -->
                 <!-- </div> -->
                 </ul>
             </div>
         </div>
-
-         <div id="add-button-div" class="fixed-action-btn">
-            <!-- Modal Trigger -->
-            <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-                <i id="add-icon" class="material-icons">add</i></a>
-            </a>
-        </div>
-
-        <!-- Modal Structure -->
-        <div id="add_modal" class="modal">
-            <div class="modal-content">
-                <h2>Add Class</h2>
-                <form id="add-class-form">
-                    <div class="input-field">
-                        <input id="course_code" type="text" required="" />
-                        <label for="course_code">Course Code</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="course_title" type="text" required="" />
-                        <label for="course_title">Course Title</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="class_section" type="text" required="" />
-                        <label for="class_section">Class Section</label>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
-                        <i class="material-icons">done</i>
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <a href="Section.html">Click me!</a>
 
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
