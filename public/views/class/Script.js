@@ -111,10 +111,10 @@ $(document).ready( function () {
 
                 });
 
-        },
-        error: function(err){
-            return Materialize.toast(err.responseText,2500);
-        }
-    });
-
+            },
+            error: function(err){
+                console.log(err.responseText);
+                return Materialize.toast(err.responseText,2500);
+            }
+        });
 });

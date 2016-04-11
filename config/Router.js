@@ -44,16 +44,13 @@ module.exports = function (router) {
         .get(class_.viewOne)
         .delete(class_.removeSection)
         .get(class_.search);
-
-    router.route('/api/class_student')
+ 
+    router.route('/api/class_student/')
         .post(class_student.add)
         .delete(class_student.remove);
 
     router.route('/api/class_student/:class_id')
         .get(class_student.view);
-
-    //router.route('/api/class_student/:student_number')
-    //    .get(class_student.searchStudentInClass);
 
     router.route('/api/faculty')
         .put(faculty.edit)
