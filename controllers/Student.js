@@ -4,7 +4,7 @@ var db = require(__dirname + './../lib/Mysql');
 exports.add = function (req, res, next) {
     // Checks if the student number is null
     if(req.body.student_number == null || req.body.student_number == "") {
-        res.status(400).send("Error: Bad Argument!");
+        res.send(400, "Error: Bad Argument!");
     }
 
     db.query("SELECT student_number FROM STUDENT WHERE student_number = ?",
@@ -27,7 +27,7 @@ exports.add = function (req, res, next) {
                     res.send(rows);
             });
         } else {
-            res.status(400).send("Error: Student already exists!");
+            res.send(400, "Error: Student already exists!");
         }
     });
 }
@@ -55,7 +55,7 @@ exports.edit = function (req, res, next) {
 /* Removes a student from the database */
 exports.remove = function (req, res, next) {
     if (!req.body.student_number) {
-        res.status(400).send("Error: Missing student number.");
+        res.send(400, "Error: Missing student number.");
     }
 
     db.query('DELETE FROM STUDENT WHERE student_number = ?',
@@ -65,7 +65,7 @@ exports.remove = function (req, res, next) {
             }
             
             if (!rows.affectedRows) {
-                res.status(400).send("Error: No student was deleted.");
+                res.send(400, "Error: No student was deleted.");
             }
 
             res.send(rows);
@@ -79,27 +79,23 @@ exports.viewAll = function(req, res, next) {
             return next(err);
         }
         
-        if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
-            res.send(rows);
-        }
+        res.send(rows);
 	});
 }
 
 /* Shows the details of a student */
 exports.viewOne = function(req, res, next) {
-    db.query("SELECT * FROM STUDENT WHERE student_number = ?",
-        [req.params.student_number], function (err, rows) {
+	db.query("SELECT * FROM STUDENT WHERE student_number = ?",
+		[req.params.student_number], function (err, rows) {
         if (err) {
             return next(err);
         }
         
         if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
+            res.send(404, "Error: Student not found!");
+	    } else {
             res.send(rows);
-        }
+	    }
 	});
 }
 
@@ -113,9 +109,9 @@ exports.search = function(req, res, next) {
         }
         
         if (rows.length === 0) {
-            res.send(404, "Error: Classes not found.");
-        } else {
+            res.send(404, "Error: Student not found!");
+	    } else {
             res.send(rows);
-        }
+	    }
 	});
 }

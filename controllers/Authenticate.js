@@ -17,7 +17,7 @@ exports.login = function (req, res, next) {
     }
 
     if (!username) {
-        return res.send(400, "Usename cannot be blank.");
+        return res.send(400, "Username cannot be blank.");
     }
 
     if (!password) {
@@ -61,13 +61,13 @@ exports.login = function (req, res, next) {
                             rows3[0].role = 'FACULTY';
                             return res.send(rows3);
                         } else {
-                            return res.status(400).send("Incorrect Password!");
+                            return res.send(400, "Incorrect Password!");
                         }
                     });
                 }
             });
         } else {
-            return res.status(400).send("Username not Found!");
+            return res.send(400, "Username not Found!");
         }
     });
 }
@@ -75,7 +75,7 @@ exports.login = function (req, res, next) {
 /* Log-out */
 exports.logout = function (req, res, next) {
     if (!req.session.username) {
-        return res.status(400).send("No one is logged in.");
+        return res.send(400, "No one is logged in.");
     }
 
     req.session.destroy();

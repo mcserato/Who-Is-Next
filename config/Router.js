@@ -99,8 +99,8 @@ module.exports = function (router) {
         .get(student.search);
 
     router.route('*')
-        .all(function (req, res) {      
-            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));       
+        .all(function (req, res) {		
+            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));		
         });
         
     return router;
