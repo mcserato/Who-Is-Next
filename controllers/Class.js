@@ -5,7 +5,7 @@ exports.add = function (req, res, next) {
     db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
         + "section_number, emp_num) VALUES(?, ?, ?, ?, ?)",
         [req.body.course_code, req.body.course_title, req.body.class_section,
-        req.body.section_number, req.sessions.emp_num],
+        req.body.section_number, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
@@ -20,7 +20,7 @@ exports.addSection = function (req, res, next) {
     db.query("INSERT INTO CLASS(course_code, course_title, class_section, " +
         "section_number, emp_num) SELECT course_code, course_title, " +
         "class_section, ?, ? FROM CLASS WHERE class_id=?",
-        [req.body.section_number, req.sessions.emp_num, req.params.class_id],
+        [req.body.section_number, req.session.emp_num, req.params.class_id],
 
         function (err, rows) {
             if (err) {
@@ -91,7 +91,7 @@ exports.removeSection = function(req, res, next){
 
 /* Shows all the courses of a faculty user */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ? and is_archived = 0", [req.sessions.emp_num], function (err, rows) {
+    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ? and is_archived = 0", [req.session.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
@@ -106,7 +106,7 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of all classes from a course code of a faculty user */
 exports.viewOne = function(req, res, next) {
-    db.query("SELECT * FROM CLASS where emp_num = ? and coure_code = ? and is_archived = 0", [req.sessions.emp_num, req.params.course_code], function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and coure_code = ? and is_archived = 0", [req.session.emp_num, req.params.course_code], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
@@ -121,7 +121,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Shows the details of all classes */
 /*exports.viewArchived = function(req, res, next) {
-    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.sessions.emp_num], function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and is_archived = 1", [req.session.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
@@ -136,7 +136,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a class */
 exports.search = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE emp_num = ? and course_code like '%?%'", [req.sessions.emp_num, req.params.course_code],
+    db.query("SELECT * FROM CLASS WHERE emp_num = ? and course_code like '%?%'", [req.session.emp_num, req.params.course_code],
         function (err, rows) {
 			if (err) {
 				return next(err);
@@ -152,7 +152,7 @@ exports.search = function(req, res, next) {
 
 /*Searches all the classes that belong to the employee*/
 exports.searchClassOfEmployee = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE emp_num = ? and is_archived = 0 ", [req.sessions.emp_num],
+    db.query("SELECT * FROM CLASS WHERE emp_num = ? and is_archived = 0 ", [req.session.emp_num],
         function (err, rows) {
 			if (err) {
 				return next(err);
