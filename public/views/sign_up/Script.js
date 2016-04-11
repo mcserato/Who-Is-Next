@@ -17,8 +17,8 @@ $(document).ready( function () {
         var full_name = $('#full-name').val(),
             emp_number = $('#emp-num').val(),
             email = $('#email').val(),
-            username = $('#username').val(),
-            password = $('#password').val(),
+            username = $('#sign-up-username').val(),
+            password = $('#sign-up-password').val(),
             confirm_password = $('#confirm-password').val();
 
         if(!full_name){
@@ -64,6 +64,8 @@ $(document).ready( function () {
         }
 
         if(password != confirm_password){
+            console.log(password);
+            console.log(confirm_password);
             return Materialize.toast("Password confirmation did not match!", 2500);
         }
 
