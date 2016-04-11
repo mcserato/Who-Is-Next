@@ -44,6 +44,35 @@
             </div>
         </div>
 
+        <div id="add-button-div" class="fixed-action-btn">
+            <!-- Modal Trigger -->
+            <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_section_modal">
+                <i id="add-icon" class="material-icons">add</i></a>
+            </a>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="add_section_modal" class="modal">
+            <div class="modal-content">
+                <h2>Add Section</h2>
+                <form id="add-class-form">
+                    <div class="input-field">
+                        <input id="class_section" type="text" required="" />
+                        <label for="class_section">Class Section</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="section_number" type="text" required="" />
+                        <label for="section_number">Section Number</label>
+                    </div>            
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div> 
+
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
     </body>

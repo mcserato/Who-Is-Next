@@ -19,8 +19,8 @@ exports.add = function (req, res, next) {
 exports.addSection = function (req, res, next) {
     db.query("INSERT INTO CLASS(course_code, course_title, class_section, " +
         "section_number, emp_num) SELECT course_code, course_title, " +
-        "class_section, ?, ? FROM CLASS WHERE class_id=?",
-        [req.body.section_number, req.session.emp_num, req.params.class_id],
+        "?, ?, ? FROM CLASS WHERE course_code=? LIMIT 1",
+        [req.body.class_section, req.body.section_number, req.session.emp_num, req.params.course_code],
 
         function (err, rows) {
             if (err) {

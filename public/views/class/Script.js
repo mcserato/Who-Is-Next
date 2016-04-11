@@ -6,6 +6,7 @@ $(document).ready( function () {
         var course_code = $("#course_code").val();
         var course_title = $("#course_title").val();
         var class_section = $("#class_section").val();
+        var section_number = $("#section_number").val();
 
         $.ajax({
             type: "POST",
@@ -14,6 +15,7 @@ $(document).ready( function () {
                 course_code: course_code,
                 course_title: course_title,
                 class_section: class_section,
+                section_number: section_number
             },
             success: function(){
                 Materialize.toast(course_code + " added!", 1000);

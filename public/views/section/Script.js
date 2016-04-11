@@ -2,6 +2,34 @@
 
 $(document).ready( function () {
 
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('#add-class-form').submit(function (event) {
+        //var course_code = $("#course_code").val();
+        //var course_title = $("#course_title").val();
+        var class_section = $("#class_section").val();
+        var section_number = $("#section_number").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/class/" + localStorage.course_code,
+            data: {
+                class_section: class_section,
+                section_number: section_number
+            },
+            success: function(){
+                Materialize.toast(course_code + " added!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/section"
+
+        return false;
+    });
+
+    $('.modal-trigger').leanModal();
+
+
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
 		  
@@ -51,7 +79,12 @@ $(document).ready( function () {
                         }else{
                             var head = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
                         }
-                        head.addClass("title");
+                        
+                    var add = $("<a href='#add_student_modal'><i>add</i></a>");
+                    add.addClass("material-icons right modal-trigger");
+                    add.attr("class_id", data[class_].class_id);
+                    head.addClass("title");
+                    class_header.append(add);
                     class_header.append(head);
 
                     var class_body = $("<div></div>").addClass("collapsible-body");
