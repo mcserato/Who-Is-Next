@@ -74,7 +74,9 @@ exports.remove = function (req, res, next) {
 
 /* Shows a list of all students */
 exports.viewAll = function(req, res, next) {
-	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s, CLASS_STUDENT cs, CLASS c WHERE s.student_number = cs.student_number and c.class_id = cs.class_id and c.emp_num = ?", [req.session.emp_num], function (err, rows) {
+	db.query("SELECT s.first_name, s.middle_name, s.last_name, s.student_number FROM STUDENT s, CLASS_STUDENT cs, CLASS c WHERE s.student_number = cs.student_number and c.class_id = cs.class_id and c.emp_num = ?",
+    [req.session.emp_num], 
+    function (err, rows) {
         if (err) {
             return next(err);
         }

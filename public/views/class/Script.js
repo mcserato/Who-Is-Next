@@ -55,7 +55,7 @@ $(document).ready( function () {
     $('.modal-trigger').leanModal();
 
 
-	//config.checkAuth("FACULTY");
+	config.checkAuth("FACULTY");
 		$.ajax({
             url: '/api/class',
             method: 'GET',
@@ -89,7 +89,6 @@ $(document).ready( function () {
                     .click(function(){
                         localStorage.course_code = $(this).attr("course_code");
                         window.location.href = "/views/section";
-
                     });
                     
                 $('.remove')
