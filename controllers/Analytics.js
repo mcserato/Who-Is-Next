@@ -20,7 +20,7 @@ exports.getTopTenMostCalledStudents = function (req, res, next) {
 /*Gets the sections belongs to the class*/
 exports.getSection = function (req, res, next) {
     db.query("SELECT DISTINCT c.class_id as id from CLASS c, CLASS_STUDENT cs "+
-            "WHERE c.class_section=(SELECT class_section from CLASS WHERE " + 
+            "WHERE c.class_section=(SELECT class_section from CLASS WHERE " +
             "class_id = ?) AND c.course_code=(SELECT course_code FROM CLASS " +
             "WHERE class_id = ?) AND c.class_id!=?",
              [req.params.class_id,req.params.class_id,req.params.class_id],
@@ -36,8 +36,8 @@ exports.getSection = function (req, res, next) {
 
 /*Gets the section frequency in a specific class*/
 exports.getSectionFrequency = function (req, res, next) {
-    db.query("SELECT (SELECT section_number from CLASS where class_id = ?) " + 
-            "as section, SUM(no_of_times_called) as frequency from " + 
+    db.query("SELECT (SELECT section_number from CLASS where class_id = ?) " +
+            "as section, SUM(no_of_times_called) as frequency from " +
             "CLASS_STUDENT cs where cs.class_id = ?",
              [req.params.class_section,req.params.class_section],
 
