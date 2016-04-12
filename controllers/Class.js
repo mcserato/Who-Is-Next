@@ -45,6 +45,20 @@ exports.edit = function (req, res, next) {
     });
 }
 
+exports.editClass = function (req, res, next) {
+    db.query("UPDATE CLASS SET " +
+        "course_code = ?, course_title = ? WHERE course_code = ?",
+        [req.body.course_code,
+        req.body.course_title, req.body.course_code_o],
+
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+            res.send(rows);
+    });
+}
+
 /* Removes an entire class and all of its sections */
 exports.removeClass = function(req, res, next){
     if (!req.body.class_section) {

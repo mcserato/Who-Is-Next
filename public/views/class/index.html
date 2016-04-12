@@ -79,7 +79,27 @@
             </div>
         </div>
 
-        <
+        <!-- Modal Structure -->
+        <div id="edit_modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit Class</h2>
+                <form id="edit-class-form">
+                    <div class="input-field">
+                        <input id="course_code_edit" type="text" required="" />
+                        <label for="course_code_edit">Course Code</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="course_title_edit" type="text" />
+                        <label for="course_title_edit">Course Title</label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>

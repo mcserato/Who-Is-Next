@@ -2,7 +2,7 @@
 
 $(document).ready( function () {
     /* Add Class */
-    
+
     $('#add-class-form').submit(function (event) {
         var course_code = $("#course_code").val();
         var course_title = $("#course_title").val();
@@ -29,7 +29,28 @@ $(document).ready( function () {
         return false;
     });
 
+    $('#edit-class-form').submit(function (event) {
+        var course_code = $("#course_code_edit").val();
+        var course_title = $("#course_title_edit").val();
 
+        $.ajax({
+            type: "PUT",
+            url: "/api/class2",
+            data: {
+                course_code: course_code,
+                course_title: course_title,
+                course_code_o: localStorage.course_code
+            },
+            success: function(){
+                Materialize.toast(course_code + " edited!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/class"
+
+        return false;
+    });
 
     $('.modal-trigger').leanModal();
 
@@ -73,9 +94,10 @@ $(document).ready( function () {
                     var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");
                     var head = $("<span></span>").text(data[class_].course_code);
-                    var body = $("<i>delete</i>");
+                    var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
                     body.addClass("material-icons right");
-                    row.attr("course_code", data[class_].course_code);
+                    body.attr("course_code", data[class_].course_code);
+                    head.attr("course_code", data[class_].course_code);
                     row.addClass("courses");
                     head.addClass("title");
 
@@ -86,14 +108,20 @@ $(document).ready( function () {
                 }
 
 
-
-            $('.courses')
+                $('.edit')
+                    .click(function(){
+                        console.log($(this).attr("course_code"));
+                        localStorage.class_id = $(this).attr("course_code");
+                        $('#edit_modal').openModal();
+                    });
+            $('.title')
                 .click(function(){
                     console.log($(this).attr("course_code"));
                     localStorage.course_code = $(this).attr("course_code");
                     window.location.href = "/views/section";
 
                 });
+
 
             },
             error: function(err){

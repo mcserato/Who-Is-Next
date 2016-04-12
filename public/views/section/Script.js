@@ -105,6 +105,7 @@ $(document).ready( function () {
                     body.attr("class_id", data[class_].class_id);
                     body.addClass("material-icons right");
                     head.addClass("title");
+                    head.attr("class_id", data[class_].class_id);
                     class_header.append(add);
                     class_header.append(head);
 
