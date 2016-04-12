@@ -42,22 +42,27 @@ module.exports = function (router) {
         .put(class_.edit)
         .get(class_.viewAll)
         .delete(class_.removeClass);
+
+    router.route('/api/class/:course_code')
+        .post(class_.addSection);
         
-    router.route('/api/class/:class_id')
+    router.route('/api/class/:course_code')
         .get(class_.viewOne)
         .delete(class_.removeSection);
         
-    router.route('/api/class/:course_code')
-        .get(class_.search);
+    /*router.route('/api/class/:course_code')
+        .get(class_.search);*/
 
     //---------------------------------------    
-    router.route('/api/class_student')
+    router.route('/api/class_student/')
         .post(class_student.add)
-        .get(class_student.view)
         .delete(class_student.remove);
 
-    router.route('/api/class_student/:student_number')
-        .get(class_student.search);
+    router.route('/api/class_student/:class_id')
+        .get(class_student.view);
+
+    /*router.route('/api/class_student/:student_number')
+        .get(class_student.search);*/
         
     router.route('/api/import')
         .post(class_student.import);  
@@ -99,8 +104,8 @@ module.exports = function (router) {
         .get(student.search);
 
     router.route('*')
-        .all(function (req, res) {		
-            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));		
+        .all(function (req, res) {      
+            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));       
         });
         
     return router;

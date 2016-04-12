@@ -2,21 +2,30 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Classes</title>
+        <title>Section</title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="../../style/Materialize.min.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
             <div class="navbar-wrapper">
                 <nav class="z-depth-0">
                     <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
-                    <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
+                    <span class="right username"></span>
                 </nav>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="main-content">
+                <h1 class="center">Section</h1>
+                <!-- <div class="card"> -->
+
+                <!-- </div> -->
             </div>
         </div>
 
@@ -33,17 +42,6 @@
             </ul>
         </div>
 
-        <div class="container">
-            <div id="main-content">
-                <h1 class="center">Classes</h1>
-                <ul id="class-list" class="collapsible" data-collapsible="accordion">
-                <!-- <div class="card"> -->
-
-                <!-- </div> -->
-                </ul>
-            </div>
-        </div>
-
          <div id="add-button-div" class="fixed-action-btn">
             <!-- Modal Trigger -->
             <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
@@ -54,22 +52,12 @@
         <!-- Modal Structure -->
         <div id="add_modal" class="modal">
             <div class="modal-content">
-                <h2>Add Class</h2>
+                <h2>Add Section</h2>
                 <form id="add-class-form">
                     <div class="input-field">
-                        <input id="course_code" type="text" required="" />
-                        <label for="course_code">Course Code</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="course_title" type="text" required="" />
-                        <label for="course_title">Course Title</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input id="class_section" type="text" required="" />
-                        <label for="class_section">Class Section</label>
-                    </div>
+                        <input id="section_number" type="text" required="" />
+                        <label for="section_number">Section Number</label>
+                    </div>            
             </div>
             <div class="modal-footer">
                     <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
@@ -77,9 +65,40 @@
                     </button>
                 </form>
             </div>
-        </div>
+        </div> 
 
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
         <script src="../../script/Config.js"></script>
-        <script src="./Script.js"></script>
+        <script src="../../script/Script.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+                $('#add-class-form').submit(function (event) {
+                    var section_number = $("#section_number").val();
+
+                    var emp_num = 128128128;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/class/26",
+                        data: {
+                            section_number: section_number,
+                            emp_num: emp_num
+                        },
+                        success: function(){
+                            Materialize.toast(section_number + " added!", 1000);
+                        },
+                        dataType: "JSON"
+                    });
+
+                    return false;
+                });
+
+
+                $('.modal-trigger').leanModal();
+            });
+        </script>
     </body>
 </html>

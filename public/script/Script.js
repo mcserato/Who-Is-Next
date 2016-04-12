@@ -6,16 +6,15 @@ $(document).ready( function () {
         : config.TITLE;
 
     if(localStorage.user){
-
         var user = JSON.parse(localStorage.user);
         
         if(user.role == 'ADMIN'){
-            window.location.href = '/admin';
+            window.location.href = 'views/faculty';
         }
+
         if(user.role == 'FACULTY'){
-            window.location.href = '/faculty';
+            window.location.href = '/views/class';
         }
 
     }
-    
 });

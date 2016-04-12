@@ -67,10 +67,15 @@ input[type=password]:focus:not([readonly]) {
 input[type=text]:focus:not([readonly])+label,
 input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
-	
+
 }
 
 .input-field
 .prefix.active{
 	color: #CB494E;
+}
+
+#logout-btn {
+	margin-top: 2%;
+	margin-right: 2%;
 }
