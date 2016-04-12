@@ -53,9 +53,9 @@ module.exports = function (router) {
         .post(class_.addSection)
         .get(class_.viewOne)
         .delete(class_.removeSection);
-
-    /*router.route('/api/class/:course_code')
-        .get(class_.search);*/
+        
+    router.route('/api/class/search/:course_code')
+        .get(class_.search);
 
     //---------------------------------------
     router.route('/api/class_student/')
