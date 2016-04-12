@@ -44,11 +44,17 @@ $(document).ready( function () {
         if(!email.match(/\S+@\S+/)){
             return Materialize.toast("Invalid Email Address", 2500);
         }
-
+		
+		if(!username.match(/^[a-zA-Z0-9]+$/)){
+            return Materialize.toast("Invalid username", 2500);
+        }
         if(!username){
             return Materialize.toast("Username is missing! ", 2500);
         }
-
+		
+		if(!password.match(/[^\s]/)){
+            return Materialize.toast("Invalid Password", 2500);
+        }
         if(!password){
             return Materialize.toast("Password is missing! ", 2500);
         }
