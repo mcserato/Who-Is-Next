@@ -1,3 +1,5 @@
+'use strict;'
+
 var db = require(__dirname + './../lib/Mysql');
 var cli_color = require('cli-color');
 
@@ -5,49 +7,61 @@ var SUCCESS = cli_color.green,
 	ERROR = cli_color.red,
 	WARNING = cli_color.yellow;
 
-exports.attempt = function (username, action, ip_address) {
-	username = username || '<GUEST>';
-
-	var message = username + ' attempts to ' + action;
-
-	return console.log(message + ' at ' + ip_address);
-}
-
-exports.success = function (username, action, ip_address) {
-	username = username || '<GUEST>';
-
-	var message =  SUCCESS(username + ' successfully ' + action);
-
-	db.query('INSERT INTO LOG(username, action, status, ip_address) VALUES(?, ?, \'SUCCESS\', ?);',
-			[username, action, ip_address],
-			callback);
-
-	function callback(err, result) {
-		if (err) {
-			console.log(ERROR('ERROR in writing to LOG while SUCCESS!'));
-			return err;
-		}
-
-		return console.log(message + ' at ' + ip_address);
+exports.read = function (req, res, next) {
+	if (!req.session) {
+		res.status(401).send("No one is logged in");
 	}
 
+	if (req.session.role === "ADMIN") {
+		db.query("SELECT * FROM LOG", [], callback);
+
+		function callback(error, result) {
+			if (error) return next(error);
+
+			
+			return res.send(result);
+		}
+	}
 }
 
-exports.error = function (username, action, error_code, ip_address) {
-	username = username || '<GUEST>';
+exports.write = function (req, status, message) {
+	var color = cli_color.white;
+	var username;
 
-	var message =  ERROR(username + ' failed to ' + action + ' [' + error_code + ']');
-
-	db.query('INSERT INTO LOG(username, action, status, ip_address) VALUES(?, ?, \'FAILED\', ?);',
-			[username, action, ip_address],
-			callback);
-
-	function callback(err, result) {
-		if (err) {
-			console.log(ERROR('ERROR in writing to LOG while ERROR!'));
-			return err;
-		}
-
-		return console.log(message + ' at ' + ip_address);
+	if (req.session) {
+		username = req.session.username
+			? req.session.username
+			: "<GUEST>";
 	}
+
+	else {
+		username = "<GUEST>";
+	}
+
+	if (status === 'SUCCESS') {
+		color = SUCCESS;
+	}
+
+	else if (status === 'FAILED') {
+		color = ERROR;
+	}
+
+	else if (status === 'WARNING') {
+		color = WARNING;
+	}
+
+	console.log(color(new Date(), req.ip, username, req.method, req.originalUrl, message));
+
+	db.query('INSERT INTO LOG(ip_address, username, method, url, message, status) VALUES (?, ?, ?, ?, ?, ?)',
+                [req.ip, username, req.method, req.originalUrl, message, status],
+                callback);
+}
+
+function callback(error, result) {
+	if (error) {
+		console.log(error)
+		return console.log('[X] NOT LOGGED');
+	}
+
+	return console.log('[!] LOGGED');
 }
