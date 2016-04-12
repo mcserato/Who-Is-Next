@@ -24,7 +24,6 @@ CREATE TABLE CLASS
 	 course_title VARCHAR(256) NOT NULL,
 	 class_section VARCHAR(10) NOT NULL,
 	 section_number VARCHAR(5),
-	 is_archived BOOLEAN DEFAULT FALSE,
 	 emp_num INT(9) NOT NULL,
 	 PRIMARY KEY (class_id),
 	 FOREIGN KEY(emp_num) REFERENCES FACULTY(emp_num) ON DELETE CASCADE ON UPDATE CASCADE
@@ -84,31 +83,31 @@ INSERT INTO FACULTY VALUES (100100100, "kepbuplb", "Kristine Bautista", "kepbupl
 INSERT INTO FACULTY VALUES (575757575, "maryaaguirre", "Marya Aguirre", "maamarya", "maryaaguirre@gmail.com", FALSE, 0);
 INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", "kendoll", "kjaen@gmail.com", FALSE, 0);
 
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", null, TRUE, 202020202);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", "3L", TRUE, 220202020);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 11", "Introduction to Computer Science", "UV", null, FALSE, 123123123);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 11", "Introduction to Computer Science", "UV", "3L", FALSE, 111111111);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 11", "Introduction to Computer Science", "UV", "3L", TRUE, 111111111);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "X", null, FALSE, 222222222);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "Y", null, FALSE, 222222222);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "X", "4L", TRUE, 222222222);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "X", "3L", FALSE, 222222222);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "Y", "2L", FALSE, 222222222);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", null, TRUE, 131131131);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "5L", FALSE, 130130130);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", null, FALSE, 131131131);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "5L", TRUE, 130130130);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "4L", FALSE, 131131131);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", "1L", FALSE, 100100100);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "C", null, TRUE, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "C", null, FALSE, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", null, FALSE, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", null, TRUE, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", null, FALSE, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", "4L", TRUE, 132132132);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", "4L", FALSE, 132132132);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 125", "Operating Systems", "ST", null, FALSE, 125125125);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, is_archived, emp_num) VALUES ("CMSC 57", "Discrete Mathematical Structure in Computer Science", "ST", "3L", FALSE, 575757575);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", null, 202020202);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", "3L", 220202020);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 11", "Introduction to Computer Science", "UV", null, 123123123);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 11", "Introduction to Computer Science", "UV", "3L", 111111111);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 11", "Introduction to Computer Science", "UV", "3L", 111111111);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "X", null, 222222222);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "Y", null, 222222222);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "X", "4L", 222222222);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "X", "3L", 222222222);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 22", "Object-Oriented Programming", "Y", "2L", 222222222);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 57", "Discrete Mathematical Structure in Computer Science", "ST", "3L", 575757575);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", null, 131131131);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "5L", 130130130);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", null, 131131131);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "5L", 130130130);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "4L", 131131131);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", "1L", 100100100);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "C", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "C", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", "4L", 132132132);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", "4L", 132132132);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 125", "Operating Systems", "ST", null, 125125125);
 
 INSERT INTO STUDENT VALUES ('2013-08197', "Adriell Dane", "Cabela", "de Guzman", "CAS", "BSCS", "M", "pic ni b2s", STR_TO_DATE('1997-01-29', '%Y-%m-%d'));
 INSERT INTO STUDENT VALUES ('2013-08210', "Jan Charles", "Maghirang", "Adono", "CAS", "BSCS", "M", "pic ni jeyseh", STR_TO_DATE('1997-02-01', '%Y-%m-%d'));
