@@ -108,16 +108,20 @@ $(document).ready( function () {
                     body.addClass("material-icons right");
                     head.addClass("title");
                     head.attr("class_id", data[class_].class_id);
+                    
+                    var class_body = $("<div></div>").addClass("collapsible-body");
+                    var student_info = $("<ul></ul>").addClass("collection");  
+                    
                     class_header.append(add);
                     class_header.append(head);
+                    
                     class_body.append(student_info);
                     class_header.append(body);
                     row.append(class_header);
                     row.append(class_body);
                     content.append(row);
 
-                    var class_body = $("<div></div>").addClass("collapsible-body");
-                    var student_info = $("<ul></ul>").addClass("collection");  
+                    
 
                     $.ajax({
                         url: '/api/class_student/' + data[class_].class_id,
