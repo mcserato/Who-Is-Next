@@ -26,6 +26,60 @@ $(document).ready( function () {
 
         });
 
+    $('#search-class').keypress(function (e) {
+        //localStorage.search_class = $(this).val();
+        if (e.keyCode == 13) {
+            e.preventDefault();
+            //window.location.href = "/search/class";
+
+            content.empty();
+
+            console.log($(this).val());
+
+            $.ajax({
+                url: '/api/class/search/' + $(this).val(),
+                method: 'GET',
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in fetching data",2500);
+                    }
+
+                    for (var class_ in data){
+                        var row = $("<li></li>");
+                        var class_header = $("<div></div>").addClass("collapsible-header");                    
+                        var head = $("<span></span>").text(data[class_].course_code);
+                        var body = $("<i>delete</i>");
+                        body.addClass("material-icons right");
+                        row.attr("course_code", data[class_].course_code);
+                        row.addClass("courses");
+                        head.addClass("title");
+                        
+                        class_header.append(body);
+                        class_header.append(head);
+                        row.append(class_header);
+                        content.append(row);
+                    }
+
+                    $('.courses')
+                        .click(function(){
+                            console.log($(this).attr("course_code"));
+                            localStorage.course_code = $(this).attr("course_code");
+                            window.location.href = "/views/section";
+
+                        });
+
+                },
+                error: function(err){
+                    //console.log(err.responseText);
+                    return Materialize.toast(err.responseText,2500);
+                }
+            });
+
+
+        }
+    });
+    
+
     $('#add-class-form').submit(function (event) {
         var course_code = $("#course_code").val();
         var course_title = $("#course_title").val();
