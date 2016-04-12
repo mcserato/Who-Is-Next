@@ -237,27 +237,27 @@ $( document ).ready(function() {
                 }]
             });
         });
-        
+
     $.ajax({
             type: "GET",
             url: "/api/analyticsGetSection/6"
-         }).done(function(section){      
+         }).done(function(section){
             var section_list = [];
             for(var i = 0; i < section.length ; i ++) {
-                section_list.push( section[i].id );             
+                section_list.push( section[i].id );
             }
-        
+
                 var values = [];
                 for(var i = 0 ; i < section_list.length ; i ++){
                     var link = "/api/analyticsLab/"+section_list[i];
                     $.ajax({
                          type: "GET",
                          url: link
-                      }).done(function(frequency){     
+                      }).done(function(frequency){
                            var temp = [];
                            temp.push(frequency[0].section);
                            temp.push(frequency[0].frequency);
-                           values.push(temp);   
+                           values.push(temp);
 
                         $('#section-frequency-div').highcharts({
                             chart: {
@@ -289,8 +289,8 @@ $( document ).ready(function() {
                                 name: 'No. of Times Called',
                                 data: values
                             }]
-                        });                        
-                     });     
-                }        
-           });  
+                        });
+                     });
+                }
+           });
 });

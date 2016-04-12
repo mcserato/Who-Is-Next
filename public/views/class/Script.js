@@ -1,7 +1,58 @@
 'use strict';
 
 $(document).ready( function () {
+    /* Add Class */
+    $('#add-class-form').submit(function (event) {
+        var course_code = $("#course_code").val();
+        var course_title = $("#course_title").val();
+        var class_section = $("#class_section").val();
+        var section_number = $("#section_number").val();
 
+        $.ajax({
+            type: "POST",
+            url: "/api/class",
+            data: {
+                course_code: course_code,
+                course_title: course_title,
+                class_section: class_section,
+                section_number: section_number
+            },
+            success: function(){
+                Materialize.toast(course_code + " added!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/class"
+
+        return false;
+    });
+
+    $('#edit-class-form').submit(function (event) {
+        var course_code = $("#course_code_edit").val();
+        var course_title = $("#course_title_edit").val();
+
+        $.ajax({
+            type: "PUT",
+            url: "/api/class2",
+            data: {
+                course_code: course_code,
+                course_title: course_title,
+                course_code_o: localStorage.course_code
+            },
+            success: function(){
+                Materialize.toast(course_code + " edited!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/class"
+
+        return false;
+    });
+
+    $('.modal-trigger').leanModal();
+    
 	const content = $('#class-list');
 
     $('#logout-btn')
@@ -26,35 +77,6 @@ $(document).ready( function () {
 
         });
 
-    $('#add-class-form').submit(function (event) {
-        var course_code = $("#course_code").val();
-        var course_title = $("#course_title").val();
-        var class_section = $("#class_section").val();
-        var section_number = $("#section_number").val();
-
-        $.ajax({
-            type: "POST",
-            url: "/api/class",
-            data: {
-                course_code: course_code,
-                course_title: course_title,
-                class_section: class_section,
-                section_number: section_number,
-                emp_num: emp_num
-            },
-            success: function(){
-                Materialize.toast("Yey!", 1000);
-            },
-            dataType: "JSON"
-        });
-
-        return false;
-    });
-
-
-    $('.modal-trigger').leanModal();
-
-
 	config.checkAuth("FACULTY");
 		$.ajax({
             url: '/api/class',
@@ -66,7 +88,7 @@ $(document).ready( function () {
 
                 for (var class_ in data){
                     var row = $("<li></li>");
-                    var class_header = $("<div></div>").addClass("collapsible-header");                    
+                    var class_header = $("<div></div>").addClass("collapsible-header");
                     var head = $("<span></span>").text(data[class_].course_code);
                     var trash = $("<a><i>delete</i></a>");
                     trash.addClass("material-icons right");
@@ -80,6 +102,15 @@ $(document).ready( function () {
                     head.addClass("title");
                     
                     class_header.append(trash);
+                    var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
+                    body.addClass("material-icons right");
+                    body.attr("course_code", data[class_].course_code);
+                    row.attr("course_code", data[class_].course_code);
+                    head.attr("course_code", data[class_].course_code);
+                    row.addClass("courses");
+                    head.addClass("title");
+
+                    class_header.append(body);
                     class_header.append(head);
                     row.append(class_header);
                     content.append(row);
@@ -115,6 +146,20 @@ $(document).ready( function () {
                             }
                         });
                     });
+
+                $('.edit')
+                    .click(function(){
+                        console.log($(this).attr("course_code"));
+                        localStorage.class_id = $(this).attr("course_code");
+                        $('#edit_modal').openModal();
+                    });
+            $('.title')
+                .click(function(){
+                    console.log($(this).attr("course_code"));
+                    localStorage.course_code = $(this).attr("course_code");
+                    window.location.href = "/views/section";
+
+                });
 
             },
             error: function(err){
