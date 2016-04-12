@@ -1,0 +1,51 @@
+#select {
+	color:white; 
+}
+.card-content{
+	height: 8vw;
+}
+.row {
+	font-weight:bold;
+}
+.card-action{
+	background-color: black;
+}
+.card-title{
+	font-weight:bold;
+}
+#color1{
+	background-color:#990100;
+}
+#color2{
+	background-color:#BF4D28;
+}
+#color3{
+	background-color:#774F38;
+}
+#color4{
+	background-color:#F8CA00;
+}
+#color5{
+	background-color:#BD1550;
+}
+#color6{
+	background-color:#351330;
+}
+#color7{
+	background-color:#E08E79;
+}
+#color8{
+	background-color:#CDB380;
+}
+#color9{
+	background-color:#036564;
+}
+#color10{
+	background-color:#8A9B0F;
+}
+#color11{
+	background-color:#69D2E7;
+}
+#color12{
+	background-color:#F56991;
+}
