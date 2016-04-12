@@ -23,6 +23,7 @@ $(document).ready( function () {
 
         return false;
     });
+
     $('#edit-class-form').submit(function (event) {
         var class_section = $("#class_section_edit").val();
         var section_number = $("#section_number_edit").val();
@@ -45,8 +46,6 @@ $(document).ready( function () {
 
         return false;
     });
-    $('.modal-trigger').leanModal();
-
 
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
@@ -92,15 +91,17 @@ $(document).ready( function () {
                 for(var class_ in data){
                     var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");
-                        if(data[class_].section_number == null){
-                            var head = $("<span></span>").text(data[class_].class_section);
-                        }else{
-                            var head = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
-                        }
 
+                    if(data[class_].section_number == null){
+                        var head = $("<span></span>").text(data[class_].class_section);
+                    }else{
+                        var head = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
+                    }
+                        
+                    // Modal Trigger
                     var add = $("<a href='#add_student_modal'><i>add</i></a>");
                     var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
-                    add.addClass("material-icons right modal-trigger");
+                    add.addClass("add-student-button material-icons right modal-trigger");
                     add.attr("class_id", data[class_].class_id);
                     body.attr("class_id", data[class_].class_id);
                     body.addClass("material-icons right");
@@ -110,23 +111,22 @@ $(document).ready( function () {
                     class_header.append(head);
 
                     var class_body = $("<div></div>").addClass("collapsible-body");
-                        var student_info = $("<ul></ul>").addClass("collection");
+                    var student_info = $("<ul></ul>").addClass("collection");  
 
-                            $.ajax({
-                                url: '/api/class_student/' + data[class_].class_id,
-                                method: 'GET',
-                                success: function(student_data){
-                                    for(var student in student_data){
-                                        var student_name = $("<li></li>").addClass("collection-item");
-                                        student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + student_data[student].middle_name );
-                                        student_info.append(student_name);
-                                    }
-                                },
-                                error: function(err){
-                                    return Materialize.toast(err.responseText,2500);
-                                }
-                            });
-
+                    $.ajax({
+                        url: '/api/class_student/' + data[class_].class_id,
+                        method: 'GET',
+                        success: function(student_data){
+                            for(var student in student_data){
+                                var student_name = $("<li></li>").addClass("collection-item");
+                                student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + student_data[student].middle_name );
+                                student_info.append(student_name);
+                            }
+                        },
+                        error: function(err){
+                            return Materialize.toast(err.responseText,2500);
+                        } 
+                    });
 
                     class_body.append(student_info);
                     class_header.append(body);
@@ -134,6 +134,13 @@ $(document).ready( function () {
                     row.append(class_body);
                     content.append(row);
                 }
+
+                /* Add Student */
+                $('.add-student-button').click(function () {
+                    localStorage.class_id = $(this).attr("class_id");
+                    $('#add_student_modal').openModal();
+                });
+
                 $('.edit')
                     .click(function(){
                         console.log($(this).attr("class_id"));
@@ -141,9 +148,73 @@ $(document).ready( function () {
                         $('#edit_modal').openModal();
                     });
             },
+        
             error: function(err){
                 return Materialize.toast(err.responseText,2500);
             }
-        });
+    });
 
+
+  
+
+    $('#add-student-form').submit(function (event) {
+        var student_number = $("#student_number").val();
+        var first_name = $("#first_name").val();
+        var middle_name = $("#middle_name").val();
+        var last_name = $("#last_name").val();
+        var college = $("#college").val();
+        var course = $("#course").val();
+        var gender;
+        if($("#male").val()){
+            gender = "M";
+        }
+        else{
+            gender = "F";
+        }
+        var birthday = $("#birthday").val();
+        if (!student_number.match(/^[0-9]{4}-[0-9]{5}$/)) {
+            Materialize.toast("Invalid student number", 1000);
+        }
+        /*if (!birthday.match(/^[0-9]{4} - ([0][0-9] | [1][0-2])$/)) { //YAHHH PAANO TO???
+            Materialize.toast("Invalid student number", 1000);
+        }*/
+        else {
+            $.ajax({
+                type: "POST",
+                url: "/api/student",
+                data: {
+                    student_number: student_number,
+                    first_name: first_name,
+                    middle_name: middle_name,
+                    last_name: last_name,
+                    college: college,
+                    course: course,
+                    gender: gender,
+                    birthday: birthday
+                },
+                success: function(){
+
+                },
+                dataType: "JSON"
+            }).done(function(data){
+                $.ajax({
+                    type: "POST",
+                    url: "/api/class_student",
+                    data: {
+                        class_id: localStorage.class_id,
+                        student_number: student_number,
+                        no_of_times_called: 0
+                    },
+                    success: function(){
+                        Materialize.toast(student_number + " is added!", 1000);
+                    },
+                    dataType: "JSON"
+                });
+            });
+        }
+
+        return false;
+    });
+
+    $('.modal-trigger').leanModal();
 });
