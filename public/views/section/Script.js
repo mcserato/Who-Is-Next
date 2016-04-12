@@ -23,13 +23,34 @@ $(document).ready( function () {
 
         return false;
     });
+    $('#edit-class-form').submit(function (event) {
+        var class_section = $("#class_section_edit").val();
+        var section_number = $("#section_number_edit").val();
 
+        $.ajax({
+            type: "PUT",
+            url: "/api/class",
+            data: {
+                class_section: class_section,
+                section_number: section_number,
+                class_id: localStorage.class_id
+            },
+            success: function(){
+                Materialize.toast(course_code + " added!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/section"
+
+        return false;
+    });
     $('.modal-trigger').leanModal();
 
 
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
-		  
+
     $('#logout-btn')
         .click(function(){
 
@@ -76,16 +97,19 @@ $(document).ready( function () {
                         }else{
                             var head = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
                         }
-                        
+
                     var add = $("<a href='#add_student_modal'><i>add</i></a>");
+                    var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
                     add.addClass("material-icons right modal-trigger");
                     add.attr("class_id", data[class_].class_id);
+                    body.attr("class_id", data[class_].class_id);
+                    body.addClass("material-icons right");
                     head.addClass("title");
                     class_header.append(add);
                     class_header.append(head);
 
                     var class_body = $("<div></div>").addClass("collapsible-body");
-                        var student_info = $("<ul></ul>").addClass("collection");  
+                        var student_info = $("<ul></ul>").addClass("collection");
 
                             $.ajax({
                                 url: '/api/class_student/' + data[class_].class_id,
@@ -99,18 +123,22 @@ $(document).ready( function () {
                                 },
                                 error: function(err){
                                     return Materialize.toast(err.responseText,2500);
-                                } 
+                                }
                             });
 
 
                     class_body.append(student_info);
-
+                    class_header.append(body);
                     row.append(class_header);
                     row.append(class_body);
-
                     content.append(row);
                 }
-
+                $('.edit')
+                    .click(function(){
+                        console.log($(this).attr("class_id"));
+                        localStorage.class_id = $(this).attr("class_id");
+                        $('#edit_modal').openModal();
+                    });
             },
             error: function(err){
                 return Materialize.toast(err.responseText,2500);

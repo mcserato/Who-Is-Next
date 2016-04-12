@@ -32,9 +32,9 @@ exports.addSection = function (req, res, next) {
 
 /* Edits a specific class in the database */
 exports.edit = function (req, res, next) {
-    db.query("UPDATE CLASS SET course_code = ?, course_title = ?, " +
+    db.query("UPDATE CLASS SET " +
         "class_section = ?, section_number = ? WHERE class_id = ?",
-        [req.body.course_code, req.body.course_title, req.body.class_section,
+        [req.body.class_section,
         req.body.section_number, req.body.class_id],
 
         function (err, rows) {
@@ -110,7 +110,7 @@ exports.viewOne = function(req, res, next) {
 		if (err) {
             return next(err);
         }
-        
+
         if (rows.length === 0) {
             res.send(404, "Error: Classes were not found.");
         } else {

@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.js"></script>
+        <script src="../../script/Materialize.min.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
@@ -63,7 +63,7 @@
                     <div class="input-field">
                         <input id="section_number" type="text" required="" />
                         <label for="section_number">Section Number</label>
-                    </div>            
+                    </div>
             </div>
             <div class="modal-footer">
                     <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
@@ -71,7 +71,28 @@
                     </button>
                 </form>
             </div>
-        </div> 
+        </div>
+        <!-- Modal Structure -->
+        <div id="edit_modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit Class</h2>
+                <form id="edit-class-form">
+                    <div class="input-field">
+                        <input id="class_section_edit" type="text" required="" />
+                        <label for="class_section_edit">Class Section</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="section_number_edit" type="text" />
+                        <label for="class_section_edit">Section Number</label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
