@@ -91,7 +91,7 @@ exports.removeSection = function(req, res, next){
 
 /* Shows all the courses of a faculty user */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ? ", [req.session.emp_num], function (err, rows) {
+    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ?", [req.session.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}

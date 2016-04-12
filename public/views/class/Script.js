@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready( function () {
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    /* Add Class */
     $('#add-class-form').submit(function (event) {
         var course_code = $("#course_code").val();
         var course_title = $("#course_title").val();
@@ -80,30 +80,30 @@ $(document).ready( function () {
         return false;
     });
 
-	//config.checkAuth("FACULTY");
-	$.ajax({
-        url: '/api/class',
-        method: 'GET',
-        success: function(data){
-        	if(!data){
-            	return Materialize.toast("Error in fetching data",2500);
-        	}
+	config.checkAuth("FACULTY");
+		$.ajax({
+            url: '/api/class',
+            method: 'GET',
+            success: function(data){
+            	if(!data){
+                	return Materialize.toast("Error in fetching data",2500);
+            	}
 
-            for (var class_ in data){
-                var row = $("<li></li>");
-                var class_header = $("<div></div>").addClass("collapsible-header");                    
-                var head = $("<span></span>").text(data[class_].course_code);
-                var body = $("<i>delete</i>");
-                body.addClass("material-icons right");
-                row.attr("course_code", data[class_].course_code);
-                row.addClass("courses");
-                head.addClass("title");
-                
-                class_header.append(body);
-                class_header.append(head);
-                row.append(class_header);
-                content.append(row);
-            }
+                for (var class_ in data){
+                    var row = $("<li></li>");
+                    var class_header = $("<div></div>").addClass("collapsible-header");                    
+                    var head = $("<span></span>").text(data[class_].course_code);
+                    var body = $("<i>delete</i>");
+                    body.addClass("material-icons right");
+                    row.attr("course_code", data[class_].course_code);
+                    row.addClass("courses");
+                    head.addClass("title");
+                    
+                    class_header.append(body);
+                    class_header.append(head);
+                    row.append(class_header);
+                    content.append(row);
+                }
 
             $('.courses')
                 .click(function(){

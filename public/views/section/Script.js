@@ -1,11 +1,8 @@
 'use strict';
 
 $(document).ready( function () {
-
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('#add-class-form').submit(function (event) {
-        //var course_code = $("#course_code").val();
-        //var course_title = $("#course_title").val();
+    /* Add Section */
+    $('#add-section-form').submit(function (event) {
         var class_section = $("#class_section").val();
         var section_number = $("#section_number").val();
 
@@ -95,7 +92,9 @@ $(document).ready( function () {
                                 method: 'GET',
                                 success: function(student_data){
                                     for(var student in student_data){
-                                        console.log(student_data[student]); 
+                                        var student_name = $("<li></li>").addClass("collection-item");
+                                        student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + student_data[student].middle_name );
+                                        student_info.append(student_name);
                                     }
                                 },
                                 error: function(err){
@@ -103,9 +102,6 @@ $(document).ready( function () {
                                 } 
                             });
 
-                            /*var student_name = $("<li></li>").addClass("collection-item");
-                            student_name.text("gjh");*/
-                        //student_info.append(student_name);
 
                     class_body.append(student_info);
 
