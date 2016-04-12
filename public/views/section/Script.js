@@ -19,14 +19,37 @@ $(document).ready( function () {
             dataType: "JSON"
         });
 
-//        window.location.href = "/views/section"
+        window.location.href = "/views/section"
+
+        return false;
+    });
+
+    $('#edit-class-form').submit(function (event) {
+        var class_section = $("#class_section_edit").val();
+        var section_number = $("#section_number_edit").val();
+
+        $.ajax({
+            type: "PUT",
+            url: "/api/class",
+            data: {
+                class_section: class_section,
+                section_number: section_number,
+                class_id: localStorage.class_id
+            },
+            success: function(){
+                Materialize.toast(course_code + " added!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/section"
 
         return false;
     });
 
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
-		  
+
     $('#logout-btn')
         .click(function(){
 
@@ -68,6 +91,7 @@ $(document).ready( function () {
                 for(var class_ in data){
                     var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");
+
                     if(data[class_].section_number == null){
                         var head = $("<span></span>").text(data[class_].class_section);
                     }else{
@@ -76,8 +100,11 @@ $(document).ready( function () {
                         
                     // Modal Trigger
                     var add = $("<a href='#add_student_modal'><i>add</i></a>");
+                    var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
                     add.addClass("add-student-button material-icons right modal-trigger");
                     add.attr("class_id", data[class_].class_id);
+                    body.attr("class_id", data[class_].class_id);
+                    body.addClass("material-icons right");
                     head.addClass("title");
                     class_header.append(add);
                     class_header.append(head);
@@ -100,12 +127,10 @@ $(document).ready( function () {
                         } 
                     });
 
-
                     class_body.append(student_info);
-
+                    class_header.append(body);
                     row.append(class_header);
                     row.append(class_body);
-
                     content.append(row);
                 }
 
@@ -114,6 +139,13 @@ $(document).ready( function () {
                     localStorage.class_id = $(this).attr("class_id");
                     $('#add_student_modal').openModal();
                 });
+
+                $('.edit')
+                    .click(function(){
+                        console.log($(this).attr("class_id"));
+                        localStorage.class_id = $(this).attr("class_id");
+                        $('#edit_modal').openModal();
+                    });
             },
         
             error: function(err){
@@ -173,7 +205,7 @@ $(document).ready( function () {
                         no_of_times_called: 0
                     },
                     success: function(){
-                        Materialize.toast(student_number + " is added", 1000);
+                        Materialize.toast(student_number + " is added!", 1000);
                     },
                     dataType: "JSON"
                 });
