@@ -20,7 +20,7 @@ exports.edit = function (req, res, next) {
 }
 
 /* Removes a faculty employee from the database */
-exports.removeFaculty = function (req, res, next) {
+exports.remove = function (req, res, next) {
     if (!req.body.emp_num) {
         res.send(400, "Error: Missing employee number.");
     }
@@ -43,10 +43,9 @@ exports.removeFaculty = function (req, res, next) {
 exports.signup = function (req, res, next) {
 	var emp_num = req.body.emp_num;
 	var username = req.body.username;
-	var name = req.body.name;
+	var name = req.body.full_name;
 	var password = req.body.password;
 	var email = req.body.email;
-	var picture = req.body.picture;
 	
 	db.query("SELECT * FROM FACULTY WHERE username = ?", [username], 
 	    function (err, rows) {
@@ -67,14 +66,15 @@ exports.signup = function (req, res, next) {
 					        return res.send(400, "Error: Employee number already exists.");
 				        } else {
 					        db.query("INSERT INTO FACULTY (emp_num,username," + 
-					        "name,password,email,picture) VALUES (?, ?, ?, ?, ?, ?)",
-					        [emp_num, username, name, password, email, picture], 
+					        "name,password,email) VALUES (?, ?, ?, ?, ?)",
+					        [emp_num, username, name, password, email], 
 					        function(err3, rows3){
 						        if(err3) {
 							        return next(err3);
 							    }
-							    
-						        return res.send(rows3);
+							    if(rows3){
+						        	return res.send(rows3);
+						        }
 					        });
 				        }
 			    });

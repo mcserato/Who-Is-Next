@@ -17,7 +17,7 @@ exports.login = function (req, res, next) {
     }
 
     if (!username) {
-        return res.send(400, "Usename cannot be blank.");
+        return res.send(400, "Username cannot be blank.");
     }
 
     if (!password) {

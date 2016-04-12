@@ -19,8 +19,8 @@ exports.add = function (req, res, next) {
 exports.addSection = function (req, res, next) {
     db.query("INSERT INTO CLASS(course_code, course_title, class_section, " +
         "section_number, emp_num) SELECT course_code, course_title, " +
-        "class_section, ?, ? FROM CLASS WHERE class_id=?",
-        [req.body.section_number, req.session.emp_num, req.params.class_id],
+        "?, ?, ? FROM CLASS WHERE course_code=? LIMIT 1",
+        [req.body.class_section, req.body.section_number, req.session.emp_num, req.params.course_code],
 
         function (err, rows) {
             if (err) {
@@ -91,7 +91,7 @@ exports.removeSection = function(req, res, next){
 
 /* Shows all the courses of a faculty user */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ? and is_archived = 0", [req.session.emp_num], function (err, rows) {
+    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ?", [req.session.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
 		}
@@ -106,16 +106,16 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of all classes from a course code of a faculty user */
 exports.viewOne = function(req, res, next) {
-    db.query("SELECT * FROM CLASS where emp_num = ? and coure_code = ? and is_archived = 0", [req.session.emp_num, req.params.course_code], function (err, rows) {
+    db.query("SELECT * FROM CLASS where emp_num = ? and course_code = ?", [req.session.emp_num, req.params.course_code], function (err, rows) {
 		if (err) {
-		    return next(err);
-		}
-
-		if (rows.length === 0) {
-		    res.send(404, "Error: Classes were not found.");
-		} else {
-			res.send(rows);
-		}
+            return next(err);
+        }
+        
+        if (rows.length === 0) {
+            res.send(404, "Error: Classes were not found.");
+        } else {
+            res.send(rows);
+        }
     });
 }
 
