@@ -13,7 +13,6 @@ exports.add = function (req, res, next) {
     });
 }
 
-
 /* Deletes a student from class */
 exports.remove = function(req, res, next){
     if (!req.body.class_id) {
@@ -38,7 +37,6 @@ exports.remove = function(req, res, next){
     });        
 }
 
-
 /* Searches a student in a class by last name */
 exports.search = function(req, res, next) {
 	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s,"+
@@ -55,7 +53,7 @@ exports.search = function(req, res, next) {
 /* Shows a list of student in a class */
 exports.view = function(req, res, next) {
     db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s," + 
-        "CLASS_STUDENT cs, CLASS c WHERE s.student_number = cs.student_number " +
+        "CLASS_STUDENT cs, CLASS c WHERE s.student_number = cs.student_number" +
         "and c.class_id = cs.class_id and c.class_id = ?", 
         [req.params.class_id], function (err, rows) {
             if (err) {
