@@ -37,11 +37,15 @@ $(document).ready( function () {
         	//localStorage.clear();
             //Materialize.toast(data,2500);
             //window.location.href = '/';
-            console.log(data);
+            //console.log(data);
 
             for (var student in data){
 
                 var row = $("<li></li>");
+                    row.attr("id", data[student].student_number);
+                    row.addClass("student-data");
+                    row.addClass("modal-trigger");
+                    row.attr("href", "#student_modal");
                     var student_header = $("<div></div>").addClass("collapsible-header");
                         if(data[student].picture == null){
                             var image = $('<img />',{
@@ -65,7 +69,38 @@ $(document).ready( function () {
                     student_header.append(text);
                 row.append(student_header);
                 content.append(row);
-            };
+            }
+
+            $('.student-data')
+                .click(function(){
+                    $.ajax({
+                        url: '/api/student/' + $(this).attr("id"),
+                        method: 'GET',
+                        success: function(data_student){
+                            console.log(data_student[0]);
+                            $('#student_header').empty();
+                            $('#student_number').empty();
+                            $('#student_name').empty();
+                            $('#student_course').empty();
+                            $('#student_college').empty();
+                            $('#student_gender').empty();
+                            $('#student_birthday').empty();
+
+                            $('#student_header').append($("<span></span>").html(data_student[0].last_name + ", " + data_student[0].first_name + " " + data_student[0].middle_name));
+                            $('#student_number').append($("<span></span>").html("Student number: " + data_student[0].student_number));
+                            $('#student_course').append($("<span></span>").html("Course: " + data_student[0].course));
+                            $('#student_college').append($("<span></span>").html("College: " + data_student[0].college));
+                            $('#student_gender').append($("<span></span>").html("Gender: " + data_student[0].gender));
+                            $('#student_birthday').append($("<span></span>").html("Birthday: " + data_student[0].birthday));
+
+                            $('#student_modal').openModal();
+
+                        },
+                        error: function(err){
+                            return Materialize.toast(err.responseText,2500);
+                        }
+                    });
+                });
 
         },
         error: function(err){

@@ -82,10 +82,8 @@ $(document).ready( function () {
 
                 $('.courses')
                     .click(function(){
-                        console.log($(this).attr("course_code"));
                         localStorage.course_code = $(this).attr("course_code");
                         window.location.href = "/views/section";
-
                     });
 
             },
