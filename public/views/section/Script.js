@@ -98,7 +98,9 @@ $(document).ready( function () {
                     trash.addClass("material-icons right");
                     trash.addClass("remove");
                     trash.attr("class_id", data[class_].class_id);
-                        
+                    row.attr("course_code", data[class_].course_code);
+                    row.addClass("courses");
+                    class_header.append(trash);
                     // Modal Trigger
                     var add = $("<a href='#add_student_modal'><i>add</i></a>");
                     var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
@@ -121,15 +123,14 @@ $(document).ready( function () {
                     row.append(class_body);
                     content.append(row);
 
-                    
-
                     $.ajax({
                         url: '/api/class_student/' + data[class_].class_id,
                         method: 'GET',
                         success: function(student_data){
                             for(var student in student_data){
                                 var student_name = $("<li></li>").addClass("collection-item");
-                                student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + student_data[student].middle_name );
+                                student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + 
+                                student_data[student].middle_name );
                                 student_info.append(student_name);
                             }
                         },
@@ -139,30 +140,29 @@ $(document).ready( function () {
                     });
                 }
                 
-                $('.remove')
-                    .click(function(){
-                        var class_id = $(this).attr("class_id");
-                        if(!confirm("Are you sure you want to delete this section?")) return false;
-                        $.ajax({
-                            url: '/api/class/' + class_id,
-                            method: 'DELETE',
-                            data: {
-                                class_id: class_id
-                            },
-                            dataType: "JSON",
-                            success: function(data){
-                                if(!data){
-                                    return Materialize.toast("Error in deleting. Please try again!",2500);
-                                }
-                                
-                                $('#' + class_id).remove();
-                                return Materialize.toast("Successfully deleted section!",2500);
-                            },
-                            error: function(err){
-                                return Materialize.toast(err.responseText,2500);
+                $('.remove').click(function(){
+                    var class_id = $(this).attr("class_id");
+                    if(!confirm("Are you sure you want to delete this section?")) return false;
+                    $.ajax({
+                        url: '/api/class/' + class_id,
+                        method: 'DELETE',
+                        data: {
+                            class_id: class_id
+                        },
+                        dataType: "JSON",
+                        success: function(data){
+                            if(!data){
+                                return Materialize.toast("Error in deleting. Please try again!",2500);
                             }
-                        });
+                            
+                            $('#' + class_id).remove();
+                            return Materialize.toast("Successfully deleted section!",2500);
+                        },
+                        error: function(err){
+                            return Materialize.toast(err.responseText,2500);
+                        }
                     });
+                });
 
                 /* Add Student */
                 $('.add-student-button').click(function () {
