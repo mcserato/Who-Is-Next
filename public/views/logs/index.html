@@ -22,10 +22,24 @@
 
         <div class="container">
             <div id="main-content">
-                <h1 class="center">Logs</h1>
-                <!-- <div class="card"> -->
-                put your main content here
-                <!-- </div> -->
+            <h1 class="center">Logs</h1>
+                <div style="max-height: 400px; overflow: auto;">
+                    <table class="bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>IP Address</th>
+                                <th>Username</th>
+                                <th>Method</th>
+                                <th>Route</th>
+                                <th>Message</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="log-table">
+                        </tbody>
+                    </table>
+                <div>
             </div>
         </div>
 

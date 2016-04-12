@@ -3,9 +3,10 @@ var authenticate = require('../controllers/Authenticate.js'),
     class_ = require('../controllers/Class.js'),
     class_student = require('../controllers/ClassStudent.js'),
     faculty = require('../controllers/Faculty.js'),
-    student = require('../controllers/Student.js');
-    analytics = require('../controllers/Analytics.js');
-    randomizer = require('../controllers/Randomizer.js');
+    student = require('../controllers/Student.js'),
+    analytics = require('../controllers/Analytics.js'),
+    randomizer = require('../controllers/Randomizer.js'),
+    log = require('../controllers/Log.js');
 
 var path = require('path');
 
@@ -106,6 +107,9 @@ module.exports = function (router) {
 
     /*router.route('/api/student/:last_name')
         .get(student.search);*/
+
+    router.route('/api/logs')
+        .get(log.read);
 
     router.route('*')
         .all(function (req, res) {

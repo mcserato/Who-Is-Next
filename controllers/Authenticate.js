@@ -1,4 +1,5 @@
 var db = require(__dirname + './../lib/Mysql');
+var logs = require(__dirname + '/Log');
 
 /* Log-in
  INPUTS:  username, password
@@ -13,15 +14,18 @@ exports.login = function (req, res, next) {
     var password = req.body.password;
 
     if (req.session.username) {
-        return res.send(400, "Someone is already logged in.");
+        logs.write(req, "FAILED", 'Someone is already logged in.');
+        return res.status(400).send("Someone is already logged in.");
     }
 
     if (!username) {
-        return res.send(400, "Username cannot be blank.");
+        logs.write(req, "FAILED", 'Username cannot be blank.');
+        return res.status(400).send("Username cannot be blank.");
     }
 
     if (!password) {
-        return res.send(400, "Password cannot be blank.");
+        logs.write(req, "FAILED", 'Password cannot be blank.');
+        return res.status(400).send("Password cannot be blank.");
     }
     
     db.query("SELECT * FROM ADMIN a,FACULTY f WHERE a.admin_username=? OR f.username=?", 
@@ -43,6 +47,7 @@ exports.login = function (req, res, next) {
 
                     delete rows2[0].password;
                     rows2[0].role = 'ADMIN';
+                    logs.write(req, "SUCCESS", 'Successfully logged in.');
                     return res.send(rows2);
                 } else {
                     db.query("SELECT * FROM FACULTY WHERE username = ? AND password = ?",
@@ -59,15 +64,18 @@ exports.login = function (req, res, next) {
 
                             delete rows3[0].password;
                             rows3[0].role = 'FACULTY';
+                            logs.write(req, "SUCCESS", 'Successfully logged in.');
                             return res.send(rows3);
                         } else {
-                            return res.send(400, "Incorrect Password!");
+                        logs.write(req, "FAILED", 'Incorrect Password!');
+                            return res.status(400).send("Incorrect Password!");
                         }
                     });
                 }
             });
         } else {
-            return res.send(400, "Username not Found!");
+            logs.write(req, "FAILED", 'Username not Found!');
+            return res.status(400).send("Username not Found!");
         }
     });
 }
@@ -75,9 +83,11 @@ exports.login = function (req, res, next) {
 /* Log-out */
 exports.logout = function (req, res, next) {
     if (!req.session.username) {
-        return res.send(400, "No one is logged in.");
+        logs.write(req, "FAILED", "No one is logged in.");
+        return res.status(400).send("No one is logged in.");
     }
 
+    logs.write(req, "SUCCESS", 'Successfully logged out.');
     req.session.destroy();
 
     return res.send("Successfully logged out!");
