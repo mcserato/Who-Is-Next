@@ -5,7 +5,8 @@ var authenticate = require('../controllers/Authenticate.js'),
     faculty = require('../controllers/Faculty.js'),
     student = require('../controllers/Student.js');
     analytics = require('../controllers/Analytics.js');
-    randomizer = require('../controllers/Randomizer.js');
+    randomizer = require('../controllers/Randomizer.js'),
+    upload = require('../controllers/Upload.js');
 
 var path = require('path');
 
@@ -96,7 +97,7 @@ module.exports = function (router) {
         
     router.route('/api/student/:student_number')        
         .get(student.viewOne);
-        
+
     /*router.route('/api/student/:last_name')
         .get(student.search);*/
 
