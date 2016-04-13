@@ -121,7 +121,8 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a class */
 exports.search = function(req, res, next) {
-    db.query("SELECT * FROM CLASS WHERE emp_num = ? and course_code like '%?%'", [req.params.emp_num, req.params.course_code],
+    db.query("SELECT * FROM CLASS WHERE emp_num = ? and course_code like ?", 
+        [req.session.emp_num, '%' + req.params.course_code + '%'],
         function (err, rows) {
 			if (err) {
 				return next(err);
