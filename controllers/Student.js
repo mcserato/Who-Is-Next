@@ -104,7 +104,7 @@ exports.viewOne = function(req, res, next) {
 /* Searches a student by last name from all classes */
 exports.search = function(req, res, next) {
 	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s," + 
-	"CLASS_STUDENT cs where s.last_name like '%?%'", [req.params.last_name], 
+	"CLASS_STUDENT cs where s.last_name like ?", ['%'+req.params.last_name+'%'], 
 	function (err, rows) {
         if (err) {
             return next(err);

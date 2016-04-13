@@ -67,7 +67,11 @@ $(document).ready( function () {
                             window.location.href = "/views/section";
 
                         });
-
+                    /*
+                    if(e.keyCode == 13){
+                        $(this).val() = '';
+                    }
+                    */
                 },
                 error: function(err){
                     //console.log(err.responseText);
