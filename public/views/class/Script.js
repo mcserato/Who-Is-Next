@@ -31,7 +31,7 @@ $(document).ready( function () {
         if (e.keyCode == 13) {
             e.preventDefault();
             //window.location.href = "/search/class";
-
+        }
             content.empty();
 
             console.log($(this).val());
@@ -71,12 +71,14 @@ $(document).ready( function () {
                 },
                 error: function(err){
                     //console.log(err.responseText);
-                    return Materialize.toast(err.responseText,2500);
+                    if(e.keyCode == 13){
+                        return Materialize.toast(err.responseText,2500);    
+                    }
                 }
             });
 
 
-        }
+        //}
     });
     
 

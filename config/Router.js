@@ -5,8 +5,7 @@ var authenticate = require('../controllers/Authenticate.js'),
     faculty = require('../controllers/Faculty.js'),
     student = require('../controllers/Student.js');
     analytics = require('../controllers/Analytics.js');
-    randomizer = require('../controllers/Randomizer.js'),
-    upload = require('../controllers/Upload.js');
+    randomizer = require('../controllers/Randomizer.js');
 
 var path = require('path');
 
