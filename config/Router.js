@@ -94,9 +94,12 @@ module.exports = function (router) {
         .get(student.viewAll)
         .delete(student.remove);
         
+    router.route('/api/student/search/:last_name')
+        .get(student.search);
+
     router.route('/api/student/:student_number')        
         .get(student.viewOne);
-        
+
     /*router.route('/api/student/:last_name')
         .get(student.search);*/
 
