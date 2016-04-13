@@ -1,46 +1,12 @@
 'use strict';
 
 $(document).ready( function () {
-
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
-
 	const content = $('#student-list');
-	//config.checkAuth("FACULTY");
 
-    $.ajax({
-        url: '/api/student',
-        method: 'GET',
-        success: function(data){
-        	if(!data){
-            	return Materialize.toast("Error in fetching data",2500);
-        	}
-        	//localStorage.clear();
-            //Materialize.toast(data,2500);
-            //window.location.href = '/';
-            //console.log(data);
+    var timeoutID = null;
 
-            for (var student in data){
-
+    function add_data(data){
+        for (var student in data){
                 var row = $("<li></li>");
                     row.attr("id", data[student].student_number);
                     row.addClass("student-data");
@@ -101,6 +67,71 @@ $(document).ready( function () {
                         }
                     });
                 });
+    }
+
+    function search(str){
+        $.ajax({
+            url: '/api/student/' + str,
+            method: 'GET',
+            success: function(data_student){
+                content.empty();
+                add_data(data_student);
+               
+
+            },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        });
+        //console.log('search: ' + str);
+    }
+
+    $('#search')
+        .keyup(function(){
+            clearTimeout(timeoutID);
+            var $target = $(this);
+            timeoutID = setTimeout(function(){
+                search($target.val());
+            }, 500);    
+        });
+
+    $('#logout-btn')
+        .click(function(){
+
+            $.ajax({
+                url: '/api/logout',
+                method: 'POST',
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in Logout. Please try again !",2500);
+                    }
+
+                    localStorage.clear();
+                    Materialize.toast(data,2500);
+                    window.location.href = '/';
+                },
+                error: function(err){
+                    return Materialize.toast(err.responseText,2500);
+                }
+            });
+
+        });
+
+	//config.checkAuth("FACULTY");
+
+    $.ajax({
+        url: '/api/student',
+        method: 'GET',
+        success: function(data){
+        	if(!data){
+            	return Materialize.toast("Error in fetching data",2500);
+        	}
+        	//localStorage.clear();
+            //Materialize.toast(data,2500);
+            //window.location.href = '/';
+            //console.log(data);
+
+            add_data(data);            
 
         },
         error: function(err){

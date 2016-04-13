@@ -58,8 +58,8 @@ module.exports = function (router) {
     router.route('/api/class_student/:class_id')
         .get(class_student.view);
 
-    /*router.route('/api/class_student/:student_number')
-        .get(class_student.search);*/
+    router.route('/api/class_student/search/:student_number')
+        .get(class_student.search);
         
     router.route('/api/import')
         .post(class_student.import);  
