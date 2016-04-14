@@ -24,7 +24,8 @@ $(document).ready( function () {
         return false;
     });
 
-    $('#edit-class-form').submit(function (event) {
+    /* Edit Section */
+    $('#edit-section-form').submit(function (event) {
         var class_section = $("#class_section_edit").val();
         var section_number = $("#section_number_edit").val();
 
@@ -41,6 +42,46 @@ $(document).ready( function () {
             },
             dataType: "JSON"
         });
+
+        window.location.href = "/views/section"
+
+        return false;
+    });
+
+    /* Edit Student */
+    $('#edit-student-form').submit(function (event) {
+        var first_name = $("#first_name").val();
+        var middle_name = $("#middle_name").val();
+        var last_name = $("#last_name").val();
+        var college = $("#college").val();
+        var course = $("#course").val();
+        var gender;
+        if($("#male").val()){
+            gender = "M";
+        }
+        else{
+            gender = "F";
+        }
+        var birthday = $("#birthday").val();
+        $.ajax({
+            type: "PUT",
+            url: "/api/student",
+            data: {
+                first_name: first_name,
+                middle_name: middle_name,
+                last_name: last_name,
+                college: college,
+                course: course,
+                gender: gender,
+                birthday: birthday,
+                student_number: localStorage.student_number
+
+            },
+            success: function(){
+
+            },
+            dataType: "JSON"
+        })
 
         window.location.href = "/views/section"
 
@@ -103,7 +144,7 @@ $(document).ready( function () {
                     class_header.append(trash);
                     // Modal Trigger
                     var add = $("<a href='#add_student_modal'><i>add</i></a>");
-                    var body = $("<a class='edit modal-trigger' href='#edit_modal'><i>mode_edit</i></a>");
+                    var body = $("<a class='edit-section-button modal-trigger' href='#edit_section_modal'><i>mode_edit</i></a>");
                     add.addClass("add-student-button material-icons right modal-trigger");
                     add.attr("class_id", data[class_].class_id);
                     body.attr("class_id", data[class_].class_id);
@@ -129,8 +170,12 @@ $(document).ready( function () {
                         success: function(student_data){
                             for(var student in student_data){
                                 var student_name = $("<li></li>").addClass("collection-item");
+                                var body = $("<a class='edit-student-button modal-trigger' href='#edit_student_modal'><i>mode_edit</i></a>");
+                                body.attr("student_id", student_data[student].student_number);
+                                body.addClass("material-icons right");
+                                student_info.append(body);
                                 student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " + 
-                                student_data[student].middle_name );
+                                student_data[student].middle_name);
                                 student_info.append(student_name);
                             }
                         },
@@ -169,13 +214,24 @@ $(document).ready( function () {
                     localStorage.class_id = $(this).attr("class_id");
                     $('#add_student_modal').openModal();
                 });
+                
+                /* Edit Student */
+                $('.edit-student-button').click(function () {
+                    alert('hello');
+                    console.log("help");
+                    localStorage.student_number = $(this).attr("student_id");
+                    $('#edit_stdent_modal').openModal();
+                });
 
-                $('.edit')
-                    .click(function(){
-                        console.log($(this).attr("class_id"));
-                        localStorage.class_id = $(this).attr("class_id");
-                        $('#edit_modal').openModal();
-                    });
+
+                /* Edit Section */
+                $('.edit-section-button').click(function(){
+                    console.log($(this).attr("class_id"));
+                    localStorage.class_id = $(this).attr("student_number    ");
+                    $('#edit_section_modal').openModal();
+                });
+
+
             },
         
             error: function(err){
@@ -183,6 +239,7 @@ $(document).ready( function () {
             }
     });
 
+    /* Add Student */
     $('#add-student-form').submit(function (event) {
         var student_number = $("#student_number").val();
         var first_name = $("#first_name").val();
@@ -205,6 +262,7 @@ $(document).ready( function () {
             Materialize.toast("Invalid student number", 1000);
         }*/
         else {
+            /* Add Student */
             $.ajax({
                 type: "POST",
                 url: "/api/student",
@@ -217,12 +275,14 @@ $(document).ready( function () {
                     course: course,
                     gender: gender,
                     birthday: birthday
+
                 },
                 success: function(){
 
                 },
                 dataType: "JSON"
             }).done(function(data){
+                /* Add Student to a class */
                 $.ajax({
                     type: "POST",
                     url: "/api/class_student",
