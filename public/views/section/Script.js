@@ -130,9 +130,9 @@ $(document).ready( function () {
                     var class_header = $("<div></div>").addClass("collapsible-header");
                     row.attr("id", data[class_].class_id);
                     if(data[class_].section_number == null){
-                        var head = $("<span></span>").text(data[class_].class_section);
+                        var section = $("<span></span>").text(data[class_].class_section);
                     }else{
-                        var head = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
+                        var section = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
                     }
                     
                     var trash = $("<a><i>delete</i></a>");
@@ -141,25 +141,26 @@ $(document).ready( function () {
                     trash.attr("class_id", data[class_].class_id);
                     row.attr("course_code", data[class_].course_code);
                     row.addClass("courses");
-                    class_header.append(trash);
+
                     // Modal Trigger
-                    var add = $("<a href='#add_student_modal'><i>add</i></a>");
-                    var body = $("<a class='edit-section-button modal-trigger' href='#edit_section_modal'><i>mode_edit</i></a>");
-                    add.addClass("add-student-button material-icons right modal-trigger");
-                    add.attr("class_id", data[class_].class_id);
-                    body.attr("class_id", data[class_].class_id);
-                    body.addClass("material-icons right");
-                    head.addClass("title");
-                    head.attr("class_id", data[class_].class_id);
+                    var add_student = $("<a href='#add_student_modal'><i>add</i></a>");
+                    var edit_section = $("<a class='edit-section-button modal-trigger' href='#edit_section_modal'><i>mode_edit</i></a>");
+                    
+                    add_student.addClass("add-student-button material-icons right modal-trigger");
+                    add_student.attr("class_id", data[class_].class_id);
+                    edit_section.attr("class_id", data[class_].class_id);
+                    edit_section.addClass("material-icons right");
+                    section.addClass("title");
+                    section.attr("class_id", data[class_].class_id);
                     
                     var class_body = $("<div></div>").addClass("collapsible-body");
                     var student_info = $("<ul></ul>").addClass("collection");  
                     
-                    class_header.append(add);
-                    class_header.append(head);
-                    
                     class_body.append(student_info);
-                    class_header.append(body);
+                    class_header.append(section);
+                    class_header.append(trash);
+                    class_header.append(edit_section);
+                    class_header.append(add_student);
                     row.append(class_header);
                     row.append(class_body);
                     content.append(row);
@@ -217,10 +218,8 @@ $(document).ready( function () {
                 
                 /* Edit Student */
                 $('.edit-student-button').click(function () {
-                    alert('hello');
-                    console.log("help");
                     localStorage.student_number = $(this).attr("student_id");
-                    $('#edit_stdent_modal').openModal();
+                    $('#edit_student_modal').openModal();
                 });
 
 
