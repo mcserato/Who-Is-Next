@@ -135,8 +135,10 @@ $(document).ready( function () {
                 	return Materialize.toast("Error in fetching data",2500);
             	}
 
+                var color_flag = 0; // For alternating the color
+                var num_flag = 0;   // For althernating number per row
                 for (var class_ in data){
-                    var row = $("<li></li>");
+                    /*var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");
                     var head = $("<span></span>").text(data[class_].course_code);
                     var trash = $("<a><i>delete</i></a>");
@@ -162,7 +164,33 @@ $(document).ready( function () {
                     class_header.append(body);
                     class_header.append(head);
                     row.append(class_header);
-                    content.append(row);
+                    content.append(row);*/
+
+                    if (color_flag % 2 == 0) {
+                        var subject_div = $("<div class='hexagon-red'></div>");
+                        
+                    } else {
+                        var subject_div = $("<div class='hexagon-grey'></div>");
+                    }
+                   
+                    var subject = $("<span></span").text(data[class_].course_code);
+
+                    subject.attr("course_code", data[class_].course_code);
+                    subject.addClass("title");
+                    subject.addClass("courses");
+                    subject_div.attr("id", data[class_].course_code.replace(' ', ''));
+                    subject_div.append(subject);
+
+                    if (num_flag < 3) {
+                        var row_div = $("<div class='three'></div>");   
+                        row_div.append(subject_div);
+                        content.append(row_div);  
+                    } else  content.append(subject_div);
+                    
+                    
+                    color_flag++;   
+                    num_flag++;
+                    if (num_flag == 7) num_flag = 0;
                 }
 
                 $('.courses')
