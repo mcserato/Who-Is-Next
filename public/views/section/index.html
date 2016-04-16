@@ -9,6 +9,8 @@
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.min.js"></script>
+        <script src="../../script/Highcharts.js"></script>
+        <script src="../../script/Exporting.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
@@ -204,6 +206,18 @@
                        <i class="material-icons">done</i>
                    </button>
                </form>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="view_analytics_modal" class="modal">
+           <div class="modal-content">
+               <h4>Analytics</h4>
+               <div id="top-ten-div" class="card"></div>
+               <div id="gender-frequency-div" class="card"></div>
+               <div id="top-ten-males-div" class="card"></div>
+               <div id="top-ten-females-div" class="card"></div>
+               <div id="section-frequency-div" class="card"></div>
            </div>
         </div>
 
