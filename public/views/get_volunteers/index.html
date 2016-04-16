@@ -24,13 +24,30 @@
         <div class="container">
             <div id="main-content">
                 <h1 class="center">WHO IS NEXT?</h1>
-                <h4 class="center">Would you like to narrow down your search?</h4>
+                
                 <!-- <div class="card"> -->
                 <!-- </div> -->
             </div>
         </div>
-
+    <div class = "row center">
+     <div class = "col s6 offset-s3 ">
+     
+       <div class="card" style = "border:#b42529;">
+       
         <div class="row center">
+            <br>
+            <br>
+            <h5 class="center">Would you like to narrow down your search?</h5>
+             <p class="input-fieldenter row center" style="width:20%;">
+                <select class="browser-default">
+                  <option value="" disabled selected>SELECT CLASS</option>
+                  <option value="1">CMSC127</option>
+                  <option value="2">CMSC123</option>
+                  <option value="3">CMSC132</option>
+                  <option value="4">CMSC130</option>
+                  <option value="5">CMSC170</option>
+                </select>
+            </p>
             <p> Gender: &nbsp;&nbsp;&nbsp;
                 <input type="checkbox" class="filled-in" id="filled-in-box1" />
                 <label for="filled-in-box1">Male</label> &nbsp;&nbsp;&nbsp;
@@ -45,7 +62,7 @@
                   <input id="last_name" type="text" class="validate" style="width:20%;">
                   <label for="last_name">First Name Starts With</label>
             </p>
-            <p class="input-fieldenter" style="width:20%;">
+            <p class="input-fieldenter row center" style="width:20%;">
                 <select class="browser-default">
                   <option value="" disabled selected>Birthday Month</option>
                   <option value="1">January</option>
@@ -62,7 +79,7 @@
                   <option value="12">December</option>
                 </select>
             </p>
-            <p class="input-fieldenter" style="width:20%;">
+            <p class="input-fieldenter row center" style="width:20%;">
                 <select class="browser-default">
                   <option value="" disabled selected>Course</option>
                   <option value="1">BS Computer Science</option>
@@ -79,7 +96,7 @@
                   <option value="12">December</option>
                 </select>
             </p>
-            <p class="input-fieldenter" style="width:20%;">
+            <p class="input-fieldenter row center" style="width:20%;">
                 <select class="browser-default">
                   <option value="" disabled selected>College</option>
                   <option value="1">CAS</option>
@@ -96,13 +113,20 @@
                   <option value="12">December</option>
                 </select>
             </p>
-            <div class="input-field col s1">
-                <input id="input_text" type="text" length="4">
-                <label for="input_text">Batch</label>
+            
+            <p class="input-field">
+                  <input id="batch" type="text" class="validate" style="width:20%;" length = "4">
+                  <label for="input_text">Batch</label>
+            </p>
+            <p class="input-field">
+                  <input id="numVolunteers" type="text" class="validate" style="width:20%;">
+                  <label for="input_text">Number of Volunteers</label>
+            </p>
+        </div>
+        <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
+               
             </div>
         </div>
-        <a class="waves-effect waves-light btn-large" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
-        
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red z-depth-0 black">
                 <i class="large material-icons">menu</i>
