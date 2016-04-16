@@ -113,20 +113,21 @@ $(document).ready( function () {
 
         });
 
-        $("#course-id").append($("<span></span>").text(localStorage.course_code));
-        $("#course-id").append($("<br/>"));
+        $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
         $.ajax({
             url: '/api/class/' + localStorage.course_code,
             method: 'GET',
             success: function(data){
-                $("#course-id").append($("<span></span>").text(data[0].course_title));
+                $("#course-id").append($("<h3></h3>").text(data[0].course_title));
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
                 }
 
+                var color_flag = 0; // For alternating the color
+                var num_flag = 0;   // For althernating number per row
                 for(var class_ in data){
-                    var row = $("<li></li>");
+                    /*var row = $("<li></li>");
                     var class_header = $("<div></div>").addClass("collapsible-header");
                     row.attr("id", data[class_].class_id);
                     if(data[class_].section_number == null){
@@ -183,8 +184,70 @@ $(document).ready( function () {
                         error: function(err){
                             return Materialize.toast(err.responseText,2500);
                         } 
-                    });
+                    });*/
+
+                    if(data[class_].section_number == null){
+                        var section = $("<span></span>").text(data[class_].class_section);
+                    }else{
+                        var section = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
+                    }
+                    section.addClass("title courses");
+                    section.attr("class_id", data[class_].class_id);
+                    section.attr("course_code", data[class_].course_code);
+                    section.attr("class_section", data[class_].class_section);    
+                    section.attr("section_number", data[class_].section_number);
+
+                    var delete_section = $("<a title='Delete Section'><i class='material-icons options-text'>delete</i></a>");
+                    delete_section.addClass("remove");
+                    delete_section.attr("class_id", data[class_].class_id);
+
+                    var edit_section = $("<a title='Edit Section' href='#edit_section_modal'><i class='material-icons options-text'>mode_edit</i></a>");
+                    edit_section.addClass("modal-trigger edit-section-button");
+                    edit_section.attr("class_id", data[class_].class_id);
+
+                    var options_div = $("<div class='options'></div>");
+                    options_div.append(edit_section);
+                    options_div.append(delete_section);
+
+                    if (color_flag % 2 == 0) {
+                        var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
+                        
+                    } else {
+                        var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
+                    }
+                    section_dv.attr("id", data[class_].course_code.replace(' ', ''));
+                    section_dv.append(section);
+
+                    if (num_flag < 3) {
+                        var row_div = $("<div class='three'></div>");   
+                        row_div.append(section_dv);
+                        content.append(row_div);  
+                    } else  content.append(section_dv);
+                    
+                    content.append(options_div);
+
+                    color_flag++;   
+                    num_flag++;
+                    if (num_flag == 7) num_flag = 0;
                 }
+
+                $('.options').hide();
+
+                $('.courses')
+                    .click(function(){
+                        localStorage.class_id = $(this).attr("class_id");
+                        localStorage.course_code = $(this).attr("course_code");
+                        localStorage.class_section = $(this).attr("class_section");
+                        localStorage.section_number = $(this).attr("section_number");
+                        window.location.href = "/views/class_student";
+                    });
+
+                $('.hex').hover(function() {
+                   $('.options').show();
+                   $('.options').mouseleave(function() {
+                        $('.options').hide();
+                    });
+                });
                 
                 $('.remove').click(function(){
                     var class_id = $(this).attr("class_id");
