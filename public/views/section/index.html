@@ -9,6 +9,8 @@
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.min.js"></script>
+        <script src="../../script/Highcharts.js"></script>
+        <script src="../../script/Exporting.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
@@ -61,7 +63,7 @@
                         <label for="class_section">Class Section</label>
                     </div>
                     <div class="input-field">
-                        <input id="section_number" type="text" required="" />
+                        <input id="section_number" type="text" />
                         <label for="section_number">Section Number</label>
                     </div>
             </div>
@@ -83,7 +85,7 @@
                     </div>
                     <div class="input-field">
                         <input id="section_number_edit" type="text" />
-                        <label for="class_section_edit">Section Number</label>
+                        <label for="section_number_edit">Section Number</label>
                     </div>
             </div>
             <div class="modal-footer">
@@ -204,6 +206,18 @@
                        <i class="material-icons">done</i>
                    </button>
                </form>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="view_analytics_modal" class="modal">
+           <div class="modal-content">
+               <h4>Analytics</h4>
+               <div id="top-ten-div" class="card"></div>
+               <div id="gender-frequency-div" class="card"></div>
+               <div id="top-ten-males-div" class="card"></div>
+               <div id="top-ten-females-div" class="card"></div>
+               <div id="section-frequency-div" class="card"></div>
            </div>
         </div>
 
