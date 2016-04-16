@@ -4,7 +4,7 @@ body {
 
 nav {
 	background-color: #f5f6f6;
-	z-index: 0px;
+	z-index: 0;
 	color: black;
 }
 
@@ -43,6 +43,10 @@ nav {
 }
 
 .title {
+	margin: 0;
+}
+
+.courses {
 	color: #ffffff;
     display: inline-block;
     vertical-align: middle;
@@ -151,6 +155,17 @@ input[type=password]:focus:not([readonly])+label {
     border-left: 100px solid transparent;
     border-right: 100px solid transparent;
     border-top: 50px solid #333333;
+}
+
+.options {
+    float: left;
+    text-align: center;
+    line-height: 100px;
+    margin: 0px 10px 20px -200px;
+}
+
+.options-text {
+	color: #333333;
 }
 
 .three {
