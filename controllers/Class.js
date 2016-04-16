@@ -1,4 +1,5 @@
 var db = require(__dirname + './../lib/Mysql');
+var logs = require(__dirname + '/Log');
 
 /* Adds the class to the database */
 exports.add = function (req, res, next) {
@@ -109,6 +110,7 @@ exports.viewAll = function(req, res, next) {
 		if (rows.length === 0) {
 		    res.send(404, "Error: Classes were not found.");
 		} else {
+		    logs.write(req, "SUCCESS", "Viewed all classes.");
 			res.send(rows);
 		}
     });
@@ -124,6 +126,7 @@ exports.viewOne = function(req, res, next) {
 		if (rows.length === 0) {
 		    res.send(404, "Error: Classes were not found.");
 		} else {
+		    logs.write(req, "SUCCESS", "Viewed " + req.params.course_code + ".");
 			res.send(rows);
 		}
     });
