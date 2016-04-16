@@ -42,7 +42,7 @@ $(document).ready( function () {
                 class_id: localStorage.class_id
             },
             success: function(){
-                Materialize.toast("Section successfully edited!", 1000);
+                Materialize.toast("Successfully edited section!", 1000);
             },
             dataType: "JSON"
         });
