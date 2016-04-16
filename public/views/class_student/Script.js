@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready( function () {
-    if (localStorage.section_number == "undefined") {
+    if (localStorage.section_number.length == 0 || localStorage.section_number == "undefined") {
         $("#course-id").append($("<h2></h2>")
             .text(
                 localStorage.course_code + ' ' + 

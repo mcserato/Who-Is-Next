@@ -14,7 +14,11 @@ $(document).ready( function () {
                 section_number: section_number
             },
             success: function(){
-                Materialize.toast(course_code + " added!", 1000);
+                if (section_number.length == 0) {
+                    Materialize.toast(class_section + " added!", 1000);
+                } else {
+                    Materialize.toast(class_section + section_number + " added!", 1000);
+                }
             },
             dataType: "JSON"
         });
@@ -38,7 +42,7 @@ $(document).ready( function () {
                 class_id: localStorage.class_id
             },
             success: function(){
-                Materialize.toast(course_code + " added!", 1000);
+                Materialize.toast("Section successfully edited!", 1000);
             },
             dataType: "JSON"
         });
@@ -185,10 +189,9 @@ $(document).ready( function () {
                             return Materialize.toast(err.responseText,2500);
                         }
                     });*/
-
-                    if(data[class_].section_number == null){
+                    if (data[class_].section_number == null || data[class_].section_number.length == 0) {
                         var section = $("<span></span>").text(data[class_].class_section);
-                    }else{
+                    } else {
                         var section = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
                     }
                     section.addClass("title courses");
@@ -204,6 +207,7 @@ $(document).ready( function () {
                     var delete_section = $("<a title='Delete Section'><i class='material-icons options-text'>delete</i></a>");
                     delete_section.addClass("remove");
                     delete_section.attr("class_id", data[class_].class_id);
+                    delete_section.attr("course_code", data[class_].course_code);
 
                     var edit_section = $("<a title='Edit Section' href='#edit_section_modal'><i class='material-icons options-text'>mode_edit</i></a>");
                     edit_section.addClass("modal-trigger edit-section-button");
@@ -254,29 +258,34 @@ $(document).ready( function () {
                     });
                 });
 
-                $('.remove').click(function(){
-                    var class_id = $(this).attr("class_id");
-                    if(!confirm("Are you sure you want to delete this section?")) return false;
-                    $.ajax({
-                        url: '/api/class/' + class_id,
-                        method: 'DELETE',
-                        data: {
-                            class_id: class_id
-                        },
-                        dataType: "JSON",
-                        success: function(data){
-                            if(!data){
-                                return Materialize.toast("Error in deleting. Please try again!",2500);
-                            }
+                /* Delete Section*/
+                $('.remove')
+                    .click(function(){
+                        var class_id = $(this).attr("class_id");
+                        
+                        if(!confirm("Are you sure you want to delete this section?")) return false;
+                        $.ajax({
+                            url: '/api/class/' + class_id,
+                            method: 'DELETE',
+                            data: {
+                                class_id: class_id
+                            },
+                            dataType: "JSON",
+                            success: function(data){
+                                if(!data){
+                                    return Materialize.toast("Error in deleting. Please try again!",2500);
+                                }
 
-                            $('#' + class_id).remove();
-                            return Materialize.toast("Successfully deleted section!",2500);
-                        },
-                        error: function(err){
-                            return Materialize.toast(err.responseText,2500);
-                        }
+                                $('#' + class_id).remove();
+                                return Materialize.toast("Successfully deleted section!",2500);
+                            },
+                            error: function(err){
+                                return Materialize.toast(err.responseText,2500);
+                            }
+                        });
+
+                        window.location.href = "/views/section"
                     });
-                });
 
                 /* Add Student */
                 $('.add-student-button').click(function () {
@@ -292,15 +301,14 @@ $(document).ready( function () {
 
                 /* Edit Student */
                 $('.edit-student-button').click(function () {
-                    localStorage.student_number = $(this).attr("student_id");
+                    localStorage.student_number = $(this).attr("class_id");
                     $('#edit_student_modal').openModal();
                 });
 
 
                 /* Edit Section */
                 $('.edit-section-button').click(function(){
-                    console.log($(this).attr("class_id"));
-                    localStorage.class_id = $(this).attr("student_number    ");
+                    localStorage.class_id = $(this).attr("class_id");
                     $('#edit_section_modal').openModal();
                 });
 
