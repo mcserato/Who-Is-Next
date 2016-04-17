@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready( function () {
+     //$('select').material_select();
     if (localStorage.section_number.length == 0 || localStorage.section_number == "undefined") {
         $("#course-id").append($("<h2></h2>")
             .text(
@@ -16,7 +17,7 @@ $(document).ready( function () {
             )
         );
     }
-
+    
     $('#logout-btn')
         .click(function(){
 
@@ -121,7 +122,7 @@ $(document).ready( function () {
             return Materialize.toast(err.responseText,2500);
         }
     });
-
+    
    /* Add Student */
     $('#add-student-form').submit(function (event) {
         var student_number = $("#student_number").val();
