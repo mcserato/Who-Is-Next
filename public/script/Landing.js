@@ -21,13 +21,13 @@ $(document).ready( function () {
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
 
-    $('#logo')
+    $('#log-in-logo-link')
         .hover(hoverIn,hoverOut);
 
-    $('#sign-up')
+    $('#main-logo-link')
         .hover(hoverIn,hoverOut);
 
-    $('#log-in')
+    $('#sign-up-logo-link')
         .hover(hoverIn,hoverOut);
 
     $("#log-in-link").click(function () {
@@ -50,10 +50,15 @@ $(document).ready( function () {
     });    
 
     function hoverIn(){
-        $('#logo').attr("src", '/icon/logo1.gif');
+        $('#main-logo-link').attr("src", '/icon/logo1.gif');
+        $('#sign-up-logo-link').attr("src", '/icon/logo1.gif');
+        $('#log-in-logo-link').attr("src", '/icon/logo1.gif');
     }
     function hoverOut(){
-        $('#logo').attr("src", '/icon/logo1.png');
+        $('#main-logo-link').attr("src", '/icon/logo1.png');
+        $('#sign-up-logo-link').attr("src", '/icon/logo1.png');
+        $('#log-in-logo-link').attr("src", '/icon/logo1.png');
+
     }
 
     $('#login')

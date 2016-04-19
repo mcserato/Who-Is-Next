@@ -44,7 +44,6 @@ nav {
 #login {
 	background-color: #CB494E;
 }
-
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]) {
 	border-bottom: 1px solid #CB494E;
@@ -60,4 +59,15 @@ input[type=password]:focus:not([readonly])+label {
 .input-field
 .prefix.active{
 	color: #CB494E;
+}
+
+.input-field .prefix ~ label, 
+.input-field label{
+	color: #333;
+	font-size: 120%;
+}
+
+#logout-btn {
+	margin-top: 2%;
+	margin-right: 2%;
 }
