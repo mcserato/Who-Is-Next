@@ -16,11 +16,11 @@ exports.add = function (req, res, next) {
 /* Deletes a student from class */
 exports.remove = function(req, res, next){
     if (!req.body.class_id) {
-        res.send(400, "Error: Missing class id.");
+        res.status(400).send("Error: Missing class id.");
     }
     
     if (!req.body.student_number) {
-        res.send(400, "Error: Missing student number.");
+        res.status(400).send("Error: Missing student number.");
     }
     
     db.query('DELETE from CLASS_STUDENT where class_id = ? AND student_number = ?',
@@ -30,7 +30,7 @@ exports.remove = function(req, res, next){
             }
             
             if (!rows.affectedRows) {
-                res.send(400, "Error: No student was deleted'.");
+                res.status(400).send("Error: No student was deleted'.");
             }
 
             res.send(rows);
