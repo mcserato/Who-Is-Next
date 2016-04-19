@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.js"></script>
+        <script src="../../script/Materialize.min.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
@@ -34,13 +34,10 @@
         </div>
 
         <div class="container">
-
-
             <div id="main-content">
                 <h1 class="center">Classes</h1>
-
                 <div class="nav-wrapper row">
-                    <form>
+                    <form onSubmit="return false">
                         <div class="input-field col l12">
                             <input id="search-class" type="search" placeholder="Search Class" required>
                             <label for="search-class"><i class="material-icons">search</i></label>
@@ -48,11 +45,7 @@
                         </div>
                     </form>
                 </div>
-
                 <ul id="class-list" class="collapsible with-header" data-collapsible="accordion">
-                <!-- <div class="card"> -->
-
-                <!-- </div> -->
                 </ul>
             </div>
         </div>
@@ -83,11 +76,6 @@
                         <input id="class_section" type="text" required="" />
                         <label for="class_section">Class Section</label>
                     </div>
-
-                    <div class="input-field">
-                        <input id="section_number" type="text" required="" />
-                        <label for="section_number">Class Section Number</label>
-                    </div>                
             </div>
             <div class="modal-footer">
                     <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
@@ -95,7 +83,29 @@
                     </button>
                 </form>
             </div>
-        </div> 
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="edit_modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit Class</h2>
+                <form id="edit-class-form">
+                    <div class="input-field">
+                        <input id="course_code_edit" type="text" required="" />
+                        <label for="course_code_edit">Course Code</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="course_title_edit" type="text" />
+                        <label for="course_title_edit">Course Title</label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>

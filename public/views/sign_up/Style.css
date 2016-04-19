@@ -1,0 +1,20 @@
+body {
+    background-color:#f5f6f6;
+}
+
+div..col.s6 img {
+    padding-top: 20%;
+}
+
+div.col.s6 form div#input-fields-div{
+    background-color: white;
+}
+
+div#input-fields-div {
+    background-color:white;
+}
+
+button.btn {
+    color:white;
+    background-color:#b71c1c;
+}

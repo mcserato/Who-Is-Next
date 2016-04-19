@@ -87,7 +87,7 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of a student */
 exports.viewOne = function(req, res, next) {
-	db.query("SELECT * FROM STUDENT WHERE student_number = ?",
+	db.query("SELECT * FROM STUDENT WHERE student_number like ?",
 		['%' + req.params.student_number + '%'], function (err, rows) {
         if (err) {
             return next(err);
@@ -103,7 +103,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a student by last name from all classes */
 exports.search = function(req, res, next) {
-	db.query("SELECT s.first_name, s.middle_name, s.last_name FROM STUDENT s," + 
+	db.query("SELECT DISTINCT(s.student_number), s.last_name, s.first_name, s.middle_name FROM STUDENT s," + 
 	"CLASS_STUDENT cs where s.last_name like ?", ['%' + req.params.last_name + '%'], 
 	function (err, rows) {
         if (err) {
