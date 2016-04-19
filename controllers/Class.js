@@ -1,23 +1,38 @@
 var db = require(__dirname + './../lib/Mysql');
-var logs = require(__dirname + '/Log');
+var logs = require(__dirname + '/Log').write;
 
 /* Adds the class to the database */
 exports.add = function (req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
         + "section_number, emp_num) VALUES(?, ?, ?, ?, ?)",
         [req.body.course_code, req.body.course_title, req.body.class_section,
-        req.body.section_number, req.body.emp_num],
+        req.body.section_number, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
                 return next(err);
             }
+
+            logs(req, "SUCCESS", "Added" + 
+                [req.body.course_code, req.body.class_section, req.body.section_number]
+                .join(' '));
+
             res.send(rows);
     });
 }
 
 /* Adds the section to a class to the database */
 exports.addSection = function (req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
         + "section_number, emp_num) SELECT course_code, course_title, ?, ?, ? FROM CLASS WHERE course_code=? LIMIT 1",
         [req.body.class_section, req.body.section_number, req.session.emp_num, req.params.course_code],
@@ -26,6 +41,11 @@ exports.addSection = function (req, res, next) {
             if (err) {
                 return next(err);
             }
+
+            logs(req, "SUCCESS", "Added" + 
+                [req.body.course_code, req.body.class_section, req.body.section_number]
+                .join(' '));
+
             res.send(rows);
     });
 }
@@ -33,6 +53,11 @@ exports.addSection = function (req, res, next) {
 
 /* Edits a specific class in the database */
 exports.edit = function (req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("UPDATE CLASS SET " +
         "class_section = ?, section_number = ? WHERE class_id = ?",
         [req.body.class_section,
@@ -42,11 +67,18 @@ exports.edit = function (req, res, next) {
             if (err) {
                 return next(err);
             }
+            logs(req, "SUCCESS", 
+                ["Edited",req.body.class_id].join(' ') );
             res.send(rows);
     });
 }
 
 exports.editClass = function (req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("UPDATE CLASS SET " +
         "course_code = ?, course_title = ? WHERE course_code = ?",
         [req.body.course_code,
@@ -56,12 +88,19 @@ exports.editClass = function (req, res, next) {
             if (err) {
                 return next(err);
             }
+            logs(req, "SUCCESS", 
+                ["Edited",req.body.course_code].join(' ') );
             res.send(rows);
     });
 }
 
 /* Removes an entire class and all of its sections */
 exports.removeClass = function(req, res, next){
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     if (!req.body.course_code) {
         res.send(400, "Error: Missing course code.");
     }
@@ -75,13 +114,19 @@ exports.removeClass = function(req, res, next){
             if (!rows.affectedRows) {
                 res.send(400, "Error: No class was deleted.");
             }
-		    
+		    logs(req, "SUCCESS", 
+                ["Removed",req.body.course_code].join(' ') );
 		    res.send(rows);
     });
 }
 
 //Removes an entire section from a class
 exports.removeSection = function(req, res, next){
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     if (!req.body.class_id) {
         res.send(400, "Error: Missing class id.");
     }
@@ -95,13 +140,19 @@ exports.removeSection = function(req, res, next){
             if (!rows.affectedRows) {
                 res.send(400, "Error: No section was deleted.");
             }
-            
+            logs(req, "SUCCESS", 
+                ["Removed",req.body.class_id].join(' ') );
             res.send(rows);
     });
 }
 
 /* Shows all the courses of a faculty user */
 exports.viewAll = function(req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ?", [req.session.emp_num], function (err, rows) {
 		if (err) {
 		    return next(err);
@@ -110,7 +161,7 @@ exports.viewAll = function(req, res, next) {
 		if (rows.length === 0) {
 		    res.send(404, "Error: Classes were not found.");
 		} else {
-		    logs.write(req, "SUCCESS", "Viewed all classes.");
+		    logs(req, "SUCCESS", "Viewed all classes.");
 			res.send(rows);
 		}
     });
@@ -118,6 +169,11 @@ exports.viewAll = function(req, res, next) {
 
 /* Shows the details of all classes from a course code of a faculty user */
 exports.viewOne = function(req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("SELECT * FROM CLASS where emp_num = ? and course_code = ?", [req.session.emp_num, req.params.course_code], function (err, rows) {
 		if (err) {
 		    return next(err);
@@ -126,7 +182,7 @@ exports.viewOne = function(req, res, next) {
 		if (rows.length === 0) {
 		    res.send(404, "Error: Classes were not found.");
 		} else {
-		    logs.write(req, "SUCCESS", "Viewed " + req.params.course_code + ".");
+		    logs(req, "SUCCESS", ["Viewed",req.params.course_code].join(' '));
 			res.send(rows);
 		}
     });
@@ -134,6 +190,11 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a class */
 exports.search = function(req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
     db.query("SELECT * FROM CLASS WHERE emp_num = ? and course_code like ?", 
         [req.session.emp_num, '%' + req.params.course_code + '%'],
         function (err, rows) {
