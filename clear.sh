@@ -2,8 +2,7 @@
 #removes any trace of Who-Is-Next in the PC
 
 echo -n "Enter root password: " #asks the user for the password of root
-read pw #stores the input to pw
-mysql -uroot -p$pw < lib/DeleteUser.sql #using the input password
+mysql -uroot -p < lib/DeleteUser.sql #using the input password
     #log-ins root and deletes the user and database
 
 #Sequential
