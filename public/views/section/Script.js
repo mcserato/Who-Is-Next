@@ -51,47 +51,7 @@ $(document).ready( function () {
 
         return false;
     });
-
-    /* Edit Student */
-    $('#edit-student-form').submit(function (event) {
-        var first_name = $("#first_name").val();
-        var middle_name = $("#middle_name").val();
-        var last_name = $("#last_name").val();
-        var college = $("#college").val();
-        var course = $("#course").val();
-        var gender;
-        if($("#male").val()){
-            gender = "M";
-        }
-        else{
-            gender = "F";
-        }
-        var birthday = $("#birthday").val();
-        $.ajax({
-            type: "PUT",
-            url: "/api/student",
-            data: {
-                first_name: first_name,
-                middle_name: middle_name,
-                last_name: last_name,
-                college: college,
-                course: course,
-                gender: gender,
-                birthday: birthday,
-                student_number: localStorage.student_number
-
-            },
-            success: function(){
-
-            },
-            dataType: "JSON"
-        })
-
-        window.location.href = "/views/section"
-
-        return false;
-    });
-
+    
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
 
@@ -608,20 +568,11 @@ $(document).ready( function () {
                            });
                 });
 
-                /* Edit Student */
-                $('.edit-student-button').click(function () {
-                    localStorage.student_number = $(this).attr("class_id");
-                    $('#edit_student_modal').openModal();
-                });
-
-
                 /* Edit Section */
                 $('.edit-section-button').click(function(){
                     localStorage.class_id = $(this).attr("class_id");
                     $('#edit_section_modal').openModal();
                 });
-
-
             },
 
             error: function(err){
