@@ -22,13 +22,15 @@
         </div>
 
         <div class="container">
-            <div id="main-content">
-                <h1 class="center">Students</h1>
-                <!-- <div class="card"> -->
-                <!-- </div> -->
+            <div id="main-content" class="center">
+                <h1 id="course-id"></h1>
+                <a class="waves-effect waves-light btn-large" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
             </div>
+            <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
         </div>
 
+       
+                   
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red z-depth-0 black">
                 <i class="large material-icons">menu</i>
@@ -44,7 +46,7 @@
 
         <div id="add-button-div" class="fixed-action-btn">
            <!-- Modal Trigger -->
-           <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
+           <a title="Add Student" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
                <i id="add-icon" class="material-icons">add</i></a>
            </a>
         </div>
@@ -75,9 +77,20 @@
                    </div>
 
                    <div class="input-field">
-                       <input id="college" type="text" required="" />
-                       <label for="college">College</label>
-                   </div>
+                    <select class="browser-default" id="college">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div> 
 
                    <div class="input-field">
                        <input id="course" type="text" required="" />
@@ -125,4 +138,3 @@
         <script src="./Script.js"></script>
     </body>
 </html>
->>>>>>> Po

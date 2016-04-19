@@ -3,12 +3,20 @@ var db = require(__dirname + '/../lib/Mysql');
 /*
 Filters:
 1. Gender
+M F
+
 2. Last Name Starts With
+Type
 3. First Name Starts With
+Type
 4. Birthday Month
+Dropdown
 5. Course
+Dropdown
 6. College
+Dropdown
 7. Batch
+Type
        
 var sample = [
     " gender = 'params' ",
