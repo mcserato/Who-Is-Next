@@ -4,18 +4,17 @@
         <meta charset="utf-8"/>
         <title>Admin</title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="../style/Materialize.min.css" />
-        <link rel="stylesheet" href="../style/Style.css" />
-        <link rel="stylesheet" href="./Style.css" />
-        <link rel="shortcut icon" href="../favicon/favicon.ico">
-        <script src="../script/Jquery.min.js"></script>
-        <script src="../script/Materialize.js"></script>
+        <link rel="stylesheet" href="../../style/Materialize.min.css" />
+        <link rel="stylesheet" href="../../style/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico">
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
     </head>
     <body>
         <div class="navbar-fixed">
             <div class="navbar-wrapper">
                 <nav class="z-depth-0">
-                    <a href="/" class="brand-logo black-text center"><img src="../icon/logo1.png" class="logo"/></a>
+                    <a href="/" class="brand-logo black-text center"><img src="../../icon/logo1.png" class="logo"/></a>
                     <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
                 </nav>
             </div>
@@ -30,7 +29,8 @@
                     <div class="nav-wrapper row">
                         <form>
                             <div class="input-field">
-                                <input id="search-faculty" type="search"/>
+                                <input id="search-faculty" type="search" name="name"
+                                placeholder="Search Faculty"/>
                                 <label for="search-faculty"><i class="material-icons">search</i></label>
                                 <i class="material-icons">close</i>
                             </div>
@@ -38,7 +38,7 @@
                     </div>  
                 </nav>
                 
-                <ul id="student-list" class="collapsible" data-collapsible="accordion">    
+                <ul id="faculty-list" class="collapsible" data-collapsible="accordion">    
                 </ul>
                 
             </div>
@@ -57,7 +57,7 @@
             </ul>
         </div>
 
-        <script src="../script/Config.js"></script>
+        <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
     </body>
 </html>

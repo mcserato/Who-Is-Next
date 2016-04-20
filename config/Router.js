@@ -78,6 +78,9 @@ module.exports = function (router) {
         .get(faculty.viewAll)
         .delete(faculty.remove);
 
+    router.route('/api/faculty/search/:name')
+        .get(faculty.search);
+
     router.route('/api/faculty/:emp_num')
         .get(faculty.viewOne);
 

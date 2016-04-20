@@ -29,7 +29,7 @@ $(document).ready( function () {
                                 width: '10%'
                             });
                         }
-                        image.addClass("circle")
+                        image.addClass("circle");
                         var text = $("<span></span>").html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
                         text.addClass("center-align");
                     student_header.append(image);
@@ -95,6 +95,7 @@ $(document).ready( function () {
                 add_data(data_student);
             },
             error: function(err){
+                refresh();
                 return Materialize.toast(err.responseText,2500);
             }
         });

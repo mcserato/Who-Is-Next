@@ -9,7 +9,7 @@ $(document).ready( function () {
         var user = JSON.parse(localStorage.user);
         
         if(user.role == 'ADMIN'){
-            window.location.href = 'views/faculty';
+            window.location.href = '/views/faculty';
         }
 
         if(user.role == 'FACULTY'){
