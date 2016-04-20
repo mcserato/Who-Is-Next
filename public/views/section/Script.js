@@ -51,47 +51,7 @@ $(document).ready( function () {
 
         return false;
     });
-
-    /* Edit Student */
-    $('#edit-student-form').submit(function (event) {
-        var first_name = $("#first_name").val();
-        var middle_name = $("#middle_name").val();
-        var last_name = $("#last_name").val();
-        var college = $("#college").val();
-        var course = $("#course").val();
-        var gender;
-        if($("#male").val()){
-            gender = "M";
-        }
-        else{
-            gender = "F";
-        }
-        var birthday = $("#birthday").val();
-        $.ajax({
-            type: "PUT",
-            url: "/api/student",
-            data: {
-                first_name: first_name,
-                middle_name: middle_name,
-                last_name: last_name,
-                college: college,
-                course: course,
-                gender: gender,
-                birthday: birthday,
-                student_number: localStorage.student_number
-
-            },
-            success: function(){
-
-            },
-            dataType: "JSON"
-        })
-
-        window.location.href = "/views/section"
-
-        return false;
-    });
-
+    
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
 
@@ -300,7 +260,7 @@ $(document).ready( function () {
                     /* For the view analytics */
                     $('#top-ten-div').empty();
                     $('#gender-frequency-div').empty();
-                    $('top-ten-males-div').empty();
+                    $('#top-ten-males-div').empty();
                     $('#top-ten-females-div').empty();
                     $('#section-frequency-div').empty();
                     var gender_frequency=[];
@@ -310,63 +270,64 @@ $(document).ready( function () {
                         url: "/api/analytics/" + localStorage.class_id
                     }).done(function(data){
                         var data2=[];
-                        for(i=0; i<10; i++){
+                        for(i=0; i<data.length; i++){
                             //data2.push(JSON.parse(data[i]));
                             var temp=[];
                             temp.push(data[i].last_name);
                             temp.push(data[i].no_of_times_called);
                             data2.push(temp);
                         }
+                        if(data.length>0){
+                            Highcharts.setOptions({
+                            	colors: ['#b42529', '#333333']
+                        	});
 
-                        Highcharts.setOptions({
-                        	colors: ['#b42529', '#333333']
-                    	});
 
-
-                        $('#top-ten-div').highcharts({
-                            chart: {
-                                type: 'column'
-                            },
-                            title: {
-                                text: 'Top Ten Most Called Students'
-                            },
-                            xAxis: {
-                                type: 'category',
-                                labels: {
-                                    rotation: -45,
-                                    style: {
-                                        fontSize: '13px',
-                                        fontFamily: 'Verdana, sans-serif'
-                                    }
-                                }
-                            },
-
-                            yAxis: {
-                                min: 0,
+                            $('#top-ten-div').highcharts({
+                                chart: {
+                                    type: 'column'
+                                },
                                 title: {
-                                    text: 'No. of times called'
-                                }
-                            },
-                            legend: {
-                                enabled: false
-                            },
-                            series: [{
-                                name: 'Top Ten Most Called Students',
-                                data: data2,
-                                dataLabels: {
-                                    enabled: true,
-                                    rotation: -90,
-                                    color: '#FFFFFF',
-                                    align: 'right',
-                                    format: '{point.y:.0f}', // one decimal
-                                    y: 10, // 10 pixels down from the top
-                                    style: {
-                                        fontSize: '13px',
-                                        fontFamily: 'Verdana, sans-serif'
+                                    text: 'Top Ten Most Called Students'
+                                },
+                                xAxis: {
+                                    type: 'category',
+                                    labels: {
+                                        rotation: -45,
+                                        style: {
+                                            fontSize: '13px',
+                                            fontFamily: 'Verdana, sans-serif'
+                                        }
                                     }
-                                }
-                            }]
-                        });
+                                },
+
+                                yAxis: {
+                                    min: 0,
+                                    title: {
+                                        text: 'No. of times called'
+                                    }
+                                },
+                                legend: {
+                                    enabled: false
+                                },
+                                series: [{
+                                    name: 'Top Ten Most Called Students',
+                                    data: data2,
+                                    dataLabels: {
+                                        enabled: true,
+                                        rotation: -90,
+                                        color: '#FFFFFF',
+                                        align: 'right',
+                                        format: '{point.y:.0f}', // one decimal
+                                        y: 10, // 10 pixels down from the top
+                                        style: {
+                                            fontSize: '13px',
+                                            fontFamily: 'Verdana, sans-serif'
+                                        }
+                                    }
+                                }]
+                            });
+                        }
                     });
                     $.ajax({
                         type: "GET",
@@ -379,54 +340,56 @@ $(document).ready( function () {
                         url: "/api/analyticsGender/"+localStorage.class_id+"/F"
                     }).done(function(data) {
                         gender_frequency.push(data[0].frequency);
+                        
+                        if(data[0].frequency!=null || data[1].frequency!=null){
+                            Highcharts.getOptions().plotOptions.pie.colors = (function () {
+                    	        var colors = [],
+                    	            base = Highcharts.getOptions().colors[0],
+                    	            i;
 
-                        Highcharts.getOptions().plotOptions.pie.colors = (function () {
-                	        var colors = [],
-                	            base = Highcharts.getOptions().colors[0],
-                	            i;
+                    	        for (i = 0; i < 10; i += 1) {
+                    	            // Start out with a darkened base color (negative brighten), and end
+                    	            // up with a much brighter color
+                    	            colors.push(Highcharts.Color(base).brighten((i-1) / 7).get());
+                    	        }
+                    	        return colors;
+                    	    }());
 
-                	        for (i = 0; i < 10; i += 1) {
-                	            // Start out with a darkened base color (negative brighten), and end
-                	            // up with a much brighter color
-                	            colors.push(Highcharts.Color(base).brighten((i-1) / 7).get());
-                	        }
-                	        return colors;
-                	    }());
-
-                        $('#gender-frequency-div').highcharts({
-                            chart: {
-                                plotBackgroundColor: null,
-                                plotBorderWidth: null,
-                                plotShadow: false,
-                                type: 'pie'
-                            },
-                            title: {
-                                text: 'Gender Frequency Distribution'
-                            },
-                            tooltip: {
-                                pointFormat: '{series.name}: <b>{point.y}</b>'
-                            },
-                            plotOptions: {
-                                pie: {
-                                    allowPointSelect: true,
-                                    cursor: 'pointer',
-                                    dataLabels: {
-                                        enabled: true,
-                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                        style: {
-                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            $('#gender-frequency-div').highcharts({
+                                chart: {
+                                    plotBackgroundColor: null,
+                                    plotBorderWidth: null,
+                                    plotShadow: false,
+                                    type: 'pie'
+                                },
+                                title: {
+                                    text: 'Gender Frequency Distribution'
+                                },
+                                tooltip: {
+                                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                                },
+                                plotOptions: {
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: {
+                                            enabled: true,
+                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                            style: {
+                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                            }
                                         }
                                     }
-                                }
-                            },
-                            series: [{
-                                name: 'Number of Time Called',
-                                data: [
-                                    { name: 'Male', y: gender_frequency[0] },
-                                    { name: 'Female', y: gender_frequency[1] }
-                                ]
-                            }]
-                        });
+                                },
+                                series: [{
+                                    name: 'Number of Time Called',
+                                    data: [
+                                        { name: 'Male', y: gender_frequency[0] },
+                                        { name: 'Female', y: gender_frequency[1] }
+                                    ]
+                                }]
+                            });
+                        }
                     });
 
                     $.ajax({
@@ -441,69 +404,13 @@ $(document).ready( function () {
                             temp.push(datalang[i].no_of_times_called)
                             data4.push(temp);
                         }
-                        $('#top-ten-females-div').highcharts({
-                            chart: {
-                                type: 'column'
-                            },
-                            title: {
-                                text: 'Top Ten Most Called Female Students'
-                            },
-                            xAxis: {
-                                type: 'category',
-                                labels: {
-                                    rotation: -45,
-                                    style: {
-                                        fontSize: '13px',
-                                        fontFamily: 'Verdana, sans-serif'
-                                    }
-                                }
-                            },
-                            yAxis: {
-                                min: 0,
-                                title: {
-                                    text: 'No. of times called'
-                                }
-                            },
-                            legend: {
-                                enabled: false
-                            },
-                            series: [{
-                                name: 'Top Ten Most Called Female Students',
-                                data: data4,
-                                dataLabels: {
-                                    enabled: true,
-                                    rotation: -90,
-                                    color: '#FFFFFF',
-                                    align: 'right',
-                                    format: '{point.y:.0f}', // one decimal
-                                    y: 10, // 10 pixels down from the top
-                                    style: {
-                                        fontSize: '13px',
-                                        fontFamily: 'Verdana, sans-serif'
-                                    }
-                                }
-                            }]
-                        });
-                    });
-
-                    $.ajax({
-                            type: "GET",
-                            url: "/api/analyticsMale/" + localStorage.class_id
-                        }).done(function(datagg){
-                            var data3=[];
-                            for(i=0; i<datagg.length; i++){
-                                //data2.push(JSON.parse(data[i]));
-                                var temp=[];
-                                temp.push(datagg[i].first_name);
-                                temp.push(datagg[i].no_of_times_called);
-                                data3.push(temp);
-                            }
-                            $('#top-ten-males-div').highcharts({
+                        if(datalang.length>0){
+                            $('#top-ten-females-div').highcharts({
                                 chart: {
                                     type: 'column'
                                 },
                                 title: {
-                                    text: 'Top Ten Most Called Male Students'
+                                    text: 'Top Ten Most Called Female Students'
                                 },
                                 xAxis: {
                                     type: 'category',
@@ -525,8 +432,8 @@ $(document).ready( function () {
                                     enabled: false
                                 },
                                 series: [{
-                                    name: 'Top Ten Most Called Male Students',
-                                    data: data3,
+                                    name: 'Top Ten Most Called Female Students',
+                                    data: data4,
                                     dataLabels: {
                                         enabled: true,
                                         rotation: -90,
@@ -541,6 +448,66 @@ $(document).ready( function () {
                                     }
                                 }]
                             });
+                        }
+                    });
+
+                    $.ajax({
+                            type: "GET",
+                            url: "/api/analyticsMale/" + localStorage.class_id
+                        }).done(function(datagg){
+                            var data3=[];
+                            for(i=0; i<datagg.length; i++){
+                                //data2.push(JSON.parse(data[i]));
+                                var temp=[];
+                                temp.push(datagg[i].first_name);
+                                temp.push(datagg[i].no_of_times_called);
+                                data3.push(temp);
+                            }
+                            if(datagg.length>0){
+                                $('#top-ten-males-div').highcharts({
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: 'Top Ten Most Called Male Students'
+                                    },
+                                    xAxis: {
+                                        type: 'category',
+                                        labels: {
+                                            rotation: -45,
+                                            style: {
+                                                fontSize: '13px',
+                                                fontFamily: 'Verdana, sans-serif'
+                                            }
+                                        }
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: 'No. of times called'
+                                        }
+                                    },
+                                    legend: {
+                                        enabled: false
+                                    },
+                                    series: [{
+                                        name: 'Top Ten Most Called Male Students',
+                                        data: data3,
+                                        dataLabels: {
+                                            enabled: true,
+                                            rotation: -90,
+                                            color: '#FFFFFF',
+                                            align: 'right',
+                                            format: '{point.y:.0f}', // one decimal
+                                            y: 10, // 10 pixels down from the top
+                                            style: {
+                                                fontSize: '13px',
+                                                fontFamily: 'Verdana, sans-serif'
+                                            }
+                                        }
+                                    }]
+                                });
+                            }
                         });
 
                     $.ajax({
@@ -563,57 +530,49 @@ $(document).ready( function () {
                                            temp.push(frequency[0].section);
                                            temp.push(frequency[0].frequency);
                                            values.push(temp);
-
-                                        $('#section-frequency-div').highcharts({
-                                            chart: {
-                                                plotBackgroundColor: null,
-                                                plotBorderWidth: null,
-                                                plotShadow: false,
-                                                type: 'pie'
-                                            },
-                                            title: {
-                                                text: 'Section Frequency Distribution'
-                                            },
-                                            tooltip: {
-                                                pointFormat: '{series.name}: <b>{point.y}</b>'
-                                            },
-                                            plotOptions: {
-                                                pie: {
-                                                    allowPointSelect: true,
-                                                    cursor: 'pointer',
-                                                    dataLabels: {
-                                                        enabled: true,
-                                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                                        style: {
-                                                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                           if(values.length>0){
+                                            $('#section-frequency-div').highcharts({
+                                                chart: {
+                                                    plotBackgroundColor: null,
+                                                    plotBorderWidth: null,
+                                                    plotShadow: false,
+                                                    type: 'pie'
+                                                },
+                                                title: {
+                                                    text: 'Section Frequency Distribution'
+                                                },
+                                                tooltip: {
+                                                    pointFormat: '{series.name}: <b>{point.y}</b>'
+                                                },
+                                                plotOptions: {
+                                                    pie: {
+                                                        allowPointSelect: true,
+                                                        cursor: 'pointer',
+                                                        dataLabels: {
+                                                            enabled: true,
+                                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                            style: {
+                                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            },
-                                            series: [{
-                                                name: 'No. of Times Called',
-                                                data: values
-                                            }]
-                                        });
+                                                },
+                                                series: [{
+                                                    name: 'No. of Times Called',
+                                                    data: values
+                                                }]
+                                            });
+                                        }
                                      });
                                 }
                            });
                 });
-
-                /* Edit Student */
-                $('.edit-student-button').click(function () {
-                    localStorage.student_number = $(this).attr("class_id");
-                    $('#edit_student_modal').openModal();
-                });
-
 
                 /* Edit Section */
                 $('.edit-section-button').click(function(){
                     localStorage.class_id = $(this).attr("class_id");
                     $('#edit_section_modal').openModal();
                 });
-
-
             },
 
             error: function(err){
