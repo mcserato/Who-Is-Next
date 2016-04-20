@@ -15,7 +15,7 @@ $(document).ready( function () {
             subject.addClass("title courses");
 
             var delete_class = $("<a title='Delete Class'><i class='material-icons options-text'>delete</i></a>");
-            delete_class.addClass("remove");
+             delete_class.addClass("remove");
             delete_class.attr("course_code", data[class_].course_code);
 
             var edit_class = $("<a title='Edit Class' href='#edit_modal'><i class='material-icons options-text'>mode_edit</i></a>");
