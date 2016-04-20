@@ -106,6 +106,23 @@ $(document).ready( function () {
             });
     }
 
+    function Refresh(){
+        $.ajax({
+            url: '/api/class',
+            method: 'GET',
+            success: function(data){
+                if(!data){
+                    return Materialize.toast("Error in fetching data",2500);
+                }
+
+                add_class(data);
+            },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        });   
+    }
+
     $('#search-class').keypress(function (e) {
         if (e.keyCode == 13) {
             e.preventDefault();
@@ -114,20 +131,7 @@ $(document).ready( function () {
 
         
         if($(this).val() === ''){
-            $.ajax({
-                url: '/api/class',
-                method: 'GET',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in fetching data",2500);
-                    }
-
-                    add_class(data);
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            }); 
+            Refresh(); 
             return;
         }
 
@@ -234,19 +238,7 @@ $(document).ready( function () {
         });
 
 	config.checkAuth("FACULTY");
-		$.ajax({
-            url: '/api/class',
-            method: 'GET',
-            success: function(data){
-            	if(!data){
-                	return Materialize.toast("Error in fetching data",2500);
-            	}
-
-                add_class(data);
-            },
-            error: function(err){
-                return Materialize.toast(err.responseText,2500);
-            }
-        });
+		
+    Refresh();
 
 });
