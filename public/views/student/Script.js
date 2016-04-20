@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready( function () {
+    config.checkAuth("FACULTY");
 	const content = $('#student-list');
     var timeoutID = null;
 
@@ -66,12 +67,28 @@ $(document).ready( function () {
                             return Materialize.toast(err.responseText,2500);
                         }
                     });
-                });
+            });
+    }
+
+    function refresh () {
+        $.ajax({
+            url: '/api/student',
+            method: 'GET',
+            success: function(data){
+                if(!data){
+                    return Materialize.toast("Error in fetching data",2500);
+                }
+                add_data(data);            
+            },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        });
     }
 
     function search(str){
         $.ajax({
-            url: '/api/student/' + str,
+            url: '/api/student/search/' + str,
             method: 'GET',
             success: function(data_student){
                 content.empty();
@@ -82,15 +99,6 @@ $(document).ready( function () {
             }
         });
     }
-
-    /*$('#search')
-        .keyup(function(){
-            clearTimeout(timeoutID);
-            var $target = $(this);
-            timeoutID = setTimeout(function(){
-                search($target.val());
-            }, 500);    
-    });*/
 
     $('#logout-btn')
         .click(function(){
@@ -114,71 +122,22 @@ $(document).ready( function () {
 
         });
 
-	//config.checkAuth("FACULTY");
-
+	
     $('#search-student').keypress(function (e) {
         if (e.keyCode == 13) {
             e.preventDefault();
-            $(this).val('');
-            return;
+            
         }
         content.empty();
 
-        $.ajax({
-            url: '/api/student/search/' + $(this).val(),
-            method: 'GET',
-            success: function(data){
-                if(!data){
-                    return Materialize.toast("Error in fetching data",2500);
-                }
-
-                for (var student in data){
-                    var row = $("<li></li>");
-                        var student_header = $("<div></div>").addClass("collapsible-header");
-                            if(data[student].picture == null){
-                                var image = $('<img />',{
-                                    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
-                                    float: 'left',
-                                    position: 'relative',
-                                    width: '10%'
-                                });                        
-                            }else{
-                                var image = $('<img />',{
-                                    src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
-                                    float: 'left',
-                                    position: 'relative',
-                                    width: '10%'
-                                });
-                            }
-                            image.addClass("circle")
-                            var text = $("<span></span>").html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
-                            text.addClass("center-align");
-                        student_header.append(image);
-                        student_header.append(text);
-                    row.append(student_header);
-                    content.append(row);
-                };
-            },
-            error: function(err){
-                if(e.keyCode == 13){
-                    return Materialize.toast(err.responseText,2500);    
-                }
-            }
-        });
-    });
-
-    $.ajax({
-        url: '/api/student',
-        method: 'GET',
-        success: function(data){
-        	if(!data){
-            	return Materialize.toast("Error in fetching data",2500);
-        	}
-            add_data(data);            
-        },
-        error: function(err){
-            return Materialize.toast(err.responseText,2500);
+        if($(this).val() === ''){
+            refresh();
+            return;
         }
+
+        search($(this).val());
+
     });
-        
+
+    refresh();
 });

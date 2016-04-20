@@ -1,7 +1,9 @@
 'use strict';
 
 $(document).ready( function () {
-	const content = $('#class-list');
+    config.checkAuth("FACULTY");
+    const content = $('#class-list');
+
 
     function add_class (data) {
 
