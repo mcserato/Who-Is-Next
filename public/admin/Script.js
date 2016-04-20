@@ -10,10 +10,11 @@ $(document).ready( function () {
         var color_flag = 0; // For alternating the color
         var num_flag = 0;   // For althernating number per row
         for (var class_ in data){
-            var subject = $("<span></span").text(data[class_].course_code);
-            subject.attr("course_code", data[class_].course_code);
+            var subject = $("<span></span").text(data[class_].name);
+            subject.attr("name", data[class_].name);
             subject.addClass("title courses");
 
+/*
             var delete_class = $("<a title='Delete Class'><i class='material-icons options-text'>delete</i></a>");
             delete_class.addClass("remove");
             delete_class.attr("course_code", data[class_].course_code);
@@ -25,14 +26,14 @@ $(document).ready( function () {
             var options_div = $("<div class='options'></div>");
             options_div.append(edit_class);
             options_div.append(delete_class);
-
+*/
             if (color_flag % 2 == 0) {
                 var subject_div = $("<div class='hex z-depth-2 hexagon-red'></div>");
                 
             } else {
                 var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
             }
-            subject_div.attr("id", data[class_].course_code.replace(' ', ''));
+            subject_div.attr("id", data[class_].name.replace(' ', ''));
             subject_div.append(subject);
 
             if (num_flag < 3) {
@@ -52,7 +53,7 @@ $(document).ready( function () {
 
         $('.courses')
             .click(function(){
-                localStorage.course_code = $(this).attr("course_code");
+                localStorage.name = $(this).attr("name");
                 window.location.href = "/views/section";
             });
 
@@ -66,7 +67,7 @@ $(document).ready( function () {
         /* Delete Class*/
         $('.remove')
             .click(function(){
-                var course_code = $(this).attr("course_code");
+                var course_code = $(this).attr("name");
                 if(!confirm("Are you sure you want to delete this class?")) return false;
                 $.ajax({
                     url: '/api/class',
@@ -92,7 +93,7 @@ $(document).ready( function () {
         /* Edit Class */
         $('.edit')
             .click(function(){
-                console.log($(this).attr("course_code"));
+                console.log($(this).attr("name"));
                 localStorage.class_id = $(this).attr("course_code");
                 $('#edit_modal').openModal();
             });
@@ -100,7 +101,7 @@ $(document).ready( function () {
         /* Link to View Sections of the class clicked */
         $('.title')
             .click(function(){
-                console.log($(this).attr("course_code"));
+                console.log($(this).attr("name"));
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
@@ -149,13 +150,14 @@ $(document).ready( function () {
 
                 $('.courses')
                     .click(function(){
-                        localStorage.course_code = $(this).attr("course_code");
+                        localStorage.name = $(this).attr("name");
                         window.location.href = "/views/section";
 
                     });
             },
             error: function(err){
                 if(e.keyCode == 13){
+                	Refresh();
                     return Materialize.toast(err.responseText,2500);    
                 }
             }

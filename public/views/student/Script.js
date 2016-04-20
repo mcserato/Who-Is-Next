@@ -95,6 +95,7 @@ $(document).ready( function () {
                 add_data(data_student);
             },
             error: function(err){
+                refresh();
                 return Materialize.toast(err.responseText,2500);
             }
         });

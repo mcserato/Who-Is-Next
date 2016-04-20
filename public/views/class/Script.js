@@ -156,6 +156,7 @@ $(document).ready( function () {
             },
             error: function(err){
                 if(e.keyCode == 13){
+                    refresh();
                     return Materialize.toast(err.responseText,2500);    
                 }
             }
