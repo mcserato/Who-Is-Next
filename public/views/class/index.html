@@ -34,13 +34,10 @@
         </div>
 
         <div class="container">
-
-
             <div id="main-content">
                 <h1 class="center">Classes</h1>
-
                 <div class="nav-wrapper row">
-                    <form>
+                    <form onSubmit="return false">
                         <div class="input-field col l12">
                             <input id="search-class" type="search" placeholder="Search Class" required>
                             <label for="search-class"><i class="material-icons">search</i></label>
@@ -50,7 +47,6 @@
                     </div>
                   </nav>
 
-
                 <div id="class-list" class="row">
                     <!-- <div class="card"> -->
 
@@ -59,10 +55,10 @@
             </div>
         </div>
 
-         <div id="add-button-div" class="fixed-action-btn">
+        <div id="add-button-div" class="fixed-action-btn">
             <!-- Modal Trigger -->
             <a title="Add Class" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-                <i id="add-icon" class="material-icons">add</i></a>
+                <i id="add-icon" class="material-icons">add</i>
             </a>
         </div>
 
@@ -107,12 +103,12 @@
                         <input id="course_title_edit" type="text" />
                         <label for="course_title_edit">Course Title</label>
                     </div>
+                </form>
             </div>
             <div class="modal-footer">
-                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
-                        <i class="material-icons">done</i>
-                    </button>
-                </form>
+                <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                    <i class="material-icons">done</i>
+                </button>
             </div>
         </div>
 
