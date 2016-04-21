@@ -4,7 +4,7 @@ var db = require(__dirname + './../lib/Mysql');
 exports.getTopTenMostCalledStudents = function (req, res, next) {
     db.query("SELECT * FROM CLASS_STUDENT, STUDENT WHERE " +
         "CLASS_STUDENT.class_id = ? and CLASS_STUDENT.student_number = " +
-        "STUDENT.student_number CLASS_STUDENT.emp_num = STUDENT.emp_num and "+
+        "STUDENT.student_number and CLASS_STUDENT.emp_num = STUDENT.emp_num and "+
         "STUDENT.emp_num = ? ORDER BY CLASS_STUDENT.no_of_times_called " +
         "DESC LIMIT 10",
         [req.params.class_id, req.session.emp_num],
@@ -56,7 +56,7 @@ exports.getTopTenMostCalledMales = function (req, res, next) {
     db.query("SELECT * FROM CLASS_STUDENT,STUDENT where gender = " +
         "'M' and CLASS_STUDENT.student_number = STUDENT.student_number and "+
         "CLASS_STUDENT.emp_num = STUDENT.emp_num and class_id  = ? and "+
-        "STUDENT.student_number.emp_num = ? order by no_of_times_called desc limit 10;",
+        "STUDENT.emp_num = ? order by no_of_times_called desc limit 10;",
         [req.params.class_id, req.session.emp_num],
 
         function (err, rows) {
@@ -73,7 +73,7 @@ exports.getTopTenMostCalledFemales = function (req, res, next) {
     db.query("SELECT * FROM CLASS_STUDENT,STUDENT where gender = " +
         "'F' and CLASS_STUDENT.student_number = STUDENT.student_number and "+
         "CLASS_STUDENT.emp_num = STUDENT.emp_num and class_id  = ? and "+
-        "STUDENT.student_number.emp_num = ? order by no_of_times_called desc limit 10;",
+        "STUDENT.emp_num = ? order by no_of_times_called desc limit 10;",
         [req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
