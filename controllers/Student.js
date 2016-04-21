@@ -45,7 +45,7 @@ exports.edit = function (req, res, next) {
         [req.body.student_number_new, req.body.first_name,
         req.body.middle_name, req.body.last_name, req.body.college,
         req.body.course, req.body.gender, req.body.picture,
-        req.body.birthday, req.body.student_number, req.session.emp_num]
+        req.body.birthday, req.body.student_number, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
@@ -63,7 +63,7 @@ exports.remove = function (req, res, next) {
         res.send(400, "Error: Missing student number.");
     }
 
-    db.query('DELETE FROM STUDENT WHERE student_number = ? AND emp_num = ?',
+    db.query("DELETE FROM STUDENT WHERE student_number = ? AND emp_num = ?",
         [req.body.student_number, req.session.emp_num], 
 
         function (err, rows) {
