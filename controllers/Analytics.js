@@ -4,9 +4,10 @@ var db = require(__dirname + './../lib/Mysql');
 exports.getTopTenMostCalledStudents = function (req, res, next) {
     db.query("SELECT * FROM CLASS_STUDENT, STUDENT WHERE " +
         "CLASS_STUDENT.class_id = ? and CLASS_STUDENT.student_number = " +
-        "STUDENT.student_number ORDER BY CLASS_STUDENT.no_of_times_called " +
+        "STUDENT.student_number CLASS_STUDENT.emp_num = STUDENT.emp_num and "+
+        "STUDENT.emp_num = ? ORDER BY CLASS_STUDENT.no_of_times_called " +
         "DESC LIMIT 10",
-        [req.params.class_id],
+        [req.params.class_id, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
@@ -54,8 +55,9 @@ exports.getSectionFrequency = function (req, res, next) {
 exports.getTopTenMostCalledMales = function (req, res, next) {
     db.query("SELECT * FROM CLASS_STUDENT,STUDENT where gender = " +
         "'M' and CLASS_STUDENT.student_number = STUDENT.student_number and "+
-        "class_id  = ? order by no_of_times_called desc limit 10;",
-        [req.params.class_id],
+        "CLASS_STUDENT.emp_num = STUDENT.emp_num and class_id  = ? and "+
+        "STUDENT.student_number.emp_num = ? order by no_of_times_called desc limit 10;",
+        [req.params.class_id, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
@@ -70,8 +72,9 @@ exports.getTopTenMostCalledMales = function (req, res, next) {
 exports.getTopTenMostCalledFemales = function (req, res, next) {
     db.query("SELECT * FROM CLASS_STUDENT,STUDENT where gender = " +
         "'F' and CLASS_STUDENT.student_number = STUDENT.student_number and "+
-        "class_id  = ? order by no_of_times_called desc limit 10;",
-        [req.params.class_id],
+        "CLASS_STUDENT.emp_num = STUDENT.emp_num and class_id  = ? and "+
+        "STUDENT.student_number.emp_num = ? order by no_of_times_called desc limit 10;",
+        [req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
                 return next(err);
@@ -85,8 +88,9 @@ exports.getTopTenMostCalledFemales = function (req, res, next) {
 exports.getGenderFrequency = function (req, res, next) {
     db.query("SELECT  SUM(no_of_times_called) as frequency FROM STUDENT, CLASS_STUDENT " +
         "WHERE STUDENT.student_number = CLASS_STUDENT.student_number and " +
-        "gender = ? AND class_id = ?",
-        [req.params.gender, req.params.class_id],
+        "STUDENT.emp_num = CLASS_STUDENT.emp_num and gender = ? AND "+
+        "class_id = ? and STUDENT.emp_num = ?",
+        [req.params.gender, req.params.class_id, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
