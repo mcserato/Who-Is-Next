@@ -63,9 +63,9 @@ exports.search = function(req, res, next) {
 /* Shows a list of student in a class */
 exports.view = function(req, res, next) {
     db.query("SELECT * FROM STUDENT s, CLASS_STUDENT cs, CLASS c " + 
-        "WHERE s.student_number = cs.student_number AND" +
+        "WHERE s.student_number = cs.student_number AND " +
         "s.emp_num = cs.emp_num AND " +
-        "c.class_id = cs.class_id AND c.class_id = ? AND emp_num = ?", 
+        "c.class_id = cs.class_id AND c.class_id = ? AND s.emp_num = ?", 
         [req.params.class_id, req.session.emp_num], 
 
         function (err, rows) {
@@ -80,8 +80,9 @@ exports.view = function(req, res, next) {
 
 /* Imports a student */
 exports.import = function(req, res, next) {
-    db.query("INSERT INTO CLASS_STUDENT(class_id, student_number, emp_num)" +
-        "VALUES(?, ?, ?)", [req.body.class_id, req.body.student_number],
+    db.query("INSERT INTO CLASS_STUDENT(class_id, student_number, emp_num) " +
+        "VALUES(?, ?, ?)", 
+        [req.body.class_id, req.body.student_number, req.session.emp_num],
         
         function (err, rows) {
             if (err) {
