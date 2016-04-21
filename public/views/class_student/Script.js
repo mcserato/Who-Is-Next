@@ -1,7 +1,6 @@
 'use strict';
 
 $(document).ready( function () {
-     //$('select').material_select();
     if (localStorage.section_number.length == 0 || localStorage.section_number == "undefined") {
         $("#course-id").append($("<h2></h2>")
             .text(
@@ -102,6 +101,7 @@ $(document).ready( function () {
                     url: '/api/student/' + $(this).attr("id"),
                     method: 'GET',
                     success: function(data_student){
+                        
                         $('#student_header').empty();
                         $('#student_number').empty();
                         $('#student_name').empty();
@@ -109,7 +109,7 @@ $(document).ready( function () {
                         $('#student_college').empty();
                         $('#student_gender').empty();
                         $('#student_birthday').empty();
-
+                        
                         $('#student_header').append($("<span></span>").html(data_student[0].last_name + ", " + data_student[0].first_name + " " + data_student[0].middle_name));
                         $('#student_number').append($("<span></span>").html("Student number: " + data_student[0].student_number));
                         $('#student_course').append($("<span></span>").html("Course: " + data_student[0].course));
@@ -129,9 +129,28 @@ $(document).ready( function () {
 			/* Edit Student */
             $('.edit-student-button').click(function(){
                 localStorage.student_number = $(this).attr("student_number");
-                $('#edit_student_modal').openModal();
-            });
+                
+                $.ajax({
+                    url: '/api/student/' + $(this).attr("student_number"),
+                    method: 'GET',
+                    success: function(data_student){
+                        
+                        $('#student_number_edit').val(data_student[0].student_number);
+                        $('#first_name_edit').val(data_student[0].first_name);
+                        $('#middle_name_edit').val(data_student[0].middle_name);
+                        $('#last_name_edit').val(data_student[0].last_name);
+                        $('#course_edit').val(data_student[0].course);
+                        $('#college_edit').val(data_student[0].college);
+                        $('#birthday_edit').val(data_student[0].birthday);
 
+                        $('#edit_student_modal').openModal();
+
+                    },
+                    error: function(err){
+                        return Materialize.toast(err.responseText,2500);
+                    }
+                });
+            });
         },
         error: function(err){
             return Materialize.toast(err.responseText,2500);
