@@ -84,6 +84,7 @@
                         <option value="" disabled selected>College</option>
                         <option value="CA" id="ca">CA</option>
                         <option value="CAS" id="cas">CAS</option>
+                        <option value="CAS" id="cas">CDC</option>
                         <option value="CEAT" id="ceat">CEAT</option>
                         <option value="CEM" id="cem">CEM</option>
                         <option value="CFNR" id="cfnr">CFNR</option>
@@ -106,13 +107,14 @@
                    </p>
 
                    <p>
-                      <input name="gender" type="radio" id="female" style="color:red;" />
+                      <input name="gender" type="radio" id="female" />
                       <label for="female">Female</label>
                    </p>
 
                    <div class="input-field">
-                       <input id="birthday" type="text" required="" />
-                       <label for="birthday">Birthday (YYYY-MM-DD)</label>
+                        <span style="color:#999999;">Birthday</span> 
+                       <input id="birthday" type="date" class ="datepicker" required="" />
+                      
                    </div>
            </div>
            <div class="modal-footer">

@@ -1,7 +1,6 @@
 'use strict';
 
 $(document).ready( function () {
-     //$('select').material_select();
     if (localStorage.section_number.length == 0 || localStorage.section_number == "undefined") {
         $("#course-id").append($("<h2></h2>")
             .text(
