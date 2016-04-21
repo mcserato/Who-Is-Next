@@ -53,7 +53,7 @@ $(document).ready( function () {
 
         return false;
     });
-    
+
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
 
@@ -165,7 +165,7 @@ $(document).ready( function () {
             $('.remove')
                 .click(function(){
                     var class_id = $(this).attr("class_id");
-                    
+
                     if(!confirm("Are you sure you want to delete this section?")) return false;
                     $.ajax({
                         url: '/api/class/' + class_id,
@@ -254,7 +254,7 @@ $(document).ready( function () {
                                     enabled: false
                                 },
                                 series: [{
-                                    name: 'Top Ten Most Called Students',
+                                    name: 'No. of times called',
                                     data: data2,
                                     dataLabels: {
                                         enabled: true,
@@ -283,7 +283,7 @@ $(document).ready( function () {
                         url: "/api/analyticsGender/"+localStorage.class_id+"/F"
                     }).done(function(data) {
                         gender_frequency.push(data[0].frequency);
-                        
+
                         if(data[0].frequency!=null || data[1].frequency!=null){
                             Highcharts.getOptions().plotOptions.pie.colors = (function () {
                     	        var colors = [],
@@ -375,7 +375,7 @@ $(document).ready( function () {
                                     enabled: false
                                 },
                                 series: [{
-                                    name: 'Top Ten Most Called Female Students',
+                                    name: 'No. of times called',
                                     data: data4,
                                     dataLabels: {
                                         enabled: true,
@@ -434,7 +434,7 @@ $(document).ready( function () {
                                         enabled: false
                                     },
                                     series: [{
-                                        name: 'Top Ten Most Called Male Students',
+                                        name: 'No. of times called',
                                         data: data3,
                                         dataLabels: {
                                             enabled: true,
@@ -585,11 +585,11 @@ $(document).ready( function () {
 
         return false;
     });
-    
-        
+
+
      var emp_no = JSON.parse(localStorage.user).emp_num;
      var orig_password;
-     
+
      /* Fills Up Areas */
      $.ajax({
             type: "GET",
@@ -598,11 +598,11 @@ $(document).ready( function () {
             $("#name_edit").val(info[0].name);
             $("#email_edit").val(info[0].email);
             $("#username_edit").val(info[0].username);
-            orig_password = info[0].password;   
-         });   
-        
-        
-     /*Edit User*/   
+            orig_password = info[0].password;
+         });
+
+
+     /*Edit User*/
      $('#edit-user-form').submit(function (event) {
         var name = $("#name_edit").val();
         var email = $("#email_edit").val();
@@ -610,7 +610,7 @@ $(document).ready( function () {
         var old_password = $("#current_password").val();
         var new_password = $("#new_password_edit").val();
         var cnew_password = $("#cnew_password_edit").val();
-        
+
         if(new_password != cnew_password){
             Materialize.toast("Password does not match !");
             return false;
@@ -632,14 +632,14 @@ $(document).ready( function () {
                     emp_num: emp_no
                 },
                 success: function(){
-                    Materialize.toast(course_code + " edited!", 1000);   
+                    Materialize.toast(course_code + " edited!", 1000);
                 },
                 dataType: "JSON"
             });
              return true;
         }
-        
-        else{ 
+
+        else{
             $.ajax({
                 type: "PUT",
                 url: "/api/faculty",
@@ -651,14 +651,14 @@ $(document).ready( function () {
                     emp_num: emp_no
                 },
                 success: function(){
-                    Materialize.toast(course_code + " edited!", 1000);   
+                    Materialize.toast(course_code + " edited!", 1000);
                 },
                 dataType: "JSON"
             });
              return true;
-        }     
-        
-    }); 
+        }
+
+    });
 
 
     $('.modal-trigger').leanModal();
