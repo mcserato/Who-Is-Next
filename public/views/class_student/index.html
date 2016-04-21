@@ -38,6 +38,12 @@
                 <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
                 <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
                 <li><a href="/views/archived_classes" class="btn-floating black" href="" title="Archived Classes"><i class="material-icons">archive</i></a></li>
+                <li>
+                    <!-- Modal Trigger -->
+                        <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
+                            <i id="edit-icon" class="material-icons">mode_edit</i>
+                        </a> 
+               </li>
             </ul>
         </div>
 
@@ -74,9 +80,20 @@
                    </div>
 
                    <div class="input-field">
-                       <input id="college" type="text" required="" />
-                       <label for="college">College</label>
-                   </div>
+                    <select class="browser-default" id="college">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div> 
 
                    <div class="input-field">
                        <input id="course" type="text" required="" />
@@ -107,6 +124,76 @@
         </div>
 
         <!-- Modal Structure -->
+        <div id="edit_student_modal" class="modal">
+           <div class="modal-content">
+               <h2>Edit Student</h2>
+               <form id="edit-student-form">
+                   <div class="input-field">
+                       <input id="student_number_edit" type="text" required="" />
+                       <label for="student_number_edit">Student <NOFRAMES></NOFRAMES>umber</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="first_name_edit" type="text" required="" />
+                       <label for="first_name_edit">First Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="middle_name_edit" type="text" required="" />
+                       <label for="middle_name_edit">Middle Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="last_name_edit" type="text" required="" />
+                       <label for="last_name_edit">Last Name</label>
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college_edit">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div>
+
+                   <div class="input-field">
+                       <input id="course_edit" type="text" required="" />
+                       <label for="course_edit">Course</label>
+                   </div>
+
+                   <p>
+                      <input name="gender" type="radio" id="male_edit" />
+                      <label for="male_edit">Male</label>
+                   </p>
+
+                   <p>
+                      <input name="gender" type="radio" id="female_edit" style="color:red;" />
+                      <label for="female_edit">Female</label>
+                   </p>
+
+
+                   <div class="input-field">
+                       <input id="birthday_edit" type="text" required="" />
+                       <label for="birthday_edit">Birthday (YYYY-MM-DD)</label>
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="edit-student-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+               </form>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
         <div id="student_modal" class="modal">
             <div class="modal-content">
                 <h1 id="student_header"class="center"></h1>
@@ -117,6 +204,45 @@
                     <li id="student_gender" class="collection-item"></li>
                     <li id="student_birthday" class="collection-item"></li>
                 </ul>                
+            </div>
+        </div>
+        
+        <!-- Modal Structure -->
+        <div id="edit-user_modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit User</h2>
+                <form id="edit-user-form">
+                    <div class="input-field">
+                        <input id="name_edit" type="text" class="validate"/>
+                        <label for="name_edit">Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="email_edit" type="email" class="validate"/>
+                        <label for="email_edit">Email Address</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="username_edit" type="text" class="validate"/>
+                        <label for="username_edit">Username</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="new_password_edit" type="password" class="validate"/>
+                        <label for="new_password_edit">New Password</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="cnew_password_edit" type="password" class="validate"/>
+                        <label for="cnew_password_edit">Confirm New Password</label>
+                    </div>
+                    
+                    <div class="input-field">
+                        <span id="confirm-message"> Enter Current Password to Save Changes:</span>
+                        <input id="current_password" type="password" class="validate"/>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="edit-user-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
             </div>
         </div>
 
