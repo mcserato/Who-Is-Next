@@ -33,7 +33,8 @@ exports.getVolunteers = function (req, res, next) {
     }
 
     db.query("SELECT first_name, last_name FROM CLASS_STUDENT,STUDENT where " + 
-        "CLASS_STUDENT.student_number = STUDENT.student_number and "+
+        "CLASS_STUDENT.student_number = STUDENT.student_number and "+ 
+        "CLASS_STUDENT.emp_num = STUDENT.emp_num  and "+
         "class_id  = ? " + query + " order by no_of_times_called",
         [req.params.class_id],
 

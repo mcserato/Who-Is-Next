@@ -3,6 +3,7 @@
 $(document).ready( function () {
     /* Add Section */
     $('#add-section-form').submit(function (event) {
+        // Get data from input fields of add section form
         var class_section = $("#class_section").val();
         var section_number = $("#section_number").val();
 
@@ -30,6 +31,7 @@ $(document).ready( function () {
 
     /* Edit Section */
     $('#edit-section-form').submit(function (event) {
+        // Get data from input fields of edit section form
         var class_section = $("#class_section_edit").val();
         var section_number = $("#section_number_edit").val();
 
@@ -77,175 +79,116 @@ $(document).ready( function () {
 
         });
 
-        $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
+    $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
-        $.ajax({
-            url: '/api/class/' + localStorage.course_code,
-            method: 'GET',
-            success: function(data){
-                $("#course-id").append($("<h3></h3>").text(data[0].course_title));
-                if(!data){
-                    return Materialize.toast("Error in fetching data",2500);
+    $.ajax({
+        url: '/api/class/' + localStorage.course_code,
+        method: 'GET',
+        success: function(data){
+            $("#course-id").append($("<h3></h3>").text(data[0].course_title));
+            if(!data){
+                return Materialize.toast("Error in fetching data",2500);
+            }
+
+            var color_flag = 0; // For alternating the color
+            var num_flag = 0;   // For althernating number per row
+            for(var class_ in data){
+                if (data[class_].section_number == null || data[class_].section_number.length == 0) {
+                    var section = $("<span></span>").text(data[class_].class_section);
+                } else {
+                    var section = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
                 }
+                section.addClass("title courses");
+                section.attr("class_id", data[class_].class_id);
+                section.attr("course_code", data[class_].course_code);
+                section.attr("class_section", data[class_].class_section);
+                section.attr("section_number", data[class_].section_number);
 
-                var color_flag = 0; // For alternating the color
-                var num_flag = 0;   // For althernating number per row
-                for(var class_ in data){
-                    /*var row = $("<li></li>");
-                    var class_header = $("<div></div>").addClass("collapsible-header");
-                    row.attr("id", data[class_].class_id);
-                    if(data[class_].section_number == null){
-                        var section = $("<span></span>").text(data[class_].class_section);
-                    }else{
-                        var section = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
-                    }
+                var view_analytics = $("<a title='View Analytics'><i class='material-icons options-text'>insert_chart</i></a>");
+                view_analytics.addClass("modal-trigger view-analytics-button");
+                view_analytics.attr("class_id", data[class_].class_id);
 
-                    var trash = $("<a><i>delete</i></a>");
-                    trash.addClass("material-icons right");
-                    trash.addClass("remove");
-                    trash.attr("class_id", data[class_].class_id);
-                    row.attr("course_code", data[class_].course_code);
-                    row.addClass("courses");
+                var delete_section = $("<a title='Delete Section'><i class='material-icons options-text'>delete</i></a>");
+                delete_section.addClass("remove");
+                delete_section.attr("class_id", data[class_].class_id);
+                delete_section.attr("course_code", data[class_].course_code);
 
-                    // Modal Trigger
-                    var add_student = $("<a href='#add_student_modal'><i>add</i></a>");
-                    var edit_section = $("<a class='edit-section-button modal-trigger' href='#edit_section_modal'><i>mode_edit</i></a>");
+                var edit_section = $("<a title='Edit Section' href='#edit_section_modal'><i class='material-icons options-text'>mode_edit</i></a>");
+                edit_section.addClass("modal-trigger edit-section-button");
+                edit_section.attr("class_id", data[class_].class_id);
 
-                    add_student.addClass("add-student-button material-icons right modal-trigger");
-                    add_student.attr("class_id", data[class_].class_id);
-                    edit_section.attr("class_id", data[class_].class_id);
-                    edit_section.addClass("material-icons right");
-                    section.addClass("title");
-                    section.attr("class_id", data[class_].class_id);
+                var options_div = $("<div class='options'></div>");
+                options_div.append(view_analytics);
+                options_div.append(edit_section);
+                options_div.append(delete_section);
 
-                    var class_body = $("<div></div>").addClass("collapsible-body");
-                    var student_info = $("<ul></ul>").addClass("collection");
+                if (color_flag % 2 == 0) {
+                    var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
 
-                    class_body.append(student_info);
-                    class_header.append(section);
-                    class_header.append(trash);
-                    class_header.append(edit_section);
-                    class_header.append(add_student);
-                    row.append(class_header);
-                    row.append(class_body);
-                    content.append(row);
+                } else {
+                    var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
+                }
+                section_dv.attr("id", data[class_].course_code.replace(' ', ''));
+                section_dv.append(section);
 
+                if (num_flag < 3) {
+                    var row_div = $("<div class='three'></div>");
+                    row_div.append(section_dv);
+                    content.append(row_div);
+                } else  content.append(section_dv);
+
+                content.append(options_div);
+
+                color_flag++;
+                num_flag++;
+                if (num_flag == 7) num_flag = 0;
+            }
+
+            $('.options').hide();
+
+            $('.courses').click(function(){
+                localStorage.class_id = $(this).attr("class_id");
+                localStorage.course_code = $(this).attr("course_code");
+                localStorage.class_section = $(this).attr("class_section");
+                localStorage.section_number = $(this).attr("section_number");
+                window.location.href = "/views/class_student";
+            });
+
+            $('.hex').hover(function() {
+               $('.options').show();
+               $('.options').mouseleave(function() {
+                    $('.options').hide();
+                });
+            });
+
+            /* Delete Section*/
+            $('.remove')
+                .click(function(){
+                    var class_id = $(this).attr("class_id");
+                    
+                    if(!confirm("Are you sure you want to delete this section?")) return false;
                     $.ajax({
-                        url: '/api/class_student/' + data[class_].class_id,
-                        method: 'GET',
-                        success: function(student_data){
-                            for(var student in student_data){
-                                var student_name = $("<li></li>").addClass("collection-item");
-                                var body = $("<a class='edit-student-button modal-trigger' href='#edit_student_modal'><i>mode_edit</i></a>");
-                                body.attr("student_id", student_data[student].student_number);
-                                body.addClass("material-icons right");
-                                student_info.append(body);
-                                student_name.text(student_data[student].last_name + ", " + student_data[student].first_name + " " +
-                                student_data[student].middle_name);
-                                student_info.append(student_name);
+                        url: '/api/class/' + class_id,
+                        method: 'DELETE',
+                        data: {
+                            class_id: class_id
+                        },
+                        dataType: "JSON",
+                        success: function(data){
+                            if(!data){
+                                return Materialize.toast("Error in deleting. Please try again!",2500);
                             }
+
+                            $('#' + class_id).remove();
+                            return Materialize.toast("Successfully deleted section!",2500);
                         },
                         error: function(err){
                             return Materialize.toast(err.responseText,2500);
                         }
-                    });*/
-                    if (data[class_].section_number == null || data[class_].section_number.length == 0) {
-                        var section = $("<span></span>").text(data[class_].class_section);
-                    } else {
-                        var section = $("<span></span>").text(data[class_].class_section + "-" + data[class_].section_number);
-                    }
-                    section.addClass("title courses");
-                    section.attr("class_id", data[class_].class_id);
-                    section.attr("course_code", data[class_].course_code);
-                    section.attr("class_section", data[class_].class_section);
-                    section.attr("section_number", data[class_].section_number);
-
-                    var view_analytics = $("<a title='View Analytics'><i class='material-icons options-text'>insert_chart</i></a>");
-                    view_analytics.addClass("modal-trigger view-analytics-button");
-                    view_analytics.attr("class_id", data[class_].class_id);
-
-                    var delete_section = $("<a title='Delete Section'><i class='material-icons options-text'>delete</i></a>");
-                    delete_section.addClass("remove");
-                    delete_section.attr("class_id", data[class_].class_id);
-                    delete_section.attr("course_code", data[class_].course_code);
-
-                    var edit_section = $("<a title='Edit Section' href='#edit_section_modal'><i class='material-icons options-text'>mode_edit</i></a>");
-                    edit_section.addClass("modal-trigger edit-section-button");
-                    edit_section.attr("class_id", data[class_].class_id);
-
-                    var options_div = $("<div class='options'></div>");
-                    options_div.append(view_analytics);
-                    options_div.append(edit_section);
-                    options_div.append(delete_section);
-
-                    if (color_flag % 2 == 0) {
-                        var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
-
-                    } else {
-                        var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
-                    }
-                    section_dv.attr("id", data[class_].course_code.replace(' ', ''));
-                    section_dv.append(section);
-
-                    if (num_flag < 3) {
-                        var row_div = $("<div class='three'></div>");
-                        row_div.append(section_dv);
-                        content.append(row_div);
-                    } else  content.append(section_dv);
-
-                    content.append(options_div);
-
-                    color_flag++;
-                    num_flag++;
-                    if (num_flag == 7) num_flag = 0;
-                }
-
-                $('.options').hide();
-
-                $('.courses')
-                    .click(function(){
-                        localStorage.class_id = $(this).attr("class_id");
-                        localStorage.course_code = $(this).attr("course_code");
-                        localStorage.class_section = $(this).attr("class_section");
-                        localStorage.section_number = $(this).attr("section_number");
-                        window.location.href = "/views/class_student";
                     });
 
-                $('.hex').hover(function() {
-                   $('.options').show();
-                   $('.options').mouseleave(function() {
-                        $('.options').hide();
-                    });
+                    window.location.href = "/views/section"
                 });
-
-                /* Delete Section*/
-                $('.remove')
-                    .click(function(){
-                        var class_id = $(this).attr("class_id");
-                        
-                        if(!confirm("Are you sure you want to delete this section?")) return false;
-                        $.ajax({
-                            url: '/api/class/' + class_id,
-                            method: 'DELETE',
-                            data: {
-                                class_id: class_id
-                            },
-                            dataType: "JSON",
-                            success: function(data){
-                                if(!data){
-                                    return Materialize.toast("Error in deleting. Please try again!",2500);
-                                }
-
-                                $('#' + class_id).remove();
-                                return Materialize.toast("Successfully deleted section!",2500);
-                            },
-                            error: function(err){
-                                return Materialize.toast(err.responseText,2500);
-                            }
-                        });
-
-                        window.location.href = "/views/section"
-                    });
 
                 /* Add Student */
                 $('.add-student-button').click(function () {
@@ -511,61 +454,61 @@ $(document).ready( function () {
                         });
 
                     $.ajax({
-                            type: "GET",
-                            url: "/api/analyticsGetSection/" + localStorage.class_id
-                         }).done(function(section){
-                            var section_list = [];
-                            for(var i = 0; i < section.length ; i ++) {
-                                section_list.push( section[i].id );
-                            }
+                        type: "GET",
+                        url: "/api/analyticsGetSection/" + localStorage.class_id
+                    }).done(function(section){
+                        var section_list = [];
+                        for(var i = 0; i < section.length ; i ++) {
+                            section_list.push( section[i].id );
+                        }
 
-                                var values = [];
-                                for(var i = 0 ; i < section_list.length ; i ++){
-                                    var link = "/api/analyticsLab/"+section_list[i];
-                                    $.ajax({
-                                         type: "GET",
-                                         url: link
-                                      }).done(function(frequency){
-                                           var temp = [];
-                                           temp.push(frequency[0].section);
-                                           temp.push(frequency[0].frequency);
-                                           values.push(temp);
-                                           if(values.length>0){
-                                            $('#section-frequency-div').highcharts({
-                                                chart: {
-                                                    plotBackgroundColor: null,
-                                                    plotBorderWidth: null,
-                                                    plotShadow: false,
-                                                    type: 'pie'
-                                                },
-                                                title: {
-                                                    text: 'Section Frequency Distribution'
-                                                },
-                                                tooltip: {
-                                                    pointFormat: '{series.name}: <b>{point.y}</b>'
-                                                },
-                                                plotOptions: {
-                                                    pie: {
-                                                        allowPointSelect: true,
-                                                        cursor: 'pointer',
-                                                        dataLabels: {
-                                                            enabled: true,
-                                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                                            style: {
-                                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                                                            }
-                                                        }
+                        var values = [];
+                        for(var i = 0 ; i < section_list.length ; i ++){
+                            var link = "/api/analyticsLab/"+section_list[i];
+                            $.ajax({
+                                 type: "GET",
+                                 url: link
+                              }).done(function(frequency){
+                                   var temp = [];
+                                   temp.push(frequency[0].section);
+                                   temp.push(frequency[0].frequency);
+                                   values.push(temp);
+                                   if(values.length>0){
+                                    $('#section-frequency-div').highcharts({
+                                        chart: {
+                                            plotBackgroundColor: null,
+                                            plotBorderWidth: null,
+                                            plotShadow: false,
+                                            type: 'pie'
+                                        },
+                                        title: {
+                                            text: 'Section Frequency Distribution'
+                                        },
+                                        tooltip: {
+                                            pointFormat: '{series.name}: <b>{point.y}</b>'
+                                        },
+                                        plotOptions: {
+                                            pie: {
+                                                allowPointSelect: true,
+                                                cursor: 'pointer',
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                    style: {
+                                                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                                                     }
-                                                },
-                                                series: [{
-                                                    name: 'No. of Times Called',
-                                                    data: values
-                                                }]
-                                            });
-                                        }
-                                     });
+                                                }
+                                            }
+                                        },
+                                        series: [{
+                                            name: 'No. of Times Called',
+                                            data: values
+                                        }]
+                                    });
                                 }
-                           });
+                             });
+                        }
+                   });
                 });
 
                 /* Edit Section */
@@ -642,6 +585,81 @@ $(document).ready( function () {
 
         return false;
     });
+    
+        
+     var emp_no = JSON.parse(localStorage.user).emp_num;
+     var orig_password;
+     
+     /* Fills Up Areas */
+     $.ajax({
+            type: "GET",
+            url: "/api/faculty/"+emp_no
+         }).done(function(info){
+            $("#name_edit").val(info[0].name);
+            $("#email_edit").val(info[0].email);
+            $("#username_edit").val(info[0].username);
+            orig_password = info[0].password;   
+         });   
+        
+        
+     /*Edit User*/   
+     $('#edit-user-form').submit(function (event) {
+        var name = $("#name_edit").val();
+        var email = $("#email_edit").val();
+        var username = $("#username_edit").val();
+        var old_password = $("#current_password").val();
+        var new_password = $("#new_password_edit").val();
+        var cnew_password = $("#cnew_password_edit").val();
+        
+        if(new_password != cnew_password){
+            Materialize.toast("Password does not match !");
+            return false;
+        }
+        else if(old_password !== orig_password){
+            alert(orig_password);
+            Materialize.toast("Wrong password!");
+            return false;
+        }
+        else if(new_password == "" || new_password == null){
+            $.ajax({
+                type: "PUT",
+                url: "/api/faculty",
+                data: {
+                    name: name,
+                    username: username,
+                    password: info[0].password,
+                    email: email,
+                    emp_num: emp_no
+                },
+                success: function(){
+                    Materialize.toast(course_code + " edited!", 1000);   
+                },
+                dataType: "JSON"
+            });
+             return true;
+        }
+        
+        else{ 
+            $.ajax({
+                type: "PUT",
+                url: "/api/faculty",
+                data: {
+                    name: name,
+                    username: username,
+                    password: new_password,
+                    email: email,
+                    emp_num: emp_no
+                },
+                success: function(){
+                    Materialize.toast(course_code + " edited!", 1000);   
+                },
+                dataType: "JSON"
+            });
+             return true;
+        }     
+        
+    }); 
+
 
     $('.modal-trigger').leanModal();
 
