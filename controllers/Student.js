@@ -9,7 +9,7 @@ exports.add = function (req, res, next) {
 
     db.query("SELECT student_number, emp_num FROM STUDENT WHERE " +
         "student_number = ? AND emp_num = ?",
-        [req.body.student_number, req.session.emp_num], 
+        [req.body.student_number, req.session.emp_num],
 
         function(err, rows) {
             // Checks if the student already exists
@@ -20,7 +20,7 @@ exports.add = function (req, res, next) {
                     req.body.first_name, req.body.middle_name, req.body.last_name,
                     req.body.college, req.body.course, req.body.gender,
                     req.body.picture, req.body.birthday],
-                   
+
                     function (err, rows) {
                         if (err) {
                             return next(err);
@@ -55,7 +55,7 @@ exports.edit = function (req, res, next) {
             res.send(rows);
         }
     );
-} 
+}
 
 /* Removes a student from the database */
 exports.remove = function (req, res, next) {
@@ -64,13 +64,13 @@ exports.remove = function (req, res, next) {
     }
 
     db.query("DELETE FROM STUDENT WHERE student_number = ? AND emp_num = ?",
-        [req.body.student_number, req.session.emp_num], 
+        [req.body.student_number, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
                 return next(err);
             }
-            
+
             if (!rows.affectedRows) {
                 res.send(400, "Error: No student was deleted.");
             }
@@ -82,17 +82,17 @@ exports.remove = function (req, res, next) {
 
 /* Shows a list of all students */
 exports.viewAll = function(req, res, next) {
-    db.query("SELECT s.first_name, s.middle_name, s.last_name, " + 
+    db.query("SELECT s.first_name, s.middle_name, s.last_name, " +
         "s.student_number FROM STUDENT s, CLASS_STUDENT cs, CLASS c WHERE " +
         "s.student_number = cs.student_number AND s.emp_num = cs.emp_num AND " +
         "c.class_id = cs.class_id AND c.emp_num = ?",
-        [req.session.emp_num], 
+        [req.session.emp_num],
 
         function (err, rows) {
             if (err) {
                 return next(err);
             }
-            
+
             res.send(rows);
         }
     );
@@ -101,7 +101,7 @@ exports.viewAll = function(req, res, next) {
 /* Shows the details of a student */
 exports.viewOne = function(req, res, next) {
     db.query("SELECT * FROM STUDENT WHERE student_number = ? AND emp_num = ?",
-        [req.params.student_number, req.session.emp_num], 
+        [req.params.student_number, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
@@ -120,14 +120,14 @@ exports.viewOne = function(req, res, next) {
 /* Searches a student by last name from all classes */
 exports.search = function(req, res, next) {
     db.query("SELECT s.first_name, s.middle_name, s.last_name FROM " +
-        "STUDENT s, CLASS_STUDENT cs where s.last_name like '%?%'", 
-        [req.params.last_name], 
+        "STUDENT s, CLASS_STUDENT cs where s.last_name like '%?%'",
+        [req.params.last_name],
 
         function (err, rows) {
             if (err) {
                 return next(err);
             }
-            
+
             if (rows.length === 0) {
                 res.send(404, "Error: Student not found!");
             } else {

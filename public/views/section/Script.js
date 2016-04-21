@@ -55,7 +55,7 @@ $(document).ready( function () {
 
         return false;
     });
-    
+
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
 
@@ -222,11 +222,10 @@ $(document).ready( function () {
                         temp.push(data[i].no_of_times_called);
                         data2.push(temp);
                     }
-
                     if(data.length>0){
                         Highcharts.setOptions({
-                        	colors: ['#b42529', '#333333']
-                    	});
+                            colors: ['#b42529', '#333333']
+                        });
 
 
                         $('#top-ten-div').highcharts({
@@ -257,7 +256,7 @@ $(document).ready( function () {
                                 enabled: false
                             },
                             series: [{
-                                name: 'Top Ten Most Called Students',
+                                name: 'No. of times called',
                                 data: data2,
                                 dataLabels: {
                                     enabled: true,
@@ -275,33 +274,31 @@ $(document).ready( function () {
                         });
                     }
                 });
-
                 $.ajax({
                     type: "GET",
                     url: "/api/analyticsGender/"+localStorage.class_id+"/M"
                 }).done(function(data) {
                     gender_frequency.push(data[0].frequency);
                 });
-
                 $.ajax({
                     type: "GET",
                     url: "/api/analyticsGender/"+localStorage.class_id+"/F"
                 }).done(function(data) {
                     gender_frequency.push(data[0].frequency);
-                    
+
                     if(data[0].frequency!=null || data[1].frequency!=null){
                         Highcharts.getOptions().plotOptions.pie.colors = (function () {
-                	        var colors = [],
-                	            base = Highcharts.getOptions().colors[0],
-                	            i;
+                            var colors = [],
+                                base = Highcharts.getOptions().colors[0],
+                                i;
 
-                	        for (i = 0; i < 10; i += 1) {
-                	            // Start out with a darkened base color (negative brighten), and end
-                	            // up with a much brighter color
-                	            colors.push(Highcharts.Color(base).brighten((i-1) / 7).get());
-                	        }
-                	        return colors;
-                	    }());
+                            for (i = 0; i < 10; i += 1) {
+                                // Start out with a darkened base color (negative brighten), and end
+                                // up with a much brighter color
+                                colors.push(Highcharts.Color(base).brighten((i-1) / 7).get());
+                            }
+                            return colors;
+                        }());
 
                         $('#gender-frequency-div').highcharts({
                             chart: {
@@ -352,7 +349,6 @@ $(document).ready( function () {
                         temp.push(datalang[i].no_of_times_called)
                         data4.push(temp);
                     }
-
                     if(datalang.length>0){
                         $('#top-ten-females-div').highcharts({
                             chart: {
@@ -381,7 +377,7 @@ $(document).ready( function () {
                                 enabled: false
                             },
                             series: [{
-                                name: 'Top Ten Most Called Female Students',
+                                name: 'No. of times called',
                                 data: data4,
                                 dataLabels: {
                                     enabled: true,
@@ -412,7 +408,6 @@ $(document).ready( function () {
                             temp.push(datagg[i].no_of_times_called);
                             data3.push(temp);
                         }
-
                         if(datagg.length>0){
                             $('#top-ten-males-div').highcharts({
                                 chart: {
@@ -441,7 +436,7 @@ $(document).ready( function () {
                                     enabled: false
                                 },
                                 series: [{
-                                    name: 'Top Ten Most Called Male Students',
+                                    name: 'No. of times called',
                                     data: data3,
                                     dataLabels: {
                                         enabled: true,
@@ -473,41 +468,41 @@ $(document).ready( function () {
                     for(var i = 0 ; i < section_list.length ; i ++){
                         var link = "/api/analyticsLab/"+section_list[i];
                         $.ajax({
-                            type: "GET",
-                            url: link
-                        }).done(function(frequency){
-                            var temp = [];
-                            temp.push(frequency[0].section);
-                            temp.push(frequency[0].frequency);
-                            values.push(temp);
-                            if(values.length>0){
+                             type: "GET",
+                             url: link
+                          }).done(function(frequency){
+                               var temp = [];
+                               temp.push(frequency[0].section);
+                               temp.push(frequency[0].frequency);
+                               values.push(temp);
+                               if(values.length>0){
                                 $('#section-frequency-div').highcharts({
-                                chart: {
-                                    plotBackgroundColor: null,
-                                    plotBorderWidth: null,
-                                    plotShadow: false,
-                                    type: 'pie'
-                                },
-                                title: {
-                                    text: 'Section Frequency Distribution'
-                                },
-                                tooltip: {
-                                    pointFormat: '{series.name}: <b>{point.y}</b>'
-                                },
-                                plotOptions: {
-                                    pie: {
-                                        allowPointSelect: true,
-                                        cursor: 'pointer',
-                                        dataLabels: {
-                                            enabled: true,
-                                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                                            style: {
-                                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                    chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false,
+                                        type: 'pie'
+                                    },
+                                    title: {
+                                        text: 'Section Frequency Distribution'
+                                    },
+                                    tooltip: {
+                                        pointFormat: '{series.name}: <b>{point.y}</b>'
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: true,
+                                                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                                style: {
+                                                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                                                }
                                             }
                                         }
-                                    }
-                                },
-                                series: [{
+                                    },
+                                    series: [{
                                         name: 'No. of Times Called',
                                         data: values
                                     }]
@@ -515,7 +510,7 @@ $(document).ready( function () {
                             }
                         });
                     }
-               });
+                });
             });
 
             /* Edit Section */
@@ -588,8 +583,7 @@ $(document).ready( function () {
         }
 
         return false;
-    });
-    
+    });    
 
     var emp_no = JSON.parse(localStorage.user).emp_num;
     var orig_password;
