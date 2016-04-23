@@ -10,10 +10,10 @@ $(document).ready( function () {
         var user = JSON.parse(localStorage.user);
         
         if(user.role == 'ADMIN'){
-            window.location.href = '/admin';
+            window.location.href = '/views/faculty';
         }
         if(user.role == 'FACULTY'){
-            window.location.href = '/faculty';
+            window.location.href = '/views/class';
         }
 
     }
@@ -107,10 +107,10 @@ $(document).ready( function () {
         localStorage.user = JSON.stringify(user);
 
         if(user.role == "ADMIN"){
-            window.location.href = '/admin';
+            window.location.href = '/views/faculty';
         }
         if(user.role == "FACULTY"){
-            window.location.href = '/faculty';
+            window.location.href = '/views/class';
         }
     }
 

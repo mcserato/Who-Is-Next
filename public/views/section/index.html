@@ -4,29 +4,19 @@
         <meta charset="utf-8"/>
         <title>Students</title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="../../style/materialize.css" />
+        <link rel="stylesheet" href="../../style/Materialize.min.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
         <script src="../../script/Jquery.min.js"></script>
-        <script src="../../script/Materialize.js"></script>
+        <script src="../../script/Materialize.min.js"></script>
     </head>
-   <body>
+    <body>
         <div class="navbar-fixed">
             <div class="navbar-wrapper">
                 <nav class="z-depth-0">
                     <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
-
                     <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
                 </nav>
-            </div>
-        </div>
-
-        <div class="container">
-            <div id="main-content">
-                <h1 class="center">Students</h1>
-                <!-- <div class="card"> -->
-                put your main content here
-                <!-- </div> -->
             </div>
         </div>
 
@@ -43,15 +33,69 @@
             </ul>
         </div>
 
+        <div class="container">
+            <div id="main-content">
+                <h1 id="course-id" class="center"></h1>
+                <ul id="section-list" class="collapsible" data-collapsible="accordion">
+                <!-- <div class="card"> -->
+                <!--put your main content here -->
+                <!-- </div> -->
+                </ul>
+            </div>
+        </div>
+
         <div id="add-button-div" class="fixed-action-btn">
-           <!-- Modal Trigger -->
-           <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-               <i id="add-icon" class="material-icons">add</i></a>
-           </a>
+            <!-- Modal Trigger -->
+            <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_section_modal">
+                <i id="add-icon" class="material-icons">add</i></a>
+            </a>
         </div>
 
         <!-- Modal Structure -->
-        <div id="add_modal" class="modal">
+        <div id="add_section_modal" class="modal">
+            <div class="modal-content">
+                <h2>Add Section</h2>
+                <form id="add-section-form">
+                    <div class="input-field">
+                        <input id="class_section" type="text" required="" />
+                        <label for="class_section">Class Section</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="section_number" type="text" required="" />
+                        <label for="section_number">Section Number</label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Modal Structure -->
+        <div id="edit_modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit Section</h2>
+                <form id="edit-class-form">
+                    <div class="input-field">
+                        <input id="class_section_edit" type="text" required="" />
+                        <label for="class_section_edit">Class Section</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="section_number_edit" type="text" />
+                        <label for="class_section_edit">Section Number</label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="add_student_modal" class="modal">
            <div class="modal-content">
                <h2>Add Student</h2>
                <form id="add-student-form">
@@ -95,6 +139,7 @@
                       <label for="female">Female</label>
                    </p>
 
+
                    <div class="input-field">
                        <input id="birthday" type="text" required="" />
                        <label for="birthday">Birthday (YYYY-MM-DD)</label>
@@ -108,22 +153,7 @@
            </div>
         </div>
 
-        <!-- Modal Structure -->
-        <div id="student_modal" class="modal">
-            <div class="modal-content">
-                <h1 id="student_header"class="center"></h1>
-                <ul id="student_list" class="collection">
-                    <li id="student_number" class="collection-item"></li>
-                    <li id="student_course" class="collection-item"></li>
-                    <li id="student_college" class="collection-item"></li>
-                    <li id="student_gender" class="collection-item"></li>
-                    <li id="student_birthday" class="collection-item"></li>
-                </ul>                
-            </div>
-        </div>
-
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
     </body>
 </html>
->>>>>>> Po
