@@ -41,7 +41,7 @@ nav {
 	margin-top: 15%;
 }
 
-#login {
+#login-btn, #sign-up-btn {
 	background-color: #CB494E;
 }
 input[type=text]:focus:not([readonly]),
@@ -61,13 +61,22 @@ input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
 }
 
-.input-field .prefix ~ label, 
+/*.input-field .prefix ~ label, 
 .input-field label{
 	color: #333;
 	font-size: 120%;
-}
+}*/
 
 #logout-btn {
 	margin-top: 2%;
 	margin-right: 2%;
+}
+
+#landing-page {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#sign-up-logo-link {
+	margin-top: 10%;
 }
