@@ -209,3 +209,61 @@ exports.search = function(req, res, next) {
 			}
 	});
 }
+
+/* Shows the details of all classes from a course code of a faculty user */
+exports.viewClasses = function(req, res, next) {
+    if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+    
+    var data = {
+        classes: '',
+        degree_programs: '',
+        colleges: ''
+    };
+
+    db.query("SELECT class_id, course_code, class_section, section_number " + 
+    "FROM CLASS where emp_num = ?", [req.session.emp_num], function (err, rows) {
+		if (err) {
+		    return next(err);
+		}
+		
+		if (rows.length === 0) {
+		    res.send(404, "Error: Classes were not found.");
+		} else {
+		    logs(req, "SUCCESS", "Viewed all classes");
+			data.classes = rows;
+		}
+    });
+    
+    db.query("SELECT DISTINCT course FROM STUDENT WHERE emp_num = " + 
+    "?", [req.session.emp_num], function (err, rows) {
+		    if (err) {
+		        return next(err);
+		    }
+		
+		    if (rows.length === 0) {
+		        //res.send(404, "Error: Classes were not found.");
+		    } else {
+		        logs(req, "SUCCESS", "Viewed all degree programs of students");
+			    data.degree_programs = rows;
+		    }
+    });
+    
+    db.query("SELECT DISTINCT college FROM STUDENT WHERE emp_num = ?", 
+        [req.session.emp_num], function (err, rows) {
+		    if (err) {
+		        return next(err);
+		    }
+		
+		    if (rows.length === 0) {
+		        //res.send(404, "Error: Classes were not found.");
+		    } else {
+		        logs(req, "SUCCESS", "Viewed all colleges of students");
+			    data.colleges = rows;
+			    
+                return res.send(data);
+		    }
+    });
+}

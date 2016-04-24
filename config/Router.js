@@ -48,7 +48,8 @@ module.exports = function (router) {
         .delete(class_.removeClass);
         
     router.route('/api/class2')
-        .put(class_.editClass);
+        .put(class_.editClass)
+        .get(class_.viewClasses);
 
     router.route('/api/class/:course_code')
         .post(class_.addSection)
@@ -92,8 +93,8 @@ module.exports = function (router) {
         .put(faculty.switchTheme);
 
     //---------------------------------------
-    router.route('/api/randomizer/')
-        .get(randomizer.getVolunteers);
+    router.route('/api/randomizer/:class_id')
+        .post(randomizer.getVolunteers);
 
     //---------------------------------------
     router.route('/api/student')
