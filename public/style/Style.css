@@ -29,6 +29,19 @@ nav {
 	left: 0px;
 }
 
+#add-button-div {		
+	left: 90%;		
+	top: 80%;		
+}		
+		
+#add-icon {		
+	background-color: #b42529;		
+}		
+		
+#add-button {		
+	background-color: #b42529;		
+}
+
 .title {
 	margin :0px;
 }

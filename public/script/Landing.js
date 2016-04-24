@@ -21,6 +21,12 @@ $(document).ready( function () {
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
 
+    $('#log-in-link')
+        .hover(hoverIn,hoverOut);
+
+    $('#sign-up-link')
+        .hover(hoverIn,hoverOut);
+
     $('#log-in-logo-link')
         .hover(hoverIn,hoverOut);
 
@@ -61,7 +67,7 @@ $(document).ready( function () {
 
     }
 
-    $('#login')
+    $('#login-btn')
         .click(login);
 
     $(':input','#log-in-form')

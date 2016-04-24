@@ -2,7 +2,7 @@
 
 
 $(document).ready( function () {
-    $('#sign-up')
+    $('#sign-up-btn')
         .click(sign_up);
 
     $(':input','#sign-up-form')

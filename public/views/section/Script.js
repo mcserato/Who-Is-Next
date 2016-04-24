@@ -50,27 +50,6 @@ $(document).ready( function () {
 	const content = $('#section-list');
 	config.checkAuth("FACULTY");
 
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
 
         $("#course-id").append($("<span></span>").text(localStorage.course_code));
         $("#course-id").append($("<br/>"));
