@@ -1,5 +1,5 @@
 var db = require(__dirname + '/../lib/Mysql');
-
+var logs = require(__dirname + '/Log');
 /*
 Filters:
 1. Gender
@@ -48,6 +48,8 @@ exports.getVolunteers = function (req, res, next) {
                 return next(err);
             }
 
+            logs.write(req, "SUCCESS", "Randomized.");
+            logs.save(req.body, rows);
             res.send(rows);
     });
 }

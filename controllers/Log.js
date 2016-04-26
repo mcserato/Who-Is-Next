@@ -62,3 +62,10 @@ exports.write = function (req, status, message) {
 	    return console.log('[!] LOGGED');
     }
 }
+
+exports.save = function (filters, volunteers) {
+	for (var i in volunteers) {
+		console.log(volunteers[i].first_name, volunteers[i].last_name);
+	}
+
+}
