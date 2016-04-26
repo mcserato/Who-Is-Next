@@ -73,19 +73,19 @@ CREATE TABLE LOG
 
 INSERT INTO ADMIN VALUES ("WhoIsNext", "ab-1l");
 
-INSERT INTO FACULTY VALUES (128128128, "rncrecario", "Reginald Recario", "madamada", "rncrecario@gmail.com", FALSE, 0);
+INSERT INTO FACULTY VALUES (128128128, "rncrecario", "Reginald Recario", "madamada", "rncrecario@gmail.com", TRUE, 0);
 INSERT INTO FACULTY VALUES (131131131, "laniedanila", "Lanie Danila", "assembly", "laniedanila@gmail.com",  TRUE, 0);
 INSERT INTO FACULTY VALUES (220202020, "rjgobrero", "Jason Obrero", "cmsc2", "rjgobrero@gmail.com",  TRUE, 0);
 INSERT INTO FACULTY VALUES (222222222, "rvbulalacao", "Rommel Bulalacao", "terror22", "rvbulalacao@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (565656565, "jrramirez", "Ramir Ramirez", "mirramir", "jrramirez@gmail.com",  FALSE, 0);
-INSERT INTO FACULTY VALUES (111111111, "donnadrio", "Donnalyn Drio", "driodonna", "donnadrio@gmail.com",FALSE, 0);
+INSERT INTO FACULTY VALUES (565656565, "jrramirez", "Ramir Ramirez", "mirramir", "jrramirez@gmail.com",  TRUE, 0);
+INSERT INTO FACULTY VALUES (111111111, "donnadrio", "Donnalyn Drio", "driodonna", "donnadrio@gmail.com",TRUE, 0);
 INSERT INTO FACULTY VALUES (123123123, "betelderobles", "Betel de Robles", "btldrbls", "betelderobles@gmail.com",  TRUE, 0);
-INSERT INTO FACULTY VALUES (125125125, "jencinas", "Joman Encinas", "jencinas", "jencinas@gmail.com", FALSE, 0);
+INSERT INTO FACULTY VALUES (125125125, "jencinas", "Joman Encinas", "jencinas", "jencinas@gmail.com", TRUE, 0);
 INSERT INTO FACULTY VALUES (202020202, "mmanalang", "Martee Manalang", "murtee", "mmanalang@gmail.com", TRUE, 0);
 INSERT INTO FACULTY VALUES (132132132, "ivyaguila", "Ivy Aguila", "poisonivy", "ivyaguila@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (100100100, "kepbuplb", "Kristine Bautista", "kepbuplb", "kepbautista@gmail.com", FALSE, 0);
-INSERT INTO FACULTY VALUES (575757575, "maryaaguirre", "Marya Aguirre", "maamarya", "maryaaguirre@gmail.com", FALSE, 0);
-INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", "kendoll", "kjaen@gmail.com", FALSE, 0);
+INSERT INTO FACULTY VALUES (100100100, "kepbuplb", "Kristine Bautista", "kepbuplb", "kepbautista@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (575757575, "maryaaguirre", "Marya Aguirre", "maamarya", "maryaaguirre@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", "kendoll", "kjaen@gmail.com", TRUE, 0);
 
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", null, 202020202);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", "3L", 220202020);
@@ -102,14 +102,16 @@ INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", null, 131131131);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "5L", 130130130);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 130", "Logic Design and Digital Computer Circuits", "C", "4L", 131131131);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", "1L", 100100100);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "C", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", "1L", 128128128);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "C", null, 128128128);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "S", null, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", null, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", null, 128128128);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", "4L", 132132132);
-INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architechture", "T", "4L", 132132132);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "AB", "1L", 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "AB", "2L", 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "AB", "3L", 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 128", "Introduction to Software Engineering", "CD", "4L", 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architecture", "ST", "3L", 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architecture", "T", null, 128128128);
+INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 132", "Computer Architecture", "T", "4L", 132132132);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 125", "Operating Systems", "ST", null, 125125125);
 
 INSERT INTO STUDENT VALUES ('2013-08197', 128128128, "Adriell Dane", "Cabela", "de Guzman", "CAS", "BSCS", "M", "pic ni b2s", STR_TO_DATE('1997-01-29', '%Y-%m-%d'));

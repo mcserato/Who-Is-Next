@@ -78,13 +78,14 @@ $(document).ready( function () {
 
         return false;
     });
-
+    
+    
     /* Edit Class */
     $('#edit-class-form').submit(function (event) {
+                
         // Get data from input fields of edi class form
         var course_code = $("#course_code_edit").val();
         var course_title = $("#course_title_edit").val();
-        console.log(localStorage.course_code);
 
         $.ajax({
             type: "PUT",
@@ -222,14 +223,20 @@ $(document).ready( function () {
             /* Edit Class */
             $('.edit')
                 .click(function(){
-                    console.log($(this).attr("course_code"));
-                    localStorage.class_id = $(this).attr("course_code");
-                    $('#edit_modal').openModal();
+                    localStorage.class_id = $(this).attr("course_code");                  
+                    /* Auto-fills up form of selected edit class*/
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/class/" + localStorage.class_id
+                    }).done(function(info){ 
+                        $("#course_code_edit").val(info[0].course_code);
+                        $("#course_title_edit").val(info[0].course_title); 
+                        $('#edit_modal').openModal(); 
+                    });                    
                 });
 
             /* Link to View Sections of the class clicked */
             $('.title').click(function(){
-                console.log($(this).attr("course_code"));
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
