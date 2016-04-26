@@ -119,6 +119,8 @@ $(document).ready( function () {
                 var edit_section = $("<a title='Edit Section' href='#edit_section_modal'><i class='material-icons options-text'>mode_edit</i></a>");
                 edit_section.addClass("modal-trigger edit-section-button");
                 edit_section.attr("class_id", data[class_].class_id);
+                edit_section.attr("class_section", data[class_].class_section);
+                edit_section.attr("section_number", data[class_].section_number);
 
                 var options_div = $("<div class='options'></div>");
                 options_div.append(view_analytics);
@@ -516,6 +518,10 @@ $(document).ready( function () {
             /* Edit Section */
             $('.edit-section-button').click(function(){
                 localStorage.class_id = $(this).attr("class_id");
+
+                $('#class_section_edit').val($(this).attr("class_section"));
+                $('#section_number_edit').val($(this).attr("section_number"));
+
                 $('#edit_section_modal').openModal();
             });
         },
