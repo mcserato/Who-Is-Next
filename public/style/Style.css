@@ -29,17 +29,17 @@ nav {
 	left: 0px;
 }
 
-#add-button-div {
-	left: 90%;
-	top: 80%;
-}
-
-#add-icon {
-	background-color: #b42529;
-}
-
-#add-button {
-	background-color: #b42529;
+#add-button-div {		
+	left: 90%;		
+	top: 80%;		
+}		
+		
+#add-icon {		
+	background-color: #b42529;		
+}		
+		
+#add-button {		
+	background-color: #b42529;		
 }
 
 .title {
@@ -54,10 +54,9 @@ nav {
 	margin-top: 15%;
 }
 
-#login {
+#login-btn, #sign-up-btn {
 	background-color: #CB494E;
 }
-
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]) {
 	border-bottom: 1px solid #CB494E;
@@ -67,7 +66,7 @@ input[type=password]:focus:not([readonly]) {
 input[type=text]:focus:not([readonly])+label,
 input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
-
+	
 }
 
 .input-field
@@ -75,7 +74,22 @@ input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
 }
 
+/*.input-field .prefix ~ label, 
+.input-field label{
+	color: #333;
+	font-size: 120%;
+}*/
+
 #logout-btn {
 	margin-top: 2%;
 	margin-right: 2%;
+}
+
+#landing-page {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#sign-up-logo-link {
+	margin-top: 10%;
 }
