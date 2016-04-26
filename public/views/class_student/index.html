@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <title>Students</title>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../../style/material-icons.css">
         <link rel="stylesheet" href="../../style/materialize.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico">
@@ -23,11 +23,9 @@
 
         <div class="container">
             <div id="main-content">
-                <h1 class="center">Students</h1>
-                <!-- <div class="card"> -->
-                put your main content here
-                <!-- </div> -->
+                <h1 id="course-id" class="center"></h1>
             </div>
+            <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
         </div>
 
         <div class="fixed-action-btn">
@@ -51,7 +49,7 @@
 
         <div id="add-button-div" class="fixed-action-btn">
            <!-- Modal Trigger -->
-           <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
+           <a title="Add Student" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
                <i id="add-icon" class="material-icons">add</i></a>
            </a>
         </div>
@@ -82,9 +80,21 @@
                    </div>
 
                    <div class="input-field">
-                       <input id="college" type="text" required="" />
-                       <label for="college">College</label>
-                   </div>
+                    <select class="browser-default" id="college">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CAS" id="cas">CDC</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div> 
 
                    <div class="input-field">
                        <input id="course" type="text" required="" />
@@ -97,17 +107,88 @@
                    </p>
 
                    <p>
-                      <input name="gender" type="radio" id="female" style="color:red;" />
+                      <input name="gender" type="radio" id="female" />
                       <label for="female">Female</label>
                    </p>
 
                    <div class="input-field">
-                       <input id="birthday" type="text" required="" />
-                       <label for="birthday">Birthday (YYYY-MM-DD)</label>
+                        <span style="color:#999999;">Birthday</span> 
+                       <input id="birthday" type="date" class ="datepicker" required="" />
+                      
                    </div>
            </div>
            <div class="modal-footer">
                    <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+               </form>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="edit_student_modal" class="modal">
+           <div class="modal-content">
+               <h2>Edit Student</h2>
+               <form id="edit-student-form">
+                   <div class="input-field">
+                       <input placeholder="" id="student_number_edit" type="text" required="" />
+                       <label for="student_number_edit">Student Number</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="first_name_edit" placeholder="" type="text" required="" />
+                       <label for="first_name_edit">First Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="middle_name_edit" placeholder="" type="text" required="" />
+                       <label for="middle_name_edit">Middle Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="last_name_edit" placeholder="" type="text" required="" />
+                       <label for="last_name_edit">Last Name</label>
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college_edit">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div>
+
+                   <div class="input-field">
+                       <input id="course_edit" type="text" placeholder="" required="" />
+                       <label for="course_edit">Course</label>
+                   </div>
+
+                   <p>
+                      <input name="gender" type="radio" id="male_edit" />
+                      <label for="male_edit">Male</label>
+                   </p>
+
+                   <p>
+                      <input name="gender" type="radio" id="female_edit" style="color:red;" />
+                      <label for="female_edit">Female</label>
+                   </p>
+
+
+                   <div class="input-field">
+                       <input id="birthday_edit" placeholder="" type="text" required="" />
+                       <label for="birthday_edit">Birthday (YYYY-MM-DD)</label>
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="edit-student-button" type="submit" class="modal-action btn waves-light waves-effect">
                        <i class="material-icons">done</i>
                    </button>
                </form>
@@ -171,4 +252,3 @@
         <script src="./Script.js"></script>
     </body>
 </html>
->>>>>>> Po
