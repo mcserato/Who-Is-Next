@@ -13,7 +13,7 @@ exports.read = function (req, res, next) {
 	}
 
 	if (req.session.role === "ADMIN") {
-		db.query("SELECT * FROM LOG", [], callback);
+		db.query("SELECT * FROM LOG ORDER BY log_number DESC", [], callback);
 
 		function callback(error, result) {
 			if (error) return next(error);
@@ -29,9 +29,7 @@ exports.write = function (req, status, message) {
 	var username;
 
 	if (req.session) {
-		username = req.session.username
-			? req.session.username
-			: "<GUEST>";
+		username = req.session.username || "<GUEST>";
 	}
 
 	else {
@@ -51,17 +49,23 @@ exports.write = function (req, status, message) {
 	}
 
 	console.log(color(new Date(), req.ip, username, req.method, req.originalUrl, message));
-
 	db.query('INSERT INTO LOG(ip_address, username, method, url, message, status) VALUES (?, ?, ?, ?, ?, ?)',
-                [req.ip, username, req.method, req.originalUrl, message, status],
-                callback);
+        [req.ip, username, req.method, req.originalUrl, message, status],
+        callback);
+    
+    function callback(error, result) {
+	    if (error) {
+		    console.log(error)
+		    return console.log('[X] NOT LOGGED');
+	    }
+
+	    return console.log('[!] LOGGED');
+    }
 }
 
-function callback(error, result) {
-	if (error) {
-		console.log(error)
-		return console.log('[X] NOT LOGGED');
+exports.save = function (filters, volunteers) {
+	for (var i in volunteers) {
+		console.log(volunteers[i].first_name, volunteers[i].last_name);
 	}
 
-	return console.log('[!] LOGGED');
 }
