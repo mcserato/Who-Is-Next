@@ -110,7 +110,7 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a faculty member */
 exports.search = function(req, res, next) {
-	db.query("SELECT name FROM FACULTY WHERE name like '%?%'", [req.params.name],
+	db.query("SELECT name FROM FACULTY WHERE name like ?", ['%'+req.params.name+'%'],
 		function (err, rows) {
 		    if (err) {
 		        return next(err);

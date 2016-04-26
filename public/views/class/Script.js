@@ -15,7 +15,7 @@ $(document).ready( function () {
             subject.addClass("title courses");
 
             var delete_class = $("<a title='Delete Class'><i class='material-icons options-text'>delete</i></a>");
-            delete_class.addClass("remove");
+             delete_class.addClass("remove");
             delete_class.attr("course_code", data[class_].course_code);
 
             var edit_class = $("<a title='Edit Class' href='#edit_modal'><i class='material-icons options-text'>mode_edit</i></a>");
@@ -106,6 +106,23 @@ $(document).ready( function () {
             });
     }
 
+    function Refresh(){
+        $.ajax({
+            url: '/api/class',
+            method: 'GET',
+            success: function(data){
+                if(!data){
+                    return Materialize.toast("Error in fetching data",2500);
+                }
+
+                add_class(data);
+            },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        });   
+    }
+
     $('#search-class').keypress(function (e) {
         if (e.keyCode == 13) {
             e.preventDefault();
@@ -114,20 +131,7 @@ $(document).ready( function () {
         content.empty();
         
         if($(this).val() === ''){
-            $.ajax({
-                url: '/api/class',
-                method: 'GET',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in fetching data",2500);
-                    }
-
-                    add_class(data);
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            }); 
+            Refresh(); 
             return;
         }
 
@@ -152,6 +156,7 @@ $(document).ready( function () {
             },
             error: function(err){
                 if(e.keyCode == 13){
+                    refresh();
                     return Materialize.toast(err.responseText,2500);    
                 }
             }
@@ -234,20 +239,8 @@ $(document).ready( function () {
         });
 
 	config.checkAuth("FACULTY");
-		$.ajax({
-            url: '/api/class',
-            method: 'GET',
-            success: function(data){
-            	if(!data){
-                	return Materialize.toast("Error in fetching data",2500);
-            	}
-
-                add_class(data);
-            },
-            error: function(err){
-                return Materialize.toast(err.responseText,2500);
-            }
-        });
+		
+    Refresh();
 
 });
 
