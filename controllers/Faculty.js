@@ -130,7 +130,8 @@ exports.getTheme = function (req, res, next) {
 		    if(err) {
 		        return next(err);
 		    }
-		    return res.send(rows[0].current_theme);
+		    console.log(rows[0].current_theme);
+		    return res.send(rows);
 	});
 }
 
