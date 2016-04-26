@@ -190,9 +190,9 @@ $(document).ready( function () {
                 Materialize.toast(student_number + " successfully edited!", 1000);
             },
             dataType: "JSON"
-        })
+        });
 
-        window.location.href = "/views/class_student"
+        window.location.href = "/views/class_student";
 
         return false;
     });
@@ -231,31 +231,28 @@ $(document).ready( function () {
                     course: course,
                     gender: gender,
                     birthday: birthday
-
                 },
                 success: function() {
-                    
+                     /* Add Student to a class */
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/class_student",
+                        data: {
+                            class_id: localStorage.class_id,
+                            student_number: student_number,
+                            no_of_times_called: 0
+                        },
+                        success: function () {
+                            Materialize.toast(student_number + " is added!", 1000);
+                        },
+                        dataType: "JSON"
+                    });
                 },
                 dataType: "JSON"
-            }).done(function (data){
-                /* Add Student to a class */
-                $.ajax({
-                    type: "POST",
-                    url: "/api/class_student",
-                    data: {
-                        class_id: localStorage.class_id,
-                        student_number: student_number,
-                        no_of_times_called: 0
-                    },
-                    success: function () {
-                        Materialize.toast(student_number + " is added!", 1000);
-                    },
-                    dataType: "JSON"
-                });
             });
         }
 
-        window.location.href = "/views/class_student"
+        window.location.href = "/views/class_student";
 
         return false;
     });
