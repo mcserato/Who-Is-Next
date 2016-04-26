@@ -62,7 +62,7 @@ exports.editClass = function (req, res, next) {
 /* Removes an entire class and all of its sections */
 exports.removeClass = function(req, res, next){
     if (!req.body.course_code) {
-        res.send(400, "Error: Missing course code.");
+        res.status(400).send("Error: Missing course code.");
     }
     
     db.query('DELETE from CLASS where course_code = ?', 
@@ -72,7 +72,7 @@ exports.removeClass = function(req, res, next){
             }
         	
             if (!rows.affectedRows) {
-                res.send(400, "Error: No class was deleted.");
+                res.status(400).send("Error: No class was deleted.");
             }
 		    
 		    res.send(rows);
@@ -82,7 +82,7 @@ exports.removeClass = function(req, res, next){
 //Removes an entire section from a class
 exports.removeSection = function(req, res, next){
     if (!req.body.class_id) {
-        res.send(400, "Error: Missing class id.");
+        res.status(400).send("Error: Missing class id.");
     }
     
     db.query('DELETE from CLASS where class_id = ?', [req.body.class_id],
@@ -92,7 +92,7 @@ exports.removeSection = function(req, res, next){
             }
 		    
             if (!rows.affectedRows) {
-                res.send(400, "Error: No section was deleted.");
+                res.status(400).send("Error: No section was deleted.");
             }
             
             res.send(rows);
@@ -107,7 +107,7 @@ exports.viewAll = function(req, res, next) {
 		}
 		
 		if (rows.length === 0) {
-		    res.send(404, "Error: Classes were not found.");
+		    res.status(404).send("Error: Classes were not found.");
 		} else {
 			res.send(rows);
 		}
@@ -122,7 +122,7 @@ exports.viewOne = function(req, res, next) {
 		}
 		
 		if (rows.length === 0) {
-		    res.send(404, "Error: Classes were not found.");
+		    res.status(404).send("Error: Classes were not found.");
 		} else {
 			res.send(rows);
 		}
@@ -139,7 +139,7 @@ exports.search = function(req, res, next) {
 			}
 		
 			if (rows.length === 0) {
-				res.send(404, "Error: Class not found.");
+				res.status(404).send("Error: Class not found.");
 			} else {
 				res.send(rows);
 			}

@@ -1,24 +1,14 @@
 'use strict';
 
 $(document).ready( function () {
+    config.checkAuth("FACULTY");
 
 	const content = $('#student-list');
-	//config.checkAuth("FACULTY");
+    var timeoutID = null;
 
-    $.ajax({
-        url: '/api/student',
-        method: 'GET',
-        success: function(data){
-        	if(!data){
-            	return Materialize.toast("Error in fetching data",2500);
-        	}
-        	//localStorage.clear();
-            //Materialize.toast(data,2500);
-            //window.location.href = '/';
-            //console.log(data);
 
-            for (var student in data){
-
+    function add_data(data){
+        for (var student in data){
                 var row = $("<li></li>");
                     row.attr("id", data[student].student_number);
                     row.addClass("student-data");
@@ -31,7 +21,7 @@ $(document).ready( function () {
                                 float: 'left',
                                 position: 'relative',
                                 width: '10%'
-                            });                        
+                            });
                         }else{
                             var image = $('<img />',{
                                 src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
@@ -40,7 +30,7 @@ $(document).ready( function () {
                                 width: '10%'
                             });
                         }
-                        image.addClass("circle")
+                        image.addClass("circle");
                         var text = $("<span></span>").html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
                         text.addClass("center-align");
                     student_header.append(image);
@@ -78,18 +68,84 @@ $(document).ready( function () {
                             return Materialize.toast(err.responseText,2500);
                         }
                     });
-                });
+            });
+    }
 
-        },
-        error: function(err){
-            return Materialize.toast(err.responseText,2500);
+    function refresh () {
+        $.ajax({
+            url: '/api/student',
+            method: 'GET',
+            success: function(data){
+                if(!data){
+                    return Materialize.toast("Error in fetching data",2500);
+                }
+                add_data(data);
+            },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        });
+    }
+
+    function search(str){
+        $.ajax({
+            url: '/api/student/search/' + str,
+            method: 'GET',
+            success: function(data_student){
+                content.empty();
+                add_data(data_student);
+            },
+            error: function(err){
+                refresh();
+                return Materialize.toast(err.responseText,2500);
+            }
+        });
+    }
+
+    $('#logout-btn')
+        .click(function(){
+
+            $.ajax({
+                url: '/api/logout',
+                method: 'POST',
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in Logout. Please try again !",2500);
+                    }
+
+                    localStorage.clear();
+                    Materialize.toast(data,2500);
+                    window.location.href = '/';
+                },
+                error: function(err){
+                    return Materialize.toast(err.responseText,2500);
+                }
+            });
+
+        });
+
+
+    $('#search-student').keypress(function (e) {
+        if (e.keyCode == 13) {
+            e.preventDefault();
+
         }
+        content.empty();
+
+        if($(this).val() === ''){
+            refresh();
+            return;
+        }
+
+        search($(this).val());
+
     });
-    
-        
+<<<<<<< HEAD
+
+
      var emp_no = JSON.parse(localStorage.user).emp_num;
      var orig_password;
-     
+
      /* Fills Up Areas */
      $.ajax({
             type: "GET",
@@ -98,11 +154,11 @@ $(document).ready( function () {
             $("#name_edit").val(info[0].name);
             $("#email_edit").val(info[0].email);
             $("#username_edit").val(info[0].username);
-            orig_password = info[0].password;   
-         });   
-        
-        
-     /*Edit User*/   
+            orig_password = info[0].password;
+         });
+
+
+     /*Edit User*/
      $('#edit-user-form').submit(function (event) {
         var name = $("#name_edit").val();
         var email = $("#email_edit").val();
@@ -110,7 +166,7 @@ $(document).ready( function () {
         var old_password = $("#current_password").val();
         var new_password = $("#new_password_edit").val();
         var cnew_password = $("#cnew_password_edit").val();
-        
+
         if(new_password != cnew_password){
             Materialize.toast("Password does not match !");
             return false;
@@ -132,14 +188,14 @@ $(document).ready( function () {
                     emp_num: emp_no
                 },
                 success: function(){
-                    Materialize.toast(course_code + " edited!", 1000);   
+                    Materialize.toast(course_code + " edited!", 1000);
                 },
                 dataType: "JSON"
             });
              return true;
         }
-        
-        else{ 
+
+        else{
             $.ajax({
                 type: "PUT",
                 url: "/api/faculty",
@@ -151,16 +207,20 @@ $(document).ready( function () {
                     emp_num: emp_no
                 },
                 success: function(){
-                    Materialize.toast(course_code + " edited!", 1000);   
+                    Materialize.toast(course_code + " edited!", 1000);
                 },
                 dataType: "JSON"
             });
              return true;
-        }     
-        
-    }); 
-    
+        }
+
+    });
+
     $('.modal-trigger').leanModal();
 
-        
+
+=======
+
+    refresh();
+>>>>>>> Dipsy
 });

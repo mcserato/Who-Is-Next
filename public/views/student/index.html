@@ -1,4 +1,3 @@
-<!DOCTYPEhtml>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -43,74 +42,32 @@
                     <!-- Modal Trigger -->
                         <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
                             <i id="edit-icon" class="material-icons">mode_edit</i>
-                        </a> 
+                        </a>
                </li>
             </ul>
         </div>
 
-        <div id="add-button-div" class="fixed-action-btn">
-           <!-- Modal Trigger -->
-           <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-               <i id="add-icon" class="material-icons">add</i></a>
-           </a>
-        </div>
+        <div class="container">
+            <div id="main-content">
 
-        <!-- Modal Structure -->
-        <div id="add_modal" class="modal">
-           <div class="modal-content">
-               <h2>Add Student</h2>
-               <form id="add-student-form">
-                   <div class="input-field">
-                       <input id="student_number" type="text" required="" />
-                       <label for="student_number">Student Number</label>
-                   </div>
+                <h1 class="center">Students</h1>
 
-                   <div class="input-field">
-                       <input id="first_name" type="text" required="" />
-                       <label for="first_name">First Name</label>
-                   </div>
+                <nav>
+                    <div class="nav-wrapper row">
+                        <form>
+                            <div class="input-field">
+                                <input id="search-student" type="search"/>
+                                <label for="search-student"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
 
-                   <div class="input-field">
-                       <input id="middle_name" type="text" required="" />
-                       <label for="middle_name">Middle Name</label>
-                   </div>
+                <ul id="student-list" class="collapsible" data-collapsible="accordion">
+                </ul>
 
-                   <div class="input-field">
-                       <input id="last_name" type="text" required="" />
-                       <label for="last_name">Last Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="college" type="text" required="" />
-                       <label for="college">College</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="course" type="text" required="" />
-                       <label for="course">Course</label>
-                   </div>
-
-                   <p>
-                      <input name="gender" type="radio" id="male" />
-                      <label for="male">Male</label>
-                   </p>
-
-                   <p>
-                      <input name="gender" type="radio" id="female" style="color:red;" />
-                      <label for="female">Female</label>
-                   </p>
-
-                   <div class="input-field">
-                       <input id="birthday" type="text" required="" />
-                       <label for="birthday">Birthday (YYYY-MM-DD)</label>
-                   </div>
-           </div>
-           <div class="modal-footer">
-                   <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
-                       <i class="material-icons">done</i>
-                   </button>
-               </form>
-           </div>
+            </div>
         </div>
 
         <!-- Modal Structure -->
@@ -123,10 +80,10 @@
                     <li id="student_college" class="collection-item"></li>
                     <li id="student_gender" class="collection-item"></li>
                     <li id="student_birthday" class="collection-item"></li>
-                </ul>                
+                </ul>
             </div>
         </div>
-        
+
         <!-- Modal Structure -->
         <div id="edit-user_modal" class="modal">
             <div class="modal-content">
@@ -152,7 +109,7 @@
                         <input id="cnew_password_edit" type="password" class="validate"/>
                         <label for="cnew_password_edit">Confirm New Password</label>
                     </div>
-                    
+
                     <div class="input-field">
                         <span id="confirm-message"> Enter Current Password to Save Changes:</span>
                         <input id="current_password" type="password" class="validate"/>

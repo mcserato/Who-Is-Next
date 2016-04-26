@@ -5,10 +5,12 @@ $(document).ready( function () {
         ? ' - ' + config.TITLE
         : config.TITLE;
 
+
     if(!localStorage.user &&
         window.location.href != config.FRONTEND_URL){
         window.location.href = '/';
     }
+
 
     $('.menu')
         .hover(
