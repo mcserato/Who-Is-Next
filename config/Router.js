@@ -66,7 +66,7 @@ module.exports = function (router) {
     router.route('/api/class_student/:class_id')
         .get(class_student.view);
 
-    router.route('/api/class_student/search/:student_number')
+    router.route('/api/class_student/search/:class_id/:last_name')
         .get(class_student.search);
         
     router.route('/api/import')
@@ -104,6 +104,9 @@ module.exports = function (router) {
         
     router.route('/api/student/search/:last_name')
         .get(student.search);
+
+    router.route('/api/student/:student_number')
+        .get(student.viewOne);
 
     router.route('/api/logs')
         .get(log.read);
