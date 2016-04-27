@@ -1,51 +1,59 @@
-#select {
-	color:white; 
-}
+
 .card-content{
-	height: 8vw;
+	height: 10vw;
 }
 .row {
 	font-weight:bold;
 }
 .card-action{
 	background-color: black;
+	font-size: 1.9vw;
 }
 .card-title{
 	font-weight:bold;
 }
-#color1{
-	background-color:#990100;
+
+#green{
+	background: url("images/green.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+	
 }
-#color2{
-	background-color:#BF4D28;
+
+#yellow{
+	background:url("images/yellow.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
-#color3{
-	background-color:#774F38;
+
+#red{
+	background:url("images/red.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
-#color4{
-	background-color:#F8CA00;
+
+#violet{
+	background:url("images/violet.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
-#color5{
-	background-color:#BD1550;
+#default{
+	background-color: black;
+	text-align: center;
+	font-size: 1.9vw;
+	color:white;
 }
-#color6{
-	background-color:#351330;
+
+#dipsy{
+	  color:rgb(196,237,104);
 }
-#color7{
-	background-color:#E08E79;
+#laalaa{
+	color:rgb(240,216,0);
 }
-#color8{
-	background-color:#CDB380;
+#tinkywinky{
+	color:rgb( 92,101,192);
 }
-#color9{
-	background-color:#036564;
-}
-#color10{
-	background-color:#8A9B0F;
-}
-#color11{
-	background-color:#69D2E7;
-}
-#color12{
-	background-color:#F56991;
+#po{
+	color:rgb(177,22,35);
 }

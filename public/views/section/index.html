@@ -31,12 +31,22 @@
                 <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
                 <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
                 <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
+                <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">invert_colors</i></a></li>
                 <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
+                <li>
+                    <!-- Modal Trigger -->
+                        <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
+                            <i id="edit-icon" class="material-icons">mode_edit</i>
+                        </a>
+               </li>
             </ul>
         </div>
 
         <div class="container">
             <div id="main-content">
+                <!--
+                <ul id="section-list" class="collapsible" data-collapsible="accordion">
+                -->
                 <h1 id="course-id" class="center"></h1>
                 <div id="section-list" class="row">
                 <!-- <div class="card"> -->
@@ -80,11 +90,11 @@
                 <h2>Edit Section</h2>
                 <form id="edit-section-form">
                     <div class="input-field">
-                        <input id="class_section_edit" type="text" required="" />
+                        <input id="class_section_edit" type="text" required="" placeholder=""/>
                         <label for="class_section_edit">Class Section</label>
                     </div>
                     <div class="input-field">
-                        <input id="section_number_edit" type="text" />
+                        <input id="section_number_edit" type="text" placeholder=""/>
                         <label for="section_number_edit">Section Number</label>
                     </div>
             </div>
@@ -156,63 +166,10 @@
         </div>
 
         <!-- Modal Structure -->
-        <div id="edit_student_modal" class="modal">
-           <div class="modal-content">
-               <h2>Edit Student</h2>
-               <form id="edit-student-form">
-                   <div class="input-field">
-                       <input id="first_name" type="text" required="" />
-                       <label for="first_name">First Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="middle_name" type="text" required="" />
-                       <label for="middle_name">Middle Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="last_name" type="text" required="" />
-                       <label for="last_name">Last Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="college" type="text" required="" />
-                       <label for="college">College</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="course" type="text" required="" />
-                       <label for="course">Course</label>
-                   </div>
-
-                   <p>
-                      <input name="gender" type="radio" id="male" />
-                      <label for="male">Male</label>
-                   </p>
-
-                   <p>
-                      <input name="gender" type="radio" id="female" style="color:red;" />
-                      <label for="female">Female</label>
-                   </p>
-
-
-                   <div class="input-field">
-                       <input id="birthday" type="text" required="" />
-                       <label for="birthday">Birthday (YYYY-MM-DD)</label>
-                   </div>
-           </div>
-           <div class="modal-footer">
-                   <button id="edit-button" type="submit" class="modal-action btn waves-light waves-effect">
-                       <i class="material-icons">done</i>
-                   </button>
-               </form>
-           </div>
-        </div>
-
-        <!-- Modal Structure -->
         <div id="view_analytics_modal" class="modal">
            <div class="modal-content">
                <h4>Analytics</h4>
+               <div id="no-data"></div>
                <div id="top-ten-div" class="card"></div>
                <div id="gender-frequency-div" class="card"></div>
                <div id="top-ten-males-div" class="card"></div>
@@ -221,7 +178,47 @@
            </div>
         </div>
 
+        <!-- Modal Structure -->
+        <div id="edit-user_modal" class="modal">
+            <div class="modal-content">
+                <h2>Edit User</h2>
+                <form id="edit-user-form">
+                    <div class="input-field">
+                        <input id="name_edit" type="text" class="validate" placeholder=""/>
+                        <label for="name_edit">Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="email_edit" type="email" class="validate" placeholder=""/>
+                        <label for="email_edit">Email Address</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="username_edit" type="text" class="validate" placeholder=""/>
+                        <label for="username_edit">Username</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="new_password_edit" type="password" class="validate"/>
+                        <label for="new_password_edit">New Password</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="cnew_password_edit" type="password" class="validate"/>
+                        <label for="cnew_password_edit">Confirm New Password</label>
+                    </div>
+
+                    <div class="input-field">
+                        <span id="confirm-message"> Enter Current Password to Save Changes:</span>
+                        <input id="current_password" type="password" class="validate"/>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="edit-user-button" type="submit" class="modal-action btn waves-light waves-effect">
+                        <i class="material-icons">done</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
         <script src="../../script/Config.js"></script>
+        <script src="../../script/Script.js"></script>
         <script src="./Script.js"></script>
     </body>
 </html>

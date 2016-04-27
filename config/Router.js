@@ -67,9 +67,9 @@ module.exports = function (router) {
     router.route('/api/class_student/:class_id')
         .get(class_student.view);
 
-    /*router.route('/api/class_student/:student_number')
-        .get(class_student.search);*/
-
+    router.route('/api/class_student/search/:class_id/:last_name')
+        .get(class_student.search);
+        
     router.route('/api/import')
         .post(class_student.import);
 
@@ -78,6 +78,9 @@ module.exports = function (router) {
         .put(faculty.edit)
         .get(faculty.viewAll)
         .delete(faculty.remove);
+
+    router.route('/api/faculty/search/:name')
+        .get(faculty.search);
 
     router.route('/api/faculty/:emp_num')
         .get(faculty.viewOne);
@@ -102,12 +105,12 @@ module.exports = function (router) {
         .put(student.edit)
         .get(student.viewAll)
         .delete(student.remove);
+        
+    router.route('/api/student/search/:last_name')
+        .get(student.search);
 
     router.route('/api/student/:student_number')
         .get(student.viewOne);
-
-    /*router.route('/api/student/:last_name')
-        .get(student.search);*/
 
     router.route('/api/logs')
         .get(log.read);

@@ -8,7 +8,7 @@ Filters:
 4. Birthday Month
 5. Course
 6. College
-7. Batch 
+7. Batch
 */
 
 /* Gets people in a given class/section */
@@ -37,11 +37,11 @@ exports.getVolunteers = function (req, res, next) {
     if(req.body.batch!=""){
         query += " AND student_number like '" + req.body.batch + "%' ";
     }
-    
-    db.query("SELECT first_name, last_name FROM STUDENT s, CLASS_STUDENT cs, " + 
-    "CLASS c WHERE s.student_number = cs.student_number AND s.emp_num = " + 
+
+    db.query("SELECT first_name, last_name FROM STUDENT s, CLASS_STUDENT cs, " +
+    "CLASS c WHERE s.student_number = cs.student_number AND s.emp_num = " +
     "cs.emp_num AND c.class_id = cs.class_id AND c.class_id = ?" + query +
-    "ORDER BY rand() limit " + req.body.number, [req.body.class_id], 
+    "ORDER BY rand() limit " + req.body.number, [req.body.class_id],
 
         function (err, rows) {
             if (err) {
