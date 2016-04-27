@@ -2,6 +2,10 @@ var express = require('express'),
 	session = require('express-session'),
 	bodyParser = require('body-parser'),
     app = express(),
+    formidable = require('formidable'),
+    util = require('util'),
+    fs   = require('fs-extra'),
+    qt   = require('quickthumb'),
     
     server = app.listen(8000, "localhost", 
     	function(){

@@ -80,20 +80,21 @@ $(document).ready( function () {
             for (var student in data){
                 var row = $("<li></li>");
                 row.attr("id", data[student].student_number);
+                var studnum = data[student].student_number;
                 row.addClass("student-data");
                 row.addClass("modal-trigger");
                 row.attr("href", "#student_modal");
                 var student_header = $("<div></div>").addClass("collapsible-header");
                     if(data[student].picture == null){
                         var image = $('<img />',{
-                            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                            src: '../../photos/uploads/' + studnum + '.jpg',
                             float: 'left',
                             position: 'relative',
                             width: '10%'
                         });                        
                     }else{
                         var image = $('<img />',{
-                            src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                            src: '../../photos/uploads/' + studnum + '.jpg',
                             float: 'left',
                             position: 'relative',
                             width: '10%'
@@ -160,6 +161,8 @@ $(document).ready( function () {
             gender = "F";
         }
         var birthday = $("#birthday").val();
+        //var photoPath = $("#photo").val();
+        //console.log(photoPath);
         if (!student_number.match(/^[0-9]{4}-[0-9]{5}$/)) {
             Materialize.toast("Invalid student number", 1000);
         }
