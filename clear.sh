@@ -1,7 +1,7 @@
 #Counterpart of setup.sh
 #removes any trace of Who-Is-Next in the PC
 
-echo -n "Enter root password: " #asks the user for the password of root
+echo -n "[root] " #asks the user for the password of root
 mysql -uroot -p < lib/DeleteUser.sql #using the input password
     #log-ins root and deletes the user and database
 
@@ -16,3 +16,5 @@ git config --global user.email '' &&
 
 history -c #clears the terminal history to hide confidential commands
 #such as github repo link, db password, etc.
+
+cd ..
