@@ -8,7 +8,7 @@ exports.edit = function (req, res, next) {
     }
 
     db.query("UPDATE FACULTY SET username = ?, name = ?, password = " +
-        "PASSWORD(?), email = ? WHERE emp_num = ?",
+        "?, email = ? WHERE emp_num = ?",
         [req.body.username, req.body.name, req.body.password,
         req.body.email, req.body.emp_num], function (err, rows) {
             if (err) {
@@ -66,7 +66,7 @@ exports.signup = function (req, res, next) {
 					        return res.status(400).send("Error: Employee number already exists.");
 				        } else {
 					        db.query("INSERT INTO FACULTY (emp_num,username," + 
-					        "name,password,email) VALUES (?, ?, ?, ?, ?)",
+					        "name,password,email) VALUES (?, ?, ?, PASSWORD(?), ?)",
 					        [emp_num, username, name, password, email], 
 					        function(err3, rows3){
 						        if(err3) {
@@ -130,7 +130,8 @@ exports.getTheme = function (req, res, next) {
 		    if(err) {
 		        return next(err);
 		    }
-		    return res.send(rows[0].current_theme);
+		    console.log(rows[0].current_theme);
+		    return res.send(rows);
 	});
 }
 
