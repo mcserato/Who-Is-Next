@@ -442,26 +442,6 @@ $(document).ready( function () {
         });
     }
 
-    function refresh () {
-        $.ajax({
-            url: '/api/class/' + localStorage.course_code,
-            method: 'GET',
-            success: function(data){
-                $("#course-id").append($("<h3></h3>").text(data[0].course_title));
-                if(!data){
-                    return Materialize.toast("Error in fetching data",2500);
-                }
-                addItem(data);
-            },
-
-            error: function(err){
-                return Materialize.toast(err.responseText,2500);
-            }
-        });
-    }
-
-    refresh();
-
     /* Add Section */
     $('#add-section-form').submit(function (event) {
         // Get data from input fields of add section form
@@ -554,8 +534,6 @@ $(document).ready( function () {
 
         return false;
     });
-
-    $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
     $.ajax({
         url: '/api/class/' + localStorage.course_code,
