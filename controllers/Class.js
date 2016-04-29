@@ -21,7 +21,6 @@ exports.add = function (req, res, next) {
             logs(req, "SUCCESS", "Added" + 
                 [req.body.course_code, req.body.class_section, req.body.section_number]
                 .join(' '));
-
             res.send(rows);
     });
 }
