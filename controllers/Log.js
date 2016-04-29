@@ -47,6 +47,10 @@ exports.write = function (req, status, message) {
 	else if (status === 'WARNING') {
 		color = WARNING;
 	}
+	
+	else {
+	    return console.error(status, 'is not a valid status');
+	}
 
 	console.log(color(new Date(), req.ip, username, req.method, req.originalUrl, message));
 	db.query('INSERT INTO LOG(ip_address, username, method, url, message, status) VALUES (?, ?, ?, ?, ?, ?)',
