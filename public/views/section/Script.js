@@ -5,6 +5,8 @@ $(document).ready( function () {
     const content = $('#section-list');
     config.checkAuth("FACULTY");
 
+    navbar.init('#navbar');
+
     $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
     function addItem (data) {

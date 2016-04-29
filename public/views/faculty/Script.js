@@ -4,6 +4,8 @@ $(document).ready( function () {
 	config.checkAuth("ADMIN");
     const content = $('#faculty-list');
 
+    navbar.init('#navbar');
+
     function add_data (data) {
 
         var color_flag = 0; // For alternating the color

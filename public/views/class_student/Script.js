@@ -2,6 +2,8 @@
 
 $(document).ready( function () {
     $('.modal-trigger').leanModal();
+
+    navbar.init('#navbar');
         
     const content = $('#student-list');
 

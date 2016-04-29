@@ -2,6 +2,9 @@
 
 
 $(document).ready( function () {
+
+    navbar.init("#navbar");
+
 	 $.ajax({    
                 url: '/api/switch_theme',
                 method: 'GET',

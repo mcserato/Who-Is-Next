@@ -2,6 +2,7 @@
 
 $(document).ready( function () {
     config.checkAuth("FACULTY");
+    navbar.init("#navbar");
 
 	const content = $('#student-list');
     var timeoutID = null;
