@@ -1,19 +1,22 @@
-var kek = document.getElementById("master");
-var kekduke = document.getElementById("temp");
-var limit = 0;
+var basin = document.getElementById("basin");
+var temp = document.getElementById("temp");
+var limit = 0; //number of volunteers
+
+
+/*Animation trigger*/
 $("#yas").click(function(){
 	limit = $("input[type='radio'][name='times']:checked").val();
-	var t = 0;
 	var g = document.getElementById("yassity");
 	g.className += " shake-slow shake-constant";
 	$("#yas").attr("disabled",true);
 	setTimeout(function(){
-			buraticator();
+			fall();
 	},3000); 		
 });
 
 
-function buraticator (){
+/* "Egg" div creation and animation*/
+function fall (){
 	var v_container = document.createElement("div");
 	$(v_container).attr('style','background:#333333;color:white;width:60%;height:105px;position:relative;z-index:-1;margin:2px;');
 	v_container.className += "bouncing";
@@ -31,28 +34,29 @@ function buraticator (){
 	v_container.appendChild(wspace);
 	v_container.appendChild(n_container);
 	v_container.appendChild(content);
-	kek.appendChild(v_container);
+	basin.appendChild(v_container);
 	$(v_container).one('webkitAnimationEnd oanimationend msAnimationEnd animationend',function(e) {
 		$(v_container).attr('class','');
-   		kekduke.appendChild(v_container);
-   		buratata(document.getElementById("temp").children.length);
+   		temp.appendChild(v_container);
+   		animationEnd(document.getElementById("temp").children.length);
 	});
 }
 
-function buratata(t){
-	while(kek.firstChild){
-		kek.removeChild(document.getElementById("master").firstChild);
+/*Determines when will the series of animation end.*/
+function animationEnd(children){
+	while(basin.firstChild){
+		basin.removeChild(basin.firstChild);
 	}
-	if(t == (limit)){
+	if(children == (limit)){
 		alert("yas");
 		$("#yassity").attr('class','container');
 		$("#yas").attr("disabled",false);
 		setTimeout(function(){
-			while(kekduke.firstChild){
-				kekduke.removeChild(kekduke.firstChild);
+			while(temp.firstChild){
+				temp.removeChild(temp.firstChild);
 			}
-		},1000);
+		},10000);
 	}else{
-		buraticator();
+		fall();
 	}
 }
