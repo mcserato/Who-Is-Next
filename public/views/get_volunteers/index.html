@@ -1,0 +1,117 @@
+<!DOCTYPEhtml>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Students</title>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../../style/materialize.css" />
+        <link rel="stylesheet" href="../../style/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico">
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
+    </head>
+   <body>
+        <div class="navbar-fixed">
+            <div class="navbar-wrapper">
+                <nav class="z-depth-0">
+                    <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
+
+                    <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="main-content">
+                <h1 class="center">WHO IS NEXT?</h1>
+                
+                <!-- <div class="card"> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    <div class = "row center">
+     <div class = "col s6 offset-s3 ">
+     
+       <div class="card" style = "border:#b42529;">
+       
+        <div class="row center">
+            <br>
+            <br>
+            <h5 class="center">Would you like to narrow down your search?</h5>
+             <p class="input-fieldenter row center" >
+                <select class="browser-default" id="class-filter">
+                  <option value="" selected>SELECT CLASS</option>
+
+                </select>
+            </div>
+            <div> Gender: &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" class="filled-in" id="male-filter" checked/>
+                <label for="filled-in-box1">Male</label> &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" class="filled-in" id="female-filter" checked/>
+                <label for="filled-in-box2">Female</label>
+            </div>
+            <div class="input-field">
+                  <input id="last-name-filter" type="text" class="validate" >
+                  <label for="last-name-filter">Last Name Starts With</label>
+            </div>
+            <div class="input-field">
+                  <input id="first-name-filter" type="text" class="validate" >
+                  <label for="last-name-filter">First Name Starts With</label>
+            </div>
+            <div class="input-fieldenter row center" >
+                <select class="browser-default" id="birthday-filter">
+                  <option value="" selected>All Months</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+            </div>
+            <div class="input-field row center" >
+                <select class="browser-default" id="course-filter">
+                  <option value="" selected>All Courses</option>
+                </select>
+            </div>
+            <div class="input-fieldenter row center" >
+                <select class="browser-default" id="college-filter">
+                  <option value="" selected>All Colleges</option>
+                </select>
+            </div>
+            
+            <div class="input-field">
+                  <input id="batch-filter" type="number" class="validate"  min="1999" max="2016">
+            </div>
+            <div class="input-field">
+                  <input id="number-filter" type="number" class="validate"  min="1">
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
+               
+            </div>
+        </div>
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red z-depth-0 black">
+                <i class="large material-icons">menu</i>
+            </a>
+            <ul>
+                <li><a href="/views/class" class="btn-floating black" href="" title="Class"><i class="material-icons">class</i></a></li>
+                <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
+                <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
+                <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
+                <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
+            </ul>
+        </div>
+        
+        
+        <script src="../../script/Config.js"></script>
+        <script src="./Script.js"></script>
+    </body>
+</html>

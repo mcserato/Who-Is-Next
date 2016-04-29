@@ -1,30 +1,59 @@
-#select {
-	color:white; 
-}
+
 .card-content{
-	height: 12vw;
+	height: 10vw;
 }
 .row {
 	font-weight:bold;
 }
 .card-action{
 	background-color: black;
+	font-size: 1.9vw;
 }
 .card-title{
 	font-weight:bold;
 }
-#color1{
-	background-color:#C0D860;
-}
-#color2{
-	background-color:#BF4D28;
+
+#green{
+	background: url("images/green.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+	
 }
 
-#color5{
-	background-color:#BD1550;
+#yellow{
+	background:url("images/yellow.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
-#color8{
-	background-color:#CDB380;
+#red{
+	background:url("images/red.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
+#violet{
+	background:url("images/violet.png");
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+#default{
+	background-color: black;
+	text-align: center;
+	font-size: 1.9vw;
+	color:white;
+}
+
+#dipsy{
+	  color:rgb(196,237,104);
+}
+#laalaa{
+	color:rgb(240,216,0);
+}
+#tinkywinky{
+	color:rgb( 92,101,192);
+}
+#po{
+	color:rgb(177,22,35);
+}

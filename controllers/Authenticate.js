@@ -28,14 +28,15 @@ exports.login = function (req, res, next) {
         return res.status(400).send("Password cannot be blank.");
     }
     
-    db.query("SELECT * FROM ADMIN a,FACULTY f WHERE a.admin_username=? OR f.username=?", 
+    db.query("SELECT admin_username as username FROM ADMIN WHERE admin_username= ? " +
+            "UNION SELECT username from FACULTY WHERE username= ? ", 
         [username, username], function (err, rows) {
         if(err) {
             return next(err);
         }
         
         if(rows.length) {
-            db.query("SELECT * FROM ADMIN WHERE admin_username = ? AND password = ?",
+            db.query("SELECT * FROM ADMIN WHERE admin_username = ? AND password = PASSWORD(?)",
                 [username, password], function (err2, rows2) {
                 if(err2) {
                     return next(err2);
@@ -50,7 +51,7 @@ exports.login = function (req, res, next) {
                     logs.write(req, "SUCCESS", 'Successfully logged in.');
                     return res.send(rows2);
                 } else {
-                    db.query("SELECT * FROM FACULTY WHERE username = ? AND password = ?",
+                    db.query("SELECT * FROM FACULTY WHERE username = ? AND password = PASSWORD(?)",
                         [username, password], function (err3, rows3) {
                         
                         if(err3) {

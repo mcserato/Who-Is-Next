@@ -13,7 +13,11 @@ $(document).ready( function () {
             window.location.href = '/views/faculty';
         }
         if(user.role == 'FACULTY'){
-            window.location.href = '/views/class';
+            if(!user.is_validated){
+                window.location.href = '/not_validated'
+            }else{
+                window.location.href = '/views/class';
+            }
         }
 
     }
@@ -21,13 +25,19 @@ $(document).ready( function () {
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
 
-    $('#logo')
+    $('#log-in-link')
         .hover(hoverIn,hoverOut);
 
-    $('#sign-up')
+    $('#sign-up-link')
         .hover(hoverIn,hoverOut);
 
-    $('#log-in')
+    $('#log-in-logo-link')
+        .hover(hoverIn,hoverOut);
+
+    $('#main-logo-link')
+        .hover(hoverIn,hoverOut);
+
+    $('#sign-up-logo-link')
         .hover(hoverIn,hoverOut);
 
     $("#log-in-link").click(function () {
@@ -50,13 +60,18 @@ $(document).ready( function () {
     });    
 
     function hoverIn(){
-        $('#logo').attr("src", '/icon/logo1.gif');
+        $('#main-logo-link').attr("src", '/icon/logo1.gif');
+        $('#sign-up-logo-link').attr("src", '/icon/logo1.gif');
+        $('#log-in-logo-link').attr("src", '/icon/logo1.gif');
     }
     function hoverOut(){
-        $('#logo').attr("src", '/icon/logo1.png');
+        $('#main-logo-link').attr("src", '/icon/logo1.png');
+        $('#sign-up-logo-link').attr("src", '/icon/logo1.png');
+        $('#log-in-logo-link').attr("src", '/icon/logo1.png');
+
     }
 
-    $('#login')
+    $('#login-btn')
         .click(login);
 
     $(':input','#log-in-form')
@@ -105,9 +120,13 @@ $(document).ready( function () {
             window.location.href = '/views/faculty';
         }
         if(user.role == "FACULTY"){
-            window.location.href = '/views/class';
+            if(!user.is_validated){
+                window.location.href = '/not_validated'
+            }else{
+                window.location.href = '/views/class';
+            }
         }
     }
 
-
+    footer.init('#footer', 'landing');
 });

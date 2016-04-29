@@ -2,40 +2,74 @@
 
 
 $(document).ready( function () {
-	 $.ajax({
+	 $.ajax({    
                 url: '/api/switch_theme',
                 method: 'GET',
                 success: function(data){
+                  
+                    
                     if(!data){
                         return Materialize.toast("Error in fetching data",2500);
                     }
 					if( data[0].current_theme == 1){
-                    	//dipsy
-                    	console.log("pasok");
+                    	//green
                     	$('body').css({
-                    		"background-color":"#CFF09E"
+                    		"background-color":"rgb(196,237,104)"
                     		});
+                        $('.btn').css({
+                            "background-color":"#CFF09E"
+                            });
+                        $('nav').css({
+                            "background-color":"rgb(89,168,15)"
+                            });
                     	
                     }else if( data[0].current_theme == 2){
-                    	//laalaa
+                    	//yellow
                     	$('body').css({
-                    		"background-color":"#FFF077"
-                    		});
+                            "background-color":"rgb(240,240,72)"
+                            });
+                        $('.btn').css({
+                            "background-color":"rgb(240,216,0)"
+                            });
+                        $('.btn.black.right').css({
+                            "background-color":"rgb(240,216,0)"
+                            });
+                         $('a.btn-floating.black').css({
+                            "background-color":"rgb(240,216,0)"
+                            });
+                        $('nav').css({
+                            "background-color":"rgb(72,48,0)"
+                            });
+                        $('.center').css({
+                        	"color":"rgb(96,72,24)"
+                        });
                     }else if (data[0].current_theme == 3){
-                    	//po
+                    	//violet
                     	$('body').css({
-                    		"background-color":"#5D4157"
+                    		"background-color":"rgb(92,101,192)"
                     		});
+                         $('nav').css({
+                            "background-color":"rgb(28,11,43)"
+                            });
+                         $('.center').css({
+                            "color":"rgb(48,28,65)"
+                            });
+                        
                     }else if (data[0].current_theme == 4){
-                    	//tinkywinky
+                    	//red
                     	$('body').css({
-                    		"background-color":"#7D1A0C"
+                    		"background-color":"rgb(177,22,35)"
                     		});
+                         $('nav').css({
+                            "background-color":"rgb(41,44,55)"
+                            });
+                         $('.center').css({
+                         	color:"rgb(41,44,55)"
+                         })
                     }else {
                     	//default
                     	console.log(data);
                     }
-                    
 
                 },
                 error: function(err){
@@ -45,21 +79,25 @@ $(document).ready( function () {
 
 
 
-   $('#dipsy').click(function() {
+   $('#green').click(function() {
 		switch_theme(1);
 	});
 
-	$('#laalaa').click(function() {
+	$('#yellow').click(function() {
 		switch_theme(2);
 	});
 	
-	$('#po').click(function() {
+	$('#violet').click(function() {
 		switch_theme(3);
 	});
 	
-	$('#tinkywinky').click(function() {
+	$('#red').click(function() {
 		switch_theme(4);
 	});
+    $('#default').click(function() {
+        switch_theme(0);
+    });
+
     function switch_theme(theme) {	
         $.ajax({
             url: '/api/switch_theme',
@@ -69,10 +107,11 @@ $(document).ready( function () {
             },
             dataType: 'json',
             success: function(data){
-            location.reload();
-                return Materialize.toast("You had successfully changed the theme.",2500,"",function(){
-                
+                 
+                return Materialize.toast("You had successfully changed the theme. Wait for the page to reload",1000,"",function(){
+                 location.reload();
                 });
+                
 
             },
             error: function(err){
@@ -81,4 +120,26 @@ $(document).ready( function () {
         });
 
     }
+
+    $('#logout-btn')
+        .click(function(){
+
+            $.ajax({
+                url: '/api/logout',
+                method: 'POST',
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in Logout. Please try again !",2500);
+                    }
+
+                    localStorage.clear();
+                    Materialize.toast(data,2500);
+                    window.location.href = '/';
+                },
+                error: function(err){
+                    return Materialize.toast(err.responseText,2500);
+                }
+            });
+
+        });
 });
