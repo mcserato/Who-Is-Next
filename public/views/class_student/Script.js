@@ -189,7 +189,6 @@ $(document).ready( function () {
             });*/
         });
 
-    const content = $('#student-list');
     //config.checkAuth("FACULTY");
 
     /* View Students in a Class*/
@@ -197,7 +196,6 @@ $(document).ready( function () {
         url: '/api/class_student/' + localStorage.class_id,
         method: 'GET',
         success: function (data) {
-            console.log(localStorage);
             if(!data) {
                 return Materialize.toast("Error in fetching data",2500);
             }

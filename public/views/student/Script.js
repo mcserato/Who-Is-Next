@@ -140,7 +140,6 @@ $(document).ready( function () {
         search($(this).val());
 
     });
-<<<<<<< HEAD
 
 
      var emp_no = JSON.parse(localStorage.user).emp_num;
@@ -219,8 +218,5 @@ $(document).ready( function () {
     $('.modal-trigger').leanModal();
 
 
-=======
-
     refresh();
->>>>>>> Dipsy
 });
