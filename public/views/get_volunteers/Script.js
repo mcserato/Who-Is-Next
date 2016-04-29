@@ -46,7 +46,7 @@ $(document).ready( function () {
             
             for (var i in college) {
                 $('#college-filter').append(
-                    '<option value=' + college[i].college + '>' + college[i].college + '</option>'
+                    '<option value='+ college[i].college + '>' + college[i].college + '</option>'
                 );
             } 
         },
@@ -68,7 +68,13 @@ $(document).ready( function () {
 
     $('#randomize')
         .click(function(){
-           
+            var checked = $('input[type=checkbox]:checked').length;
+
+            if(checked == 0) {
+                return alert("You must check at least one checkbox at the Gender section");
+
+            }
+
             var class_id = $('#class-filter').val();
             
             $.ajax({
