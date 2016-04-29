@@ -1,6 +1,5 @@
-'use strict;
-const db = require(__dirname + './../lib/Mysql');
-const logs = require(__dirname + '/Log').write;
+var db = require(__dirname + './../lib/Mysql');
+var logs = require(__dirname + '/Log').write;
 
 /* Edits a specific faculty's credentials */
 exports.edit = function (req, res, next) {

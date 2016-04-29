@@ -1,6 +1,5 @@
-'use strict';
-const db = require(__dirname + './../lib/Mysql');
-const logs = require(__dirname+'./../lib/Mysql');
+var db = require(__dirname + './../lib/Mysql');
+var logs = require(__dirname+'./Log').write;
 /* Adds the student to the database */
 exports.add = function (req, res, next) {
     if (!req.session) {

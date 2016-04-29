@@ -1,5 +1,5 @@
-'use strict';
-const db = require(__dirname + './../lib/Mysql');
+var db = require(__dirname + './../lib/Mysql');
+var logs = require(__dirname + '/Log').write;
 /* Gets the top ten most called student in a specific class */
 exports.getTopTenMostCalledStudents = function (req, res, next) {
     if(!req.session){

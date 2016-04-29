@@ -1,5 +1,5 @@
 var db = require(__dirname + '/../lib/Mysql');
-var logs = require(__dirname + '/Log');
+var logs = require(__dirname + '/Log').write;
 /*
 Filters:
 1. Gender
