@@ -13,7 +13,11 @@ $(document).ready( function () {
             window.location.href = '/views/faculty';
         }
         if(user.role == 'FACULTY'){
-            window.location.href = '/views/class';
+            if(!user.is_validated){
+                window.location.href = '/not_validated'
+            }else{
+                window.location.href = '/views/class';
+            }
         }
 
     }
@@ -116,9 +120,13 @@ $(document).ready( function () {
             window.location.href = '/views/faculty';
         }
         if(user.role == "FACULTY"){
-            window.location.href = '/views/class';
+            if(!user.is_validated){
+                window.location.href = '/not_validated'
+            }else{
+                window.location.href = '/views/class';
+            }
         }
     }
 
-
+    footer.init('#footer', 'landing');
 });
