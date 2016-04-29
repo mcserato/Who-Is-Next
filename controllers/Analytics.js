@@ -17,8 +17,7 @@ exports.getTopTenMostCalledStudents = function (req, res, next) {
                 logs(req, "FAILED", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs(req, "SUCCESS", "RETRIEVED top 10 students from "+req.params.class_id
-                +" of "+req.session.emp_num);
+            logs(req, "SUCCESS", "RETRIEVED top 10 students from "+req.params.class_id);
             res.send(rows);
     });
 }
@@ -77,8 +76,7 @@ exports.getTopTenMostCalledMales = function (req, res, next) {
                 logs(req, "FAILED", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs(req, "SUCCESS", "RETRIEVED Top 10 Males from class "+req.params.class_id
-                +" of "+req.session.emp_num);
+            logs(req, "SUCCESS", "RETRIEVED Top 10 Males from class "+req.params.class_id);
             res.send(rows);
     });
 }
@@ -98,8 +96,7 @@ exports.getTopTenMostCalledFemales = function (req, res, next) {
                 logs(req, "FAILED", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs(req, "SUCCESS", "RETRIEVED Top 10 Females from class "+req.params.class_id
-                +" of "+req.session.emp_num);
+            logs(req, "SUCCESS", "RETRIEVED Top 10 Females from class "+req.params.class_id);
             res.send(rows);
     });
 }
