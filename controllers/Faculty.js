@@ -84,6 +84,9 @@ exports.signup = function (req, res, next) {
 
 /* Shows the list of all faculty members */
 exports.viewAll = function(req, res, next) {
+    if (req.get('Accept').match(/application\/json/) === null) {
+       return res.send({message: 'gg'});
+    }
 	db.query("SELECT name FROM FACULTY", function (err, rows) {
         if (err) {
             return next(err);

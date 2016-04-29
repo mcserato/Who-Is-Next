@@ -1,124 +1,83 @@
-var authenticate = require('../controllers/Authenticate.js'),
-    admin = require('../controllers/Admin.js'),
-    class_ = require('../controllers/Class.js'),
-    class_student = require('../controllers/ClassStudent.js'),
-    faculty = require('../controllers/Faculty.js'),
-    student = require('../controllers/Student.js'),
-    analytics = require('../controllers/Analytics.js'),
-    randomizer = require('../controllers/Randomizer.js'),
-    log = require('../controllers/Log.js');
 
-var path = require('path');
+'use strict';
+
+const importer = require('anytv-node-importer');
+const path = require('path');
 
 module.exports = function (router) {
-    router.route('/api/validate')
-        .post(admin.validate);
 
-    //---------------------------------------
-    router.route('/api/analytics/:class_id')
-        .get(analytics.getTopTenMostCalledStudents);
+    const __ =importer.dirloadSync(__dirname + '/../controllers');
 
-    router.route('/api/analyticsMale/:class_id')
-        .get(analytics.getTopTenMostCalledMales);
+    router.del = router.delete;
 
-    router.route('/api/analyticsFemale/:class_id')
-        .get(analytics.getTopTenMostCalledFemales);
+    router.post('/api/validate',                                               __.Admin.validate);
 
-    router.route('/api/analyticsLab/:class_section')
-        .get(analytics.getSectionFrequency);
+    router.get('/api/analytics/:class_id',                                     __.Analytics.getTopTenMostCalledStudents);
+    router.get('/api/analyticsMale/:class_id',                                 __.Analytics.getTopTenMostCalledMales);
+    router.get('/api/analyticsFemale/:class_id',                               __.Analytics.getTopTenMostCalledFemales);
+    router.get('/api/analyticsLab/:class_section',                             __.Analytics.getSectionFrequency);
+    router.get('/api/analyticsGender/:class_id/:gender',                       __.Analytics.getGenderFrequency);
+    router.get('/api/analyticsGetSection/:class_id',                           __.Analytics.getSection);
 
-    router.route('/api/analyticsGender/:class_id/:gender')
-        .get(analytics.getGenderFrequency);
+    router.post('/api/login',                                                  __.Authenticate.login);
+    router.post('/api/logout',                                                 __.Authenticate.logout);
 
-    router.route('/api/analyticsGetSection/:class_id')
-        .get(analytics.getSection);
+    router.post('/api/class',                                                  __.Class.add);
+    router.put('/api/class',                                                   __.Class.edit);
+    router.get('/api/class',                                                   __.Class.viewAll)
+    router.del('/api/class',                                                   __.Class.removeClass);
 
-    //---------------------------------------
-    router.route('/api/login')
-        .post(authenticate.login);
+    router.put('/api/class2',                                                  __.Class.editClass)
+    router.get('/api/class2',                                                  __.Class.viewClasses);
 
-    router.route('/api/logout')
-        .post(authenticate.logout);
-
-    //---------------------------------------
-    router.route('/api/class')
-        .post(class_.add)
-        .put(class_.edit)
-        .get(class_.viewAll)
-        .delete(class_.removeClass);
+    router.post('/api/class/:course_code',                                     __.Class.addSection)
+    router.get('/api/class/:course_code',                                      __.Class.viewOne)
+    router.del('/api/class/:course_code',                                      __.Class.removeSection);
         
-    router.route('/api/class2')
-        .put(class_.editClass)
-        .get(class_.viewClasses);
+    router.get('/api/class/search/:course_code',                               __.Class.search);
 
-    router.route('/api/class/:course_code')
-        .post(class_.addSection)
-        .get(class_.viewOne)
-        .delete(class_.removeSection);
+    router.post('/api/class_student/',                                         __.ClassStudent.add)
+    router.del('/api/class_student/',                                          __.ClassStudent.remove);
+
+    router.get('/api/class_student/:class_id',                                 __.ClassStudent.view);
+
+    router.get('/api/class_student/search/:class_id/:last_name',               __.ClassStudent.search);
+
+    router.post('/api/import',                                                 __.ClassStudent.import);
+
+    router.put('/api/faculty',                                                 __.Faculty.edit);
+    router.get('/api/faculty',                                                 __.Faculty.viewAll)
+    router.del('/api/faculty',                                                 __.Faculty.remove);
+ 
+    router.get('/api/faculty/search/:name',                                    __.Faculty.search);
+
+    router.get('/api/faculty/:emp_num',                                        __.Faculty.viewOne);
+
+    router.get('/api/faculty/:name',                                           __.Faculty.search);
+
+    router.put('/api/signup',                                                  __.Faculty.signup);
+
+    router.get('/api/switch_theme',                                            __.Faculty.getTheme)
+    router.put('/api/switch_theme',                                            __.Faculty.switchTheme);
+
+    router.post('/api/randomizer/:class_id',                                   __.Randomizer.getVolunteers);
+
+    router.post('/api/student',                                                __.Student.add);
+    router.put('/api/student',                                                 __.Student.edit);
+    router.get('/api/student',                                                 __.Student.viewAll);
+    router.del('/api/student',                                                 __.Student.remove);
         
-    router.route('/api/class/search/:course_code')
-        .get(class_.search);
+    router.get('/api/student/search/:last_name',                               __.Student.search);
 
-    //---------------------------------------
-    router.route('/api/class_student/')
-        .post(class_student.add)
-        .delete(class_student.remove);
+    router.get('/api/student/:student_number',                                 __.Student.viewOne);
 
-    router.route('/api/class_student/:class_id')
-        .get(class_student.view);
+    router.get('/api/logs',                                                    __.Log.read);
 
-    router.route('/api/class_student/search/:class_id/:last_name')
-        .get(class_student.search);
-        
-    router.route('/api/import')
-        .post(class_student.import);
-
-    //---------------------------------------
-    router.route('/api/faculty')
-        .put(faculty.edit)
-        .get(faculty.viewAll)
-        .delete(faculty.remove);
-
-    router.route('/api/faculty/search/:name')
-        .get(faculty.search);
-
-    router.route('/api/faculty/:emp_num')
-        .get(faculty.viewOne);
-
-    router.route('/api/faculty/:name')
-        .get(faculty.search);
-
-    router.route('/api/signup')
-        .put(faculty.signup);
-
-    router.route('/api/switch_theme')
-        .get(faculty.getTheme)
-        .put(faculty.switchTheme);
-
-    //---------------------------------------
-    router.route('/api/randomizer/:class_id')
-        .post(randomizer.getVolunteers);
-
-    //---------------------------------------
-    router.route('/api/student')
-        .post(student.add)
-        .put(student.edit)
-        .get(student.viewAll)
-        .delete(student.remove);
-        
-    router.route('/api/student/search/:last_name')
-        .get(student.search);
-
-    router.route('/api/student/:student_number')
-        .get(student.viewOne);
-
-    router.route('/api/logs')
-        .get(log.read);
-
-    router.route('*')
-        .all(function (req, res) {
-            return res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));
-        });
+    router.all('*', function(req, res){
+        if (req.get('Accept').match(/application\/json/) === null) {
+            res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));
+        }
+    });
 
     return router;
 };

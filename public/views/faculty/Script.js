@@ -1,5 +1,8 @@
 'use strict';
-
+const headers = {
+        'Accept': 'application/json;',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    };
 $(document).ready( function () {
 	config.checkAuth("ADMIN");
     const content = $('#faculty-list');
@@ -62,6 +65,7 @@ $(document).ready( function () {
     	$.ajax({
 	        url: '/api/faculty',
 	        method: 'GET',
+            headers: headers,
 	        success: function(data){
 	        	if(!data){
 	            	return Materialize.toast("Error in fetching data",2500);
