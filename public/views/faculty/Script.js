@@ -59,20 +59,23 @@ $(document).ready( function () {
     }
 */
     function Refresh(){
-    	$.ajax({
-	        url: '/api/faculty',
-	        method: 'GET',
-	        success: function(data){
-	        	if(!data){
-	            	return Materialize.toast("Error in fetching data",2500);
-	        	}
-
-	            add_data(data);
-	        },
-	        error: function(err){
-	            return Materialize.toast(err.responseText,2500);
-	        }
-	    });	
+        $.ajax({
+            url: '/api/faculty',
+            method: 'GET',
+            success: function(data){
+                if(!data){
+                    return Materialize.toast("Error in fetching data",2500);
+                }
+                console.log(data);
+                data = jQuery.grep(data, function(value){
+                    return value.is_validated == 1;
+                });
+                add_data(data);
+            },
+            error: function(err){
+                return Materialize.toast(err.responseText,2500);
+            }
+        }); 
     }
 
     $('#search-faculty').keypress(function (e) {

@@ -10,7 +10,7 @@ $(document).ready( function () {
         var user = JSON.parse(localStorage.user);
         
         if(user.role == 'ADMIN'){
-            window.location.href = '/views/faculty';
+            window.location.href = '/views/admin';
         }
         if(user.role == 'FACULTY'){
             window.location.href = '/views/class';
@@ -113,7 +113,7 @@ $(document).ready( function () {
         localStorage.user = JSON.stringify(user);
 
         if(user.role == "ADMIN"){
-            window.location.href = '/views/faculty';
+            window.location.href = '/views/admin';
         }
         if(user.role == "FACULTY"){
             window.location.href = '/views/class';
