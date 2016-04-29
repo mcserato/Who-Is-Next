@@ -98,18 +98,22 @@ exports.view = function(req, res, next) {
 	   }
     );
 }
-
 /* Imports a student */
 exports.import = function(req, res, next) {
+    if(!req.session){
+        logs(req, "FAILED", "No one is logged in.");
+        return res.status(401).send("No one is logged in.");
+    }
     db.query("INSERT INTO CLASS_STUDENT(class_id, student_number, emp_num) " +
         "VALUES(?, ?, ?)", 
         [req.body.class_id, req.body.student_number, req.session.emp_num],
-        
         function (err, rows) {
             if (err) {
+                logs(req, "FAILED", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-
+            logs(req, "SUCCESS", "IMPORTED "+req.body.student_number
+                +" to class "+req.body.class_id);
             res.send(rows);
         }
     );
