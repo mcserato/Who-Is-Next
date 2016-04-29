@@ -4,7 +4,7 @@ var db = require(__dirname + './../lib/Mysql');
 exports.edit = function (req, res, next) {
     // Limits the password length (8-50)
     if (req.body.password.length > 50 || req.body.password.length < 8){
-        res.send(400, "Error: Password length is invalid!");
+        res.status(400).send("Error: Password length is invalid!");
     }
 
     db.query("UPDATE FACULTY SET username = ?, name = ?, password = " +
@@ -22,7 +22,7 @@ exports.edit = function (req, res, next) {
 /* Removes a faculty employee from the database */
 exports.remove = function (req, res, next) {
     if (!req.body.emp_num) {
-        res.send(400, "Error: Missing employee number.");
+        res.status(400).send("Error: Missing employee number.");
     }
 
     db.query('DELETE FROM FACULTY WHERE emp_num = ?', [req.body.emp_num],
@@ -32,7 +32,7 @@ exports.remove = function (req, res, next) {
             }
 
             if (!rows.affectedRows) {
-                res.send(400, "Error: No faculty was deleted.");
+                res.status(400).send("Error: No faculty was deleted.");
             }
 
             res.send(rows);
@@ -54,7 +54,7 @@ exports.signup = function (req, res, next) {
 		    }
 		
 		    if(rows.length > 0){
-                return res.send(400, "Error: Username already exists.");
+                return res.status(400).send("Error: Username already exists.");
 		    } else {	
 	            db.query("SELECT * FROM FACULTY WHERE emp_num = ?", [emp_num],
 	                function (err2, rows2) {
@@ -63,10 +63,10 @@ exports.signup = function (req, res, next) {
 				        }
 				        
 				        if (rows2.length>0) {
-					        return res.send(400, "Error: Employee number already exists.");
+					        return res.status(400).send("Error: Employee number already exists.");
 				        } else {
 					        db.query("INSERT INTO FACULTY (emp_num,username," + 
-					        "name,password,email) VALUES (?, ?, ?, ?, ?)",
+					        "name,password,email) VALUES (?, ?, ?, PASSWORD(?), ?)",
 					        [emp_num, username, name, password, email], 
 					        function(err3, rows3){
 						        if(err3) {
@@ -101,7 +101,7 @@ exports.viewOne = function(req, res, next) {
 		        return next(err);
 		    }
 		    if (rows.length === 0) {
-                res.send(404, "Error: Faculty not found!");
+                res.status(404).send("Error: Faculty not found!");
 			} else {
 			    res.send(rows);
 			}
@@ -110,13 +110,13 @@ exports.viewOne = function(req, res, next) {
 
 /* Searches a faculty member */
 exports.search = function(req, res, next) {
-	db.query("SELECT name FROM FACULTY WHERE name like '%?%'", [req.params.name],
+	db.query("SELECT name FROM FACULTY WHERE name like ?", ['%'+req.params.name+'%'],
 		function (err, rows) {
 		    if (err) {
 		        return next(err);
 		    }
 		    if (rows.length === 0) {
-                res.send(404, "Error: Faculty not found!");
+                res.status(404).send("Error: Faculty not found!");
 			} else {
 			    res.send(rows);
 			}
@@ -130,7 +130,7 @@ exports.getTheme = function (req, res, next) {
 		    if(err) {
 		        return next(err);
 		    }
-		    
+		    console.log(rows[0].current_theme);
 		    return res.send(rows);
 	});
 }

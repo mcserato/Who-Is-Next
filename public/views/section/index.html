@@ -31,18 +31,22 @@
                 <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
                 <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
                 <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
+                <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">invert_colors</i></a></li>
                 <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
                 <li>
                     <!-- Modal Trigger -->
                         <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
                             <i id="edit-icon" class="material-icons">mode_edit</i>
-                        </a> 
+                        </a>
                </li>
             </ul>
         </div>
 
         <div class="container">
             <div id="main-content">
+                <!--
+                <ul id="section-list" class="collapsible" data-collapsible="accordion">
+                -->
                 <h1 id="course-id" class="center"></h1>
                 <div id="section-list" class="row">
                 <!-- <div class="card"> -->
@@ -173,7 +177,7 @@
                <div id="section-frequency-div" class="card"></div>
            </div>
         </div>
-        
+
         <!-- Modal Structure -->
         <div id="edit-user_modal" class="modal">
             <div class="modal-content">
@@ -199,7 +203,7 @@
                         <input id="cnew_password_edit" type="password" class="validate"/>
                         <label for="cnew_password_edit">Confirm New Password</label>
                     </div>
-                    
+
                     <div class="input-field">
                         <span id="confirm-message"> Enter Current Password to Save Changes:</span>
                         <input id="current_password" type="password" class="validate"/>
@@ -214,6 +218,7 @@
         </div>
 
         <script src="../../script/Config.js"></script>
+        <script src="../../script/Script.js"></script>
         <script src="./Script.js"></script>
     </body>
 </html>

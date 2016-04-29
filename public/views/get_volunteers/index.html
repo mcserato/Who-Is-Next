@@ -23,12 +23,80 @@
 
         <div class="container">
             <div id="main-content">
-                <h1 class="center">Students</h1>
+                <h1 class="center">WHO IS NEXT?</h1>
+                
                 <!-- <div class="card"> -->
                 <!-- </div> -->
             </div>
         </div>
+    <div class = "row center">
+     <div class = "col s6 offset-s3 ">
+     
+       <div class="card" style = "border:#b42529;">
+       
+        <div class="row center">
+            <br>
+            <br>
+            <h5 class="center">Would you like to narrow down your search?</h5>
+             <p class="input-fieldenter row center" >
+                <select class="browser-default" id="class-filter">
+                  <option value="" selected>SELECT CLASS</option>
 
+                </select>
+            </div>
+            <div> Gender: &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" class="filled-in" id="male-filter" checked/>
+                <label for="filled-in-box1">Male</label> &nbsp;&nbsp;&nbsp;
+                <input type="checkbox" class="filled-in" id="female-filter" checked/>
+                <label for="filled-in-box2">Female</label>
+            </div>
+            <div class="input-field">
+                  <input id="last-name-filter" type="text" class="validate" >
+                  <label for="last-name-filter">Last Name Starts With</label>
+            </div>
+            <div class="input-field">
+                  <input id="first-name-filter" type="text" class="validate" >
+                  <label for="last-name-filter">First Name Starts With</label>
+            </div>
+            <div class="input-fieldenter row center" >
+                <select class="browser-default" id="birthday-filter">
+                  <option value="" selected>All Months</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+            </div>
+            <div class="input-field row center" >
+                <select class="browser-default" id="course-filter">
+                  <option value="" selected>All Courses</option>
+                </select>
+            </div>
+            <div class="input-fieldenter row center" >
+                <select class="browser-default" id="college-filter">
+                  <option value="" selected>All Colleges</option>
+                </select>
+            </div>
+            
+            <div class="input-field">
+                  <input id="batch-filter" type="number" class="validate"  min="1999" max="2016">
+            </div>
+            <div class="input-field">
+                  <input id="number-filter" type="number" class="validate"  min="1">
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
+               
+            </div>
+        </div>
         <div class="fixed-action-btn">
             <a class="btn-floating btn-large red z-depth-0 black">
                 <i class="large material-icons">menu</i>
@@ -41,88 +109,9 @@
                 <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
             </ul>
         </div>
-
-        <div id="add-button-div" class="fixed-action-btn">
-           <!-- Modal Trigger -->
-           <a class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-               <i id="add-icon" class="material-icons">add</i></a>
-           </a>
-        </div>
-
-        <!-- Modal Structure -->
-        <div id="add_modal" class="modal">
-           <div class="modal-content">
-               <h2>Add Student</h2>
-               <form id="add-student-form">
-                   <div class="input-field">
-                       <input id="student_number" type="text" required="" />
-                       <label for="student_number">Student Number</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="first_name" type="text" required="" />
-                       <label for="first_name">First Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="middle_name" type="text" required="" />
-                       <label for="middle_name">Middle Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="last_name" type="text" required="" />
-                       <label for="last_name">Last Name</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="college" type="text" required="" />
-                       <label for="college">College</label>
-                   </div>
-
-                   <div class="input-field">
-                       <input id="course" type="text" required="" />
-                       <label for="course">Course</label>
-                   </div>
-
-                   <p>
-                      <input name="gender" type="radio" id="male" />
-                      <label for="male">Male</label>
-                   </p>
-
-                   <p>
-                      <input name="gender" type="radio" id="female" style="color:red;" />
-                      <label for="female">Female</label>
-                   </p>
-
-                   <div class="input-field">
-                       <input id="birthday" type="text" required="" />
-                       <label for="birthday">Birthday (YYYY-MM-DD)</label>
-                   </div>
-           </div>
-           <div class="modal-footer">
-                   <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
-                       <i class="material-icons">done</i>
-                   </button>
-               </form>
-           </div>
-        </div>
-
-        <!-- Modal Structure -->
-        <div id="student_modal" class="modal">
-            <div class="modal-content">
-                <h1 id="student_header"class="center"></h1>
-                <ul id="student_list" class="collection">
-                    <li id="student_number" class="collection-item"></li>
-                    <li id="student_course" class="collection-item"></li>
-                    <li id="student_college" class="collection-item"></li>
-                    <li id="student_gender" class="collection-item"></li>
-                    <li id="student_birthday" class="collection-item"></li>
-                </ul>                
-            </div>
-        </div>
-
+        
+        
         <script src="../../script/Config.js"></script>
         <script src="./Script.js"></script>
     </body>
 </html>
->>>>>>> Po

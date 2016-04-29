@@ -4,7 +4,7 @@ var db = require(__dirname + './../lib/Mysql');
 exports.add = function (req, res, next) {
     // Checks if the student number is null
     if(req.body.student_number == null || req.body.student_number == "") {
-        res.send(400, "Error: Bad Argument!");
+        res.status(400).send("Error: Bad Argument!");
     }
 
     db.query("SELECT student_number, emp_num FROM STUDENT WHERE " +
@@ -60,7 +60,7 @@ exports.edit = function (req, res, next) {
 /* Removes a student from the database */
 exports.remove = function (req, res, next) {
     if (!req.body.student_number) {
-        res.send(400, "Error: Missing student number.");
+        res.status(400).send("Error: Missing student number.");
     }
 
     db.query("DELETE FROM STUDENT WHERE student_number = ? AND emp_num = ?",
@@ -72,7 +72,7 @@ exports.remove = function (req, res, next) {
             }
 
             if (!rows.affectedRows) {
-                res.send(400, "Error: No student was deleted.");
+                res.status(400).send("Error: No student was deleted.");
             }
 
             res.send(rows);
@@ -120,8 +120,8 @@ exports.viewOne = function(req, res, next) {
 /* Searches a student by last name from all classes */
 exports.search = function(req, res, next) {
     db.query("SELECT s.first_name, s.middle_name, s.last_name FROM " +
-        "STUDENT s, CLASS_STUDENT cs where s.last_name like '%?%'",
-        [req.params.last_name],
+        "STUDENT s, CLASS_STUDENT cs where s.last_name like '%?%' AND emp_num = ?",
+        [req.params.last_name, req.session.emp_num],
 
         function (err, rows) {
             if (err) {
