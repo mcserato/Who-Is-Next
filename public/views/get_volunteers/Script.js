@@ -54,7 +54,18 @@ $(document).ready( function () {
             return Materialize.toast(err.responseText,2500);
         }
     });
-    
+        
+    $('#logo-holder').hide();
+    $('#randomize-form').hide();
+    $('#header').hide();
+
+    $("#randomize-btn").click(function(){
+        $('#randomizer-holder').hide();
+        $('#logo-holder').fadeIn();
+        $("#randomize-form").slideDown(1000);
+        $('#header').slideDown(1000);
+    });
+
     $('#randomize')
         .click(function(){
            
@@ -81,7 +92,23 @@ $(document).ready( function () {
                 },
                 dataType: "JSON"
             });
-        
+       
+            $('#logo-holder').slideUp();
+            $('#randomize-form').slideUp();
+            $('#header').slideUp();
+
+            $('#randomize-form').promise().done(function(){
+                $('#randomizer-holder').show();
+                // Import animation of dice and arrow
+                $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
+                // Remove animation
+                setTimeout(function(){
+                    document.getElementById("animation-css").remove();
+                }, 3100);
+                setTimeout(function(){
+                    // Put random effect here
+                }, 3100); 
+            });
     });
      
 });
