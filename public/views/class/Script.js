@@ -4,6 +4,7 @@ $(document).ready( function () {
     config.checkAuth("FACULTY");
     const content = $('#class-list');
 
+    navbar.init('#navbar');
 
     function add_class (data) {
 

@@ -82,15 +82,18 @@ input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
 }
 
-/*.input-field .prefix ~ label,
-.input-field label{
-	color: #333;
-	font-size: 120%;
-}*/
+#user-settings {
+    margin-top: 2%;
+}
 
-#logout-btn {
-	margin-top: 2%;
-	margin-right: 2%;
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 2px;
+    font-size: 12px;
+    line-height: 1.42;
+    border-radius: 30px;
 }
 
 .hexagon-red {
