@@ -85,7 +85,7 @@ INSERT INTO FACULTY VALUES (202020202, "mmanalang", "Martee Manalang", PASSWORD(
 INSERT INTO FACULTY VALUES (132132132, "ivyaguila", "Ivy Aguila", PASSWORD("poisonivycmsc"), "ivyaguila@gmail.com", TRUE, 0);
 INSERT INTO FACULTY VALUES (100100100, "kepbuplb", "Kristine Bautista", PASSWORD("kepbuplbcmsc"), "kepbautista@gmail.com", TRUE, 0);
 INSERT INTO FACULTY VALUES (575757575, "maryaaguirre", "Marya Aguirre", PASSWORD("maamaryacmsc"), "maryaaguirre@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", "kendoll", PASSWORD("kjaencmsc"), TRUE, 0);
+INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", PASSWORD("kendollcmsc"), "kjaen@gmail.com", TRUE, 0);
 
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", null, 202020202);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", "3L", 220202020);
