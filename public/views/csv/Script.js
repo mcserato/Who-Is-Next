@@ -17,6 +17,7 @@ $(document).ready( function () {
     function readBlob(opt_startByte, opt_stopByte) {
 
         var files = document.getElementById('file-path').files;
+        console.log(files);
         if (!files.length) {
           alert('Please select a file!');
           return;
@@ -70,24 +71,20 @@ $(document).ready( function () {
 
         var blob = file.slice(start, stop + 1);
         reader.readAsBinaryString(blob);
-      }
+    }
       
-      document.querySelector('.readBytesButtons').addEventListener('click', function(evt) {
+    document.querySelector('.readBytesButtons').addEventListener('click', function(evt) {
         if (evt.target.tagName.toLowerCase() == 'button') {
           var startByte = evt.target.getAttribute('data-startbyte');
           var endByte = evt.target.getAttribute('data-endbyte');
           readBlob(startByte, endByte);
         }
-      }, false);
+    }, false);
 
-    $('#agree')
-        .click(function(){
-            console.log("OverLord");            
+    $('#disagree')
+        .click(function (evt) {
+            console.log("Shit");    
         }
     );
-
-    console.log($('#file-path').val());
-    
-
 
 });

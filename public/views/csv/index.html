@@ -50,12 +50,87 @@
               <i class="material-icons">menu</i>
             </a>
             <ul>
-                <li><a class="btn-floating red"><i class="material-icons">add</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                <li>
+                    <a title="Add Student" class="btn-floating red waves-effect waves-light btn modal-trigger" href="#add_modal">
+                        <i id="add-icon" class="material-icons">add</i></a>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-floating blue waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <i class="material-icons">attach_file</i>
+                    </a>
+                </li>
             </ul>
         </div>
 
-        
+        <!-- Modal Structure -->
+        <div id="add_modal" class="modal">
+           <div class="modal-content">
+               <h2>Add Student</h2>
+               <form id="add-student-form">
+                   <div class="input-field">
+                       <input id="student_number" type="text" required="" />
+                       <label for="student_number">Student Number</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="first_name" type="text" required="" />
+                       <label for="first_name">First Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="middle_name" type="text" required="" />
+                       <label for="middle_name">Middle Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="last_name" type="text" required="" />
+                       <label for="last_name">Last Name</label>
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div> 
+
+                   <div class="input-field">
+                       <input id="course" type="text" required="" />
+                       <label for="course">Course</label>
+                   </div>
+
+                   <p>
+                      <input name="gender" type="radio" id="male" />
+                      <label for="male">Male</label>
+                   </p>
+
+                   <p>
+                      <input name="gender" type="radio" id="female" style="color:red;" />
+                      <label for="female">Female</label>
+                   </p>
+
+                   <div class="input-field">
+                       <input id="birthday" type="text" required="" />
+                       <label for="birthday">Birthday (YYYY-MM-DD)</label>
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+               </form>
+           </div>
+        </div>
 
         <!-- Modal Structure -->
         <div id="modal1" class="modal">
@@ -71,16 +146,16 @@
                             <input class="file-path validate" type="text">
                         </div>
                     </div>
-                    <input type="file" id="files" name="file" /> Read bytes: 
-                    <span class="readBytesButtons">
-                      <button>entire file</button>
-                    </span>
+                    
                     <div id="byte_content"></div>
                 </form>
             </div>
             <div class="modal-footer">
                 <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Disagree</a>
-                <a id="agree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                <span class="readBytesButtons">
+                  <button class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+                </span>
+                
             </div>
         </div>
 
