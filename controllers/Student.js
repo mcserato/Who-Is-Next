@@ -1,14 +1,14 @@
 var db = require(__dirname + './../lib/Mysql');
-var logs = require(__dirname+'./Log').write;
+var logs = require(__dirname+'/./Log').write;
 /* Adds the student to the database */
 exports.add = function (req, res, next) {
     if (!req.session) {
-        logs(req, "FAILED", "No one is logged in");
+        logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
     // Checks if the student number is null
     if(req.body.student_number == null || req.body.student_number == "") {
-        logs(req, "FAILED", "Error: Bad Argument");
+        logs(req, "ERROR", "Error: Bad Argument");
         res.status(400).send("Error: Bad Argument!");
     }
     db.query("SELECT student_number, emp_num FROM STUDENT WHERE " +
@@ -25,7 +25,7 @@ exports.add = function (req, res, next) {
                     req.body.picture, req.body.birthday],
                     function (err, rows) {
                         if (err) {
-                            logs(req, "FAILED", "Error: MySQL Query FAILED");
+                            logs(req, "ERROR", "Error: MySQL Query FAILED");
                             return next(err);
                         }
                         logs(req, "SUCCESS", "ADDED student to database.");
@@ -33,7 +33,7 @@ exports.add = function (req, res, next) {
                     }
                 );
             } else {
-                logs(req, "FAILED", "Error: Student alread exists.");
+                logs(req, "ERROR", "Error: Student alread exists.");
                 res.send(400, "Error: Student already exists!");
             }
         }
@@ -42,7 +42,7 @@ exports.add = function (req, res, next) {
 /* Edits a specific student in the database */
 exports.edit = function (req, res, next) {
     if (!req.session) {
-        logs(req, "FAILED", "No one is logged in");
+        logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
     db.query("UPDATE STUDENT SET student_number = ?, first_name = ?, " +
@@ -55,7 +55,7 @@ exports.edit = function (req, res, next) {
         req.body.birthday, req.body.student_number, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "UPDATED student.");
@@ -66,22 +66,22 @@ exports.edit = function (req, res, next) {
 /* Removes a student from the database */
 exports.remove = function (req, res, next) {
     if (!req.session) {
-        logs(req, "FAILED", "No one is logged in");
+        logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
     if (!req.body.student_number) {
-        logs(req, "FAILED", "Error: Missing student number.");
+        logs(req, "ERROR", "Error: Missing student number.");
         res.status(400).send("Error: Missing student number.");
     }
     db.query("DELETE FROM STUDENT WHERE student_number = ? AND emp_num = ?",
         [req.body.student_number, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             if (!rows.affectedRows) {
-                logs(req, "FAILED", "Error: No student was deleted.");
+                logs(req, "ERROR", "Error: No student was deleted.");
                 res.status(400).send("Error: No student was deleted.");
             }
             logs(req, "SUCCESS", "REMOVED student.");
@@ -92,7 +92,7 @@ exports.remove = function (req, res, next) {
 /* Shows a list of all students */
 exports.viewAll = function(req, res, next) {
     if (!req.session) {
-        logs(req, "FAILED", "No one is logged in");
+        logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
     db.query("SELECT s.first_name, s.middle_name, s.last_name, " +
@@ -102,7 +102,7 @@ exports.viewAll = function(req, res, next) {
         [req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "No one is logged in");
+                logs(req, "ERROR", "No one is logged in");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED all students.");
@@ -113,18 +113,18 @@ exports.viewAll = function(req, res, next) {
 /* Shows the details of a student */
 exports.viewOne = function(req, res, next) {
     if (!req.session) {
-        logs(req, "FAILED", "No one is logged in");
+        logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
     db.query("SELECT * FROM STUDENT WHERE student_number = ? AND emp_num = ?",
         [req.params.student_number, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "No one is logged in");
+                logs(req, "ERROR", "No one is logged in");
                 return next(err);
             }
             if (rows.length === 0) {
-                logs(req, "FAILED", "Error: Student not found!");
+                logs(req, "ERROR", "Error: Student not found!");
                 res.send(404, "Error: Student not found!");
             } else {
                 logs(req, "SUCCESS", "RETRIEVED details of "+req.params.student_number);
@@ -136,7 +136,7 @@ exports.viewOne = function(req, res, next) {
 /* Searches a student by last name from all classes */
 exports.search = function(req, res, next) {
     if (!req.session) {
-        logs(req, "FAILED", "No one is logged in");
+        logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
     db.query("SELECT s.first_name, s.middle_name, s.last_name FROM " +
@@ -144,11 +144,11 @@ exports.search = function(req, res, next) {
         [req.params.last_name, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "No one is logged in");
+                logs(req, "ERROR", "No one is logged in");
                 return next(err);
             }
             if (rows.length === 0) {
-                logs(req, "FAILED", "Error: Student not found!");
+                logs(req, "ERROR", "Error: Student not found!");
                 res.send(404, "Error: Student not found!");
             } else {
                 logs(req, "SUCCESS", "SEARCHED students "+req.params.last_name);

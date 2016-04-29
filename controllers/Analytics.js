@@ -3,7 +3,7 @@ var logs = require(__dirname + '/Log').write;
 /* Gets the top ten most called student in a specific class */
 exports.getTopTenMostCalledStudents = function (req, res, next) {
     if(!req.session){
-        logs(req, "FAILED", "No one is logged in.");
+        logs(req, "ERROR", "No one is logged in.");
         return res.status(401).send("No one is logged in.");
     }
     db.query("SELECT * FROM CLASS_STUDENT, STUDENT WHERE " +
@@ -14,7 +14,7 @@ exports.getTopTenMostCalledStudents = function (req, res, next) {
         [req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED top 10 students from "+req.params.class_id);
@@ -24,7 +24,7 @@ exports.getTopTenMostCalledStudents = function (req, res, next) {
 /*Gets the sections belongs to the class*/
 exports.getSection = function (req, res, next) {
     if(!req.session){
-        logs(req, "FAILED", "No one is logged in.");
+        logs(req, "ERROR", "No one is logged in.");
         return res.status(401).send("No one is logged in.");
     }
     db.query("SELECT DISTINCT c.class_id as id from CLASS c, CLASS_STUDENT cs "+
@@ -34,7 +34,7 @@ exports.getSection = function (req, res, next) {
              [req.params.class_id,req.params.class_id,req.params.class_id],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED all sections of class "+req.params.class_id);
@@ -44,7 +44,7 @@ exports.getSection = function (req, res, next) {
 /*Gets the section frequency in a specific class*/
 exports.getSectionFrequency = function (req, res, next) {
     if(!req.session){
-        logs(req, "FAILED", "No one is logged in.");
+        logs(req, "ERROR", "No one is logged in.");
         return res.status(401).send("No one is logged in.");
     }
     db.query("SELECT (SELECT section_number from CLASS where class_id = ?) " +
@@ -53,7 +53,7 @@ exports.getSectionFrequency = function (req, res, next) {
              [req.params.class_section,req.params.class_section],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED frequency from class "+req.params.class_section);
@@ -63,7 +63,7 @@ exports.getSectionFrequency = function (req, res, next) {
 /* Gets the top ten most called males in a given class */
 exports.getTopTenMostCalledMales = function (req, res, next) {
     if(!req.session){
-        logs(req, "FAILED", "No one is logged in.");
+        logs(req, "ERROR", "No one is logged in.");
         return res.status(401).send("No one is logged in.");
     }
     db.query("SELECT * FROM CLASS_STUDENT,STUDENT where gender = " +
@@ -73,7 +73,7 @@ exports.getTopTenMostCalledMales = function (req, res, next) {
         [req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED Top 10 Males from class "+req.params.class_id);
@@ -83,7 +83,7 @@ exports.getTopTenMostCalledMales = function (req, res, next) {
 /* Gets the top ten most called females in a given class */
 exports.getTopTenMostCalledFemales = function (req, res, next) {
     if(!req.session){
-        logs(req, "FAILED", "No one is logged in.");
+        logs(req, "ERROR", "No one is logged in.");
         return res.status(401).send("No one is logged in.");
     }
     db.query("SELECT * FROM CLASS_STUDENT,STUDENT where gender = " +
@@ -93,7 +93,7 @@ exports.getTopTenMostCalledFemales = function (req, res, next) {
         [req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED Top 10 Females from class "+req.params.class_id);
@@ -103,7 +103,7 @@ exports.getTopTenMostCalledFemales = function (req, res, next) {
 /* Gets the gender frequency in a specific class */
 exports.getGenderFrequency = function (req, res, next) {
     if(!req.session){
-        logs(req, "FAILED", "No one is logged in.");
+        logs(req, "ERROR", "No one is logged in.");
         return res.status(401).send("No one is logged in.");
     }
     db.query("SELECT  SUM(no_of_times_called) as frequency FROM STUDENT, CLASS_STUDENT " +
@@ -113,7 +113,7 @@ exports.getGenderFrequency = function (req, res, next) {
         [req.params.gender, req.params.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "FAILED", "Error: MySQL Query FAILED.");
+                logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
             logs(req, "SUCCESS", "RETRIEVED gender frequency from class "
