@@ -73,19 +73,19 @@ CREATE TABLE LOG
 
 INSERT INTO ADMIN VALUES ("WhoIsNext", "ab-1l");
 
-INSERT INTO FACULTY VALUES (128128128, "rncrecario", "Reginald Recario", "madamada", "rncrecario@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (131131131, "laniedanila", "Lanie Danila", "assembly", "laniedanila@gmail.com",  TRUE, 0);
-INSERT INTO FACULTY VALUES (220202020, "rjgobrero", "Jason Obrero", "cmsc2", "rjgobrero@gmail.com",  TRUE, 0);
-INSERT INTO FACULTY VALUES (222222222, "rvbulalacao", "Rommel Bulalacao", "terror22", "rvbulalacao@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (565656565, "jrramirez", "Ramir Ramirez", "mirramir", "jrramirez@gmail.com",  TRUE, 0);
-INSERT INTO FACULTY VALUES (111111111, "donnadrio", "Donnalyn Drio", "driodonna", "donnadrio@gmail.com",TRUE, 0);
-INSERT INTO FACULTY VALUES (123123123, "betelderobles", "Betel de Robles", "btldrbls", "betelderobles@gmail.com",  TRUE, 0);
-INSERT INTO FACULTY VALUES (125125125, "jencinas", "Joman Encinas", "jencinas", "jencinas@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (202020202, "mmanalang", "Martee Manalang", "murtee", "mmanalang@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (132132132, "ivyaguila", "Ivy Aguila", "poisonivy", "ivyaguila@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (100100100, "kepbuplb", "Kristine Bautista", "kepbuplb", "kepbautista@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (575757575, "maryaaguirre", "Marya Aguirre", "maamarya", "maryaaguirre@gmail.com", TRUE, 0);
-INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", "kendoll", "kjaen@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (128128128, "rncrecario", "Reginald Recario", "password(madamada)", "rncrecario@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (131131131, "laniedanila", "Lanie Danila", "password(assembly)", "laniedanila@gmail.com",  TRUE, 0);
+INSERT INTO FACULTY VALUES (220202020, "rjgobrero", "Jason Obrero", "password(cmsc2)", "rjgobrero@gmail.com",  TRUE, 0);
+INSERT INTO FACULTY VALUES (222222222, "rvbulalacao", "Rommel Bulalacao", "password(terror22)", "rvbulalacao@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (565656565, "jrramirez", "Ramir Ramirez", "password(mirramir)", "jrramirez@gmail.com",  TRUE, 0);
+INSERT INTO FACULTY VALUES (111111111, "donnadrio", "Donnalyn Drio", "password(driodonna)", "donnadrio@gmail.com",TRUE, 0);
+INSERT INTO FACULTY VALUES (123123123, "betelderobles", "Betel de Robles", "password(btldrbls)", "betelderobles@gmail.com",  TRUE, 0);
+INSERT INTO FACULTY VALUES (125125125, "jencinas", "Joman Encinas", "password(jencinas)", "jencinas@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (202020202, "mmanalang", "Martee Manalang", "password(murtee)", "mmanalang@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (132132132, "ivyaguila", "Ivy Aguila", "password(poisonivy)", "ivyaguila@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (100100100, "kepbuplb", "Kristine Bautista", "password(kepbuplb)", "kepbautista@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (575757575, "maryaaguirre", "Marya Aguirre", "password(maamarya)", "maryaaguirre@gmail.com", TRUE, 0);
+INSERT INTO FACULTY VALUES (130130130, "kjaen", "Kendall Jaen", "password(kendoll)", "kjaen@gmail.com", TRUE, 0);
 
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", null, 202020202);
 INSERT INTO CLASS (course_code, course_title, class_section, section_number, emp_num) VALUES ("CMSC 2", "Introduction to the Internet", "B", "3L", 220202020);
