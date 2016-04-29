@@ -127,8 +127,8 @@ $(document).ready( function () {
         if (e.keyCode == 13) {
             e.preventDefault();
         }
-        content.empty();
 
+        content.empty();
         
         if($(this).val() === ''){
             Refresh(); 
@@ -243,3 +243,4 @@ $(document).ready( function () {
     Refresh();
 
 });
+

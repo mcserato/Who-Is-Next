@@ -46,6 +46,7 @@ $(document).ready( function () {
                 var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
             }
             section_dv.attr("id", data[class_].course_code.replace(' ', ''));
+            section_dv.attr("classId", data[class_].class_id);
             section_dv.append(section);
 
             if (num_flag < 3) {
@@ -60,6 +61,11 @@ $(document).ready( function () {
             num_flag++;
             if (num_flag == 7) num_flag = 0;
         }
+
+        $('.hex')
+            .click( function () {
+            }
+        );
 
         $('.options').hide();
 
