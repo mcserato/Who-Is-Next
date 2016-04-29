@@ -75,6 +75,22 @@ CREATE TABLE LOG
 	 PRIMARY KEY (log_number)
 	);
 
+DROP TABLE IF EXISTS SAVEPOINT;
+CREATE TABLE SAVEPOINT
+	(save_id INT AUTO_INCREMENT,
+	 save_name VARCHAR(50) NOT NULL,
+	 emp_num INT(9) NOT NULL,
+	 class_id INT(9) NOT NULL,	
+	 PRIMARY KEY (save_id)
+	);
+
+DROP TABLE IF EXISTS SAVE_STUDENT;
+CREATE TABLE SAVE_STUDENT
+	(save_id INT(9) NOT NULL,
+	 student_number VARCHAR(10) NOT NULL,
+	 PRIMARY KEY (save_id, student_number)
+	);
+
 
 INSERT INTO ADMIN VALUES ("WhoIsNext", PASSWORD("ab-1l"));
 
