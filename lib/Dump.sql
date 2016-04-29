@@ -71,7 +71,7 @@ CREATE TABLE LOG
 	);
 
 
-INSERT INTO ADMIN VALUES ("WhoIsNext", "ab-1l");
+INSERT INTO ADMIN VALUES ("WhoIsNext", PASSWORD("ab-1l"));
 
 INSERT INTO FACULTY VALUES (128128128, "rncrecario", "Reginald Recario", PASSWORD("madamada128"), "rncrecario@gmail.com", TRUE, 0);
 INSERT INTO FACULTY VALUES (131131131, "laniedanila", "Lanie Danila", PASSWORD("assembly131"), "laniedanila@gmail.com",  TRUE, 0);
