@@ -9,9 +9,9 @@ read choice
 
     if [[ $choice -eq 2 ]]; then
         echo "Creating user and database..."
-    
+
         echo -n "[root] "
-        mysql -uroot -p < lib/CreateUser.sql #creates the user Teletubbies and the database WHOISNEXT
+        mysql -uroot -p < database/CreateUser.sql #creates the user Teletubbies and the database WHOISNEXT
 
     elif [[ $choice -eq 1 ]]; then
         echo ""
@@ -21,6 +21,6 @@ read choice
     fi
 
 echo "Inserting dump into the database..."
-mysql -uTeletubbies -pab1l < lib/Dump.sql #creates the tables in the database WHOISNEXT
+mysql -uTeletubbies -pab1l < database/Dump.sql #creates the tables in the database WHOISNEXT
 
 echo "Good luck and have fun! :)"
