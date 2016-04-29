@@ -66,7 +66,7 @@ exports.signup = function (req, res, next) {
 					        return res.status(400).send("Error: Employee number already exists.");
 				        } else {
 					        db.query("INSERT INTO FACULTY (emp_num,username," + 
-					        "name,password,email) VALUES (?, ?, ?, ?, ?)",
+					        "name,password,email) VALUES (?, ?, ?, PASSWORD(?), ?)",
 					        [emp_num, username, name, password, email], 
 					        function(err3, rows3){
 						        if(err3) {
