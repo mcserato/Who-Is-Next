@@ -35,7 +35,7 @@ exports.login = function (req, res, next) {
         }
         
         if(rows.length) {
-            db.query("SELECT * FROM ADMIN WHERE admin_username = ? AND password = ?",
+            db.query("SELECT * FROM ADMIN WHERE admin_username = ? AND password = PASSWORD(?)",
                 [username, password], function (err2, rows2) {
                 if(err2) {
                     return next(err2);
@@ -50,7 +50,7 @@ exports.login = function (req, res, next) {
                     logs.write(req, "SUCCESS", 'Successfully logged in.');
                     return res.send(rows2);
                 } else {
-                    db.query("SELECT * FROM FACULTY WHERE username = ? AND password = ?",
+                    db.query("SELECT * FROM FACULTY WHERE username = ? AND password = PASSWORD(?)",
                         [username, password], function (err3, rows3) {
                         
                         if(err3) {
