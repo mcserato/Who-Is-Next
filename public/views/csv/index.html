@@ -24,6 +24,9 @@
         <div class="container">
             <div id="main-content">
                 <h1 id="course-id" class="center"></h1>
+
+                
+                
             </div>
             <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
         </div>
@@ -42,11 +45,17 @@
         </div>
 
         <!-- Modal Trigger -->
-        <div id="add-button-div" class="fixed-action-btn">
-            <a title="Add CSV" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#modal1">
-                <i id="add-icon" class="material-icons">add</i></a>
+        <div id="add-button-div" class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large red">
+              <i class="material-icons">menu</i>
             </a>
+            <ul>
+                <li><a class="btn-floating red"><i class="material-icons">add</i></a></li>
+                <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+            </ul>
         </div>
+
+        
 
         <!-- Modal Structure -->
         <div id="modal1" class="modal">
@@ -56,17 +65,22 @@
                     <div class="file-field input-field">
                         <div class="btn">
                             <span>File</span>
-                            <input id="file-path" type="file" />
+                            <input id="file-path" type="file" name="file" />
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">
                         </div>
                     </div>
+                    <input type="file" id="files" name="file" /> Read bytes: 
+                    <span class="readBytesButtons">
+                      <button>entire file</button>
+                    </span>
+                    <div id="byte_content"></div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Disagree</a>
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Disagree</a>
+                <a id="agree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
             </div>
         </div>
 
