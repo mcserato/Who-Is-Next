@@ -28,7 +28,8 @@ exports.login = function (req, res, next) {
         return res.status(400).send("Password cannot be blank.");
     }
     
-    db.query("SELECT * FROM ADMIN a,FACULTY f WHERE a.admin_username=? OR f.username=?", 
+    db.query("SELECT admin_username as username FROM ADMIN WHERE admin_username= ? " +
+            "UNION SELECT username from FACULTY WHERE username= ? ", 
         [username, username], function (err, rows) {
         if(err) {
             return next(err);
