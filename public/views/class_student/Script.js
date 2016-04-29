@@ -391,6 +391,7 @@ $(document).ready( function () {
                         },
                         success: function (result) {
                             Materialize.toast(student_number + " is added!", 1000);
+                            window.location.href = "/views/class_student";
                         },
                         dataType: "JSON"
                     });
@@ -398,8 +399,6 @@ $(document).ready( function () {
                 dataType: "JSON"
             });
         }
-
-        //window.location.href = "/views/class_student";
 
         return false;
     });
