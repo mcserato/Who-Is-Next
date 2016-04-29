@@ -164,10 +164,6 @@ $(document).ready( function () {
 
         });
 
-    /* View Students in a Class*/
-    Refresh();
-
-
     $('#randomize')
         .click(function(){
             alert("hello");
@@ -356,7 +352,7 @@ $(document).ready( function () {
         var course = $("#course").val();
         var gender;
 
-        if ($("#male").val() == "Male") {
+        if ($("#male").is(':checked')) {
             gender = "M";
         } else {
             gender = "F";
@@ -365,8 +361,10 @@ $(document).ready( function () {
         var birthday = $("#birthday").val();
         if (!student_number.match(/^[0-9]{4}-[0-9]{5}$/)) {
             Materialize.toast("Invalid student number", 1000);
+            console.log("Invalid student number");
         } else {
             /* Add Student */
+            console.log('yay');
             $.ajax({
                 type: "POST",
                 url: "/api/student",
@@ -382,6 +380,7 @@ $(document).ready( function () {
                 },
                 success: function() {
                      /* Add Student to a class */
+
                     $.ajax({
                         type: "POST",
                         url: "/api/class_student",
@@ -390,7 +389,7 @@ $(document).ready( function () {
                             student_number: student_number,
                             no_of_times_called: 0
                         },
-                        success: function () {
+                        success: function (result) {
                             Materialize.toast(student_number + " is added!", 1000);
                         },
                         dataType: "JSON"
@@ -400,7 +399,7 @@ $(document).ready( function () {
             });
         }
 
-        window.location.href = "/views/class_student";
+        //window.location.href = "/views/class_student";
 
         return false;
     });
