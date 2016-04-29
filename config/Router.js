@@ -6,6 +6,7 @@ var authenticate = require('../controllers/Authenticate.js'),
     student = require('../controllers/Student.js'),
     analytics = require('../controllers/Analytics.js'),
     randomizer = require('../controllers/Randomizer.js'),
+    savedb = require('../controllers/SaveDB.js'),
     log = require('../controllers/Log.js');
 
 var path = require('path');
@@ -111,6 +112,16 @@ module.exports = function (router) {
 
     router.route('/api/student/:student_number')
         .get(student.viewOne);
+
+    //--------------------------------------- GAUVEN HELP. Tama po ba to?
+    router.route('/api/viewsave')
+        .get(savedb.view);
+    router.route('/api/viewsave/:save_id')
+        .post(savedb.save)
+    router.route('/api/viewsave/:save_id')
+        .delete(savedb.remove)
+    router.route('/api/viewsave/:save_name')
+        .get(savedb.find);
 
     router.route('/api/logs')
         .get(log.read);
