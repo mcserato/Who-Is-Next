@@ -3,10 +3,10 @@ var navbar = {
 
         $(navbar).append([
             '<div class="navbar-fixed">',
-            '<ul id="user-settings" class="dropdown-content">',
-                '<li><a href="#">Edit Information</a></li>',
-                '<li class="divider"></li>',
-                '<li><a href="#">Change Password</a></li>',
+            '<ul id="user-settings" class="dropdown-content">',               
+                '<li>',
+                    '<a id="edit-user-btn" title="Edit User" href="#edit-user_modal" class="modal-trigger">Edit Profile</a>',
+                '</li>',
                 '<li class="divider"></li>',
                 '<li><a href="/views/switch_theme">Switch Theme</a></li>',
                 '<li class="divider"></li>',
@@ -27,7 +27,7 @@ var navbar = {
                           '</ul>',
                     '</nav>',
                 '</div>',
-            '</div>'      
+            '</div>'
         ].join(''));
 
 
@@ -40,6 +40,8 @@ var navbar = {
                belowOrigin: true 
                }
         );
+
+        $('.modal-trigger').leanModal();
 
         $('#logout-btn')
             .click(function(){
