@@ -13,6 +13,7 @@ $(document).ready( function () {
         });
 
     function sign_up( ) {
+        console.log("check");
         var full_name = $('#full-name').val(),
             emp_number = $('#emp-num').val(),
             email = $('#email').val(),
@@ -69,6 +70,8 @@ $(document).ready( function () {
         }
 
         if(password != confirm_password){
+            console.log(password);
+            console.log(confirm_password);
             return Materialize.toast("Password confirmation did not match!", 2500);
         }
 
@@ -86,12 +89,14 @@ $(document).ready( function () {
             },
             dataType: 'json',
             success: function(data){
+                console.log("tama");
                 return Materialize.toast("Successfully signed up. Wait to be validated.",2500,"",function(){
-                    return window.location.href = "http://localhost:8000/";
+                    return window.location.href = "http://127.0.0.1:8000/";
                 });
 
             },
             error: function(err){
+                console.log("mali");
                 return Materialize.toast(err.responseText,2500);
             }
         });

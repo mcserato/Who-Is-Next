@@ -43,5 +43,22 @@ $(document).ready( function () {
             });
 
         });
+if ($('input[type="checkbox"]').is(':checked')) {
+    console.log("sd");
+$('#password')[0].setAttribute('type','text');
+
+} else {
+$('#password')[0].setAttribute('type','password');
+}
 
 });
+
+$('.modal-trigger').leanModal();
+
+
+
+
+
+
+
+

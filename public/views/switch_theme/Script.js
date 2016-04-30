@@ -143,3 +143,25 @@ $(document).ready( function () {
 
         });
 });
+/////////NAV BAR///////////////////////////
+$(window).scroll(function() {
+   if($(window).scrollTop()) {
+      $('nav.z-depth-0').css({
+        'background': 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,192,192,0)  )'
+      });
+   }else{
+    $('nav.z-depth-0').css({
+        'background': 'rgb(192,192,192)'
+      });
+
+   }
+
+});
+
+$(window).on("scroll", function() {
+    var s = 200 - Math.min(200, $(document).scrollTop());
+    if (s>70){
+     $("a.brand-logo").width(s).height(s);
+     $(".logo").width(s-25).height(s-25);
+    }
+});
