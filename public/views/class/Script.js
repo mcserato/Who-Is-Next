@@ -5,6 +5,7 @@ $(document).ready( function () {
     const content = $('#class-list');
 
     navbar.init('#navbar');
+    sidebar.init('#sidebar');
 
     function add_class (data) {
 
