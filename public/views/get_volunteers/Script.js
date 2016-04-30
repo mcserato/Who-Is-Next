@@ -3,7 +3,8 @@
 $(document).ready( function () {
 
     navbar.init('#navbar');
-  
+    sidebar.init('#sidebar');
+    
     $.ajax({
         url: '/api/class2/',
         method: 'GET',

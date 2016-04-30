@@ -3,7 +3,8 @@
 $(document).ready( function () {
     config.checkAuth("FACULTY");
     navbar.init("#navbar");
-
+    sidebar.init("#sidebar");
+    
 	const content = $('#student-list');
     var timeoutID = null;
 

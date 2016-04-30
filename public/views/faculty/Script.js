@@ -5,7 +5,8 @@ $(document).ready( function () {
     const content = $('#faculty-list');
 
     navbar.init('#navbar');
-
+    sidebar.init('#sidebar');
+    
     function add_data (data) {
 
         var color_flag = 0; // For alternating the color

@@ -83,7 +83,24 @@ input[type=password]:focus:not([readonly])+label {
 }
 
 #user-settings {
+    background-color: transparent;
     margin-top: 2%;
+    width: 15%;
+}
+
+.dropdown-content li.divider {
+    min-height: 0px;
+    height: 4px;
+}
+
+#user-settings li a{
+    background-color: #CFCDCD;
+    color: black;
+}
+
+#user-settings li a:hover{
+    background-color: #757575;
+    color: #F5F5F5;
 }
 
 .btn-circle {

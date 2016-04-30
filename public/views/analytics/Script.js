@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
-    navbar.init("#navbar")
+    navbar.init("#navbar");
+    sidebar.init("#sidebar");
 
     var gender_frequency=[];
     $.ajax({

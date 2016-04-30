@@ -4,6 +4,7 @@
 $(document).ready( function () {
 
     navbar.init("#navbar");
+    sidebar.init("#sidebar");
 
 	 $.ajax({    
                 url: '/api/switch_theme',

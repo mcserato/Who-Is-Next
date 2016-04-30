@@ -4,7 +4,8 @@ $(document).ready( function () {
     $('.modal-trigger').leanModal();
 
     navbar.init('#navbar');
-        
+    sidebar.init('#sidebar');
+    
     const content = $('#student-list');
 
     function addItem (data) {
