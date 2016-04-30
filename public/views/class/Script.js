@@ -50,18 +50,19 @@ $(document).ready( function () {
 
         $('.options').hide();
 
+
+        $('.hex,.options').hover(function() {
+           $('.options').show();
+           $('.hex,.options').mouseleave(function() {
+                 $('.options').hide();
+            });
+        });
+
         $('.courses')
             .click(function(){
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
-
-        $('.hex').hover(function() {
-           $('.options').show();
-           $('.options').mouseleave(function() {
-                $('.options').hide();
-            });
-        });
 
         /* Delete Class*/
         $('.remove')

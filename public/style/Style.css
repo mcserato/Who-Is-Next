@@ -163,19 +163,20 @@ input[type=password]:focus:not([readonly])+label {
     border-top: 50px solid #333333;
 }
 
-.options {
+.options{
     float: left;
     text-align: center;
     line-height: 100px;
+    left: 600px;
     margin: 0px 10px 20px -200px;
 }
-
 .options-text {
 	color: #333333;
 }
 
 .three {
 	margin-left: 120px;
+
 }
 
 #landing-page {
