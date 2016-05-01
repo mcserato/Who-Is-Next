@@ -206,3 +206,7 @@ input[type=password]:focus:not([readonly])+label {
 #sign-up-logo-link {
 	margin-top: 10%;
 }
+
+.validate {
+    padding-left: 1% !important;
+}
