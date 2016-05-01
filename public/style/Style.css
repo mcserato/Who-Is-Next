@@ -1,0 +1,212 @@
+body {
+	background-color: #f5f6f6;
+}
+
+nav {
+	background-color: #f5f6f6;
+	z-index: 0;
+	color: black;
+}
+
+.logo {
+	margin-top: 15px;
+	height: 120px;
+}
+
+#main-content {
+	margin-top: 100px;
+}
+
+.fixed-action-btn {
+	top: 3px;
+	left: 23px;
+	width: 55.5px;
+}
+
+.fixed-action-btn ul{
+	top: 85px;
+	bottom: 0px;
+	left: 0px;
+}
+
+#add-button-div {
+	left: 90%;
+	top: 80%;
+}
+
+#add-icon {
+	background-color: #b42529;
+}
+
+#add-button {
+	background-color: #b42529;
+}
+
+.title {
+	margin: 0;
+}
+
+.courses {
+	color: #ffffff;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+#logo {
+	margin-top: 2%;
+}
+
+#left, #right {
+	margin-top: 15%;
+}
+
+#login-btn, #sign-up-btn {
+	background-color: #CB494E;
+}
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]) {
+	border-bottom: 1px solid #CB494E;
+	box-shadow: 0 1px 0 0 #CB494E;
+}
+
+input[type=text]:focus:not([readonly])+label,
+input[type=password]:focus:not([readonly])+label {
+	color: #CB494E;
+
+}
+
+.input-field
+.prefix.active{
+	color: #CB494E;
+}
+
+#user-settings {
+    background-color: transparent;
+    margin-top: 2%;
+    width: 15%;
+}
+
+.dropdown-content li.divider {
+    min-height: 0px;
+    height: 4px;
+}
+
+#user-settings li a{
+    background-color: #CFCDCD;
+    color: black;
+}
+
+#user-settings li a:hover{
+    background-color: #757575;
+    color: #F5F5F5;
+}
+
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 2px;
+    font-size: 12px;
+    line-height: 1.42;
+    border-radius: 30px;
+}
+
+.hexagon-red {
+    width: 200px;
+    height: 110px;
+    background: #b42529;
+    position: relative;
+    float: left;
+    text-align: center;
+    line-height: 100px;
+    margin: 100px 10px 20px 20px;
+}
+
+.hexagon-red:before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 50px solid #b42529;
+}
+
+.hexagon-red:after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 50px solid #b42529;
+}
+
+.hexagon-grey {
+    width: 200px;
+    height: 110px;
+    background: #333333;
+    position: relative;
+    float: left;
+    text-align: center;
+    line-height: 100px;
+    margin: 100px 10px 20px 20px;
+}
+
+.hexagon-grey:before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 50px solid #333333;
+}
+
+.hexagon-grey:after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 50px solid #333333;
+}
+
+.options {
+    float: left;
+    text-align: center;
+    line-height: 100px;
+    margin: 0px 10px 20px -200px;
+}
+
+.options-text {
+	color: #333333;
+}
+
+.three {
+	margin-left: 120px;
+}
+
+#landing-page {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#sign-up-logo-link {
+	margin-top: 10%;
+}
+
+.validate {
+    padding-left: 1% !important;
+}

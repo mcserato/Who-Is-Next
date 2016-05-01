@@ -1,0 +1,207 @@
+<!DOCTYPEhtml>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Students</title>
+        <link rel="stylesheet" type="text/css" href="../../style/material-icons.css">
+        <link rel="stylesheet" href="../../style/materialize.css" />
+        <link rel="stylesheet" href="../../style/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico">
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
+    </head>
+   <body>
+        <div id="navbar"></div>
+        <div id="sidebar"></div>
+        
+        <div class="container">
+            <div id="main-content" class="center">
+                <h1 id="course-id"></h1>
+                <a class="waves-effect waves-light btn-large" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
+            </div>
+
+            <div class="nav-wrapper row">
+                <form>
+                    <div class="input-field col l12">
+                        <input id="search-class-student" type="search" placeholder="Search Student" required>
+                        <label for="search-class-student"><i class="material-icons">search</i></label>
+                        <i class="material-icons waves-effect waves-light">close</i>
+                    </div>
+                </form>
+            </div>
+
+            
+            <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
+        </div>
+
+
+        <div id="add-button-div" class="fixed-action-btn">
+           <!-- Modal Trigger -->
+           <a title="Add Student" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
+               <i id="add-icon" class="material-icons">add</i></a>
+           </a>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="add_modal" class="modal">
+           <div class="modal-content">
+               <h2>Add Student</h2>
+               <form id="add-student-form">
+                   <div class="input-field">
+                       <input id="student_number" type="text" required="" />
+                       <label for="student_number">Student Number</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="first_name" type="text" required="" />
+                       <label for="first_name">First Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="middle_name" type="text" required="" />
+                       <label for="middle_name">Middle Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="last_name" type="text" required="" />
+                       <label for="last_name">Last Name</label>
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CAS" id="cas">CDC</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div> 
+
+                   <div class="input-field">
+                       <input id="course" type="text" required="" />
+                       <label for="course">Course</label>
+                   </div>
+
+                   <p>
+                      <input name="gender" type="radio" id="male" />
+                      <label for="male">Male</label>
+                   </p>
+
+                   <p>
+                      <input name="gender" type="radio" id="female" />
+                      <label for="female">Female</label>
+                   </p>
+
+                   <div class="input-field">
+                        <span style="color:#999999;">Birthday</span> 
+                       <input id="birthday" type="date" class ="datepicker" required="" />
+                      
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+               </form>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="edit_student_modal" class="modal">
+           <div class="modal-content">
+               <h2>Edit Student</h2>
+               <form id="edit-student-form">
+                   <div class="input-field">
+                       <input placeholder="" id="student_number_edit" type="text" required="" />
+                       <label for="student_number_edit">Student Number</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="first_name_edit" placeholder="" type="text" required="" />
+                       <label for="first_name_edit">First Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="middle_name_edit" placeholder="" type="text" required="" />
+                       <label for="middle_name_edit">Middle Name</label>
+                   </div>
+
+                   <div class="input-field">
+                       <input id="last_name_edit" placeholder="" type="text" required="" />
+                       <label for="last_name_edit">Last Name</label>
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college_edit">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div>
+
+                   <div class="input-field">
+                       <input id="course_edit" type="text" placeholder="" required="" />
+                       <label for="course_edit">Course</label>
+                   </div>
+
+                   <p>
+                      <input name="gender" type="radio" id="male_edit" />
+                      <label for="male_edit">Male</label>
+                   </p>
+
+                   <p>
+                      <input name="gender" type="radio" id="female_edit" style="color:red;" />
+                      <label for="female_edit">Female</label>
+                   </p>
+
+
+                   <div class="input-field">
+                       <input id="birthday_edit" placeholder="" type="text" required="" />
+                       <label for="birthday_edit">Birthday (YYYY-MM-DD)</label>
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="edit-student-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+               </form>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="student_modal" class="modal">
+            <div class="modal-content">
+                <h1 id="student_header"class="center"></h1>
+                <ul id="student_list" class="collection">
+                    <li id="student_number" class="collection-item"></li>
+                    <li id="student_course" class="collection-item"></li>
+                    <li id="student_college" class="collection-item"></li>
+                    <li id="student_gender" class="collection-item"></li>
+                    <li id="student_birthday" class="collection-item"></li>
+                </ul>                
+            </div>
+        </div>
+        
+        <script src="../nav_bar/Script.js"></script>
+        <script src="../sidebar/Script.js"></script> 
+        <script src="../../script/Script.js"></script>
+        <script src="../../script/Config.js"></script>
+        <script src="../../script/Util.js"></script>
+        <script src="./Script.js"></script>
+    </body>
+</html>

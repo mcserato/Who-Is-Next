@@ -1,0 +1,58 @@
+<!DOCTYPEhtml>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Admin</title>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../../style/Materialize.min.css" />
+        <link rel="stylesheet" href="../../style/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico">
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.min.js"></script>
+    </head>
+    <body>
+        <div id="navbar"></div>
+
+        <div class="container">
+            <div id="main-content">
+                <h1 class="center">Admin</h1>
+
+                <nav>
+                    <div class="nav-wrapper row">
+                        <form>
+                            <div class="input-field">
+                                <input id="search-faculty" type="search" name="name"
+                                placeholder="Search Faculty"/>
+                                <label for="search-faculty"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>  
+                    </div>  
+                </nav>
+                
+                <ul id="faculty-list" class="collapsible" data-collapsible="accordion">    
+                </ul>
+                
+            </div>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red z-depth-0 black">
+                <i class="large material-icons">menu</i>
+            </a>
+            <ul>
+                <li><a href="/views/class" class="btn-floating black" href="" title="Class"><i class="material-icons">class</i></a></li>
+                <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
+                <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
+                <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
+            </ul>
+        </div>
+
+        <script src="../nav_bar/Script.js"></script>
+        <script src="../sidebar/Script.js"></script> 
+        <script src="../../script/Script.js"></script>
+        <script src="../../script/Config.js"></script>
+        <script src="../../script/Util.js"></script>
+        <script src="./Script.js"></script>
+    </body>
+</html>

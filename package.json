@@ -1,35 +1,23 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "who-is-next",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
-  "keywords": [
-    "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
-  ],
-  "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url": "http://www.openshift.com/"
+  "description": "a classroom selector of volunteers",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "http://www.openshift.com/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/openshift/origin-server"
-  },
-
-  "engines": {
-    "node": ">= 0.6.0",
-    "npm": ">= 1.0.0"
-  },
-
+  "author": "CMSC 128 AB-1L AY 15-16",
+  "license": "ISC",
   "dependencies": {
-    "express": "~3.4.4"
-  },
-  "devDependencies": {},
-  "bundleDependencies": [],
-
-  "private": true,
-  "main": "server.js"
+    "body-parser": "^1.15.0",
+    "cli-color": "^1.1.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "method-override": "^2.3.5",
+    "mysql": "^2.10.2",
+    "should": "^8.2.2",
+    "should-http": "0.0.4",
+    "supertest": "^1.2.0"
+  }
 }

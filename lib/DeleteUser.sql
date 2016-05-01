@@ -1,0 +1,2 @@
+DROP USER 'Teletubbies'@'localhost';
+DROP DATABASE IF EXISTS WHOISNEXT;
