@@ -67,58 +67,89 @@ $(document).ready( function () {
         $('#header').slideDown(1000);
     });
 
+    $("#add-filter").click(function(){
+        $('#filters').show();
+        $("#add-filter").hide();
+        $("#remove-filter").show();
+
+    });
+
+    $("#remove-filter").click(function(){
+        $('#filters').hide();
+        $("#add-filter").show();
+        $("#remove-filter").hide();
+        $('#last-name-filter').val("");
+        $('#first-name-filter').val("");
+        $('#birthday-filter').val("");
+        $('#course-filter').val("");
+        $('#college-filter').val("");
+        $('#batch-filter').val("");
+        $('#male-filter').prop('checked', true);
+        $('#female-filter').prop('checked', true);
+    });
+
+
     $('#randomize')
         .click(function(){
             var checked = $('input[type=checkbox]:checked').length;
 
-            if(checked == 0) {
-                return alert("You must check at least one checkbox at the Gender section");
-
+            if($('#class-filter').val() == ""){
+                Materialize.toast("You must choose a class", 2000);
             }
 
-            var class_id = $('#class-filter').val();
+            if(checked == 0) {
+                Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
+            }
 
-            $.ajax({
-                url: '/api/randomizer/' + class_id,
-                method: 'POST',
-                data: {
-                    class_id    : class_id,
-                    last_name   :$('#last-name-filter').val(),
-                    first_name  :$('#first-name-filter').val(),
-                    birthday    :$('#birthday-filter').val(),
-                    course      :$('#course-filter').val(),
-                    college     :$('#college-filter').val(),
-                    batch       :$('#batch-filter').val(),
-                    number      :$('#number-filter').val()
-                },
-                success: function(data) {
-                    for(var i in data) {
-                        console.log(data[i]);
-                        //alert(data[i].first_name + " " + data[i].last_name);
+            if($('#number-filter').val() == ""){
+                Materialize.toast("You must choose the number of volunteers", 2000);
+            }
 
-                    }
-                    $("#modal-names").openModal();
-                    jumbleWords(data);
-                },
-                dataType: "JSON"
-            });
+            else {
+                var class_id = $('#class-filter').val();
 
-            /*$('#logo-holder').slideUp();
-            $('#randomize-form').slideUp();
-            $('#header').slideUp();
+                $.ajax({
+                    url: '/api/randomizer/' + class_id,
+                    method: 'POST',
+                    data: {
+                        class_id    : class_id,
+                        last_name   :$('#last-name-filter').val(),
+                        first_name  :$('#first-name-filter').val(),
+                        birthday    :$('#birthday-filter').val(),
+                        course      :$('#course-filter').val(),
+                        college     :$('#college-filter').val(),
+                        batch       :$('#batch-filter').val(),
+                        number      :$('#number-filter').val()
+                    },
+                    success: function(data) {
+                        for(var i in data) {
+                            console.log(data[i]);
+                            //alert(data[i].first_name + " " + data[i].last_name);
 
-            $('#randomize-form').promise().done(function(){
-                $('#randomizer-holder').show();
-                // Import animation of dice and arrow
-                $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
-                // Remove animation
-                setTimeout(function(){
-                    document.getElementById("animation-css").remove();
-                }, 3100);
-                setTimeout(function(){
-                    // Put random effect here
-                }, 3100);
-            });*/
+                        }
+                        $("#modal-names").openModal();
+                        jumbleWords(data);
+                    },
+                    dataType: "JSON"
+                });
+
+                /*$('#logo-holder').slideUp();
+                $('#randomize-form').slideUp();
+                $('#header').slideUp();
+
+                $('#randomize-form').promise().done(function(){
+                    $('#randomizer-holder').show();
+                    // Import animation of dice and arrow
+                    $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
+                    // Remove animation
+                    setTimeout(function(){
+                        document.getElementById("animation-css").remove();
+                    }, 3100);
+                    setTimeout(function(){
+                        // Put random effect here
+                    }, 3100);
+                });*/
+            }
     });
 
 });
@@ -146,7 +177,7 @@ function jumbleWords(data){
         }
         else{
             $('#name'+i+' h4').textEffect({
-                effect: "jumble",
+                effect: "slide",
                 effectSpeed: 2000,
                 reverse: true
             });
