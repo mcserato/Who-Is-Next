@@ -114,74 +114,6 @@ $(document).ready( function () {
             });
 
 
-
-   $('#green').click(function() {
-		switch_theme(1);
-	});
-
-	$('#yellow').click(function() {
-		switch_theme(2);
-	});
-	
-	$('#violet').click(function() {
-		switch_theme(3);
-	});
-	
-	$('#red').click(function() {
-		switch_theme(4);
-	});
-    $('#default').click(function() {
-        switch_theme(0);
-    });
-
-    function switch_theme(theme) {	
-       if (temp != theme){
-        $.ajax({
-            url: '/api/switch_theme',
-            method: 'PUT',
-            data: {
-                current_theme: theme
-            },
-            dataType: 'json',
-            success: function(data){
-                 
-                return Materialize.toast("Theme changed. Wait for the page to reload",1000,"",function(){
-                 location.reload();
-                });
-                
-
-            },
-            error: function(err){
-                return Materialize.toast(err.responseText,2500);
-            }
-        });
-    }else {
-        Materialize.toast("That is the current theme. Choose another.",2500);
-    }
-    }
-
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
-});
 /////////NAV BAR///////////////////////////
 $(window).scroll(function() {
    if($(window).scrollTop()) {
@@ -220,4 +152,5 @@ $(window).on("scroll", function() {
         "height":"4vw"
      });  
     }
+});
 });

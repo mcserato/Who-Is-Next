@@ -379,15 +379,14 @@ $( document ).ready(function() {
 $(window).scroll(function() {
    if($(window).scrollTop()) {
       $('nav.z-depth-0').css({
-        'background': 'linear-gradient(to bottom,   rgba(192,192,192,1)  ,    rgba(192,192,192,0)  )'
+        'background': string1
       });
    }else if ($(window).scrollTop()==0){
       $('nav.z-depth-0').css({
-        'background': 'rgb(192,192,192)'
+        'background': string2
       });
    }
     if($(window).scrollTop()) {
-        console.log("asda");
             $('.logo').fadeIn('slow');
             $('.logo')
                 .css({'width':'184px','height':'60px'})    
