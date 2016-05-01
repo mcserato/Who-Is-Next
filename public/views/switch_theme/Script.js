@@ -1,5 +1,7 @@
 'use strict';
 
+var string1 = 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,192,192,0)  )';
+var string2 = 'rgb(192,192,192)';
 
 $(document).ready( function () {
 	 $.ajax({    
@@ -13,6 +15,7 @@ $(document).ready( function () {
                     }
 					if( data[0].current_theme == 1){
                     	//green
+                        string1 = 'linear-gradient(to bottom,   rgba(89,168,15,30)  ,    rgba(89,168,15,0)  )';
                     	$('body').css({
                     		"background-color":"rgb(196,237,104)"
                     		});
@@ -20,13 +23,17 @@ $(document).ready( function () {
                             "background-color":"#CFF09E"
                             });
                         $('nav').css({
-                            "background-color":"rgb(89,168,15)"
+                            "background-color":string1
                             });
+                        string2 = "rgb(89,168,15)";
                     	
                     }else if( data[0].current_theme == 2){
                     	//yellow
+                        string1 = 'linear-gradient(to bottom,   rgba(72,48,0,30)  ,   rgba(72,48,0,0))';
                     	$('body').css({
-                            "background-color":"rgb(240,240,72)"
+                            "background":"url(../../images/yellow.jpg)",
+                            "background-image":"no repeat",
+                            "background-size":"100% 100%"
                             });
                         $('.btn').css({
                             "background-color":"rgb(240,216,0)"
@@ -38,34 +45,47 @@ $(document).ready( function () {
                             "background-color":"rgb(240,216,0)"
                             });
                         $('nav').css({
-                            "background-color":"rgb(72,48,0)"
+                            "background-color":string1
                             });
                         $('.center').css({
                         	"color":"rgb(96,72,24)"
                         });
+                        string2 = "rgb(72,48,0)";
+
                     }else if (data[0].current_theme == 3){
-                    	//violet
+                    	//purple
+                        string1 = 'linear-gradient(to bottom,   rgba(28,11,43,30)  ,    rgba(28,11,43,0)  )';
                     	$('body').css({
-                    		"background-color":"rgb(92,101,192)"
+                    		"background":"url(../../images/purple.jpg)",
+                            "background-image":"no repeat",
+                            "background-size":"100% 100%"
                     		});
-                         $('nav').css({
+                        $('nav').css({
                             "background-color":"rgb(28,11,43)"
                             });
-                         $('.center').css({
+                        $('.center').css({
                             "color":"rgb(48,28,65)"
                             });
+                        $("a.brand-logo").css({
+                            "background-color":"rgb(26,9,41)"
+                            });
+                        
+                        string2 = "rgb(28,11,43)";
                         
                     }else if (data[0].current_theme == 4){
                     	//red
+                        string1 = 'linear-gradient(to bottom,   rgba(41,44,55,30)  ,    rgba(41,44,55,0)  )';
                     	$('body').css({
                     		"background-color":"rgb(177,22,35)"
                     		});
                          $('nav').css({
-                            "background-color":"rgb(41,44,55)"
+                            "background-color":string1
                             });
                          $('.center').css({
                          	color:"rgb(41,44,55)"
-                         })
+                         });
+                         string2 = "rgb(41,44,55)";
+
                     }else {
                     	//default
                     	console.log(data);
@@ -147,11 +167,11 @@ $(document).ready( function () {
 $(window).scroll(function() {
    if($(window).scrollTop()) {
       $('nav.z-depth-0').css({
-        'background': 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,192,192,0)  )'
+        'background': string1
       });
    }else{
     $('nav.z-depth-0').css({
-        'background': 'rgb(192,192,192)'
+        'background': string2
       });
 
    }
@@ -159,9 +179,26 @@ $(window).scroll(function() {
 });
 
 $(window).on("scroll", function() {
-    var s = 200 - Math.min(200, $(document).scrollTop());
-    if (s>70){
-     $("a.brand-logo").width(s).height(s);
-     $(".logo").width(s-25).height(s-25);
+    if ($(document).scrollTop()<10){
+        var size1 = (16-$(document).scrollTop()).toString() + "vw";
+        var size2 = (14-$(document).scrollTop()).toString() + "vw";
+
+     $("a.brand-logo").css({
+        "width":size1,
+        "height":size1
+     });
+     $(".logo").css({
+        "width":size2,
+        "height":size2
+     });
+    }else{
+      $("a.brand-logo").css({
+        "width":"6vw",
+        "height":"6vw"
+     });
+     $(".logo").css({
+        "width":"4vw",
+        "height":"4vw"
+     });  
     }
 });

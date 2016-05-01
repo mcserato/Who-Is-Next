@@ -43,22 +43,17 @@ $(document).ready( function () {
             });
 
         });
-if ($('input[type="checkbox"]').is(':checked')) {
-    console.log("sd");
-$('#password')[0].setAttribute('type','text');
-
-} else {
-$('#password')[0].setAttribute('type','password');
-}
-
 });
 
+    $('#test5').click(function(){
+    
+        if ($('.check_box').is(':checked')){
+            $('#password').attr('type', 'text');
+        }
+        else
+            $('#password').attr('type', 'password');
+    });
+
+
 $('.modal-trigger').leanModal();
-
-
-
-
-
-
-
 

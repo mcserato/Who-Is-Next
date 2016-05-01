@@ -409,7 +409,6 @@ nav.z-depth-0{
 	height:7vw;
 	box-shadow: 0 0.5vw 0 0 #CB494E;
 	background-color: #D8D8D8;
-
 }
 
 .logo:hover { 
@@ -446,4 +445,8 @@ a.brand-logo{
   60% {transform: rotateX(360deg);}
   80% {transform: rotateY(0deg);}
   100% {transform:rotateY(360deg);}
+}
+
+.card:hover{
+	cursor: pointer;
 }
