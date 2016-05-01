@@ -87,7 +87,7 @@ $(document).ready( function () {
             dataType: 'json',
             success: function(data){
                 return Materialize.toast("Successfully signed up. Wait to be validated.",2500,"",function(){
-                    return window.location.href = "http://localhost:8000/";
+                    return window.location.href = config.FRONTEND_URL;
                 });
 
             },
