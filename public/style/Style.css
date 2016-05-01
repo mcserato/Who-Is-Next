@@ -88,6 +88,22 @@ input[type=password]:focus:not([readonly])+label {
 	font-size: 120%;
 }*/
 
+#number-filter:focus + label,
+#batch-filter:focus + label {
+    color: #CB494E;
+}
+
+#number-filter:valid,
+#batch-filter:valid {
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
+}
+
+.input-field input[type=text].valid{
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
+}
+
 #logout-btn {
 	margin-top: 2%;
 	margin-right: 2%;

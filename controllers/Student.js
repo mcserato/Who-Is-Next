@@ -30,7 +30,7 @@ exports.add = function (req, res, next) {
                     }
                 );
             } else {
-                res.send(400, "Error: Student already exists!");
+                res.send(rows);
             }
         }
     );
