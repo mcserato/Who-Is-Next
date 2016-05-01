@@ -85,30 +85,116 @@ $(document).ready( function () {
                     number      :$('#number-filter').val()
                 },
                 success: function(data) {
-                    for(var i in data) {
-                        console.log(data[i]);
-                        alert(data[i].first_name + " " + data[i].last_name);
-                    }
+                    $('#logo-holder').slideUp();
+                    $('#randomize-form').slideUp();
+                    $('#header').slideUp();
+
+                    $('#randomize-form').promise().done(function(){
+                        $('#randomizer-holder').show();
+                        // Import animation of dice and arrow
+                        $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
+                        // Remove animation
+                        setTimeout(function(){
+                            document.getElementById("animation-css").remove();
+
+                            for(var i in data) {
+                                console.log(data[i]);
+                                alert(data[i].first_name + " " + data[i].last_name);
+                            }
+                        }, 3100);
+                    });
                 },
                 dataType: "JSON"
-            });
-       
-            $('#logo-holder').slideUp();
-            $('#randomize-form').slideUp();
-            $('#header').slideUp();
-
-            $('#randomize-form').promise().done(function(){
-                $('#randomizer-holder').show();
-                // Import animation of dice and arrow
-                $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
-                // Remove animation
-                setTimeout(function(){
-                    document.getElementById("animation-css").remove();
-                }, 3100);
-                setTimeout(function(){
-                    // Put random effect here
-                }, 3100); 
             });
     });
      
 });
+
+/* RANDOMIZER EFFECTS */
+
+/* Honeycomb Effect */
+// Creates the hexagon grid of volunteers
+function insertHexagon(data) {
+    var newline = true;
+    var maxHexagon = parseInt(window.innerWidth/150);
+    var minHexagon = maxHexagon-1;
+    var limit = maxHexagon;
+    var val = parseInt(window.innerWidth/150);
+
+    for(var i = 0; i < data.length; i ++){
+        $('#volunteers-grid').append(
+            "<div class='card-grid' id='card-grid"+i +"'>" +
+            "<div class='front'>" +
+            "<div class='hexagon unflipped'>" +                            
+            "<div class='hexTop'></div>"+
+            "<div class='hexBottom'></div>"+
+            "</div>"+
+            "</div>"+
+            "<div class='back'>"+
+            "<div class='hexagon flipped' id='volunteer"+i+"'>"+
+            "<div class='hexTop'></div>"+
+            "<div class='hexBottom'></div>"+
+            "</div>"+
+            "<p class='volunteer-name'>"+data[i].last_name+"</p>"+
+
+            "</div></div>"     
+        );
+        $("#volunteer"+i).css("background-image", "url(images/09.png)"); 
+
+        if(i == limit){
+            if(newline) newline = false;
+            else newline = true;
+
+            $("#card-grid"+i).css("clear", "left"); 
+            if(val == maxHexagon) val = minHexagon;
+            else val = maxHexagon;      
+
+            limit = limit + val;            
+        }
+
+        if(newline) $("#card-grid" + i).css("left", "10%");     
+        else $("#card-grid" + i).css("left", "15.5%");               
+    }
+}
+
+ // Shows volunteers one by one   
+function showVolunteers(data){
+    var done = [];      
+    var int = setInterval(function(){
+    var showHex = Math.floor((Math.random() * data.length)); 
+    
+    while($.inArray(showHex, done)!=-1){
+        showHex = Math.floor((Math.random() * data.length)); 
+    }
+        $("#card-grid" + showHex).flip(true);
+        done.push(showHex);
+        if(done.length == data.length){
+            clearInterval(int);
+        }
+    }, 1000);
+
+    // Enable flip.js 
+    $(".card-grid").flip({         
+       forceWidth: true,
+       forceHeight: true,
+       trigger:"manual",
+    });
+}
+
+
+/* Zoom In Effect */
+function zoomInImage(data){
+    $(".pic").animate({
+        width: "70%",
+        heigth: "50%",
+        opacity: 1,
+        left: "15%",
+        top:"15%",
+        borderWidth: "10px"
+    }, 3000);
+
+    setTimeout(function(){
+      $('#volunteers-grid').append('<h4 class=".name">' + data[0].last_name + '</h4>');
+    });
+}
+
