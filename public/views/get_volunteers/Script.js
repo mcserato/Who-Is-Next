@@ -2,6 +2,7 @@
 
 $(document).ready( function () {
 
+
     $('#logout-btn')
         .click(function(){
 
@@ -23,7 +24,7 @@ $(document).ready( function () {
             });
 
         });
-  
+
     $.ajax({
         url: '/api/class2/',
         method: 'GET',
@@ -32,29 +33,29 @@ $(document).ready( function () {
             var courses = data.degree_programs;
             var college = data.colleges;
 
-            for(var i in classes) {      
+            for(var i in classes) {
                 $('#class-filter').append(
                     '<option value=' + classes[i].class_id + '>' + classes[i].course_code + ' ' + classes[i].class_section + (classes[i].section_number || '') +'</option>'
                 );
             }
-            
+
             for (var i in courses) {
                 $('#course-filter').append(
                     '<option value=' + courses[i].course + '>' + courses[i].course + '</option>'
                 );
             }
-            
+
             for (var i in college) {
                 $('#college-filter').append(
                     '<option value='+ college[i].college + '>' + college[i].college + '</option>'
                 );
-            } 
+            }
         },
         error: function(err){
             return Materialize.toast(err.responseText,2500);
         }
     });
-        
+
     $('#logo-holder').hide();
     $('#randomize-form').hide();
     $('#header').hide();
@@ -76,7 +77,7 @@ $(document).ready( function () {
             }
 
             var class_id = $('#class-filter').val();
-            
+
             $.ajax({
                 url: '/api/randomizer/' + class_id,
                 method: 'POST',
@@ -93,13 +94,16 @@ $(document).ready( function () {
                 success: function(data) {
                     for(var i in data) {
                         console.log(data[i]);
-                        alert(data[i].first_name + " " + data[i].last_name);
+                        //alert(data[i].first_name + " " + data[i].last_name);
+
                     }
+                    $("#modal-names").openModal();
+                    jumbleWords(data);
                 },
                 dataType: "JSON"
             });
-       
-            $('#logo-holder').slideUp();
+
+            /*$('#logo-holder').slideUp();
             $('#randomize-form').slideUp();
             $('#header').slideUp();
 
@@ -113,8 +117,67 @@ $(document).ready( function () {
                 }, 3100);
                 setTimeout(function(){
                     // Put random effect here
-                }, 3100); 
-            });
+                }, 3100);
+            });*/
     });
-     
+
 });
+
+function jumbleWords(data){
+    var i=0;
+    $("#list").empty();
+
+    for(i=0; i<data.length; i++){
+        if(i%2==0){
+            $("#list").append("<div><div class='listname1' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
+        }
+        else {
+            $("#list").append("<div><div class='listname2' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
+        }
+    }
+
+    $('h4').delay(2000).animate({opacity:1.0});
+    for(i=0; i<data.length; i++){
+        if(i%2==0){
+            $('#name'+i+' h4').textEffect({
+                effect: "jumble",
+                effectSpeed: 2000
+            });
+        }
+        else{
+            $('#name'+i+' h4').textEffect({
+                effect: "jumble",
+                effectSpeed: 2000,
+                reverse: true
+            });
+        }
+
+    }
+}
+
+function enterName(data){
+    var i=0;
+    $("#list").empty();
+    for(i=0; i<data.length; i++){
+        if(i%2==0){
+            $("#list").append("<div><div class='listname1' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
+        }
+        else {
+            $("#list").append("<div><div class='listname2' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
+        }
+    }
+    //var names = $('.name');
+    $("h4").css({opacity:1});
+    for(i=0; i<data.length; i++){
+        if(i%2==0){
+            $("#name"+i).delay(i*1000).animate({
+                left:'20%'
+            }, 3000 );
+        }
+        else{
+            $("#name"+i).delay(i*1000).animate({
+                right:'20%'
+            }, 3000 );
+        }
+    }
+}
