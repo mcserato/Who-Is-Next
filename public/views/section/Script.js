@@ -460,7 +460,7 @@ $(document).ready( function () {
         });
     }
 
-    refresh();
+    //refresh();
 
     /* Add Section */
     $('#add-section-form').submit(function (event) {
@@ -555,7 +555,7 @@ $(document).ready( function () {
         return false;
     });
 
-    $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
+    //$("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
     $.ajax({
         url: '/api/class/' + localStorage.course_code,
