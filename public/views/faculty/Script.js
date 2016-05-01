@@ -73,7 +73,7 @@ $(document).ready( function () {
 	            add_data(data);
 	        },
 	        error: function(err){
-	            return Materialize.toast(err.responseText,2500);
+	            util.errorHandler(err);
 	        }
 	    });	
     }
@@ -106,7 +106,7 @@ $(document).ready( function () {
             function(err){
                 if(e.keyCode == 13){
                 	Refresh();
-                    return Materialize.toast(err.responseText,2500);    
+                    util.errorHandler(err);    
                 }
             }
         });
@@ -128,7 +128,7 @@ $(document).ready( function () {
 	                window.location.href = '/';
 	            },
 	            error: function(err){
-	                return Materialize.toast(err.responseText,2500);
+	                util.errorHandler(err);
 	            }
 	        });
 

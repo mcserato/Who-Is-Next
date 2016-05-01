@@ -67,7 +67,7 @@ $(document).ready( function () {
 
                         },
                         error: function(err){
-                            return Materialize.toast(err.responseText,2500);
+                            util.errorHandler(err);
                         }
                     });
             });
@@ -84,7 +84,7 @@ $(document).ready( function () {
                 add_data(data);
             },
             error: function(err){
-                return Materialize.toast(err.responseText,2500);
+                util.errorHandler(err);
             }
         });
     }
@@ -99,33 +99,10 @@ $(document).ready( function () {
             },
             error: function(err){
                 refresh();
-                return Materialize.toast(err.responseText,2500);
+                util.errorHandler(err);
             }
         });
     }
-
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
-
 
     $('#search-student').keypress(function (e) {
         if (e.keyCode == 13) {

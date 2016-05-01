@@ -66,7 +66,7 @@ $(document).ready( function () {
 
                     },
                     error: function(err){
-                        return Materialize.toast(err.responseText,2500);
+                        util.errorHandler(err);
                     }
                 });
             });
@@ -89,7 +89,7 @@ $(document).ready( function () {
 
             },
             error: function(err){
-                return Materialize.toast(err.responseText,2500);
+                util.errorHandler(err);
             }
         });    
     }
@@ -136,36 +136,13 @@ $(document).ready( function () {
                     addItem(searchdata);
                 },
                 error: function(err){
-                    //console.log(err.responseText);
                     if(e.keyCode == 13){
                         Refresh();
-                        return Materialize.toast(err.responseText,2500);    
+                        util.errorHandler(err);
                     }
                 }
             });
     });
-    
-    $('#logout-btn')
-        .click(function () {
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function (data) {
-                    if(!data) {
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function (err) {
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
     
     /* View Students in a Class*/
     Refresh();
@@ -174,22 +151,6 @@ $(document).ready( function () {
     $('#randomize')
         .click(function(){
             alert("hello");
-            /*$.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });*/
         });
 
     const content = $('#student-list');
@@ -270,7 +231,7 @@ $(document).ready( function () {
 
                     },
                     error: function (err) {
-                        return Materialize.toast(err.responseText,2500);
+                        util.errorHandler(err);
                     }
                 });
             });
@@ -296,13 +257,13 @@ $(document).ready( function () {
 
                     },
                     error: function(err){
-                        return Materialize.toast(err.responseText,2500);
+                        util.errorHandler(err);
                     }
                 });
             });
         },
         error: function (err) {
-            return Materialize.toast(err.responseText,2500);
+            util.errorHandler(err);
         }
     });
     

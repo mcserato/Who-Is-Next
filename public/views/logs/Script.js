@@ -24,8 +24,8 @@ $(document).ready( function () {
     				].join(''));
     		}
     	},
-    	error: function (data) {
-    		console.log(data);
+    	error: function (err) {
+            util.errorHandler(err);
     	}
     });
     

@@ -86,7 +86,7 @@ $(document).ready( function () {
                         return Materialize.toast("Successfully deleted class!",2500);
                     },
                     error: function(err){
-                        return Materialize.toast(err.responseText,2500);
+                        util.errorHandler(err);
                     }
                 });
             });
@@ -122,7 +122,7 @@ $(document).ready( function () {
                 add_class(data);
             },
             error: function(err){
-                return Materialize.toast(err.responseText,2500);
+                util.errorHandler(err);
             }
         });
     }
@@ -161,7 +161,7 @@ $(document).ready( function () {
             error: function(err){
                 if(e.keyCode == 13){
                     refresh();
-                    return Materialize.toast(err.responseText,2500);
+                    util.errorHandler(err);
                 }
             }
         });
@@ -309,7 +309,7 @@ $(document).ready( function () {
                             return Materialize.toast("Successfully deleted class!",2500);
                         },
                         error: function(err){
-                            return Materialize.toast(err.responseText,2500);
+                            util.errorHandler(err);
                         }
                     });
                 });
@@ -338,7 +338,7 @@ $(document).ready( function () {
 
         },
         error: function(err){
-            return Materialize.toast(err.responseText,2500);
+            util.errorHandler(err);
         }
     });
 
