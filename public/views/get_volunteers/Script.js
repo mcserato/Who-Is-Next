@@ -68,6 +68,14 @@ $(document).ready( function () {
         $('#female-filter').prop('checked', true);
     });
 
+    $("#start-again").click(function(){
+        $('#logo-holder').show();
+        $('#randomize-form').show();
+        $('#header').show();
+        $('#container-list').hide();
+
+    });
+
  $('#randomize').click(function(){
         var checked = $('input[type=checkbox]:checked').length;
 
@@ -117,8 +125,9 @@ $(document).ready( function () {
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
-
-                            $("#modal-names").openModal();
+                            $('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
                             jumbleWords(data);
                         }, 3100);
                     });
@@ -133,7 +142,7 @@ $(document).ready( function () {
     });
 
 });
-  
+
 
 /* RANDOMIZER EFFECTS */
 
@@ -150,7 +159,7 @@ function insertHexagon(data) {
         $('#volunteers-grid').append(
             "<div class='card-grid' id='card-grid"+i +"'>" +
             "<div class='front'>" +
-            "<div class='hexagon unflipped'>" +                            
+            "<div class='hexagon unflipped'>" +
             "<div class='hexTop'></div>"+
             "<div class='hexBottom'></div>"+
             "</div>"+
@@ -162,34 +171,34 @@ function insertHexagon(data) {
             "</div>"+
             "<p class='volunteer-name'>"+data[i].last_name+"</p>"+
 
-            "</div></div>"     
+            "</div></div>"
         );
-        $("#volunteer"+i).css("background-image", "url(images/09.png)"); 
+        $("#volunteer"+i).css("background-image", "url(images/09.png)");
 
         if(i == limit){
             if(newline) newline = false;
             else newline = true;
 
-            $("#card-grid"+i).css("clear", "left"); 
+            $("#card-grid"+i).css("clear", "left");
             if(val == maxHexagon) val = minHexagon;
-            else val = maxHexagon;      
+            else val = maxHexagon;
 
-            limit = limit + val;            
+            limit = limit + val;
         }
 
-        if(newline) $("#card-grid" + i).css("left", "10%");     
-        else $("#card-grid" + i).css("left", "15.5%");               
+        if(newline) $("#card-grid" + i).css("left", "10%");
+        else $("#card-grid" + i).css("left", "15.5%");
     }
 }
 
- // Shows volunteers one by one   
+ // Shows volunteers one by one
 function showVolunteers(data){
-    var done = [];      
+    var done = [];
     var int = setInterval(function(){
-    var showHex = Math.floor((Math.random() * data.length)); 
-    
+    var showHex = Math.floor((Math.random() * data.length));
+
     while($.inArray(showHex, done)!=-1){
-        showHex = Math.floor((Math.random() * data.length)); 
+        showHex = Math.floor((Math.random() * data.length));
     }
         $("#card-grid" + showHex).flip(true);
         done.push(showHex);
@@ -198,8 +207,8 @@ function showVolunteers(data){
         }
     }, 1000);
 
-    // Enable flip.js 
-    $(".card-grid").flip({         
+    // Enable flip.js
+    $(".card-grid").flip({
        forceWidth: true,
        forceHeight: true,
        trigger:"manual",
@@ -226,6 +235,7 @@ function zoomInImage(data){
 function jumbleWords(data){
     var i=0;
     $("#list").empty();
+    $("#list").append("<h3>Volunteers</h3>");
 
     for(i=0; i<data.length; i++){
         if(i%2==0){
@@ -236,18 +246,18 @@ function jumbleWords(data){
         }
     }
 
-    $('h4').delay(2000).animate({opacity:1.0});
+    $('h4').delay(200).animate({opacity:1.0});
     for(i=0; i<data.length; i++){
         if(i%2==0){
             $('#name'+i+' h4').textEffect({
                 effect: "jumble",
-                effectSpeed: 2000
+                effectSpeed: 200
             });
         }
         else{
             $('#name'+i+' h4').textEffect({
                 effect: "slide",
-                effectSpeed: 2000,
+                effectSpeed: 200,
                 reverse: true
             });
         }

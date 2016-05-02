@@ -29,10 +29,10 @@ exports.getVolunteers = function (req, res, next) {
         query += " AND MONTH(birthday) = " + req.body.birthday + " ";
     }
     if(req.body.course!=""){
-        query += " AND course = " + req.body.course + " ";
+        query += " AND course = '" + req.body.course + "' ";
     }
     if(req.body.college!=""){
-        query += " AND college = " + req.body.college + "";
+        query += " AND college = '" + req.body.college + "'";
     }
     if(req.body.batch!=""){
         query += " AND student_number like '" + req.body.batch + "%' ";

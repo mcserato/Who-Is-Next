@@ -15,7 +15,7 @@ var navbar = {
                 '<div class="navbar-wrapper">',
                     '<nav class="z-depth-0">',
                         '<a href="/" class="brand-logo black-text center">',
-                            '<img src="/../../icon/logo1.png" class="logo"/>',
+                            '<img id="logo-holder" src="/../../icon/logo1.png" class="logo"/>',
                         '</a>',
                           '<ul class="user-menu right">',
                             '<li><h5 id="user-name" style="margin-top:35px;"></h5></li>',

@@ -145,7 +145,7 @@ $(document).ready( function () {
     });
 
     /* View Students in a Class*/
-    Refresh();
+   // Refresh();
 
     $('#randomize')
         .click(function(){
