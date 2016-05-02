@@ -2,7 +2,11 @@
 
 $(document).ready( function () {
 	const content = $('#student-list');
-	function addItem (data) {
+	
+    navbar.init('#navbar');
+    sidebar.init('#sidebar');
+
+    function addItem (data) {
         for (var student in data){
             var row = $("<li></li>");
             row.attr("id", data[student].student_number);

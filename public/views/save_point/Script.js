@@ -3,6 +3,9 @@
 $(document).ready( function () {
     const content = $('#save-list');
 
+    navbar.init('#navbar');
+    sidebar.init('#sidebar');
+
     function add_save (data) {
         var color_flag = 0; // For alternating the color
         var num_flag = 0;   // For althernating number per row

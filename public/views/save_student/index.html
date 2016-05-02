@@ -11,36 +11,8 @@
         <script src="../../script/Materialize.js"></script>
     </head>
    <body>
-        <div class="navbar-fixed">
-            <div class="navbar-wrapper">
-                <nav class="z-depth-0">
-                    <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
-
-                    <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
-                </nav>
-            </div>
-        </div>
-
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large red z-depth-0 black">
-                <i class="large material-icons">menu</i>
-            </a>
-            <ul>
-                <li><a href="/views/class" class="btn-floating black" href="" title="Class"><i class="material-icons">class</i></a></li>
-                <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
-                <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
-                <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
-                <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">invert_colors</i></a></li>
-                <li><a href="/views/save_point" class="btn-floating black" href="" title="Save Point"><i class="material-icons">archive</i></a></li>
-                <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
-                <li>
-                    <!-- Modal Trigger -->
-                        <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
-                            <i id="edit-icon" class="material-icons">mode_edit</i>
-                        </a>
-               </li>
-            </ul>
-        </div>
+        <div id="navbar"></div>
+        <div id="sidebar"></div>
 
         <div class="container">
             <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
@@ -60,8 +32,12 @@
             </div>
         </div>
 
-        <script src="../../script/Config.js"></script>
+        <script src="../nav_bar/Script.js"></script>
+        <script src="../sidebar/Script.js"></script> 
         <script src="../../script/Script.js"></script>
+        <script src="../../script/Config.js"></script>
+        <script src="../../script/Theme.js"></script>
+        <script src="../../script/Util.js"></script>
         <script src="./Script.js"></script>
     </body>
 </html>
