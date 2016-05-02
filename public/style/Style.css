@@ -360,6 +360,8 @@ input[type=password]:focus:not([readonly])+label {
 	padding:1vw 1.5vw;
 	background-color: rgba(255,255,255,0.8);
 	border-radius: 1vw;
+  font-family:roboto;
+  font-weight: bold;
 	font-weight:900;
 }
 h3.center{
