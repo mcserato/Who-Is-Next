@@ -74,6 +74,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/class',
                     method: 'DELETE',
+                    headers: util.headers,
                     data: {
                         course_code: course_code
                     },
@@ -115,6 +116,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/class',
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -143,6 +145,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/class/search/' + $(this).val(),
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -179,6 +182,7 @@ $(document).ready( function () {
         $.ajax({
             type: "POST",
             url: "/api/class",
+            headers: util.headers,
             data: {
                 course_code: course_code,
                 course_title: course_title,
@@ -207,6 +211,7 @@ $(document).ready( function () {
         $.ajax({
             type: "PUT",
             url: "/api/class2",
+            headers: util.headers,
             data: {
                 course_code: course_code,
                 course_title: course_title,
@@ -229,6 +234,7 @@ $(document).ready( function () {
     $.ajax({
         url: '/api/class',
         method: 'GET',
+        headers: util.headers,
         success: function(data){
             if(!data){
                 return Materialize.toast("Error in fetching data",2500);
@@ -297,6 +303,7 @@ $(document).ready( function () {
                     $.ajax({
                         url: '/api/class',
                         method: 'DELETE',
+                        headers: util.headers,
                         data: {
                             course_code: course_code
                         },
@@ -322,7 +329,8 @@ $(document).ready( function () {
                     /* Auto-fills up form of selected edit class*/
                     $.ajax({
                         type: "GET",
-                        url: "/api/class/" + localStorage.class_id
+                        url: "/api/class/" + localStorage.class_id,
+                        headers: util.headers,
                     }).done(function(info){
                         $("#course_code_edit").val(info[0].course_code);
                         $("#course_title_edit").val(info[0].course_title);

@@ -44,6 +44,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/student/' + $(this).attr("id"),
                     method: 'GET',
+                    headers: util.headers,
                     success: function(data_student){
                         $('#student_header').empty();
                         $('#student_number').empty();
@@ -77,6 +78,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/class_student/' + localStorage.class_id,
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -128,6 +130,7 @@ $(document).ready( function () {
             $.ajax({
                 url: '/api/class_student/search/' + localStorage.class_id +'/' + $(this).val(),
                 method: 'GET',
+                headers: util.headers,
                 success: function(searchdata){
                     if(!searchdata){
                         Refresh();
@@ -148,11 +151,6 @@ $(document).ready( function () {
     /* View Students in a Class*/
     //Refresh();
 
-    $('#randomize')
-        .click(function(){
-            alert("hello");
-        });
-
     //const content = $('#student-list');
     //config.checkAuth("FACULTY");
 
@@ -160,6 +158,7 @@ $(document).ready( function () {
     $.ajax({
         url: '/api/class_student/' + localStorage.class_id,
         method: 'GET',
+        headers: util.headers,
         success: function (data) {
             console.log(localStorage);
             if(!data) {
@@ -210,7 +209,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/student/' + $(this).attr("id"),
                     method: 'GET',
-
+                    headers: util.headers,
                     success: function (data_student) {
                         $('#student_header').empty();
                         $('#student_number').empty();
@@ -243,6 +242,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/student/' + $(this).attr("student_number"),
                     method: 'GET',
+                    headers: util.headers,
                     success: function(data_student){
 
                         $('#student_number_edit').val(data_student[0].student_number);
@@ -287,6 +287,7 @@ $(document).ready( function () {
         $.ajax({
             type: "PUT",
             url: "/api/student",
+            headers: util.headers,
             data: {
                 student_number_new: student_number,
                 first_name: first_name,
@@ -336,6 +337,7 @@ $(document).ready( function () {
             $.ajax({
                 type: "POST",
                 url: "/api/student",
+                headers: util.headers,
                 data: {
                     student_number: student_number,
                     first_name: first_name,
@@ -352,6 +354,7 @@ $(document).ready( function () {
                     $.ajax({
                         type: "POST",
                         url: "/api/class_student",
+                        headers: util.headers,
                         data: {
                             class_id: localStorage.class_id,
                             student_number: student_number,

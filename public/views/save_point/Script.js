@@ -41,6 +41,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/save_point',
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);

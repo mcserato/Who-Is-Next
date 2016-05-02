@@ -11,6 +11,7 @@ $(document).ready( function () {
 	 $.ajax({    
                 url: '/api/switch_theme',
                 method: 'GET',
+                headers: util.headers,
                 success: function(data){
                   
                     
@@ -143,6 +144,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/switch_theme',
             method: 'PUT',
+            headers: util.headers,
             data: {
                 current_theme: theme
             },

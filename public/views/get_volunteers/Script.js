@@ -11,6 +11,7 @@ $(document).ready( function () {
     $.ajax({
         url: '/api/class2/',
         method: 'GET',
+        headers: util.headers,
         success: function(data) {
             var classes = data.classes;
             var courses = data.degree_programs;
@@ -92,6 +93,7 @@ $(document).ready( function () {
             $.ajax({
                 url: '/api/randomizer/' + class_id,
                 method: 'POST',
+                headers: util.headers,
                 data: {
                     class_id    : class_id,
                     last_name   :$('#last-name-filter').val(),
