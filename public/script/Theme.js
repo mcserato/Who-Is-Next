@@ -58,6 +58,9 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(70,46,2)"
                             });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
 
                         string2 = "rgb(72,48,0)";
                         temp = 2;
@@ -78,6 +81,13 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(26,9,41)"
                             });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
+                        
                         
                         string2 = "rgb(28,11,43)";
                         temp = 3;
@@ -98,6 +108,9 @@ $(document).ready( function () {
                          $("a.brand-logo").css({
                             "background-color":"rgb(39,42,57)"
                             });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
 
                          string2 = "rgb(41,44,55)";
                          temp = 4;
