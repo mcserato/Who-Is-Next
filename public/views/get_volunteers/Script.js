@@ -125,11 +125,21 @@ $(document).ready( function () {
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
+                           /* $('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
+                            jumbleWords(data);*/
+
                             $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
-                            //jumbleWords(data);
-                            zoomInImage(data);
+                            insertHexagon(data);
+
+                            /*$('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
+                            zoomInImage(data);*/
+
                         }, 3100);
                     });
 
@@ -151,13 +161,15 @@ $(document).ready( function () {
 // Creates the hexagon grid of volunteers
 function insertHexagon(data) {
     var newline = true;
-    var maxHexagon = parseInt(window.innerWidth/150);
+    var width = $('#list').width();
+    var maxHexagon = 6;
     var minHexagon = maxHexagon-1;
     var limit = maxHexagon;
-    var val = parseInt(window.innerWidth/150);
+    var val = 6;
 
+    $('#list').html("");
     for(var i = 0; i < data.length; i ++){
-        $('#volunteers-grid').append(
+        $('#list').append(
             "<div class='card-grid' id='card-grid"+i +"'>" +
             "<div class='front'>" +
             "<div class='hexagon unflipped'>" +
@@ -187,9 +199,23 @@ function insertHexagon(data) {
             limit = limit + val;
         }
 
+
         if(newline) $("#card-grid" + i).css("left", "10%");
-        else $("#card-grid" + i).css("left", "15.5%");
+        else $("#card-grid" + i).css("left", "16%");
     }
+
+     $("#start-again-div").css("position", "absolute");
+     $("#start-again-div").css("bottom", "10%");
+     $("#start-again-div").css("left", "40%");
+     $("#list").css("left", "80%");
+     // Enable flip.js
+    $(".card-grid").flip({
+       forceWidth: true,
+       forceHeight: true,
+       trigger:"manual",
+    });
+
+    showVolunteers(data);
 }
 
  // Shows volunteers one by one
@@ -208,12 +234,6 @@ function showVolunteers(data){
         }
     }, 1000);
 
-    // Enable flip.js
-    $(".card-grid").flip({
-       forceWidth: true,
-       forceHeight: true,
-       trigger:"manual",
-    });
 }
 
 
