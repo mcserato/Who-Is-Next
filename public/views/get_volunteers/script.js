@@ -4,7 +4,7 @@ var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.j
 var done = [];
 var x, randomBalloonNum, flag = 0;
 
-console.log(i);
+console.log(i);	
 
 for(var index = 0; index < i; index++) {
 
@@ -27,12 +27,12 @@ for(var index = 0; index < i; index++) {
 	var outerDiv = $("<div></div>");
 	outerDiv.addClass("balloon");
 	outerDiv.addClass("balloon" + randomBalloonNum);
-	outerDiv.attr('style', 'background-image: url("../../sample animations/flying-hexagon/images/' + pics[index] + '")');
+	outerDiv.attr('style', 'background-image: url("images/' + pics[index] + '")');
 	var hexTop = $("<div></div>");
-	hexTop.addClass("hexTop");
+	hexTop.addClass("hex2Top");
 
 	var hexBottom = $("<div></div>");
-	hexBottom.addClass("hexBottom");
+	hexBottom.addClass("hex2Bottom");
 
 	outerDiv.append(hexTop);
 	outerDiv.append(hexBottom);
@@ -41,5 +41,5 @@ for(var index = 0; index < i; index++) {
 }
 
 setTimeout(function(){
-    document.getElementById("animation-css").remove();
-}, 24000);
+        document.getElementById("animation-css").remove();
+    }, 24000);

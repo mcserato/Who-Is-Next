@@ -129,16 +129,21 @@ $(document).ready( function () {
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             jumbleWords(data);*/
-
+                            /*
                             $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             insertHexagon(data);
-
+                            */
                             /*$('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             zoomInImage(data);*/
+
+                            $('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
+                            flyingHexagon(data);
 
                         }, 3100);
                     });
@@ -234,6 +239,59 @@ function showVolunteers(data){
         }
     }, 1000);
 
+}
+
+function flyingHexagon(data) {
+    $('#start-again-div').hide();
+    var balloonDiv = $("#list");
+    var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
+    var done = [];
+    var x, randomBalloonNum, flag = 0;
+
+    for(var index = 0; index < data.length; index++) {
+
+        console.log(data[index].first_name);
+
+        while(1) {
+            flag = 0;
+            randomBalloonNum = parseInt(Math.floor(Math.random() * 28 + 1));
+
+            for(x = 0; x < done.length; x++) {
+                if(done[x] == randomBalloonNum) {
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if(flag == 0) break;
+        }
+
+        done.push(randomBalloonNum);
+
+        var outerDiv = $("<div></div>");
+        outerDiv.addClass("balloon");
+        outerDiv.addClass("balloon" + randomBalloonNum);
+        outerDiv.attr('style', 'background-image: url("images/' + pics[index] + '")');
+        var hexTop = $("<div></div>");
+        hexTop.addClass("hex2Top");
+
+        var hexBottom = $("<div></div>");
+        hexBottom.addClass("hex2Bottom");
+
+        outerDiv.append(hexTop);
+        outerDiv.append(hexBottom);
+        balloonDiv.append(outerDiv);
+
+    }
+
+    setTimeout(function(){
+        document.getElementById("hexaloon").remove();
+    }, 24000);
+    $('#start-again-div').fadeIn();
+    $("#start-again-div").css("position", "absolute");
+    $("#start-again-div").css("bottom", "10%");
+    $("#start-again-div").css("left", "40%");
+    $("#list").css("left", "80%");
 }
 
 
