@@ -113,15 +113,13 @@ module.exports = function (router) {
     router.route('/api/student/:student_number')
         .get(student.viewOne);
 
-    //--------------------------------------- GAUVEN HELP. Tama po ba to?
-    router.route('/api/viewsave')
-        .get(savedb.view);
-    router.route('/api/viewsave/:save_id')
-        .post(savedb.save)
-    router.route('/api/viewsave/:save_id')
-        .delete(savedb.remove)
-    router.route('/api/viewsave/:save_name')
-        .get(savedb.find);
+    //--------------------------------------- 
+    router.route('/api/save_point')
+        .get(savedb.viewAll);
+
+    router.route('/api/save_point/:save_id')
+        .get(savedb.viewOne);
+    
 
     router.route('/api/logs')
         .get(log.read);
