@@ -40,6 +40,9 @@ module.exports = function (router) {
     router.route('/api/logout')
         .post(authenticate.logout);
 
+    router.route('/api/session')
+        .get(authenticate.checkSession);
+
     //---------------------------------------
     router.route('/api/class')
         .post(class_.add)
