@@ -4,7 +4,7 @@ $(document).ready( function () {
     navbar.init('#navbar');
     sidebar.init('#sidebar');
 
-    const content = $('#student-list');
+    var content = $('#student-list');
 
     function addItem (data) {
         for (var student in data){
@@ -121,12 +121,10 @@ $(document).ready( function () {
             content.empty();
 
 
-            console.log($(this).val());
             if($(this).val() == ''){
                 return;
             }
 
-            console.log(localStorage.class_id);
             $.ajax({
                 url: '/api/class_student/search/' + localStorage.class_id +'/' + $(this).val(),
                 method: 'GET',
@@ -160,7 +158,6 @@ $(document).ready( function () {
         method: 'GET',
         headers: util.headers,
         success: function (data) {
-            console.log(localStorage);
             if(!data) {
                 return Materialize.toast("Error in fetching data",2500);
             }
@@ -330,10 +327,8 @@ $(document).ready( function () {
         var birthday = $("#birthday").val();
         if (!student_number.match(/^[0-9]{4}-[0-9]{5}$/)) {
             Materialize.toast("Invalid student number", 1000);
-            console.log("Invalid student number");
         } else {
             /* Add Student */
-            console.log('yay');
             $.ajax({
                 type: "POST",
                 url: "/api/student",

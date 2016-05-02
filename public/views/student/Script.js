@@ -48,7 +48,6 @@ $(document).ready( function () {
                         method: 'GET',
                         headers: util.headers,
                         success: function(data_student){
-                            console.log(data_student[0]);
                             $('#student_header').empty();
                             $('#student_number').empty();
                             $('#student_name').empty();

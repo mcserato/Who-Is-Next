@@ -103,7 +103,7 @@ $(document).ready( function () {
 
                         $('#' + emp_num).remove();
                         return Materialize.toast("Successfully deleted faculty!",2500,"",function(){
-                            return window.location.href = "http://localhost:8000/views/admin/";
+                            return window.location.href = "/views/faculty/";
                         });
                     },
                     error: function(err){
@@ -177,32 +177,6 @@ $(document).ready( function () {
             }
         });
     });
-
-    $('.remove')
-            .click(function(){
-                var course_code = $(this).attr("course_code");
-                if(!confirm("Are you sure you want to delete this class?")) return false;
-                $.ajax({
-                    url: '/api/class',
-                    method: 'DELETE',
-                    headers: util.headers,
-                    data: {
-                        course_code: course_code
-                    },
-                    dataType: "JSON",
-                    success: function(data){
-                        if(!data){
-                            return Materialize.toast("Error in deleting. Please try again!",2500);
-                        }
-
-                        $('#' + course_code).remove();
-                        return Materialize.toast("Successfully deleted class!",2500);
-                    },
-                    error: function(err){
-                        return Materialize.toast(err.responseText,2500);
-                    }
-                });
-            });
 
     Refresh();
 
