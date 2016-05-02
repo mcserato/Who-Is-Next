@@ -35,7 +35,7 @@ exports.getVolunteers = function (req, res, next) {
         query += " AND college = '" + req.body.college + "'";
     }
     if(req.body.batch!=""){
-        query += " AND student_number like '" + req.body.batch + "%' ";
+        query += " AND s.student_number like '" + req.body.batch + "%' ";
     }
     console.log(query);
     db.query("SELECT first_name, last_name FROM STUDENT s, CLASS_STUDENT cs, " +
