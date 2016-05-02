@@ -116,7 +116,7 @@ $(document).ready( function () {
 
 /////////NAV BAR///////////////////////////
 $(window).scroll(function() {
-   if($(window).scrollTop()) {
+   /*if($(window).scrollTop()) {
       $('nav.z-depth-0').css({
         'background': string1
       });
@@ -125,14 +125,17 @@ $(window).scroll(function() {
         'background': string2
       });
 
-   }
+   }*/
 
 });
 
 $(window).on("scroll", function() {
     if ($(document).scrollTop()<10){
-        var size1 = (16-$(document).scrollTop()).toString() + "vw";
-        var size2 = (14-$(document).scrollTop()).toString() + "vw";
+        var size1 = (8-$(document).scrollTop()).toString() + "vw";
+        var size2 = (6-$(document).scrollTop()).toString() + "vw";
+
+    console.log(size1);
+    console.log(size2);
 
      $("a.brand-logo").css({
         "width":size1,
@@ -144,12 +147,12 @@ $(window).on("scroll", function() {
      });
     }else{
       $("a.brand-logo").css({
-        "width":"6vw",
-        "height":"6vw"
+        "width":"8vw",
+        "height":"8vw"
      });
      $(".logo").css({
-        "width":"4vw",
-        "height":"4vw"
+        "width":"6vw",
+        "height":"6vw"
      });  
     }
 });

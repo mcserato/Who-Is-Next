@@ -5,6 +5,9 @@ $(document).ready( function () {
     navbar.init('#navbar');
     sidebar.init('#sidebar');
 
+    $('.brand-logo').remove();
+    $('nav').css({"background-color":""});
+    
     $.ajax({
         url: '/api/class2/',
         method: 'GET',

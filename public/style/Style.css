@@ -19,7 +19,7 @@ body {
 }
 
 #main-content {
-	margin-top: 100px;
+	margin-top: 1%;
 }
 
 .fixed-action-btn {
@@ -69,7 +69,7 @@ body {
 	margin-top: 15%;
 }
 
-#login-btn, #sign-up-btn {
+#login-btn, #sign-up-btn , #edit-user-button{
 	background-color: #CB494E;
 }
 input[type=text]:focus:not([readonly]),
@@ -109,6 +109,12 @@ input[type=password]:focus:not([readonly])+label {
 .input-field input[type=text].valid{
     border-bottom: 1px solid #CB494E;
     box-shadow: 0 1px 0 0 #CB494E;
+}
+
+.input-field input[type=text],
+.input-field input[type=password],
+.input-field input[type=email]{
+  background-color: white;
 }
 
 .dropdown-content li.divider {
@@ -444,7 +450,7 @@ nav.z-depth-0{
 	color: black;
 	height:7vw;
 	box-shadow: 0 0.5vw 0 0 #CB494E;
-	background-color: #D8D8D8;
+	background: linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,192,192,0)  );
 }
 
 .logo:hover { 
@@ -462,13 +468,13 @@ a.brand-logo{
 	background-color:#D0D0D4;
 	border-radius: 70%;
 	box-shadow: 0 0.3vw 0 0 rgba(0, 0, 0, 0.2);
-	height:16vw;
-	width:16vw;
+  height:8vw;
+  width:8vw;
 }
 
 .logo {
-	height:14vw;
-	width:14vw;
+	height:6vw;
+	width:6vw;
 	margin:1vw;
    -webkit-animation: flip 2s;
   animation: flip 2s;
