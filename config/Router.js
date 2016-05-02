@@ -119,6 +119,7 @@ module.exports = function (router) {
     //--------------------------------------- 
     router.route('/api/save_point')
         .get(savedb.viewAll)
+        .put(savedb.rename)
         .delete(savedb.remove);
 
     router.route('/api/save_point/:save_id')

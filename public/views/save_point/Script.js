@@ -91,6 +91,12 @@ $(document).ready( function () {
             });
             window.location.href = "/views/save_point";
         });
+
+        $('.edit').click(function(){
+            localStorage.save_id = $(this).attr("save_id");
+            $('#edit_modal').openModal();
+        });
+
     }
 
     function ShowAll(){
@@ -110,7 +116,33 @@ $(document).ready( function () {
 
     }
 
-
     ShowAll();    
+
+    $('#edit-save-form').submit(function (event) {
+
+        // Get data from input fields of edi class form
+        var save_name = $("#save_name_edit").val();
+
+        $.ajax({
+            type: "PUT",
+            url: "/api/save_point",
+            data: {
+                save_name: save_name,
+                save_id: localStorage.save_id
+            },
+            success: function(){
+                Materialize.toast(course_code + " edited!", 1000);
+            },
+            dataType: "JSON"
+        });
+
+        window.location.href = "/views/save_point"
+
+        return false;
+    });
+
+    $('#edit-button').click(function(){
+        $('#edit-save-form').submit();
+    });
 });
 
