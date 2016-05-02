@@ -1,5 +1,5 @@
 'use strict';
-
+var db = require(__dirname + './../lib/Mysql');
 /* Adds a student to a class */
 exports.add = function (req, res, next) {
     if(!req.session){
