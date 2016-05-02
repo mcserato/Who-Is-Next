@@ -5,6 +5,7 @@ $(document).ready( function () {
     navbar.init('#navbar');
     sidebar.init('#sidebar');
 
+
     $.ajax({
         url: '/api/class2/',
         method: 'GET',
@@ -33,6 +34,11 @@ $(document).ready( function () {
         },
         error: function(err){
             util.errorHandler(err);
+        }
+    }).done(function() {
+        if(typeof localStorage.class_id_randomize !== 'undefined'){
+            $("#class-filter").val(localStorage.class_id_randomize);
+            localStorage.removeItem('class_id_randomize');
         }
     });
 
@@ -75,6 +81,16 @@ $(document).ready( function () {
         $('#container-list').hide();
 
     });
+
+    if(typeof localStorage.class_id_randomize !== 'undefined'){
+        console.log("hello");
+        $("#class-filter").val(localStorage.class_id_randomize);
+        $('#randomizer-holder').hide();
+        $('#logo-holder').fadeIn();
+        $("#randomize-form").slideDown(1000);
+        $('#header').slideDown(1000);
+        //localStorage.removeItem('class_id_randomize');
+    }
 
  $('#randomize').click(function(){
         var checked = $('input[type=checkbox]:checked').length;

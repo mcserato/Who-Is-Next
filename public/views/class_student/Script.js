@@ -149,7 +149,8 @@ $(document).ready( function () {
 
     $('#randomize')
         .click(function(){
-            alert("hello");
+            localStorage.class_id_randomize = localStorage.class_id;
+            window.location.href = "/views/get_volunteers";
         });
 
     //const content = $('#student-list');
