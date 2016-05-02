@@ -71,6 +71,9 @@ $(document).ready( function () {
     }
 
     function Refresh(){
+
+        content.empty();
+
         $.ajax({
             url: '/api/class_student/' + localStorage.class_id,
             method: 'GET',
@@ -143,7 +146,7 @@ $(document).ready( function () {
     });
 
     /* View Students in a Class*/
-    Refresh();
+    //Refresh();
 
     $('#randomize')
         .click(function(){

@@ -224,15 +224,15 @@ $(document).ready( function () {
     });
 
 
-	config.checkAuth("FACULTY");
+    config.checkAuth("FACULTY");
 
-	$.ajax({
+    $.ajax({
         url: '/api/class',
         method: 'GET',
         success: function(data){
-        	if(!data){
-            	return Materialize.toast("Error in fetching data",2500);
-        	}
+            if(!data){
+                return Materialize.toast("Error in fetching data",2500);
+            }
 
             var color_flag = 0; // For alternating the color
             var num_flag = 0;   // For althernating number per row

@@ -21,6 +21,9 @@ $(document).ready( function () {
         }
     }
 
+    $('.modal-trigger').leanModal();
+    
+
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
 

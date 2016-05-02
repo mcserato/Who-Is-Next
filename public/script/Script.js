@@ -10,24 +10,13 @@ $(document).ready( function () {
         window.location.href = '/';
     }
 
-    $('.menu')
-        .hover(
-        function(){
-            $(this).addClass("btn-large");
-        },
-        function(){
-            $(this).removeClass("btn-large");
-        });
-
-    $(window).scroll(function() {
-        if ($(document).scrollTop() > 50) {
-            $(".logo").css("margin-top","0px");
-            $(".logo").css("height","70px");
-            $("nav").css("min-height","5%");
-        } else {
-            $(".logo").css("margin-top","15px");
-            $(".logo").css("height","90px");
-            $("nav").css("min-height","10%");
-        }
-    });
 });
+
+    $('#test5').click(function(){
+    
+        if ($('.check_box').is(':checked')){
+            $('#password').attr('type', 'text');
+        }
+        else
+            $('#password').attr('type', 'password');
+    });

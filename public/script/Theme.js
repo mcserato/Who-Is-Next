@@ -4,10 +4,6 @@ var string1 = 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,
 var string2 = 'rgb(192,192,192)';
 
 $(document).ready( function () {
-
-    navbar.init("#navbar");
-    sidebar.init("#sidebar");
-
 	 $.ajax({    
                 url: '/api/switch_theme',
                 method: 'GET',
@@ -113,55 +109,51 @@ $(document).ready( function () {
 
                 },
                 error: function(err){
-                    util.errorHandler(err);
+                    return Materialize.toast(err.responseText,2500);
                 }
             });
 
 
+/////////NAV BAR///////////////////////////
+$(window).scroll(function() {
+   /*if($(window).scrollTop()) {
+      $('nav.z-depth-0').css({
+        'background': string1
+      });
+   }else{
+    $('nav.z-depth-0').css({
+        'background': string2
+      });
 
-   $('#green').click(function() {
-		switch_theme(1);
-	});
+   }*/
 
-	$('#yellow').click(function() {
-		switch_theme(2);
-	});
-	
-	$('#violet').click(function() {
-		switch_theme(3);
-	});
-	
-	$('#red').click(function() {
-		switch_theme(4);
-	});
-    $('#default').click(function() {
-        switch_theme(0);
-    });
+});
 
-    function switch_theme(theme) {	
-       if (temp != theme){
-        $.ajax({
-            url: '/api/switch_theme',
-            method: 'PUT',
-            data: {
-                current_theme: theme
-            },
-            dataType: 'json',
-            success: function(data){
-                 
-                return Materialize.toast("Theme changed. Wait for the page to reload",1000,"",function(){
-                 location.reload();
-                });
-                
+$(window).on("scroll", function() {
+    if ($(document).scrollTop()<10){
+        var size1 = (8-$(document).scrollTop()).toString() + "vw";
+        var size2 = (6-$(document).scrollTop()).toString() + "vw";
 
-            },
-            error: function(err){
-                util.errorHandler(err);
-            }
-        });
-    }else {
-        Materialize.toast("That is the current theme. Choose another.",2500);
-    }
+    console.log(size1);
+    console.log(size2);
+
+     $("a.brand-logo").css({
+        "width":size1,
+        "height":size1
+     });
+     $(".logo").css({
+        "width":size2,
+        "height":size2
+     });
+    }else{
+      $("a.brand-logo").css({
+        "width":"8vw",
+        "height":"8vw"
+     });
+     $(".logo").css({
+        "width":"6vw",
+        "height":"6vw"
+     });  
     }
 });
-/////////NAV BAR///////////////////////////
+});
