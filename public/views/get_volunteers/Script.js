@@ -289,7 +289,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("images/default-picture.png"');
+        outerDiv.attr('style', 'background-image: url("../../icon/dp.png")');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
@@ -303,10 +303,12 @@ function flyingHexagon(data) {
     }
 
     setTimeout(function() {
-        
-        balloonDiv.remove();
+        balloonDiv.fadeOut(13000, function() {
+            balloonDiv.remove();
+
+        });
     
-    }, 15000);
+    }, 10000);
 
     setTimeout(function() {
 
@@ -321,6 +323,7 @@ function flyingHexagon(data) {
 }
 
 function flyingHexagon_after(data){
+
     $("#list").append("<h3>Volunteers</h3>")
 
     var i = 0;
