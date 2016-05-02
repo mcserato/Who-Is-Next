@@ -16,10 +16,9 @@ $(document).ready( function () {
             if(!user.is_validated){
                 window.location.href = '/not_validated'
             }else{
-                window.location.href = '/views/class';
+                window.location.href = '/views/get_volunteers';
             }
         }
-
     }
 
     $("#log-in-page").hide();
@@ -123,7 +122,7 @@ $(document).ready( function () {
             if(!user.is_validated){
                 window.location.href = '/not_validated'
             }else{
-                window.location.href = '/views/class';
+                window.location.href = '/views/get_volunteers';
             }
         }
     }

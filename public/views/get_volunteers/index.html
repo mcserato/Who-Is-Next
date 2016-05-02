@@ -2,92 +2,132 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Students</title>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Get Volunteers</title>
+
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />   
+        <link rel="stylesheet" type="text/css" href="css/Jumbled.css" />
         <link rel="stylesheet" href="../../style/materialize.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
-        <link rel="shortcut icon" href="../../favicon/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="css/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico" />
+                    
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
+        <script src="../../script/textEffect.jquery.js"></script>
     </head>
-   <body>
+  <body>
         <div id="navbar"></div>
         <div id="sidebar"></div>
-
-        <div class="container">
-            <div id="main-content">
-                <h1 class="center">WHO IS NEXT?</h1>
-                
-                <!-- <div class="card"> -->
-                <!-- </div> -->
-            </div>
+   
+    <div id="modal-names" class="modal">
+        <div class="modal-content">
+            <h3> Volunteers </h3>
+            <div id="list"></div>
         </div>
-    <div class = "row center">
-     <div class = "col s6 offset-s3 ">
-     
-       <div class="card" style = "border:#b42529;">
-       
-        <div class="row center">
-            <br>
-            <br>
-            <h5 class="center">Would you like to narrow down your search?</h5>
-             <p class="input-fieldenter row center" >
-                <select class="browser-default" id="class-filter">
-                  <option value="" selected>SELECT CLASS</option>
+    </div>
+    
+    <div class="container">
+        <div id="main-content">
+            <h1 id="header" class="center">WHO IS NEXT?</h1>
 
-                </select>
+            <div id="randomizer-holder">
+              <div id="spinner">
+                <img id="dice2" src="images/dice2.png"></img>
+                <img id="dice1" src="images/dice1.png"></img>
+              </div>
+              <img id="arrows" src="images/arrows.png"></img>
+
+              <button id="randomize-btn" class="btn waves-effect waves-light">Start!</button>
             </div>
-            <div> Gender: &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" class="filled-in" id="male-filter" checked/>
-                <label for="filled-in-box1">Male</label> &nbsp;&nbsp;&nbsp;
-                <input type="checkbox" class="filled-in" id="female-filter" checked/>
-                <label for="filled-in-box2">Female</label>
+          </div>
+    </div>
+    
+    <div id="randomize-form" class = "row center">
+        <div class = "col s6 offset-s3 ">
+            <div class="card" style = "border:#b42529;">
+
+            <div class="row center">
+                <br>
+                <br>
+                <h5 class="center">Would you like to narrow down your search?</h5>
+                <p class="input-fieldenter row center" >
+                  <select class="browser-default" id="class-filter">
+                    <option value="" selected>SELECT CLASS</option>
+                  </select>
+                </p>
             </div>
+
             <div class="input-field">
-                  <input id="last-name-filter" type="text" class="validate" >
-                  <label for="last-name-filter">Last Name Starts With</label>
+                <input id="number-filter" type="number" class="validate"  min="1">
+                <label for="number-filter">Number of Volunteers</label>
             </div>
-            <div class="input-field">
-                  <input id="first-name-filter" type="text" class="validate" >
-                  <label for="last-name-filter">First Name Starts With</label>
-            </div>
-            <div class="input-fieldenter row center" >
-                <select class="browser-default" id="birthday-filter">
-                  <option value="" selected>All Months</option>
-                  <option value="1">January</option>
-                  <option value="2">February</option>
-                  <option value="3">March</option>
-                  <option value="4">April</option>
-                  <option value="5">May</option>
-                  <option value="6">June</option>
-                  <option value="7">July</option>
-                  <option value="8">August</option>
-                  <option value="9">September</option>
-                  <option value="10">October</option>
-                  <option value="11">November</option>
-                  <option value="12">December</option>
-                </select>
-            </div>
-            <div class="input-field row center" >
-                <select class="browser-default" id="course-filter">
-                  <option value="" selected>All Courses</option>
-                </select>
-            </div>
-            <div class="input-fieldenter row center" >
-                <select class="browser-default" id="college-filter">
-                  <option value="" selected>All Colleges</option>
-                </select>
-            </div>
+
+            <a id="add-filter" class="waves-effect waves-light btn" style="background-color: #b42529;">Add Filters</a>
+            <a id="remove-filter" style="display: none; background-color: #b42529;" class="waves-effect waves-light btn">Remove Filters</a>
+
+            <br/>
+            <div id="filters" style="display: none;">
+                <div> Gender: &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" id="male-filter" checked/>
+                    <label for="male-filter">Male</label> &nbsp;&nbsp;&nbsp;
+
+                    <input type="checkbox" id="female-filter" checked/>
+                    <label for="female-filter">Female</label>
+                </div>
+
+                <div class="input-field">
+                    <input id="last-name-filter" type="text" class="validate" >
+                    <label for="last-name-filter">Last Name Starts With</label>
+                </div>
+
+                <div class="input-field">
+                    <input id="first-name-filter" type="text" class="validate" >
+                    <label for="last-name-filter">First Name Starts With</label>
+                </div>
+
+                <div class="input-fieldenter row center" >
+                    <select class="browser-default" id="birthday-filter">
+                        <option value="" selected>All Months</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+
+                <div class="input-field row center" >
+                    <select class="browser-default" id="course-filter">
+                        <option value="" selected>All Courses</option>
+                    </select>
+                </div>
+
+              <div class="input-fieldenter row center" >
+                  <select class="browser-default" id="college-filter">
+                    <option value="" selected>All Colleges</option>
+                  </select>
+              </div>
+
+              <div class="input-field">
+                    <input id="batch-filter" type="number" class="validate"  min="1999" max="2016">
+                    <label for="batch-filter">Batch</label>
+              </div>
             
-            <div class="input-field">
-                  <input id="batch-filter" type="number" class="validate"  min="1999" max="2016">
             </div>
-            <div class="input-field">
-                  <input id="number-filter" type="number" class="validate"  min="1">
-            </div>
+
         </div>
+
         <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
-               
+
             </div>
         </div>
         

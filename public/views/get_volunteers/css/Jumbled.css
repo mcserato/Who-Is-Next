@@ -1,0 +1,22 @@
+.listname1{
+    text-align: left;
+    position: relative;
+    left:20%;
+    background-color: #b71c1c;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+.listname2{
+    text-align: right;
+    position: relative;;
+    right:20%;
+    background-color: #212121;
+    border-radius: 10px;
+    padding-right: 20px;
+}
+.listname1 h4{
+    color: white;
+}
+.listname2 h4{
+    color: white;
+}

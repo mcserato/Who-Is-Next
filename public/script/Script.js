@@ -22,14 +22,14 @@ $(document).ready( function () {
         });
 
     $(window).scroll(function() {
-        if ($(document).scrollTop() > 70) {
+        if ($(document).scrollTop() > 50) {
             $(".logo").css("margin-top","0px");
-            $(".logo").css("height","100px");
-            $("nav").css("min-height","15%");
+            $(".logo").css("height","70px");
+            $("nav").css("min-height","5%");
         } else {
             $(".logo").css("margin-top","15px");
-            $(".logo").css("height","120px");
-            $("nav").css("min-height","20%");
+            $(".logo").css("height","90px");
+            $("nav").css("min-height","10%");
         }
     });
 });

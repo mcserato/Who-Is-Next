@@ -133,7 +133,7 @@ $(document).ready( function () {
         }
 
         content.empty();
-        
+
         if($(this).val() === ''){
             Refresh();
             return;
@@ -147,7 +147,7 @@ $(document).ready( function () {
                     return Materialize.toast("Error in fetching data",2500);
                 }
 
-                content.empty(); //di ko alam kung dinelete ba to or hindi hihi nagmerge kasi ako 
+                content.empty(); //di ko alam kung dinelete ba to or hindi hihi nagmerge kasi ako
 
                 add_class(data);
 
@@ -343,4 +343,3 @@ $(document).ready( function () {
     });
 
 });
-
