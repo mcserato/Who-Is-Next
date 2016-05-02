@@ -4,6 +4,10 @@ var string1 = 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,
 var string2 = 'rgb(192,192,192)';
 
 $(document).ready( function () {
+
+    navbar.init("#navbar");
+    sidebar.init("#sidebar");
+
 	 $.ajax({    
                 url: '/api/switch_theme',
                 method: 'GET',
@@ -109,7 +113,7 @@ $(document).ready( function () {
 
                 },
                 error: function(err){
-                    return Materialize.toast(err.responseText,2500);
+                    util.errorHandler(err);
                 }
             });
 
@@ -152,35 +156,13 @@ $(document).ready( function () {
 
             },
             error: function(err){
-                return Materialize.toast(err.responseText,2500);
+                util.errorHandler(err);
             }
         });
     }else {
         Materialize.toast("That is the current theme. Choose another.",2500);
     }
     }
-
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
 });
 /////////NAV BAR///////////////////////////
 $(window).scroll(function() {

@@ -89,12 +89,52 @@ input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
 }
 
-/*.input-field .prefix ~ label,
-.input-field label{
-	color: #333;
-	font-size: 120%;
-}*/
+#user-settings {
+    background-color: transparent;
+    margin-top: 2%;
+    width: 15%;
+}
 
+#number-filter:focus + label,
+#batch-filter:focus + label {
+    color: #CB494E;
+}
+
+#number-filter:valid,
+#batch-filter:valid {
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
+}
+
+.input-field input[type=text].valid{
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
+}
+
+.dropdown-content li.divider {
+    min-height: 0px;
+    height: 4px;
+}
+
+#user-settings li a{
+    background-color: #CFCDCD;
+    color: black;
+}
+
+#user-settings li a:hover{
+    background-color: #757575;
+    color: #F5F5F5;
+}
+
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 2px;
+    font-size: 12px;
+    line-height: 1.42;
+    border-radius: 30px;
+}
 
 .hexagon-red {
     width: 200px;
@@ -166,19 +206,20 @@ input[type=password]:focus:not([readonly])+label {
     border-top: 50px solid #333333;
 }
 
-.options {
+.options{
     float: left;
     text-align: center;
     line-height: 100px;
+    left: 600px;
     margin: 0px 10px 20px -200px;
 }
-
 .options-text {
 	color: #333333;
 }
 
 .three {
 	margin-left: 120px;
+
 }
 
 #landing-page {
@@ -189,9 +230,9 @@ input[type=password]:focus:not([readonly])+label {
 #sign-up-logo-link {
 	margin-top: 10%;
 }
-/*=====================================================================*/
+
 /*----------------------------*/
-#title{
+#company-title{
     font-size: 5vw;
     font-family: Scream;
     margin:0;
@@ -210,7 +251,7 @@ input[type=password]:focus:not([readonly])+label {
 }
 
 
- span{
+.span-title{
   display:inline-block;
   margin-left:-2.4vw;
   transform-origin: 50% 70%;
@@ -219,38 +260,38 @@ input[type=password]:focus:not([readonly])+label {
 }
 
 
-span:nth-child(1){
+.span-title:nth-child(1){
 	font-size:6.5vw;
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
 }
-span:nth-child(2){
+.span-title:nth-child(2){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
 }
 
-span:nth-child(3){
+.span-title:nth-child(3){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
 }
 
-span:nth-child(4){
+.span-title:nth-child(4){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
 }
 
-span:nth-child(5){
+.span-title:nth-child(5){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
 }
 
-span:nth-child(6){
+.span-title:nth-child(6){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
 }
-span:nth-child(7){
+.span-title:nth-child(7){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
 }
 
-span:nth-child(8){
+.span-title:nth-child(8){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
 }
 
-span:nth-child(9){
+.span-title:nth-child(9){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
 }
 
@@ -391,12 +432,7 @@ label{
 div.navbar-fixed{
 	height:9vw;
 }
-#logout-btn {
-	margin-top: 2%;
-	margin-bottom: 100%;
-	margin-right: 2%;
-	font-weight:bold;
-}
+
 nav {
 	z-index: 0;
 	color: black;
@@ -449,4 +485,12 @@ a.brand-logo{
 
 .card:hover{
 	cursor: pointer;
+}
+
+.validate {
+    padding-left: 1% !important;
+}
+
+.stud-info {
+    font-size: 20px !important;
 }

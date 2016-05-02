@@ -3,19 +3,38 @@ var db = require(__dirname + './../lib/Mysql');
 /* Edits a specific faculty's credentials */
 exports.edit = function (req, res, next) {
     // Limits the password length (8-50)
-    if (req.body.password.length > 50 || req.body.password.length < 8){
-        res.status(400).send("Error: Password length is invalid!");
-    }
+	var name = req.body.name;
+	var old_password = req.body.old_password;
+	var password = req.body.password;
+	var email = req.body.email;
 
-    db.query("UPDATE FACULTY SET username = ?, name = ?, password = " +
-        "?, email = ? WHERE emp_num = ?",
-        [req.body.username, req.body.name, req.body.password,
-        req.body.email, req.body.emp_num], function (err, rows) {
+    db.query("SELECT username from FACULTY where password = "+
+    	"PASSWORD(?)", [old_password], function (err, rows) {
             if (err) {
                 return next(err);
             }
 
-            return res.send(rows);
+            if(rows.length){
+
+            	if( password == "" || password.trim()=="" ){
+            		password = old_password;
+            	}else if( password.length > 50 || password.length < 8 ){
+			        res.status(400).send("Password length is invalid!");
+            	}
+
+            	db.query("UPDATE FACULTY SET name = ?, password = "+
+            		"PASSWORD(?), email = ? WHERE emp_num = ?",
+			        [name,password,email, req.session.emp_num],
+			        function (err1, rows1) {
+			            if (err1) {
+			                return next(err1);
+			            }
+
+			            return res.send(rows1);
+			    });
+            }else{
+		        res.status(400).send("Incorrect Password !");
+            }
     });
 }
 
@@ -84,7 +103,7 @@ exports.signup = function (req, res, next) {
 
 /* Shows the list of all faculty members */
 exports.viewAll = function(req, res, next) {
-	db.query("SELECT name FROM FACULTY", function (err, rows) {
+	db.query("SELECT * FROM FACULTY", function (err, rows) {
         if (err) {
             return next(err);
         }
@@ -103,6 +122,7 @@ exports.viewOne = function(req, res, next) {
 		    if (rows.length === 0) {
                 res.status(404).send("Error: Faculty not found!");
 			} else {
+				delete rows[0].password;
 			    res.send(rows);
 			}
 	});

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+  .blur {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    opacity:0;
+    -webkit-transition:opacity 3s linear;
+  }
+  </style>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+
+<button id="go">&raquo; Run</button>
+<div >
+    <img class="blur" src="sample.jpg" length=3px width=5px>
+</div>
+
+<script>
+// Using multiple unit types within one animation.
+
+    $( "#go" ).click(function() {
+        zoomInImage();
+    });
+
+    function zoomInImage(){
+        $( "img" ).animate({
+            width: "70%",
+            heigth: "50%",
+            opacity: 1,
+            left: "15%",
+            top:"15%",
+            borderWidth: "10px"
+        }, 3000 );
+    }
+</script>
+
+</body>
+</html>
