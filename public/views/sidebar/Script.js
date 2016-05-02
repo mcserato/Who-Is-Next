@@ -49,11 +49,6 @@ var sidebar = {
                         '<i class="material-icons">content_paste</i>',
                     '</a>',
                 '</li>',
-                '<li>',
-                    '<a href="/views/analytics" class="btn-floating black" title="Analytics">',
-                        '<i class="material-icons">insert_chart</i>',
-                    '</a>',
-                '</li>',
             ].join(''));
             
             $('#sidebar-link').click();
