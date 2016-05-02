@@ -119,7 +119,7 @@ $(document).ready( function () {
 
                         $('#' + emp_num).remove();
                         return Materialize.toast("Successfully deleted faculty!",2500,"",function(){
-                            return window.location.href = "http://localhost:8000/views/admin/";
+                            return window.location.href = "/views/admin/";
                         });
                     },
                     error: function(err){
@@ -146,7 +146,7 @@ $(document).ready( function () {
 
                         $('#' + emp_num).remove();
                         return Materialize.toast("Successfully validated faculty!",2500,"",function(){
-                            return window.location.href = "http://localhost:8000/views/admin/";
+                            return window.location.href = "/views/admin/";
                         });
                     },
                     error: function(err){
