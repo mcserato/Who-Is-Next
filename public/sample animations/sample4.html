@@ -1,0 +1,331 @@
+<!DOCTYPEhtml>
+<html>
+
+<head>
+    <title>Hexagon Animation</title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="flip.min.js">
+
+    </script>
+    <style>
+        .card-grid {
+            height: 100px;
+            width: 100px;
+            float: left;
+            margin: 1%;
+            margin-bottom: -1%;
+        }
+        
+        .hexagon {
+            position: relative;
+            width: 110px;
+            height: 63.51px;
+            margin: 31.75px 0;
+            background-color: cyan;
+            background-size: auto 127.0171px;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .hexTop,
+        .hexBottom {
+            position: absolute;
+            z-index: -1;
+            width: 77.78px;
+            height: 77.78px;
+            overflow: hidden;
+            -webkit-transform: scaleY(0.5774) rotate(-45deg);
+            -ms-transform: scaleY(0.5774) rotate(-45deg);
+            transform: scaleY(0.5774) rotate(-45deg);
+            background: inherit;
+            left: 16.11px;
+        }
+        /*counter transform the bg image on the caps*/
+        
+        .hexTop:after,
+        .hexBottom:after {
+            content: "";
+            position: absolute;
+            width: 110.0000px;
+            height: 63.50852961085884px;
+            -webkit-transform: rotate(45deg) scaleY(1.7321) translateY(-31.7543px);
+            -ms-transform: rotate(45deg) scaleY(1.7321) translateY(-31.7543px);
+            transform: rotate(45deg) scaleY(1.7321) translateY(-31.7543px);
+            -webkit-transform-origin: 0 0;
+            -ms-transform-origin: 0 0;
+            transform-origin: 0 0;
+            background: inherit;
+        }
+        
+        .hexTop {
+            top: -38.8909px;
+        }
+        
+        .hexTop:after {
+            background-position: center top;
+        }
+        
+        .hexBottom {
+            bottom: -38.8909px;
+        }
+        
+        .hexBottom:after {
+            background-position: center bottom;
+        }
+        
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            top: 0.0000px;
+            left: 0;
+            width: 110.0000px;
+            height: 63.5085px;
+            z-index: 2;
+            background: inherit;
+        }
+        
+        .flipped {
+            background-color: blueviolet;
+        }
+        
+        .flipped:before {
+            bottom: 100%;
+            border-bottom: 31.75px solid blueviolet;
+        }
+        
+        .flipped:after {
+            top: 100%;
+            width: 0;
+            border-top: 31.75px solid blueviolet;
+        }
+        
+        .unflipped {
+            background-color: #b42529;
+        }
+        
+        .unflipped:before {
+            bottom: 100%;
+            border-bottom: 31.75px solid inherit;
+        }
+        
+        .unflipped:after {
+            top: 100%;
+            width: 0;
+            border-top: 31.75px solid inherit;
+        }
+        
+        .container {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .volunteer-name {
+            height: 63.51px;
+            line-height: 63.51px;
+            vertical-align: middle;
+            width: 110px;
+            margin: 1%;
+            text-align: center;
+            color: black;
+            position: absolute;
+            bottom: 5px;
+            opacity: 0.0;
+            transition: opacity 1s ease;
+            font-weight: bold;
+            background-color:rgba(255, 255, 255, 0.3);
+        }
+        
+        .volunteer-name:hover {
+            transition: opacity 1s ease;
+            opacity: 1.0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="volunteers-grid">
+    </div>
+    <button id="show-volunteers-btn">Show Volunteers</button>
+
+    <script>
+        //sample data
+        var data = [
+            {
+                 image: "images/01.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/02.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/03.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/04.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/05.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/06.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/07.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/08.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            {
+                 image: "images/09.png",
+                 name: "Dana"
+            },
+            ];
+          $("#show-volunteers-btn").click(function(){
+              showVolunteers(); 
+          });
+           //creates the hexagon grid of volunteers
+           (function insertHexagon(){
+               var newline = true;
+               var maxHexagon = parseInt(window.innerWidth/150);
+               var minHexagon = maxHexagon-1;
+               var limit = maxHexagon;
+               var val =parseInt(window.innerWidth/150);
+            
+               for(var i = 0; i < data.length; i ++){
+                    $('#volunteers-grid').append(
+                        "<div class='card-grid' id='card-grid"+i +"'>" +
+                        "<div class='front'>" +
+                            "<div class='hexagon unflipped'>" +                            
+                                "<div class='hexTop'></div>"+
+                                "<div class='hexBottom'></div>"+
+                            "</div>"+
+                        "</div>"+
+                        "<div class='back'>"+
+                            "<div class='hexagon flipped' id='volunteer"+i+"'>"+
+                                "<div class='hexTop'></div>"+
+                                "<div class='hexBottom'></div>"+
+                            "</div>"+
+                             "<p class='volunteer-name'>"+data[i].name+"</p>"+
+                           
+                        "</div></div>"     
+                    );
+                   $("#volunteer"+i).css("background-image", "url("+data[i].image+")"); 
+                    
+                   if(i == limit){
+                        if(newline) newline=false;
+                        else newline=true;
+                     
+                        $("#card-grid"+i).css("clear", "left"); 
+                        if(val == maxHexagon) val = minHexagon;
+                        else val = maxHexagon;      
+                     
+                        limit = limit + val;            
+                    }
+                      
+                   if(newline) $("#card-grid"+i).css("left", "10%");     
+                   else $("#card-grid"+i).css("left", "15.5%");               
+               }
+           })();
+            
+           //shows volunteers one by one   
+           function showVolunteers(){
+                var done = [];      
+                var int = setInterval(function(){
+                var showHex = Math.floor((Math.random() * data.length)); 
+                
+                while($.inArray(showHex, done)!=-1){
+                    showHex = Math.floor((Math.random() * data.length)); 
+                }
+                    $("#card-grid"+showHex).flip(true);
+                    done.push(showHex);
+                    if(done.length == data.length){
+                        clearInterval(int);
+                    }
+                }, 1000);
+           }
+          
+          //enable flip.js 
+          $(".card-grid").flip({         
+               forceWidth: true,
+               forceHeight: true,
+               trigger:"manual",
+            });
+    </script>
+</body>
+
+</html>

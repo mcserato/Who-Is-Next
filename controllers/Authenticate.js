@@ -93,3 +93,12 @@ exports.logout = function (req, res, next) {
 
     return res.send("Successfully logged out!");
 }
+
+/* Session */
+exports.checkSession = function (req, res, next) {
+    if (!req.session.username) {
+        return res.send("NO_SESSION");
+    }else{
+        return res.send("SESSION");
+    }
+}
