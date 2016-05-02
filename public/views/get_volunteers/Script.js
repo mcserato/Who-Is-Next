@@ -110,8 +110,18 @@ $(document).ready( function () {
                 success: function(data) {
                     for(var i in data) {
                         console.log(data[i]);
-                        //alert(data[i].first_name + " " + data[i].last_name);
-
+                        $.ajax({
+                            url: '/api/randomizer',
+                            method: 'PUT',
+                            data: {
+                                class_id        : class_id,
+                                student_number  : data[i].student_number
+                            },
+                            success: function(data2){
+                                console.log(data2);
+                            },
+                            dataType: "JSON"
+                        });
                     }
 
                     $('#logo-holder').slideUp();
@@ -129,6 +139,17 @@ $(document).ready( function () {
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             jumbleWords(data);
+
+                            /*$('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
+                            insertHexagon(data);*/
+
+                            /*$('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
+                            zoomInImage(data);*/
+
                         }, 3100);
                     });
 
@@ -150,13 +171,14 @@ $(document).ready( function () {
 // Creates the hexagon grid of volunteers
 function insertHexagon(data) {
     var newline = true;
-    var maxHexagon = parseInt(window.innerWidth/150);
+    var maxHexagon = 6;
     var minHexagon = maxHexagon-1;
     var limit = maxHexagon;
-    var val = parseInt(window.innerWidth/150);
+    var val = 6;
 
+    $('#list').html("");
     for(var i = 0; i < data.length; i ++){
-        $('#volunteers-grid').append(
+        $('#list').append(
             "<div class='card-grid' id='card-grid"+i +"'>" +
             "<div class='front'>" +
             "<div class='hexagon unflipped'>" +
@@ -186,9 +208,22 @@ function insertHexagon(data) {
             limit = limit + val;
         }
 
+
         if(newline) $("#card-grid" + i).css("left", "10%");
-        else $("#card-grid" + i).css("left", "15.5%");
+        else $("#card-grid" + i).css("left", "16%");
     }
+
+     $("#start-again-div").css("position", "absolute");
+     $("#start-again-div").css("bottom", "10%");
+     $("#start-again-div").css("left", "40%");
+     // Enable flip.js
+    $(".card-grid").flip({
+       forceWidth: true,
+       forceHeight: true,
+       trigger:"manual",
+    });
+
+    showVolunteers(data);
 }
 
  // Shows volunteers one by one
@@ -207,17 +242,16 @@ function showVolunteers(data){
         }
     }, 1000);
 
-    // Enable flip.js
-    $(".card-grid").flip({
-       forceWidth: true,
-       forceHeight: true,
-       trigger:"manual",
-    });
 }
 
 
 /* Zoom In Effect */
 function zoomInImage(data){
+    $("#list").empty();
+    /*insert image here*/
+    //hypothetical image
+    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>")
+    $('.pic').append("<h3 class='.name' style='opacity:.5;'>" + data[0].last_name + '</h3>');
     $(".pic").animate({
         width: "70%",
         heigth: "50%",
@@ -227,9 +261,11 @@ function zoomInImage(data){
         borderWidth: "10px"
     }, 3000);
 
-    setTimeout(function(){
-      $('#volunteers-grid').append('<h4 class=".name">' + data[0].last_name + '</h4>');
+    $('.pic').promise().done(function(){
+        $('.name').css({'opacity':'1'});
     });
+
+
 }
 
 function jumbleWords(data){
