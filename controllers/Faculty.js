@@ -103,7 +103,7 @@ exports.signup = function (req, res, next) {
 
 /* Shows the list of all faculty members */
 exports.viewAll = function(req, res, next) {
-	db.query("SELECT name FROM FACULTY", function (err, rows) {
+	db.query("SELECT * FROM FACULTY", function (err, rows) {
         if (err) {
             return next(err);
         }
@@ -150,7 +150,6 @@ exports.getTheme = function (req, res, next) {
 		    if(err) {
 		        return next(err);
 		    }
-		    console.log(rows[0].current_theme);
 		    return res.send(rows);
 	});
 }

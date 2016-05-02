@@ -298,5 +298,22 @@ $( document ).ready(function() {
                      });
                 }
            });
-           
+});
+
+/////////NAV BAR///////////////////////////
+$(window).scroll(function() {
+   if($(window).scrollTop()) {
+      $('nav.z-depth-0').css({
+        'background': string1
+      });
+   }else if ($(window).scrollTop()==0){
+      $('nav.z-depth-0').css({
+        'background': string2
+      });
+   }
+    if($(window).scrollTop()) {
+            $('.logo').fadeIn('slow');
+            $('.logo')
+                .css({'width':'184px','height':'60px'})    
+        }
 });

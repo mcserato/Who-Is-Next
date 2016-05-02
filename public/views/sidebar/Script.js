@@ -19,12 +19,25 @@ var sidebar = {
             list = $('#sidebar-list');
 
         if (user.role === 'ADMIN') {
-            /*
-                add ADMIN sidebar options here
-                    
-            */
+            list.append([
+                '<li>',
+                    '<a href="/views/admin" class="btn-floating black" href="" title="Validate Faculty">',
+                        '<i class="material-icons">person_add</i>',
+                    '</a>',
+                '</li>',
+                '<li>',
+                    '<a href="/views/faculty" class="btn-floating black" href="" title="View Faculty">',
+                        '<i class="material-icons">group</i>',
+                    '</a>',
+                '</li>',
+                '<li>',
+                    '<a href="/views/student" class="btn-floating black" href="" title="View Students">',
+                        '<i class="material-icons">face</i>',
+                    '</a>',
+                '</li>',
+            ].join(''));
 
-            $('$sidebar').click();
+            $('#sidebar').click();
         }
 
         else if (user.role === 'FACULTY') {

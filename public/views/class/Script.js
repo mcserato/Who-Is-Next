@@ -52,18 +52,19 @@ $(document).ready( function () {
 
         $('.options').hide();
 
+
+        $('.hex,.options').hover(function() {
+           $('.options').show();
+           $('.hex,.options').mouseleave(function() {
+                 $('.options').hide();
+            });
+        });
+
         $('.courses')
             .click(function(){
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
-
-        $('.hex').hover(function() {
-           $('.options').show();
-           $('.options').mouseleave(function() {
-                $('.options').hide();
-            });
-        });
 
         /* Delete Class*/
         $('.remove')
@@ -133,7 +134,7 @@ $(document).ready( function () {
         }
 
         content.empty();
-        
+
         if($(this).val() === ''){
             Refresh();
             return;
@@ -147,7 +148,7 @@ $(document).ready( function () {
                     return Materialize.toast("Error in fetching data",2500);
                 }
 
-                content.empty(); //di ko alam kung dinelete ba to or hindi hihi nagmerge kasi ako 
+                content.empty(); //di ko alam kung dinelete ba to or hindi hihi nagmerge kasi ako
 
                 add_class(data);
 
@@ -223,15 +224,15 @@ $(document).ready( function () {
     });
 
 
-	config.checkAuth("FACULTY");
+    config.checkAuth("FACULTY");
 
-	$.ajax({
+    $.ajax({
         url: '/api/class',
         method: 'GET',
         success: function(data){
-        	if(!data){
-            	return Materialize.toast("Error in fetching data",2500);
-        	}
+            if(!data){
+                return Materialize.toast("Error in fetching data",2500);
+            }
 
             var color_flag = 0; // For alternating the color
             var num_flag = 0;   // For althernating number per row
@@ -343,4 +344,3 @@ $(document).ready( function () {
     });
 
 });
-
