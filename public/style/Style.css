@@ -6,12 +6,15 @@
     font-family: roboto;   
     src:url(/font/roboto/Roboto-Bold.wof);
 }
+@font-face{
+    font-family: fredoka;   
+    src:url(/font/roboto/FredokaOne-Regular.ttf);
+}
 body {
 	background-color: #f5f6f6;
     padding:auto;
 
-  font-family: roboto;
-  font-weight: bold;
+  font-family: fredoka;
 }
 
 
@@ -368,8 +371,7 @@ h3.center{
     src:url(/font/roboto/Scream.ttf);
 }
 .modal-content{
-	font-family:roboto;
-	font-weight:bold;
+	font-family:fredoka;
 }
 h4.center{
 	font-size:5.5vw;
@@ -417,23 +419,19 @@ h5.center{
     src:url(/font/roboto/Walkway.ttf);
 }
 #birthday-filter{
-     font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);
+     font-family: fredoka;   
 
 }
 #course-filter{
-     font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);
+     font-family: fredoka;   
 
 }
 #college-filter{
-     font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);
+     font-family: fredoka;   
 }
 
 label{
-      font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);   
+    font-family: fredoka;     
 
 }
 
@@ -504,7 +502,10 @@ a.brand-logo{
     font-size: 20px !important;
 }
 #user-name{
-  font-family:roboto;
-  font-weight:bold;
+  font-family:fredoka;
   font-size:2vw;
+}
+h1#student_header{
+  font-family: Scream;
+  font-size:5vw;
 }
