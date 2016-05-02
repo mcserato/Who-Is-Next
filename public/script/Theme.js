@@ -104,7 +104,7 @@ $(document).ready( function () {
 
                     }else {
                     	//default
-                    	console.log(data);
+                    	//console.log(data);
                     }
 
                 },
@@ -116,7 +116,7 @@ $(document).ready( function () {
 
 /////////NAV BAR///////////////////////////
 $(window).scroll(function() {
-   /*if($(window).scrollTop()) {
+   if($(window).scrollTop()) {
       $('nav.z-depth-0').css({
         'background': string1
       });
@@ -125,17 +125,17 @@ $(window).scroll(function() {
         'background': string2
       });
 
-   }*/
+   }
 
 });
 
 $(window).on("scroll", function() {
-    if ($(document).scrollTop()<10){
-        var size1 = (8-$(document).scrollTop()).toString() + "vw";
-        var size2 = (6-$(document).scrollTop()).toString() + "vw";
+    if ($(document).scrollTop()<11){
+        var size1 = (11-$(document).scrollTop()).toString() + "vw";
+        var size2 = (9.2-$(document).scrollTop()).toString() + "vw";
 
-    console.log(size1);
-    console.log(size2);
+   // console.log(size1);
+   // console.log(size2);
 
      $("a.brand-logo").css({
         "width":size1,

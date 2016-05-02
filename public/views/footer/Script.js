@@ -17,7 +17,7 @@ var footer = {
         }
 
         else if (page === 'user') {
-            
+            return console.error('Footer not loaded properly.', page, 'is not a valid page');
         }
 
         else if (page === 'landing') {
