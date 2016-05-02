@@ -1,10 +1,12 @@
 'use strict';
 
 $(document).ready( function () {
-    $('.modal-trigger').leanModal();
     const content = $('#section-list');
     config.checkAuth("FACULTY");
 
+    navbar.init('#navbar');
+    sidebar.init('#sidebar');
+    
     $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
     function addItem (data) {
@@ -108,7 +110,7 @@ $(document).ready( function () {
                         return Materialize.toast("Successfully deleted section!",2500);
                     },
                     error: function(err){
-                        return Materialize.toast(err.responseText,2500);
+                        util.errorHandler(err);
                     }
                 });
 
@@ -639,7 +641,7 @@ $(document).ready( function () {
                         return Materialize.toast("Successfully deleted section!",2500);
                     },
                     error: function(err){
-                        return Materialize.toast(err.responseText,2500);
+                        util.errorHandler(err);
                     }
                 });
 
@@ -979,7 +981,7 @@ $(document).ready( function () {
         },
 
         error: function(err){
-            return Materialize.toast(err.responseText,2500);
+            util.errorHandler(err);
         }
     });
 
@@ -1043,73 +1045,4 @@ $(document).ready( function () {
         return false;
     });
 
-    var emp_no = JSON.parse(localStorage.user).emp_num;
-    var orig_password;
-    /* Auto-fills up form of edit user */
-    $.ajax({
-        type: "GET",
-        url: "/api/faculty/"+emp_no
-    }).done(function(info){
-        $("#name_edit").val(info[0].name);
-        $("#email_edit").val(info[0].email);
-        $("#username_edit").val(info[0].username);
-        orig_password = info[0].password;
-    });
-
-
-    /*Edit User*/
-    $('#edit-user-form').submit(function (event) {
-        // Get data from input fields of edit user form
-        var name = $("#name_edit").val();
-        var email = $("#email_edit").val();
-        var username = $("#username_edit").val();
-        var old_password = $("#current_password").val();
-        var new_password = $("#new_password_edit").val();
-        var cnew_password = $("#cnew_password_edit").val();
-
-        if (new_password != cnew_password) {
-            Materialize.toast("Password does not match !");
-            return false;
-        } else if (old_password !== orig_password) {
-            alert(orig_password);
-            Materialize.toast("Wrong password!");
-            return false;
-        } else if (new_password == "" || new_password == null) {
-            $.ajax({
-                type: "PUT",
-                url: "/api/faculty",
-                data: {
-                    name: name,
-                    username: username,
-                    password: info[0].password,
-                    email: email,
-                    emp_num: emp_no
-                },
-                success: function(){
-                    Materialize.toast("Account successfully edited!", 1000);
-                },
-                dataType: "JSON"
-            });
-
-            return true;
-        } else {
-            $.ajax({
-                type: "PUT",
-                url: "/api/faculty",
-                data: {
-                    name: name,
-                    username: username,
-                    password: new_password,
-                    email: email,
-                    emp_num: emp_no
-                },
-                success: function(){
-                    Materialize.toast("Account successfully edited!", 1000);
-                },
-                dataType: "JSON"
-            });
-
-            return true;
-        }
-    });
 });

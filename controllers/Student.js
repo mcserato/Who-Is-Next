@@ -32,8 +32,10 @@ exports.add = function (req, res, next) {
                         res.send(rows);
                     }
                 );
-            } else {
-                logs(req, "ERROR", "Error: Student alread exists.");
+            }
+
+            else {
+                logs(req, "ERROR", "Error: Student already exists.");
                 res.send(400, "Error: Student already exists!");
             }
         }

@@ -39,6 +39,7 @@ exports.getVolunteers = function (req, res, next) {
     if(req.body.batch!=""){
         query += " AND student_number like '" + req.body.batch + "%' ";
     }
+
     db.query("SELECT first_name, last_name FROM STUDENT s, CLASS_STUDENT cs, " +
     "CLASS c WHERE s.student_number = cs.student_number AND s.emp_num = " +
     "cs.emp_num AND c.class_id = cs.class_id AND c.class_id = ?" + query +
@@ -50,7 +51,6 @@ exports.getVolunteers = function (req, res, next) {
                 return next(err);
             }
             logs.write(req, "SUCCESS", "Randomized.");
-            logs.save(req.body, rows);
             res.send(rows);
     });
 }

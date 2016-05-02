@@ -1,0 +1,30 @@
+#spinner {
+	top: 20%;
+	left: 35%;
+	width: 100px;
+	height: 100px;
+	position: relative;
+}
+#dice1, #dice2 {
+	top: 80px;
+	width: 150px;
+	height: 150px;
+	position: absolute;
+}
+#dice1 {
+	-webkit-transform: rotate(45deg);
+}
+#dice2 {
+	left: 150px;	
+}
+#arrows {
+	top: -250px;
+	left: 20%;
+	position: relative;	
+}
+#randomize-btn {
+	background-color: #b42529;
+	top: 600px;
+	left: 47%;
+	position: absolute;
+}
