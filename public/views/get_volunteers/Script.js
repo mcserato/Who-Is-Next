@@ -110,8 +110,18 @@ $(document).ready( function () {
                 success: function(data) {
                     for(var i in data) {
                         console.log(data[i]);
-                        //alert(data[i].first_name + " " + data[i].last_name);
-
+                        $.ajax({
+                            url: '/api/randomizer',
+                            method: 'PUT',
+                            data: {
+                                class_id        : class_id,
+                                student_number  : data[i].student_number
+                            },
+                            success: function(data2){
+                                console.log(data2);
+                            },
+                            dataType: "JSON"
+                        });
                     }
 
                     $('#logo-holder').slideUp();
@@ -125,15 +135,15 @@ $(document).ready( function () {
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
-                           /* $('#randomizer-holder').hide();
-                            $('#logo-holder').hide();
-                            $("#container-list").show();
-                            jumbleWords(data);*/
-
                             $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
-                            insertHexagon(data);
+                            jumbleWords(data);
+
+                            /*$('#randomizer-holder').hide();
+                            $('#logo-holder').hide();
+                            $("#container-list").show();
+                            insertHexagon(data);*/
 
                             /*$('#randomizer-holder').hide();
                             $('#logo-holder').hide();
@@ -161,7 +171,6 @@ $(document).ready( function () {
 // Creates the hexagon grid of volunteers
 function insertHexagon(data) {
     var newline = true;
-    var width = $('#list').width();
     var maxHexagon = 6;
     var minHexagon = maxHexagon-1;
     var limit = maxHexagon;
@@ -207,7 +216,6 @@ function insertHexagon(data) {
      $("#start-again-div").css("position", "absolute");
      $("#start-again-div").css("bottom", "10%");
      $("#start-again-div").css("left", "40%");
-     $("#list").css("left", "80%");
      // Enable flip.js
     $(".card-grid").flip({
        forceWidth: true,
