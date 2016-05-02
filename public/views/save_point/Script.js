@@ -14,6 +14,18 @@ $(document).ready( function () {
             subject.attr("save_name", data[save].save_name);
             subject.addClass("title courses");
 
+            var delete_class = $("<a title='Delete Save'><i class='material-icons options-text'>delete</i></a>");
+            delete_class.addClass("remove");
+            delete_class.attr("save_id", data[save].save_id);
+
+            var edit_class = $("<a title='Edit Save' href='#edit_modal'><i class='material-icons options-text'>mode_edit</i></a>");
+            edit_class.addClass("modal-trigger edit");
+            edit_class.attr("save_id", data[save].save_id);
+
+            var options_div = $("<div class='options'></div>");
+            options_div.append(edit_class);
+            options_div.append(delete_class);
+
             if (color_flag % 2 == 0) {
                 var subject_div = $("<div class='hex z-depth-2 hexagon-red'></div>");
 
@@ -29,10 +41,21 @@ $(document).ready( function () {
                 content.append(row_div);
             } else content.append(subject_div);
 
+            content.append(options_div);
+
             color_flag++;
             num_flag++;
             if (num_flag == 7) num_flag = 0;
         }
+
+        $('.options').hide();
+
+        $('.hex,.options').hover(function() {
+           $('.options').show();
+           $('.hex,.options').mouseleave(function() {
+                 $('.options').hide();
+            });
+        });
 
         $('.hex').click(function() {
             localStorage.save_id = $(this).attr("save_id");
