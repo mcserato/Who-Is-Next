@@ -23,11 +23,25 @@ exports.viewOne = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-	db.query("SELECT * FROM SAVE_STUDENT ss, STUDENT st WHERE st.emp_num = 222222222 AND " +
-		"ss.student_number = st.student_number AND ss.save_id = 1",
-		[req.params.save_id],
+	db.query("SELECT * FROM SAVE_STUDENT ss, STUDENT st WHERE st.emp_num = ? AND " +
+		"ss.student_number = st.student_number AND ss.save_id = ?",
+		[req.session.emp_num, req.params.save_id],
 		function (err, rows) {
 			if(err) {
+				return next(err);
+			}
+			res.send(rows);
+		}
+	);
+}
+
+exports.remove = function (req, res, next) {
+	db.query("DELETE FROM SAVEPOINT WHERE save_id = ? AND " +
+		"class_id = ? AND emp_num = ?",
+		[req.body.save_id, req.body.class_id, req.session.emp_num],
+
+		function (err, rows) {
+			if (err) {
 				return next(err);
 			}
 			res.send(rows);

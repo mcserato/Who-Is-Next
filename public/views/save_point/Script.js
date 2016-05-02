@@ -17,10 +17,12 @@ $(document).ready( function () {
             var delete_class = $("<a title='Delete Save'><i class='material-icons options-text'>delete</i></a>");
             delete_class.addClass("remove");
             delete_class.attr("save_id", data[save].save_id);
+            delete_class.attr("class_id", data[save].class_id);
 
             var edit_class = $("<a title='Edit Save' href='#edit_modal'><i class='material-icons options-text'>mode_edit</i></a>");
             edit_class.addClass("modal-trigger edit");
             edit_class.attr("save_id", data[save].save_id);
+            edit_class.attr("class_id", data[save].class_id);
 
             var options_div = $("<div class='options'></div>");
             options_div.append(edit_class);
@@ -60,6 +62,34 @@ $(document).ready( function () {
         $('.hex').click(function() {
             localStorage.save_id = $(this).attr("save_id");
             window.location.href = "/views/save_student";
+        });
+
+        $('.remove').click(function(){
+            var save_id = $(this).attr("save_id");
+            var class_id = $(this).attr("class_id");
+
+            if(!confirm("Are you sure you want to delete this Save Point?")) return false;
+            $.ajax({
+                url: '/api/save_point',
+                method: 'DELETE',
+                data: {
+                    save_id: save_id,
+                    class_id: class_id
+                },
+                dataType: "JSON",
+                success: function(data){
+                    if(!data){
+                        return Materialize.toast("Error in deleting. Please try again!",2500);
+                    }
+
+                    $('#' + course_code.replace(' ','')).remove();
+                    return Materialize.toast("Successfully deleted class!",2500);
+                },
+                error: function(err){
+                    util.errorHandler(err);
+                }
+            });
+            window.location.href = "/views/save_point";
         });
     }
 
