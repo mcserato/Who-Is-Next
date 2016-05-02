@@ -16,7 +16,19 @@
 }
 .listname1 h4{
     color: white;
+    opacity: 0;
 }
 .listname2 h4{
     color: white;
+    opacity: 0;
+}
+h3{
+    text-align: center;
+}
+#container-list{
+    margin-top: 50px;
+}
+#start-again{
+    background-color: #b42529;
+    left: 42%;
 }

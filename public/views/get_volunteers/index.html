@@ -4,30 +4,32 @@
         <meta charset="utf-8"/>
         <title>Get Volunteers</title>
 
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />   
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="css/Jumbled.css" />
+        <link rel="stylesheet" type="text/css" href="css/Zoomin.css" />
         <link rel="stylesheet" href="../../style/materialize.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
         <link rel="stylesheet" type="text/css" href="css/Style.css" />
+        <link rel="stylesheet" type="text/css" href="css/Honeycomb.css" />
         <link rel="shortcut icon" href="../../favicon/favicon.ico" />
-                    
+        <link rel="stylesheet" type="text/css" href="css/Hexa-loon.css" />
+        <link rel="stylesheet" type="text/css" href="css/Hexa-loon_after.css" />
+        <link rel="stylesheet" type="text/css" href="css/Shake.css" />
+        <link rel="stylesheet" type="text/css" href="css/Bounce.css" />
+
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
         <script src="../../script/textEffect.jquery.js"></script>
+        <script src="../../script/flip.min.js"></script>
     </head>
+
   <body>
+
         <div id="navbar"></div>
         <div id="sidebar"></div>
-   
-    <div id="modal-names" class="modal">
-        <div class="modal-content">
-            <h3> Volunteers </h3>
-            <div id="list"></div>
-        </div>
-    </div>
-    
+
     <div class="container">
         <div id="main-content">
             <h1 id="header" class="center">WHO IS NEXT?</h1>
@@ -41,9 +43,17 @@
 
               <button id="randomize-btn" class="btn waves-effect waves-light">Start!</button>
             </div>
-          </div>
+
+            <div id="container-list" class="container" style="display: none;">
+                <div id="list">
+                </div>
+                <div id="start-again-div">
+                        <button id="start-again" class="btn waves-effect waves-light cnter">Start again</button>
+                    </div>
+                </div>
+            </div>
     </div>
-    
+
     <div id="randomize-form" class = "row center">
         <div class = "col s6 offset-s3 ">
             <div class="card" style = "border:#b42529;">
@@ -121,7 +131,7 @@
                     <input id="batch-filter" type="number" class="validate"  min="1999" max="2016">
                     <label for="batch-filter">Batch</label>
               </div>
-            
+
             </div>
 
         </div>
@@ -130,7 +140,7 @@
 
             </div>
         </div>
-        
+
         <script src="../nav_bar/Script.js"></script>
         <script src="../sidebar/Script.js"></script>
         <script src="../../script/Script.js"></script>

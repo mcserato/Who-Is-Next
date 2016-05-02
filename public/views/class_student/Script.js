@@ -147,7 +147,6 @@ $(document).ready( function () {
     });
 
     /* View Students in a Class*/
-    //Refresh();
 
     //const content = $('#student-list');
     //config.checkAuth("FACULTY");

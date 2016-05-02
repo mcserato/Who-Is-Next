@@ -61,6 +61,7 @@ module.exports = function (router) {
     router.put('/api/switch_theme',                                            __.Faculty.switchTheme);
 
     router.post('/api/randomizer/:class_id',                                   __.Randomizer.getVolunteers);
+    router.put('/api/randomizer',                                              __.Randomizer.update);
 
     router.get('/api/save_point',                                              __.SaveDB.viewAll);
     router.get('/api/save_point/:save_id',                                     __.SaveDB.viewOne);
@@ -75,9 +76,6 @@ module.exports = function (router) {
     router.get('/api/student/:student_number',                                 __.Student.viewOne);
 
     router.get('/api/logs',                                                    __.Log.read);
-
-
-    
 
     router.all('*', function(req, res){
         if (req.get('Accept').match(/application\/json/) === null) {
