@@ -135,20 +135,20 @@ $(document).ready( function () {
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
-                            $('#randomizer-holder').hide();
+                            /*$('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
-                            jumbleWords(data);
+                            jumbleWords(data);*/
 
                             /*$('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             insertHexagon(data);*/
 
-                            /*$('#randomizer-holder').hide();
+                            $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
-                            zoomInImage(data);*/
+                            zoomInImage(data);
 
                         }, 3100);
                     });
@@ -250,8 +250,8 @@ function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
-    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>")
-    $('.pic').append("<h3 class='.name' style='opacity:.5;'>" + data[0].last_name + '</h3>');
+    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>");
+    $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
     $(".pic").animate({
         width: "70%",
         heigth: "50%",
@@ -261,10 +261,9 @@ function zoomInImage(data){
         borderWidth: "10px"
     }, 3000);
 
-    $('.pic').promise().done(function(){
-        $('.name').css({'opacity':'1'});
+    $(".pic").promise().done(function(){
+        $('.name').show();
     });
-
 
 }
 
