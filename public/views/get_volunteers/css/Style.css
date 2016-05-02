@@ -4,6 +4,7 @@
 	width: 100px;
 	height: 100px;
 	position: relative;
+	z-index:1;
 }
 #dice1, #dice2 {
 	top: 80px;
@@ -21,6 +22,7 @@
 	top: -250px;
 	left: 20%;
 	position: relative;	
+	z-index: -1;
 }
 #randomize-btn {
 	background-color: #b42529;

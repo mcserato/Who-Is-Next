@@ -132,6 +132,7 @@ $(document).ready( function () {
                         $('#randomizer-holder').show();
                         // Import animation of dice and arrow
                         $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
+                        $('#randomize-btn').hide();
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
@@ -142,7 +143,7 @@ $(document).ready( function () {
                                 $("#container-list").show();
                                 zoomInImage(data);
                             } else {    // Randomize selection of effects
-                                var rand = Math.round(Math.random() * 4);
+                                var rand = Math.round(Math.random() * 5);
                                 console.log(rand);
                                 switch(rand) {
                                     case 1:
@@ -163,6 +164,9 @@ $(document).ready( function () {
                                         $('#logo-holder').hide();
                                         $("#container-list").show();
                                         flyingHexagon(data);
+                                        break;
+                                    case 4:
+                                        startHatch(data);
                                         break;
                                     default:
                                         $('#randomizer-holder').hide();
@@ -418,7 +422,6 @@ function jumbleWords(data){
 
     }
 }
-
 function enterName(data){
     var i=0;
     $("#list").empty();
@@ -444,4 +447,106 @@ function enterName(data){
             }, 3000 );
         }
     }
+}
+
+
+
+function startHatch(data){
+	var clist = document.getElementById("container-list");
+	var i = 0;
+	while(document.getElementById("list").firstChild){
+    	document.getElementById("list").removeChild(document.getElementById("list").firstChild);
+    }
+
+	$(clist).prepend("<hr>");
+	$(clist).prepend("<h2>Volunteers</h2>");
+	$(clist).prepend("<br />");
+	$(clist).prepend("<br />");
+	$(clist).prepend("<br />");
+	$("#arrows").fadeOut();
+	hatch(data,i);
+}
+
+function hatch(data,i) {
+	var container = document.getElementById("randomizer-holder");
+	var clist = document.getElementById("container-list");
+	var d1 = document.getElementById("dice1");
+	var d2 = document.getElementById("dice2");
+	var list = document.getElementById("list");
+	var limit = $('#number-filter').val();
+
+	container.className += " shake-slow shake-constant";
+	
+	setTimeout(function () {
+		$("#dice1").css({
+			"-webkit-transform":"translateX(-55px) rotate(-45deg)"			
+		});
+		$("#dice2").css({
+			"-webkit-transform":"translateX(65px) rotate(45deg)"
+		})
+		$("#randomizer-holder").attr('class','');
+	},3100);
+	
+	$("#start-again").fadeOut();
+	
+	setTimeout(function() {
+		$(clist).attr('style','display:block');
+		var volunteer = document.createElement("div");
+		
+		if(i%2 == 0){
+			$(volunteer).attr('style','background:#333333;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');		
+		}else{
+			$(volunteer).attr('style','background:#b42529;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');
+		}
+		
+		volunteer.className += "bouncing";
+
+		var name_container = document.createElement("h4");
+		name_container.innerHTML = data[0].first_name + " " + data[0].last_name;
+		$(name_container).attr('style','margin:auto;text-align:center');
+
+		var wspace = document.createElement("div");
+		$(wspace).attr('style','width:100%;height:2.5px;color:blue;background:#4c4949;');
+		
+		volunteer.appendChild(wspace);
+		volunteer.appendChild(name_container);
+		container.appendChild(volunteer);
+		$(volunteer).one('webkitAnimationEnd oanimationend msAnimationEnd animationend',function(e) {
+			container.removeChild(container.children[2]);
+			$(volunteer).attr('class','');
+			list.appendChild(volunteer);
+	   		$("#dice1").css({
+			"-webkit-transform":"translateX(0px) rotate(45deg)"			
+			});
+			$("#dice2").css({
+				"-webkit-transform":"translateX(0px) rotate(360deg)"
+			});
+			i++;
+	   		hatchEnd(data,list.children.length,limit,i);
+		});
+
+	},3100);
+	
+}
+
+function hatchEnd(data,len,limit,i){
+	var rh = document.getElementById("container-list");
+	if(len != limit){
+		data.shift();
+		hatch(data,i);
+	}else{
+
+		list.appendChild(document.createElement("br"));
+		$('#start-again').fadeIn();
+		$('#start-again').click(function(){
+			$('#arrows').show();
+			$('#randomizer-holder').hide();
+        	while(document.getElementById("list").firstChild){
+        		document.getElementById("list").removeChild(document.getElementById("list").firstChild);
+        	}
+        	$('br').remove();
+        	$('h2').remove();
+        	$('hr').remove();
+		});	
+	}
 }
