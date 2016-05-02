@@ -9,6 +9,18 @@ $(document).ready( function () {
         window.location.href != config.FRONTEND_URL){
         window.location.href = '/';
     }
+    
+    $(document).ready( function () { //to prevent many redirects
+        if (localStorage.user) {   
+            if (JSON.parse(localStorage.user).role === 'ADMIN') {
+                $('.brand-logo').attr('href', '/views/faculty');
+            }
+
+            if (JSON.parse(localStorage.user).role === 'FACULTY') {
+                $('.brand-logo').attr('href', '/views/get_volunteers');
+            }
+        }
+    });
 
 });
 

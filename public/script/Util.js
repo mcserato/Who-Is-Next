@@ -13,7 +13,8 @@ var util = {
     errorHandler: function (err) {
 		$.ajax({
 			type: "GET",
-			url: "/api/session/"
+			url: "/api/session/",
+			headers: this.headers,
 		}).done( function(data) {
 
 			if(data=="NO_SESSION"){

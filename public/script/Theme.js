@@ -4,9 +4,14 @@ var string1 = 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,
 var string2 = 'rgb(192,192,192)';
 
 $(document).ready( function () {
+    if (JSON.parse(localStorage.user).role === 'ADMIN') {
+        return;
+    }
+
 	 $.ajax({    
                 url: '/api/switch_theme',
                 method: 'GET',
+                headers: util.headers,
                 success: function(data){
                   
                     
@@ -104,7 +109,6 @@ $(document).ready( function () {
 
                     }else {
                     	//default
-                    	console.log(data);
                     }
 
                 },
@@ -134,8 +138,6 @@ $(window).on("scroll", function() {
         var size1 = (8-$(document).scrollTop()).toString() + "vw";
         var size2 = (6-$(document).scrollTop()).toString() + "vw";
 
-    console.log(size1);
-    console.log(size2);
 
      $("a.brand-logo").css({
         "width":size1,
