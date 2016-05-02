@@ -21,17 +21,18 @@ module.exports = function (router) {
 
     router.post('/api/login',                                                  __.Authenticate.login);
     router.post('/api/logout',                                                 __.Authenticate.logout);
+    router.get('/api/session',                                                 __.Authenticate.checkSession);
 
+    router.get('/api/class',                                                   __.Class.viewAll);
     router.post('/api/class',                                                  __.Class.add);
     router.put('/api/class',                                                   __.Class.edit);
-    router.get('/api/class',                                                   __.Class.viewAll)
     router.del('/api/class',                                                   __.Class.removeClass);
 
-    router.put('/api/class2',                                                  __.Class.editClass)
     router.get('/api/class2',                                                  __.Class.viewClasses);
+    router.put('/api/class2',                                                  __.Class.editClass);
 
-    router.post('/api/class/:course_code',                                     __.Class.addSection)
-    router.get('/api/class/:course_code',                                      __.Class.viewOne)
+    router.get('/api/class/:course_code',                                      __.Class.viewOne);
+    router.post('/api/class/:course_code',                                     __.Class.addSection);
     router.del('/api/class/:course_code',                                      __.Class.removeSection);
         
     router.get('/api/class/search/:course_code',                               __.Class.search);
@@ -45,8 +46,8 @@ module.exports = function (router) {
 
     router.post('/api/import',                                                 __.ClassStudent.import);
 
+    router.get('/api/faculty',                                                 __.Faculty.viewAll);
     router.put('/api/faculty',                                                 __.Faculty.edit);
-    router.get('/api/faculty',                                                 __.Faculty.viewAll)
     router.del('/api/faculty',                                                 __.Faculty.remove);
  
     router.get('/api/faculty/search/:name',                                    __.Faculty.search);
@@ -62,9 +63,9 @@ module.exports = function (router) {
 
     router.post('/api/randomizer/:class_id',                                   __.Randomizer.getVolunteers);
 
+    router.get('/api/student',                                                 __.Student.viewAll);
     router.post('/api/student',                                                __.Student.add);
     router.put('/api/student',                                                 __.Student.edit);
-    router.get('/api/student',                                                 __.Student.viewAll);
     router.del('/api/student',                                                 __.Student.remove);
         
     router.get('/api/student/search/:last_name',                               __.Student.search);
