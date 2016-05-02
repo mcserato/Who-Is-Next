@@ -1,5 +1,5 @@
 'use strict';
-const db = require(__dirname + './../lib/Mysql');
+
 /* Adds a student to a class */
 exports.add = function (req, res, next) {
     if(!req.session){
