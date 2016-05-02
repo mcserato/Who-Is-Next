@@ -18,12 +18,6 @@ body {
 }
 
 
-
-.logo {
-	margin-top: 15px;
-	height: 120px;
-}
-
 #main-content {
 	margin-top: 1%;
 }
@@ -131,6 +125,7 @@ input[type=password]:focus:not([readonly])+label {
 #user-settings li a{
     background-color: #CFCDCD;
     color: black;
+    font-size:1.5vw;
 }
 
 #user-settings li a:hover{
@@ -407,7 +402,7 @@ h5.center{
 }
 
 .row{
-    padding-bottom: 5px;
+    padding-bottom: 1vw;
 }
 
 .card{
@@ -510,4 +505,7 @@ a.brand-logo{
 h1#student_header{
   font-family: Scream;
   font-size:5vw;
+}
+#student-list{
+  font-size:1.5vw;
 }
