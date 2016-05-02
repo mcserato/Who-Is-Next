@@ -198,6 +198,7 @@ exports.getTheme = function (req, res, next) {
 		        logs(req, "FAILED", "MySQL Query FAILED.");
 		        return next(err);
 		    }
+
 		    logs(req, "SUCCESS", "Retrieved theme");
 		    return res.send(rows);
 	});
