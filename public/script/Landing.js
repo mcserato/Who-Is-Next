@@ -13,9 +13,12 @@ $(document).ready( function () {
             window.location.href = '/views/admin';
         }
         if(user.role == 'FACULTY'){
-            window.location.href = '/views/class';
+            if(!user.is_validated){
+                window.location.href = '/not_validated'
+            }else{
+                window.location.href = '/views/get_volunteers';
+            }
         }
-
     }
 
     $("#log-in-page").hide();
@@ -116,9 +119,13 @@ $(document).ready( function () {
             window.location.href = '/views/admin';
         }
         if(user.role == "FACULTY"){
-            window.location.href = '/views/class';
+            if(!user.is_validated){
+                window.location.href = '/not_validated'
+            }else{
+                window.location.href = '/views/get_volunteers';
+            }
         }
     }
 
-
+    footer.init('#footer', 'landing');
 });

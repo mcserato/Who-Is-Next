@@ -82,15 +82,51 @@ input[type=password]:focus:not([readonly])+label {
 	color: #CB494E;
 }
 
-/*.input-field .prefix ~ label,
-.input-field label{
-	color: #333;
-	font-size: 120%;
-}*/
+#user-settings {
+    background-color: transparent;
+    margin-top: 2%;
+    width: 15%;
+}
 
-#logout-btn {
-	margin-top: 2%;
-	margin-right: 2%;
+#number-filter:focus + label,
+#batch-filter:focus + label {
+    color: #CB494E;
+}
+
+#number-filter:valid,
+#batch-filter:valid {
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
+}
+
+.input-field input[type=text].valid{
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
+}
+
+.dropdown-content li.divider {
+    min-height: 0px;
+    height: 4px;
+}
+
+#user-settings li a{
+    background-color: #CFCDCD;
+    color: black;
+}
+
+#user-settings li a:hover{
+    background-color: #757575;
+    color: #F5F5F5;
+}
+
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 2px;
+    font-size: 12px;
+    line-height: 1.42;
+    border-radius: 30px;
 }
 
 .hexagon-red {
@@ -186,4 +222,8 @@ input[type=password]:focus:not([readonly])+label {
 
 #sign-up-logo-link {
 	margin-top: 10%;
+}
+
+.validate {
+    padding-left: 1% !important;
 }

@@ -4,6 +4,9 @@ $(document).ready( function () {
     config.checkAuth("ADMIN");
     const content = $('#faculty-list');
 
+    navbar.init('#navbar');
+    sidebar.init('#sidebar');
+    
     function add_data (data) {
 
         var color_flag = 0; // For alternating the color
@@ -133,7 +136,7 @@ $(document).ready( function () {
                 add_data(data);
             },
             error: function(err){
-                return Materialize.toast(err.responseText,2500);
+                util.errorHandler(err);
             }
         }); 
     }
@@ -165,8 +168,8 @@ $(document).ready( function () {
             error: 
             function(err){
                 if(e.keyCode == 13){
-                    Refresh();
-                    return Materialize.toast(err.responseText,2500);    
+                	Refresh();
+                    util.errorHandler(err);    
                 }
             }
         });
@@ -197,30 +200,6 @@ $(document).ready( function () {
                 });
             });
 
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    Materialize.toast(data,2500);
-                    window.location.href = '/';
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
-
     Refresh();
-    
-    
 
 });

@@ -5,12 +5,10 @@ $(document).ready( function () {
         ? ' - ' + config.TITLE
         : config.TITLE;
 
-
     if(!localStorage.user &&
         window.location.href != config.FRONTEND_URL){
         window.location.href = '/';
     }
-
 
     $('.menu')
         .hover(
@@ -21,27 +19,15 @@ $(document).ready( function () {
             $(this).removeClass("btn-large");
         });
 
-    $('#logout-btn')
-        .click(function(){
-
-            $.ajax({
-                url: '/api/logout',
-                method: 'POST',
-                success: function(data){
-                    if(!data){
-                        return Materialize.toast("Error in Logout. Please try again !",2500);
-                    }
-
-                    localStorage.clear();
-                    return Materialize.toast(data,1000,"",function(){
-                        window.location.href = "/";
-                    });
-                },
-                error: function(err){
-                    return Materialize.toast(err.responseText,2500);
-                }
-            });
-
-        });
-
+    $(window).scroll(function() {
+        if ($(document).scrollTop() > 50) {
+            $(".logo").css("margin-top","0px");
+            $(".logo").css("height","70px");
+            $("nav").css("min-height","5%");
+        } else {
+            $(".logo").css("margin-top","15px");
+            $(".logo").css("height","90px");
+            $("nav").css("min-height","10%");
+        }
+    });
 });

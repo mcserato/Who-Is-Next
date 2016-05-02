@@ -1,0 +1,10 @@
+.pic {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	opacity: 0.5;
+	-webkit-transition:opacity 3s linear;
+}
+.name{
+	text-align: right;
+}
