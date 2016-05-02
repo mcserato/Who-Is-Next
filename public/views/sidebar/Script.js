@@ -67,6 +67,11 @@ var sidebar = {
                         '<i class="material-icons">insert_chart</i>',
                     '</a>',
                 '</li>',
+                '<li>',
+                    '<a href="/views/save_point" class="btn-floating black" title="Analytics">',
+                        '<i class="material-icons">archive</i>',
+                    '</a>',
+                '</li>',
             ].join(''));
             
             $('#sidebar-link').click();
