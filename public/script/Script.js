@@ -5,8 +5,6 @@ $(document).ready( function () {
         ? ' - ' + config.TITLE
         : config.TITLE;
 
-    $('.modal-trigger').leanModal();
-
     if(!localStorage.user &&
         window.location.href != config.FRONTEND_URL){
         window.location.href = '/';

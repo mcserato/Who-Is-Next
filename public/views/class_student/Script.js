@@ -1,8 +1,6 @@
 'use strict';
 
 $(document).ready( function () {
-    $('.modal-trigger').leanModal();
-
     navbar.init('#navbar');
     sidebar.init('#sidebar');
 

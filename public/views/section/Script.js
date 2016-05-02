@@ -1,7 +1,6 @@
 'use strict';
 
 $(document).ready( function () {
-    $('.modal-trigger').leanModal();
     const content = $('#section-list');
     config.checkAuth("FACULTY");
 
