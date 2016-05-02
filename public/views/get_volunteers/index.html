@@ -2,41 +2,18 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Students</title>
-        <style type="text/css">
-            .listname1{
-                text-align: left;
-                position: relative;
-                left:20%;
-                background-color: #b71c1c;
-                border-radius: 10px;
-                padding-left: 20px;
-            }
-            .listname2{
-                text-align: right;
-                position: relative;;
-                right:20%;
-                background-color: #212121;
-                border-radius: 10px;
-                padding-right: 20px;
-            }
-            .listname1 h4{
-                color: white;
-                opacity: 0;
-            }
-            .listname2 h4{
-                color: white;
-                opacity: 0;
-            }
-		</style>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <title>Get Volunteers</title>
+
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />   
+        <link rel="stylesheet" type="text/css" href="css/Jumbled.css" />
         <link rel="stylesheet" href="../../style/materialize.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
-        <link rel="stylesheet" type="text/css" href="css/Style.css">
-        <link rel="shortcut icon" href="../../favicon/favicon.ico">
-        <script src="../../script/Jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico" />
+                    
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+        <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
         <script src="../../script/textEffect.jquery.js"></script>
     </head>
@@ -45,7 +22,7 @@
     <div class="navbar-fixed">
         <div class="navbar-wrapper">
             <nav class="z-depth-0">
-                <a href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
+                <a id="logo-holder" href="/" class="brand-logo black-text center"><img src="/../../icon/logo1.png" class="logo"/></a>
                 <a id="logout-btn" href="#" class="btn black right"> LOGOUT </a>
             </nav>
         </div>
@@ -53,111 +30,115 @@
 
     <div id="modal-names" class="modal">
         <div class="modal-content">
-            <h5> Randomizing... </h5>
-            <div id="list">
-                Hello
-            </div>
+            <h3> Volunteers </h3>
+            <div id="list"></div>
         </div>
     </div>
-        <div class="container">
-            <div id="main-content">
-                <h1 id="header" class="center">WHO IS NEXT?</h1>
 
-                <div id="randomizer-holder">
-                  <div id="spinner">
-                    <img id="dice2" src="images/dice2.png"></img>
-                    <img id="dice1" src="images/dice1.png"></img>
-                  </div>
-                  <img id="arrows" src="images/arrows.png"></img>
+    <div class="container">
+        <div id="main-content">
+            <h1 id="header" class="center">WHO IS NEXT?</h1>
 
-          <button id="randomize-btn" class="btn waves-effect waves-light">Start!</button>
-        </div>
+            <div id="randomizer-holder">
+              <div id="spinner">
+                <img id="dice2" src="images/dice2.png"></img>
+                <img id="dice1" src="images/dice1.png"></img>
+              </div>
+              <img id="arrows" src="images/arrows.png"></img>
 
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large red z-depth-0 black">
-                <i class="large material-icons">menu</i>
-            </a>
-            <ul>
-                <li><a href="/views/class" class="btn-floating black" href="" title="Class"><i class="material-icons">class</i></a></li>
-                <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
-                <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
-                <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
-                <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">invert_colors</i></a></li>
-                <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">archive</i></a></li>
-                <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
-                <li>
-                    <!-- Modal Trigger -->
-                        <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
-                            <i id="edit-icon" class="material-icons">mode_edit</i>
-                        </a>
-               </li>
-            </ul>
-        </div>
-    <div id="randomize-form" class = "row center">
-     <div class = "col s6 offset-s3 ">
-
-       <div class="card" style = "border:#b42529;">
-
-          <div class="row center">
-            <br>
-            <p class="input-fieldenter row center" >
-              <select class="browser-default" id="class-filter">
-                <option value="" selected>SELECT CLASS</option>
-              </select>
-            </p>
+              <button id="randomize-btn" class="btn waves-effect waves-light">Start!</button>
+            </div>
           </div>
+        </div>
+    </div>
+    
+    <div class="fixed-action-btn">
+        <a class="btn-floating btn-large red z-depth-0 black">
+            <i class="large material-icons">menu</i>
+        </a>
+        <ul>
+            <li><a href="/views/class" class="btn-floating black" href="" title="Class"><i class="material-icons">class</i></a></li>
+            <li><a href="/views/student" class="btn-floating black" href="" title="Students"><i class="material-icons">face</i></a></li>
+            <li><a href="/views/logs" class="btn-floating black" href="" title="Logs"><i class="material-icons">content_paste</i></a></li>
+            <li><a href="/views/analytics" class="btn-floating black" href="" title="Analytics"><i class="material-icons">insert_chart</i></a></li>
+            <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">invert_colors</i></a></li>
+            <li><a href="/views/switch_theme" class="btn-floating black" href="" title="Switch Theme"><i class="material-icons">archive</i></a></li>
+            <li><a href="/views/get_volunteers" class="btn-floating black" href="" title="Get Volunteers"><i class="material-icons">loop</i></a></li>
+            <li>
+                <!-- Modal Trigger -->
+                <a title="Edit User" class="btn-floating black modal-trigger" href="#edit-user_modal">
+                    <i id="edit-icon" class="material-icons">mode_edit</i>
+                </a>
+           </li>
+        </ul>
+    </div>
+    
+    <div id="randomize-form" class = "row center">
+        <div class = "col s6 offset-s3 ">
+            <div class="card" style = "border:#b42529;">
 
-          <div class="input-field">
+            <div class="row center">
+                <br>
+                <br>
+                <h5 class="center">Would you like to narrow down your search?</h5>
+                <p class="input-fieldenter row center" >
+                  <select class="browser-default" id="class-filter">
+                    <option value="" selected>SELECT CLASS</option>
+                  </select>
+                </p>
+            </div>
+
+            <div class="input-field">
                 <input id="number-filter" type="number" class="validate"  min="1">
                 <label for="number-filter">Number of Volunteers</label>
-          </div>
+            </div>
 
-          <a id="add-filter" class="waves-effect waves-light btn" style="background-color: #b42529;">Add Filters</a>
-          <a id="remove-filter" style="display: none; background-color: #b42529;" class="waves-effect waves-light btn">Remove Filters</a>
+            <a id="add-filter" class="waves-effect waves-light btn" style="background-color: #b42529;">Add Filters</a>
+            <a id="remove-filter" style="display: none; background-color: #b42529;" class="waves-effect waves-light btn">Remove Filters</a>
 
-          <br/>
-          <div id="filters" style="display: none;">
-              <div> Gender: &nbsp;&nbsp;&nbsp;
-                  <input type="checkbox" id="male-filter" checked/>
+            <br/>
+            <div id="filters" style="display: none;">
+                <div> Gender: &nbsp;&nbsp;&nbsp;
+                    <input type="checkbox" id="male-filter" checked/>
                     <label for="male-filter">Male</label> &nbsp;&nbsp;&nbsp;
 
-                  <input type="checkbox" id="female-filter" checked/>
+                    <input type="checkbox" id="female-filter" checked/>
                     <label for="female-filter">Female</label>
-              </div>
+                </div>
 
-              <div class="input-field">
+                <div class="input-field">
                     <input id="last-name-filter" type="text" class="validate" >
                     <label for="last-name-filter">Last Name Starts With</label>
-              </div>
+                </div>
 
-              <div class="input-field">
+                <div class="input-field">
                     <input id="first-name-filter" type="text" class="validate" >
                     <label for="last-name-filter">First Name Starts With</label>
-              </div>
+                </div>
 
-              <div class="input-fieldenter row center" >
-                  <select class="browser-default" id="birthday-filter">
-                    <option value="" selected>All Months</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-              </div>
+                <div class="input-fieldenter row center" >
+                    <select class="browser-default" id="birthday-filter">
+                        <option value="" selected>All Months</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
 
-              <div class="input-field row center" >
-                  <select class="browser-default" id="course-filter">
-                    <option value="" selected>All Courses</option>
-                  </select>
-              </div>
+                <div class="input-field row center" >
+                    <select class="browser-default" id="course-filter">
+                        <option value="" selected>All Courses</option>
+                    </select>
+                </div>
 
               <div class="input-fieldenter row center" >
                   <select class="browser-default" id="college-filter">
@@ -169,12 +150,12 @@
                     <input id="batch-filter" type="number" class="validate"  min="1999" max="2016">
                     <label for="batch-filter">Batch</label>
               </div>
+            
+            </div>
+
         </div>
 
-      </div>
-
-      <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
-
+        <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
     </div>
 
     <div class="fixed-action-btn">
@@ -191,7 +172,9 @@
         </ul>
     
     </div>
-
+        
+    <div id="volunteers-grid"></div>
+  
 
     <script src="../../script/Config.js"></script>
     <script src="Script.js"></script>

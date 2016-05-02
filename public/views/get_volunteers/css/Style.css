@@ -23,10 +23,8 @@
 	position: relative;	
 }
 #randomize-btn {
-	top: 90%;
+	background-color: #b42529;
+	top: 600px;
 	left: 47%;
 	position: absolute;
-}
-#randomize-btn {
-	background-color: #b42529;
 }

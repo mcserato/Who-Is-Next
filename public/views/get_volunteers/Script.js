@@ -88,71 +88,160 @@ $(document).ready( function () {
         $('#female-filter').prop('checked', true);
     });
 
+ $('#randomize').click(function(){
+        var checked = $('input[type=checkbox]:checked').length;
 
-    $('#randomize')
-        .click(function(){
-            var checked = $('input[type=checkbox]:checked').length;
+        if($('#class-filter').val() == ""){
+            Materialize.toast("You must choose a class", 2000);
+        }
 
-            if($('#class-filter').val() == ""){
-                Materialize.toast("You must choose a class", 2000);
-            }
+        if(checked == 0) {
+            Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
+        }
 
-            if(checked == 0) {
-                Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
-            }
+        if($('#number-filter').val() == ""){
+            Materialize.toast("You must choose the number of volunteers", 2000);
+        }
 
-            if($('#number-filter').val() == ""){
-                Materialize.toast("You must choose the number of volunteers", 2000);
-            }
+        else {
+            var class_id = $('#class-filter').val();
 
-            else {
-                var class_id = $('#class-filter').val();
+            $.ajax({
+                url: '/api/randomizer/' + class_id,
+                method: 'POST',
+                data: {
+                    class_id    : class_id,
+                    last_name   :$('#last-name-filter').val(),
+                    first_name  :$('#first-name-filter').val(),
+                    birthday    :$('#birthday-filter').val(),
+                    course      :$('#course-filter').val(),
+                    college     :$('#college-filter').val(),
+                    batch       :$('#batch-filter').val(),
+                    number      :$('#number-filter').val()
+                },
+                success: function(data) {
+                    for(var i in data) {
+                        console.log(data[i]);
+                        //alert(data[i].first_name + " " + data[i].last_name);
 
-                $.ajax({
-                    url: '/api/randomizer/' + class_id,
-                    method: 'POST',
-                    data: {
-                        class_id    : class_id,
-                        last_name   :$('#last-name-filter').val(),
-                        first_name  :$('#first-name-filter').val(),
-                        birthday    :$('#birthday-filter').val(),
-                        course      :$('#course-filter').val(),
-                        college     :$('#college-filter').val(),
-                        batch       :$('#batch-filter').val(),
-                        number      :$('#number-filter').val()
-                    },
-                    success: function(data) {
-                        for(var i in data) {
-                            console.log(data[i]);
-                            //alert(data[i].first_name + " " + data[i].last_name);
+                    }
 
-                        }
-                        $("#modal-names").openModal();
-                        jumbleWords(data);
-                    },
-                    dataType: "JSON"
-                });
+                    $('#logo-holder').slideUp();
+                    $('#randomize-form').slideUp();
+                    $('#header').slideUp();
 
-                /*$('#logo-holder').slideUp();
-                $('#randomize-form').slideUp();
-                $('#header').slideUp();
+                    $('#randomize-form').promise().done(function(){
+                        $('#randomizer-holder').show();
+                        // Import animation of dice and arrow
+                        $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
+                        // Remove animation
+                        setTimeout(function(){
+                            document.getElementById("animation-css").remove();
 
-                $('#randomize-form').promise().done(function(){
-                    $('#randomizer-holder').show();
-                    // Import animation of dice and arrow
-                    $('head').append("<link id='animation-css' rel='stylesheet' type='text/css' href='css/Animation.css'>");
-                    // Remove animation
-                    setTimeout(function(){
-                        document.getElementById("animation-css").remove();
-                    }, 3100);
-                    setTimeout(function(){
-                        // Put random effect here
-                    }, 3100);
-                });*/
-            }
+                            $("#modal-names").openModal();
+                            jumbleWords(data);
+                        }, 3100);
+                    });
+
+                    $('randomize-btn').click(function(){
+                        document.getElementById('animation-css').remove();
+                    });
+                },
+                dataType: "JSON"
+            });
+        }
     });
 
 });
+  
+
+/* RANDOMIZER EFFECTS */
+
+/* Honeycomb Effect */
+// Creates the hexagon grid of volunteers
+function insertHexagon(data) {
+    var newline = true;
+    var maxHexagon = parseInt(window.innerWidth/150);
+    var minHexagon = maxHexagon-1;
+    var limit = maxHexagon;
+    var val = parseInt(window.innerWidth/150);
+
+    for(var i = 0; i < data.length; i ++){
+        $('#volunteers-grid').append(
+            "<div class='card-grid' id='card-grid"+i +"'>" +
+            "<div class='front'>" +
+            "<div class='hexagon unflipped'>" +                            
+            "<div class='hexTop'></div>"+
+            "<div class='hexBottom'></div>"+
+            "</div>"+
+            "</div>"+
+            "<div class='back'>"+
+            "<div class='hexagon flipped' id='volunteer"+i+"'>"+
+            "<div class='hexTop'></div>"+
+            "<div class='hexBottom'></div>"+
+            "</div>"+
+            "<p class='volunteer-name'>"+data[i].last_name+"</p>"+
+
+            "</div></div>"     
+        );
+        $("#volunteer"+i).css("background-image", "url(images/09.png)"); 
+
+        if(i == limit){
+            if(newline) newline = false;
+            else newline = true;
+
+            $("#card-grid"+i).css("clear", "left"); 
+            if(val == maxHexagon) val = minHexagon;
+            else val = maxHexagon;      
+
+            limit = limit + val;            
+        }
+
+        if(newline) $("#card-grid" + i).css("left", "10%");     
+        else $("#card-grid" + i).css("left", "15.5%");               
+    }
+}
+
+ // Shows volunteers one by one   
+function showVolunteers(data){
+    var done = [];      
+    var int = setInterval(function(){
+    var showHex = Math.floor((Math.random() * data.length)); 
+    
+    while($.inArray(showHex, done)!=-1){
+        showHex = Math.floor((Math.random() * data.length)); 
+    }
+        $("#card-grid" + showHex).flip(true);
+        done.push(showHex);
+        if(done.length == data.length){
+            clearInterval(int);
+        }
+    }, 1000);
+
+    // Enable flip.js 
+    $(".card-grid").flip({         
+       forceWidth: true,
+       forceHeight: true,
+       trigger:"manual",
+    });
+}
+
+
+/* Zoom In Effect */
+function zoomInImage(data){
+    $(".pic").animate({
+        width: "70%",
+        heigth: "50%",
+        opacity: 1,
+        left: "15%",
+        top:"15%",
+        borderWidth: "10px"
+    }, 3000);
+
+    setTimeout(function(){
+      $('#volunteers-grid').append('<h4 class=".name">' + data[0].last_name + '</h4>');
+    });
+}
 
 function jumbleWords(data){
     var i=0;
