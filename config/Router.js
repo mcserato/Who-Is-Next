@@ -49,7 +49,7 @@ module.exports = function (router) {
         .put(class_.edit)
         .get(class_.viewAll)
         .delete(class_.removeClass);
-        
+
     router.route('/api/class2')
         .put(class_.editClass)
         .get(class_.viewClasses);
@@ -58,7 +58,7 @@ module.exports = function (router) {
         .post(class_.addSection)
         .get(class_.viewOne)
         .delete(class_.removeSection);
-        
+
     router.route('/api/class/search/:course_code')
         .get(class_.search);
 
@@ -72,7 +72,7 @@ module.exports = function (router) {
 
     router.route('/api/class_student/search/:class_id/:last_name')
         .get(class_student.search);
-        
+
     router.route('/api/import')
         .post(class_student.import);
 
@@ -102,13 +102,15 @@ module.exports = function (router) {
     router.route('/api/randomizer/:class_id')
         .post(randomizer.getVolunteers);
 
+    router.route('/api/randomizer')
+        .put(randomizer.update);
     //---------------------------------------
     router.route('/api/student')
         .post(student.add)
         .put(student.edit)
         .get(student.viewAll)
         .delete(student.remove);
-        
+
     router.route('/api/student/search/:last_name')
         .get(student.search);
 

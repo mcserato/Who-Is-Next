@@ -73,7 +73,7 @@
 }
 .balloon1{
   background-color: #D13848;
-  left: 3%;
+  left: %;
   animation: flyingBalloon 12s;
   -webkit-animation: flyingBalloon 12s;
 }

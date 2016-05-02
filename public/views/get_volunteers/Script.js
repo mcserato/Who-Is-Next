@@ -110,8 +110,18 @@ $(document).ready( function () {
                 success: function(data) {
                     for(var i in data) {
                         console.log(data[i]);
-                        //alert(data[i].first_name + " " + data[i].last_name);
-
+                        $.ajax({
+                            url: '/api/randomizer',
+                            method: 'PUT',
+                            data: {
+                                class_id        : class_id,
+                                student_number  : data[i].student_number
+                            },
+                            success: function(data2){
+                                console.log(data2);
+                            },
+                            dataType: "JSON"
+                        });
                     }
 
                     $('#logo-holder').slideUp();
@@ -125,21 +135,24 @@ $(document).ready( function () {
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
-                           /* $('#randomizer-holder').hide();
+                            /*$('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             jumbleWords(data);*/
+
                             /*
                             $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
                             insertHexagon(data);
+                            $('#randomizer-holder').hide();
                             */
-                            /*$('#randomizer-holder').hide();
+                            /*
+                            $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
-                            zoomInImage(data);*/
-
+                            zoomInImage(data);
+                            */
                             $('#randomizer-holder').hide();
                             $('#logo-holder').hide();
                             $("#container-list").show();
@@ -166,7 +179,6 @@ $(document).ready( function () {
 // Creates the hexagon grid of volunteers
 function insertHexagon(data) {
     var newline = true;
-    var width = $('#list').width();
     var maxHexagon = 6;
     var minHexagon = maxHexagon-1;
     var limit = maxHexagon;
@@ -212,7 +224,6 @@ function insertHexagon(data) {
      $("#start-again-div").css("position", "absolute");
      $("#start-again-div").css("bottom", "10%");
      $("#start-again-div").css("left", "40%");
-     $("#list").css("left", "80%");
      // Enable flip.js
     $(".card-grid").flip({
        forceWidth: true,
@@ -242,9 +253,16 @@ function showVolunteers(data){
 }
 
 function flyingHexagon(data) {
+    $('#list').empty();
     $('#start-again-div').hide();
-    var balloonDiv = $("#list");
-    var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
+
+    var balloonDiv = $('<div id="balloonDiv"></div>')
+
+    var container = $("#list");
+    //var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
+    
+    container.append(balloonDiv);
+
     var done = [];
     var x, randomBalloonNum, flag = 0;
 
@@ -271,7 +289,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("images/' + pics[index] + '")');
+        outerDiv.attr('style', 'background-image: url("images/default-picture.png"');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
@@ -284,24 +302,59 @@ function flyingHexagon(data) {
 
     }
 
-    setTimeout(function(){
-        document.getElementById("hexaloon").remove();
-    }, 24000);
-    $('#start-again-div').fadeIn();
-    $("#start-again-div").css("position", "absolute");
-    $("#start-again-div").css("bottom", "10%");
-    $("#start-again-div").css("left", "40%");
-    $("#list").css("left", "80%");
+    setTimeout(function() {
+        
+        balloonDiv.remove();
+    
+    }, 15000);
+
+    setTimeout(function() {
+
+        flyingHexagon_after(data);
+
+        $('#start-again-div').fadeIn();
+        $("#start-again-div").css("position", "absolute");
+        $("#start-again-div").css("bottom", "10%");
+        $("#start-again-div").css("left", "40%");
+        $("#list").css("left", "80%");
+    }, 10000);
 }
 
+function flyingHexagon_after(data){
+    $("#list").append("<h3>Volunteers</h3>")
+
+    var i = 0;
+    
+    for(i = 0; i < data.length; i++){
+        if(i%2 ==0){
+            $("#list").append("<div><div class='listname_1' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
+        }
+        else {
+            $("#list").append("<div><div class='listname_2' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
+        }
+    }
+    
+    for(i=0; i<data.length; i++){
+        if(i%2==0){
+            $("#name"+i).delay(i*1000).animate({
+                left:'20%'
+            }, 3000 );
+        }
+        else{
+            $("#name"+i).delay(i*1000).animate({
+                right:'20%'
+            }, 3000 );
+        }
+    }
+}
 
 /* Zoom In Effect */
 function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
-    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>")
-    $('.pic').append("<h3 class='.name' style='opacity:.5;'>" + data[0].last_name + '</h3>');
+    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>");
+    $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
     $(".pic").animate({
         width: "70%",
         heigth: "50%",
@@ -311,10 +364,9 @@ function zoomInImage(data){
         borderWidth: "10px"
     }, 3000);
 
-    $('.pic').promise().done(function(){
-        $('.name').css({'opacity':'1'});
+    $(".pic").promise().done(function(){
+        $('.name').show();
     });
-
 
 }
 

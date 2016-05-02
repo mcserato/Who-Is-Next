@@ -19,20 +19,19 @@ $(document).ready( function () {
                     var student_header = $("<div></div>").addClass("collapsible-header");
                         if(data[student].picture == null){
                             var image = $('<img />',{
-                                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                                src: '../../icon/dp.png',
                                 float: 'left',
                                 position: 'relative',
-                                width: '10%'
+                                width: '75px'
                             });
                         }else{
                             var image = $('<img />',{
-                                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                                src: '../../icon/dp.png',
                                 float: 'left',
                                 position: 'relative',
-                                width: '10%'
+                                width: '75px'
                             });
                         }
-                        image.addClass("circle");
                         var text = $("<span></span>").html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
                         text.addClass("center-align");
                     student_header.append(image);
