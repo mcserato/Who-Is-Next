@@ -135,29 +135,42 @@ $(document).ready( function () {
                         // Remove animation
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
-                            /*$('#randomizer-holder').hide();
-                            $('#logo-holder').hide();
-                            $("#container-list").show();
-                            jumbleWords(data);*/
 
-                            /*
-                            $('#randomizer-holder').hide();
-                            $('#logo-holder').hide();
-                            $("#container-list").show();
-                            insertHexagon(data);
-                            $('#randomizer-holder').hide();
-                            */
-                            /*
-                            $('#randomizer-holder').hide();
-                            $('#logo-holder').hide();
-                            $("#container-list").show();
-                            zoomInImage(data);
-                            */
-                            $('#randomizer-holder').hide();
-                            $('#logo-holder').hide();
-                            $("#container-list").show();
-                            flyingHexagon(data);
-
+                            if (data.length == 1) {
+                                $('#randomizer-holder').hide();
+                                $('#logo-holder').hide();
+                                $("#container-list").show();
+                                zoomInImage(data);
+                            } else {    // Randomize selection of effects
+                                var rand = Math.round(Math.random() * 4);
+                                console.log(rand);
+                                switch(rand) {
+                                    case 1:
+                                        $('#randomizer-holder').hide();
+                                        $('#logo-holder').hide();
+                                        $("#container-list").show();
+                                        jumbleWords(data);
+                                        break;
+                                    case 2:
+                                        $('#randomizer-holder').hide();
+                                        $('#logo-holder').hide();
+                                        $("#container-list").show();
+                                        insertHexagon(data);
+                                        $('#randomizer-holder').hide();
+                                        break;
+                                    case 3:
+                                        $('#randomizer-holder').hide();
+                                        $('#logo-holder').hide();
+                                        $("#container-list").show();
+                                        flyingHexagon(data);
+                                        break;
+                                    default:
+                                        $('#randomizer-holder').hide();
+                                        $('#logo-holder').hide();
+                                        $("#container-list").show();
+                                        jumbleWords(data);
+                                }
+                            }
                         }, 3100);
                     });
 
