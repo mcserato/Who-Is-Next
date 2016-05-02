@@ -92,7 +92,7 @@ exports.removeClass = function(req, res, next){
     }
     if (!req.body.course_code) {
         logs(req, "ERROR", "Error: Missing course code.");
-        res.status(400).send("Error: Missing course code.");
+        return res.status(400).send("Error: Missing course code.");
     }
     db.query('DELETE from CLASS where course_code = ?', 
         [req.body.course_code], function (err, rows){
@@ -102,7 +102,7 @@ exports.removeClass = function(req, res, next){
             }
             if (!rows.affectedRows) {
                 logs(req, "ERROR", "Error: No class was deleted.");
-                res.status(400).send("Error: No class was deleted.");
+                return res.status(400).send("Error: No class was deleted.");
             }
 		    logs(req, "SUCCESS", 
                 ["Removed",req.body.course_code].join(' ') );
@@ -118,7 +118,7 @@ exports.removeSection = function(req, res, next){
     }
     if (!req.body.class_id) {
         logs(req, "ERROR", "Error: Missing class id");
-        res.status(400).send("Error: Missing class id.");
+        return res.status(400).send("Error: Missing class id.");
     }
     db.query('DELETE from CLASS where class_id = ?', [req.body.class_id],
         function (err, rows){
@@ -128,7 +128,7 @@ exports.removeSection = function(req, res, next){
             }
             if (!rows.affectedRows) {
                 logs(req, "ERROR", "Error: No section was deleted.");
-                res.status(400).send("Error: No section was deleted.");
+                return res.status(400).send("Error: No section was deleted.");
             }
             logs(req, "SUCCESS", 
                 ["Removed",req.body.class_id].join(' ') );
@@ -148,7 +148,7 @@ exports.viewAll = function(req, res, next) {
 		}
 		if (rows.length === 0) {
             logs(req,"ERROR", "Error: Classes were not found.");
-		    res.status(404).send("Error: Classes were not found.");
+		    return res.status(404).send("Error: Classes were not found.");
 		} else {
 		    logs(req, "SUCCESS", "Viewed all classes.");
 			res.send(rows);
@@ -168,7 +168,7 @@ exports.viewOne = function(req, res, next) {
 		}
 		if (rows.length === 0) {
             logs(req, "ERROR", "Error: Classeses were not found");
-		    res.status(404).send("Error: Classes were not found.");
+		    return res.status(404).send("Error: Classes were not found.");
 		} else {
 		    logs(req, "SUCCESS", ["Viewed",req.params.course_code].join(' '));
 			res.send(rows);
@@ -190,7 +190,7 @@ exports.search = function(req, res, next) {
 			}
 			if (rows.length === 0) {
                 logs(req, "ERROR", "Error: Class not found.");
-				res.status(404).send("Error: Class not found.");
+				return res.status(404).send("Error: Class not found.");
 			} else {
 				res.send(rows);
 			}
@@ -215,7 +215,7 @@ exports.viewClasses = function(req, res, next) {
 		}
 		if (rows.length === 0) {
             logs(req, "ERROR", "Error: Classes were not found.");
-		    res.send(404, "Error: Classes were not found.");
+		    return res.status(404).send("Error: Classes were not found.");
 		} else {
 		    logs(req, "SUCCESS", "Viewed all classes");
 			data.classes = rows;
@@ -230,7 +230,7 @@ exports.viewClasses = function(req, res, next) {
 		
 		    if (rows.length === 0) {
                 logs(req, "ERROR", "Error: Classes were not found.");
-		        res.send(404, "Error: Classes were not found.");
+		        return res.status(404).send("Error: Classes were not found.");
 		    } else {
 		        logs(req, "SUCCESS", "Viewed all degree programs of students");
 			    data.degree_programs = rows;
@@ -244,7 +244,7 @@ exports.viewClasses = function(req, res, next) {
 		    }
 		    if (rows.length === 0) {
                 logs(req, "ERROR", "Error: Classes were not found.");
-		        res.send(404, "Error: Classes were not found.");
+		        return res.status(404).send("Error: Classes were not found.");
 		    } else {
 		        logs(req, "SUCCESS", "Viewed all colleges of students");
 			    data.colleges = rows;

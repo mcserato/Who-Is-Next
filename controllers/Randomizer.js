@@ -50,7 +50,7 @@ exports.getVolunteers = function (req, res, next) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs.write(req, "SUCCESS", "Randomized.");
+            logs(req, "SUCCESS", "Randomized.");
             res.send(rows);
     });
 }
