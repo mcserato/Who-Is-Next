@@ -219,36 +219,39 @@ exports.viewClasses = function(req, res, next) {
 		} else {
 		    logs(req, "SUCCESS", "Viewed all classes");
 			data.classes = rows;
+
+
+            db.query("SELECT DISTINCT course FROM STUDENT WHERE emp_num = " + 
+            "?", [req.session.emp_num], function (err, rows) {
+                    if (err) {
+                        logs(req, "ERROR", "Error: MySQL Query FAILED.");
+                        return next(err);
+                    }
+                
+                    if (rows.length === 0) {
+                        logs(req, "ERROR", "Error: Classes were not found.");
+                        return res.status(404).send("Error: Classes were not found.");
+                    } else {
+                        logs(req, "SUCCESS", "Viewed all degree programs of students");
+                        data.degree_programs = rows;
+
+                        db.query("SELECT DISTINCT college FROM STUDENT WHERE emp_num = ?", 
+                            [req.session.emp_num], function (err, rows) {
+                                if (err) {
+                                    logs(req, "ERROR", "Error: MySQL Query FAILED.");
+                                    return next(err);
+                                }
+                                if (rows.length === 0) {
+                                    logs(req, "ERROR", "Error: Classes were not found.");
+                                    return res.status(404).send("Error: Classes were not found.");
+                                } else {
+                                    logs(req, "SUCCESS", "Viewed all colleges of students");
+                                    data.colleges = rows;
+                                    return res.send(data);
+                                }
+                        });
+                    }
+            });
 		}
-    });
-    db.query("SELECT DISTINCT course FROM STUDENT WHERE emp_num = " + 
-    "?", [req.session.emp_num], function (err, rows) {
-		    if (err) {
-                logs(req, "ERROR", "Error: MySQL Query FAILED.");
-		        return next(err);
-		    }
-		
-		    if (rows.length === 0) {
-                logs(req, "ERROR", "Error: Classes were not found.");
-		        return res.status(404).send("Error: Classes were not found.");
-		    } else {
-		        logs(req, "SUCCESS", "Viewed all degree programs of students");
-			    data.degree_programs = rows;
-		    }
     });   
-    db.query("SELECT DISTINCT college FROM STUDENT WHERE emp_num = ?", 
-        [req.session.emp_num], function (err, rows) {
-		    if (err) {
-                logs(req, "ERROR", "Error: MySQL Query FAILED.");
-		        return next(err);
-		    }
-		    if (rows.length === 0) {
-                logs(req, "ERROR", "Error: Classes were not found.");
-		        return res.status(404).send("Error: Classes were not found.");
-		    } else {
-		        logs(req, "SUCCESS", "Viewed all colleges of students");
-			    data.colleges = rows;
-                return res.send(data);
-		    }
-    });
 }
