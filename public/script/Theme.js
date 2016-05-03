@@ -8,13 +8,13 @@ $(document).ready( function () {
         return;
     }
 
-	 $.ajax({    
+	 $.ajax({
                 url: '/api/switch_theme',
                 method: 'GET',
                 headers: util.headers,
                 success: function(data){
-                  
-                    
+
+
                     if(!data){
                         return Materialize.toast("Error in fetching data",2500);
                     }
@@ -37,7 +37,7 @@ $(document).ready( function () {
 
                         string2 = "rgb(89,168,15)";
                         temp = 1;
-                    	
+
                     }else if( data[0].current_theme == 2){
                     	//yellow
                         string1 = 'linear-gradient(to bottom,   rgba(72,48,0,30)  ,   rgba(72,48,0,0))';
@@ -92,11 +92,11 @@ $(document).ready( function () {
                         $("#user-name").css({
                             "color":"white"
                         });
-                        
-                        
+
+
                         string2 = "rgb(28,11,43)";
                         temp = 3;
-                        
+
                     }else if (data[0].current_theme == 4){
                     	//red
                         string1 = 'linear-gradient(to bottom,   rgba(41,44,55,30)  ,    rgba(41,44,55,0)  )';
@@ -168,6 +168,7 @@ $(window).on("scroll", function() {
      $(".logo").css({
         "width":"6vw",
         "height":"6vw"
-     });  
+     });
     }
+});
 });
