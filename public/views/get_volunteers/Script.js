@@ -183,6 +183,21 @@ $(document).ready( function () {
                     $('randomize-btn').click(function(){
                         document.getElementById('animation-css').remove();
                     });
+
+                    /*Start of save students in a savepoint*/
+
+                    $.ajax({
+                        url: '/api/save_point/' + save_id,
+                        method: 'POST',
+                        data: {
+                            student_number         : save_id
+                        },
+                        success: function(data2){
+
+                        },
+                        dataType: "JSON"
+                    });
+
                 },
                 dataType: "JSON"
             });

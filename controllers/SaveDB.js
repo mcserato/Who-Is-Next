@@ -91,29 +91,18 @@ exports.save = function (req, res, next) {
 /* This function adds a student to a save point */
 exports.savestudent = function (req, res, next) {
 	db.query("INSERT INTO SAVE_STUDENT VALUES(?, ?)",
-		[req.body.save_id, req.body.student_number],
+		[req.params.save_id, req.body.student_number],
 
 		function (err, rows) {
             if (err) {
                 return next(err);
             }
-
             res.send(rows);
         }
     );
 }
 
-/*-----------
-DROP TABLE IF EXISTS SAVE_STUDENT;
-CREATE TABLE SAVE_STUDENT
-	(save_id INT NOT NULL,
-	 student_number VARCHAR(10) NOT NULL,
-	 FOREIGN KEY (save_id) REFERENCES SAVEPOINT(save_id) ON DELETE CASCADE ON UPDATE CASCADE,
-	 FOREIGN KEY (student_number) REFERENCES CLASS_STUDENT(student_number) ON DELETE CASCADE ON UPDATE CASCADE,
-	 PRIMARY KEY (save_id, student_number)
-	);
-
--------*/
+/*------------------*/
 
 
 /* This function searches for a certain save point */
