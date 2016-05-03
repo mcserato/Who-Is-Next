@@ -73,18 +73,8 @@ exports.remove = function (req, res, next) {
 	);
 }
 
-/*
-	FOR GAUVEN: Yung view, sure nakong gumagana dahil natest ko na sa mysql console.
-	Di ko lang alam kung pano ayusin yung routes.
-
-	Eto yung add function na tinry kong gawin based sa mga pinagusapan kanina
-	pakicorrect nalang kung may mga mali
-
-*/
-
 /* This function adds an empty save point with no volunteers selected yet*/
 exports.save = function (req, res, next) {
-	//etong query na to is gumagawa ng save point, pero wala pang lamang students
 	db.query("INSERT INTO SAVEPOINT VALUES(DEFAULT, ?, ?, ?)",
 		[req.body.save_name, req.session.emp_num, req.body.class_id],
 
@@ -96,12 +86,34 @@ exports.save = function (req, res, next) {
             res.send(rows);
         }
 	);
-
-	//so pano gagawin para malaman kung which students ang dapat iadd sa save point na yan? 
-	//INSERT INTO SAVE_STUDENT VALUES (1, '2013-00014'); ang example ng add sa SAVE_STUDENT
 }
 
-/*------------------*/
+/* This function adds a student to a save point */
+exports.savestudent = function (req, res, next) {
+	db.query("INSERT INTO SAVE_STUDENT VALUES(?, ?)",
+		[req.body.save_id, req.body.student_number],
+
+		function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+
+            res.send(rows);
+        }
+    );
+}
+
+/*-----------
+DROP TABLE IF EXISTS SAVE_STUDENT;
+CREATE TABLE SAVE_STUDENT
+	(save_id INT NOT NULL,
+	 student_number VARCHAR(10) NOT NULL,
+	 FOREIGN KEY (save_id) REFERENCES SAVEPOINT(save_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	 FOREIGN KEY (student_number) REFERENCES CLASS_STUDENT(student_number) ON DELETE CASCADE ON UPDATE CASCADE,
+	 PRIMARY KEY (save_id, student_number)
+	);
+
+-------*/
 
 
 /* This function searches for a certain save point */
