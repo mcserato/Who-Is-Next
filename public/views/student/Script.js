@@ -45,8 +45,8 @@ $(document).ready( function () {
                     $.ajax({
                         url: '/api/student/' + $(this).attr("id"),
                         method: 'GET',
+                        headers: util.headers,
                         success: function(data_student){
-                            console.log(data_student[0]);
                             $('#student_header').empty();
                             $('#student_number').empty();
                             $('#student_name').empty();
@@ -76,6 +76,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/student',
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -92,6 +93,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/student/search/' + str,
             method: 'GET',
+            headers: util.headers,
             success: function(data_student){
                 content.empty();
                 add_data(data_student);

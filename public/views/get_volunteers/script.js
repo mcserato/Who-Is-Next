@@ -4,7 +4,6 @@ var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.j
 var done = [];
 var x, randomBalloonNum, flag = 0;
 
-console.log(i);	
 
 for(var index = 0; index < i; index++) {
 

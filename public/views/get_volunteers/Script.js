@@ -5,10 +5,13 @@ $(document).ready( function () {
     navbar.init('#navbar');
     sidebar.init('#sidebar');
 
-
+    $('.brand-logo').remove();
+    $('nav').css({"background-color":""});
+    
     $.ajax({
         url: '/api/class2/',
         method: 'GET',
+        headers: util.headers,
         success: function(data) {
             var classes = data.classes;
             var courses = data.degree_programs;
@@ -113,6 +116,7 @@ $(document).ready( function () {
             $.ajax({
                 url: '/api/randomizer/' + class_id,
                 method: 'POST',
+                headers: util.headers,
                 data: {
                     class_id    : class_id,
                     last_name   :$('#last-name-filter').val(),
@@ -125,7 +129,6 @@ $(document).ready( function () {
                 },
                 success: function(data) {
                     for(var i in data) {
-                        console.log(data[i]);
                         $.ajax({
                             url: '/api/randomizer',
                             method: 'PUT',
@@ -134,7 +137,6 @@ $(document).ready( function () {
                                 student_number  : data[i].student_number
                             },
                             success: function(data2){
-                                console.log(data2);
                             },
                             dataType: "JSON"
                         });
@@ -160,7 +162,6 @@ $(document).ready( function () {
                                 zoomInImage(data);
                             } else {    // Randomize selection of effects
                                 var rand = Math.round(Math.random() * 5);
-                                console.log(rand);
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -293,7 +294,7 @@ function flyingHexagon(data) {
 
     var container = $("#list");
     //var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
-    
+
     container.append(balloonDiv);
 
     var done = [];
@@ -301,7 +302,6 @@ function flyingHexagon(data) {
 
     for(var index = 0; index < data.length; index++) {
 
-        console.log(data[index].first_name);
 
         while(1) {
             flag = 0;
@@ -340,7 +340,7 @@ function flyingHexagon(data) {
             balloonDiv.remove();
 
         });
-    
+
     }, 10000);
 
     setTimeout(function() {
@@ -360,7 +360,7 @@ function flyingHexagon_after(data){
     $("#list").append("<h3>Volunteers</h3>")
 
     var i = 0;
-    
+
     for(i = 0; i < data.length; i++){
         if(i%2 ==0){
             $("#list").append("<div><div class='listname_1' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
@@ -369,7 +369,7 @@ function flyingHexagon_after(data){
             $("#list").append("<div><div class='listname_2' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
         }
     }
-    
+
     for(i=0; i<data.length; i++){
         if(i%2==0){
             $("#name"+i).delay(i*1000).animate({
@@ -492,29 +492,29 @@ function hatch(data,i) {
 	var limit = $('#number-filter').val();
 
 	container.className += " shake-slow shake-constant";
-	
+
 	setTimeout(function () {
 		$("#dice1").css({
-			"-webkit-transform":"translateX(-55px) rotate(-45deg)"			
+			"-webkit-transform":"translateX(-55px) rotate(-45deg)"
 		});
 		$("#dice2").css({
 			"-webkit-transform":"translateX(65px) rotate(45deg)"
 		})
 		$("#randomizer-holder").attr('class','');
 	},3100);
-	
+
 	$("#start-again").fadeOut();
-	
+
 	setTimeout(function() {
 		$(clist).attr('style','display:block');
 		var volunteer = document.createElement("div");
-		
+
 		if(i%2 == 0){
-			$(volunteer).attr('style','background:#333333;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');		
+			$(volunteer).attr('style','background:#333333;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');
 		}else{
 			$(volunteer).attr('style','background:#b42529;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');
 		}
-		
+
 		volunteer.className += "bouncing";
 
 		var name_container = document.createElement("h4");
@@ -523,7 +523,7 @@ function hatch(data,i) {
 
 		var wspace = document.createElement("div");
 		$(wspace).attr('style','width:100%;height:2.5px;color:blue;background:#4c4949;');
-		
+
 		volunteer.appendChild(wspace);
 		volunteer.appendChild(name_container);
 		container.appendChild(volunteer);
@@ -532,7 +532,7 @@ function hatch(data,i) {
 			$(volunteer).attr('class','');
 			list.appendChild(volunteer);
 	   		$("#dice1").css({
-			"-webkit-transform":"translateX(0px) rotate(45deg)"			
+			"-webkit-transform":"translateX(0px) rotate(45deg)"
 			});
 			$("#dice2").css({
 				"-webkit-transform":"translateX(0px) rotate(360deg)"
@@ -542,7 +542,7 @@ function hatch(data,i) {
 		});
 
 	},3100);
-	
+
 }
 
 function hatchEnd(data,len,limit,i){
@@ -563,6 +563,6 @@ function hatchEnd(data,len,limit,i){
         	$('br').remove();
         	$('h2').remove();
         	$('hr').remove();
-		});	
+		});
 	}
 }
