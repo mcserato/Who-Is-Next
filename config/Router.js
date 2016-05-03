@@ -1,11 +1,11 @@
 'use strict';
 
-const importer = require('anytv-node-importer');
-const path = require('path');
+var importer = require('anytv-node-importer');
+var path = require('path');
 
 module.exports = function (router) {
 
-    const __ =importer.dirloadSync(__dirname + '/../controllers');
+    var __ = importer.dirloadSync(__dirname + '/../controllers');
 
     router.del = router.delete;
 
