@@ -6,17 +6,17 @@
     font-family: roboto;   
     src:url(/font/roboto/Roboto-Bold.wof);
 }
+@font-face{
+    font-family: fredoka;   
+    src:url(/font/roboto/FredokaOne-Regular.ttf);
+}
 body {
 	background-color: #f5f6f6;
     padding:auto;
+
+  font-family: fredoka;
 }
 
-
-
-.logo {
-	margin-top: 15px;
-	height: 120px;
-}
 
 #main-content {
 	margin-top: 1%;
@@ -125,6 +125,7 @@ input[type=password]:focus:not([readonly])+label {
 #user-settings li a{
     background-color: #CFCDCD;
     color: black;
+    font-size:1.5vw;
 }
 
 #user-settings li a:hover{
@@ -354,6 +355,8 @@ input[type=password]:focus:not([readonly])+label {
 	padding:1vw 1.5vw;
 	background-color: rgba(255,255,255,0.8);
 	border-radius: 1vw;
+  font-family:roboto;
+  font-weight: bold;
 	font-weight:900;
 }
 h3.center{
@@ -365,8 +368,7 @@ h3.center{
     src:url(/font/roboto/Scream.ttf);
 }
 .modal-content{
-	font-family:roboto;
-	font-weight:bold;
+	font-family:fredoka;
 }
 h4.center{
 	font-size:5.5vw;
@@ -400,7 +402,7 @@ h5.center{
 }
 
 .row{
-    padding-bottom: 5px;
+    padding-bottom: 1vw;
 }
 
 .card{
@@ -414,23 +416,19 @@ h5.center{
     src:url(/font/roboto/Walkway.ttf);
 }
 #birthday-filter{
-     font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);
+     font-family: fredoka;   
 
 }
 #course-filter{
-     font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);
+     font-family: fredoka;   
 
 }
 #college-filter{
-     font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);
+     font-family: fredoka;   
 }
 
 label{
-      font-family: Walkway;   
-    src:url(/font/roboto/Walkway.ttf);   
+    font-family: fredoka;     
 
 }
 
@@ -450,7 +448,7 @@ nav.z-depth-0{
 	color: black;
 	height:7vw;
 	box-shadow: 0 0.5vw 0 0 #CB494E;
-	background: linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,192,192,0)  );
+	background: rgb(192,192,192);
 }
 
 .logo:hover { 
@@ -468,13 +466,13 @@ a.brand-logo{
 	background-color:#D0D0D4;
 	border-radius: 70%;
 	box-shadow: 0 0.3vw 0 0 rgba(0, 0, 0, 0.2);
-  height:8vw;
-  width:8vw;
+  height:11vw;
+  width:11vw;
 }
 
 .logo {
-	height:6vw;
-	width:6vw;
+	height:9.1vw;
+	width:9.1vw;
 	margin:1vw;
    -webkit-animation: flip 2s;
   animation: flip 2s;
@@ -499,4 +497,15 @@ a.brand-logo{
 
 .stud-info {
     font-size: 20px !important;
+}
+#user-name{
+  font-family:fredoka;
+  font-size:2vw;
+}
+h1#student_header{
+  font-family: Scream;
+  font-size:5vw;
+}
+#student-list{
+  font-size:1.5vw;
 }

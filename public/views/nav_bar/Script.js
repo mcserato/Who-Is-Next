@@ -43,7 +43,7 @@ var navbar = {
                 '</ul>',
                     '<div class="navbar-wrapper">',
                         '<nav class="z-depth-0">',
-                            '<a href="/" class="brand-logo black-text center">',
+                            '<a href="/views/get_volunteers" class="brand-logo black-text center">',
                                 '<img src="/../../icon/logo1.png" class="logo"/>',
                             '</a>',
                               '<ul class="user-menu right">',

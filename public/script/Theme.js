@@ -63,6 +63,9 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(70,46,2)"
                             });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
 
                         string2 = "rgb(72,48,0)";
                         temp = 2;
@@ -83,6 +86,13 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(26,9,41)"
                             });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
+                        
                         
                         string2 = "rgb(28,11,43)";
                         temp = 3;
@@ -103,6 +113,9 @@ $(document).ready( function () {
                          $("a.brand-logo").css({
                             "background-color":"rgb(39,42,57)"
                             });
+                        $("#user-name").css({
+                            "color":"white"
+                        });
 
                          string2 = "rgb(41,44,55)";
                          temp = 4;
@@ -120,7 +133,7 @@ $(document).ready( function () {
 
 /////////NAV BAR///////////////////////////
 $(window).scroll(function() {
-   /*if($(window).scrollTop()) {
+   if($(window).scrollTop()) {
       $('nav.z-depth-0').css({
         'background': string1
       });
@@ -129,14 +142,14 @@ $(window).scroll(function() {
         'background': string2
       });
 
-   }*/
+   }
 
 });
 
 $(window).on("scroll", function() {
-    if ($(document).scrollTop()<10){
-        var size1 = (8-$(document).scrollTop()).toString() + "vw";
-        var size2 = (6-$(document).scrollTop()).toString() + "vw";
+    if ($(document).scrollTop()<11){
+        var size1 = (11-$(document).scrollTop()).toString() + "vw";
+        var size2 = (9.2-$(document).scrollTop()).toString() + "vw";
 
 
      $("a.brand-logo").css({
@@ -157,5 +170,4 @@ $(window).on("scroll", function() {
         "height":"6vw"
      });  
     }
-});
 });
