@@ -36,6 +36,43 @@ exports.viewOne = function (req, res, next) {
 	);
 }
 
+exports.rename = function (req, res, next) {
+	if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
+	db.query("UPDATE SAVEPOINT SET save_name = ? WHERE save_id like ?",
+		[req.body.save_name, req.body.save_id],
+
+		function (err, rows) {
+			if (err) {
+				return next(err);
+			}
+			res.send(rows);
+		}
+	);
+}
+
+exports.remove = function (req, res, next) {
+	if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
+	db.query("DELETE FROM SAVEPOINT WHERE save_id = ? AND " +
+		"class_id = ? AND emp_num = ?",
+		[req.body.save_id, req.body.class_id, req.session.emp_num],
+
+		function (err, rows) {
+			if (err) {
+				return next(err);
+			}
+			res.send(rows);
+		}
+	);
+}
+
 /*
 	FOR GAUVEN: Yung view, sure nakong gumagana dahil natest ko na sa mysql console.
 	Di ko lang alam kung pano ayusin yung routes.
@@ -66,24 +103,6 @@ exports.save = function (req, res, next) {
 
 /*------------------*/
 
-/*
-	Nacheck ko na rin sa MySQL console ang remove and find functions. Gumagana naman siya ng maayos.
-*/
-
-/* This function deletes a save point */
-exports.remove = function (req, res, next) {
-	db.query("DELETE FROM SAVEPOINT WHERE save_id = ? AND " +
-		"class_id = ? AND emp_num = ?",
-		[req.body.save_id, req.body.class_id, req.session.emp_num],
-
-		function (err, rows) {
-			if (err) {
-				return next(err);
-			}
-			res.send(rows);
-		}
-	);
-}
 
 /* This function searches for a certain save point */
 exports.find = function (req, res, next) {

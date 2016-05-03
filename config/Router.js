@@ -64,16 +64,9 @@ module.exports = function (router) {
     router.put('/api/randomizer',                                              __.Randomizer.update);
 
     router.get('/api/save_point',                                              __.SaveDB.viewAll);
+    router.put('/api/save_point',                                              __.SaveDB.rename);
+    router.del('/api/save_point',                                              __.SaveDB.remove);
     router.get('/api/save_point/:save_id',                                     __.SaveDB.viewOne);
-
-    router.get('/api/student',                                                 __.Student.viewAll);
-    router.post('/api/student',                                                __.Student.add);
-    router.put('/api/student',                                                 __.Student.edit);
-    router.del('/api/student',                                                 __.Student.remove);
-        
-    router.get('/api/student/search/:last_name',                               __.Student.search);
-
-    router.get('/api/student/:student_number',                                 __.Student.viewOne);
 
     router.get('/api/logs',                                                    __.Log.read);
 
