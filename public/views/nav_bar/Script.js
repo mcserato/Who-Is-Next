@@ -18,7 +18,7 @@ var navbar = {
                               '<ul class="user-menu right">',
                                 '<li><h5 id="user-name" style="margin-top:35px;"></h5></li>',
                                 '<li>',
-                                    '<a href="#" id="settings" class="btn black btn-large btn-circle dropdown-button" style="margin-top:20px;" data-activates="user-settings">',
+                                    '<a href="#!" id="settings" class="btn black btn-large btn-circle dropdown-button" style="margin-top:20px;" data-activates="user-settings">',
                                         '<i class="material-icons">settings</i>',
                                     '</a>',
                                 '</li>',
@@ -43,13 +43,13 @@ var navbar = {
                 '</ul>',
                     '<div class="navbar-wrapper">',
                         '<nav class="z-depth-0">',
-                            '<a href="/" class="brand-logo black-text center">',
+                            '<a href="/views/get_volunteers" class="brand-logo black-text center">',
                                 '<img src="/../../icon/logo1.png" class="logo"/>',
                             '</a>',
                               '<ul class="user-menu right">',
                                 '<li><h5 id="user-name" style="margin-top:35px;"></h5></li>',
                                 '<li>',
-                                    '<a href="#" id="settings" class="btn black btn-large btn-circle dropdown-button" style="margin-top:20px;" data-activates="user-settings">',
+                                    '<a href="#!" id="settings" class="btn black btn-large btn-circle dropdown-button" style="margin-top:20px;" data-activates="user-settings">',
                                         '<i class="material-icons">settings</i>',
                                     '</a>',
                                 '</li>',
@@ -114,6 +114,7 @@ var navbar = {
                 $.ajax({
                     url: '/api/logout',
                     method: 'POST',
+                    headers: util.headers,
                     success: function(data){
                         if(!data){
                             return Materialize.toast("Error in Logout. Please try again !",2500);
@@ -140,15 +141,18 @@ var navbar = {
 
 
                  /* Fills Up Areas */
-         $.ajax({
-                type: "GET",
-                url: "/api/faculty/"+ JSON.parse(localStorage.user).emp_num
-             }).done(function(info){
-                $("#name_edit").val(info[0].name);
-                $("#email_edit").val(info[0].email);
-                $("#username_edit").val(info[0].username);
-             });   
-            
+         
+         if (JSON.parse(localStorage.user).role === 'FACULTY') {
+             $.ajax({
+                    type: "GET",
+                    url: "/api/faculty/"+ JSON.parse(localStorage.user).emp_num,
+                    headers: util.headers,                    
+                 }).done(function(info){
+                    $("#name_edit").val(info[0].name);
+                    $("#email_edit").val(info[0].email);
+                    $("#username_edit").val(info[0].username);
+                 });   
+        }
 
             /*Edit User*/
         $('#edit-user-button').click(function () {
@@ -171,6 +175,7 @@ var navbar = {
                 $.ajax({
                     type: "PUT",
                     url: "/api/faculty",
+                    headers: util.headers,
                     data: {
                         name: name,
                         password: new_password,

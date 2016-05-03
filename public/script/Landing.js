@@ -10,7 +10,7 @@ $(document).ready( function () {
         var user = JSON.parse(localStorage.user);
         
         if(user.role == 'ADMIN'){
-            window.location.href = '/views/admin';
+            window.location.href = '/views/faculty';
         }
         if(user.role == 'FACULTY'){
             if(!user.is_validated){
@@ -97,6 +97,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/login',
             method: 'POST',
+            headers: util.headers,
             data: {
                 username: username,
                 password: password

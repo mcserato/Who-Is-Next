@@ -31,16 +31,17 @@ exports.getVolunteers = function (req, res, next) {
         query += " AND MONTH(birthday) = " + req.body.birthday + " ";
     }
     if(req.body.course!=""){
-        query += " AND course = " + req.body.course + " ";
+        query += " AND course = '" + req.body.course + "' ";
     }
     if(req.body.college!=""){
-        query += " AND college = " + req.body.college + "";
+        query += " AND college = '" + req.body.college + "'";
     }
     if(req.body.batch!=""){
-        query += " AND student_number like '" + req.body.batch + "%' ";
+        query += " AND s.student_number like '" + req.body.batch + "%' ";
     }
 
-    db.query("SELECT first_name, last_name FROM STUDENT s, CLASS_STUDENT cs, " +
+    console.log(query);
+    db.query("SELECT * FROM STUDENT s, CLASS_STUDENT cs, " +
     "CLASS c WHERE s.student_number = cs.student_number AND s.emp_num = " +
     "cs.emp_num AND c.class_id = cs.class_id AND c.class_id = ?" + query +
     "ORDER BY rand() limit " + req.body.number, [req.body.class_id],
@@ -50,7 +51,23 @@ exports.getVolunteers = function (req, res, next) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs.write(req, "SUCCESS", "Randomized.");
+            logs(req, "SUCCESS", "Randomized.");
+            res.send(rows);
+    });
+}
+
+/*Update the number of times called of a student*/
+exports.update = function (req, res, next) {
+    db.query("UPDATE CLASS_STUDENT SET no_of_times_called = "+
+    	"no_of_times_called + 1  WHERE class_id = ?"+
+        " AND student_number = ? AND emp_num = ?", [req.body.class_id,
+        req.body.student_number, req.session.emp_num],
+
+        function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+
             res.send(rows);
     });
 }
