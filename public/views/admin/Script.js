@@ -108,6 +108,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/faculty',
                     method: 'DELETE',
+                    headers: util.headers,
                     data: {
                         emp_num: emp_num
                     },
@@ -135,6 +136,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/validate',
                     method: 'POST',
+                    headers: util.headers,
                     data: {
                         emp_num: emp_num
                     },
@@ -171,6 +173,7 @@ $(document).ready( function () {
     	$.ajax({
 	        url: '/api/faculty',
 	        method: 'GET',
+            headers: util.headers,
 	        success: function(data){
 	        	if(!data){
 	            	return Materialize.toast("Error in fetching data",2500);
@@ -201,6 +204,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/faculty/search/' + $(this).val(),
             method: 'GET',
+            headers: util.headers,
             success: 
             function(data){
                 if(!data){
@@ -227,6 +231,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/class',
                     method: 'DELETE',
+                    headers: util.headers,
                     data: {
                         course_code: course_code
                     },

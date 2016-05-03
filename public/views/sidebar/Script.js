@@ -37,7 +37,7 @@ var sidebar = {
                 '</li>',
             ].join(''));
 
-            $('#sidebar').click();
+            $('#sidebar-link').click();
         }
 
         else if (user.role === 'FACULTY') {
@@ -56,7 +56,8 @@ var sidebar = {
                     '<a href="/views/student" class="btn-floating black" title="Students">',
                         '<i class="material-icons">face</i>',
                     '</a>',
-                '</li>',
+                '</li>'
+            /*Features not working
                 '<li>',
                     '<a href="/views/logs" class="btn-floating black" title="Logs">',
                         '<i class="material-icons">content_paste</i>',
@@ -67,6 +68,12 @@ var sidebar = {
                         '<i class="material-icons">insert_chart</i>',
                     '</a>',
                 '</li>',
+                '<li>',
+                    '<a href="/views/save_point" class="btn-floating black" title="Analytics">',
+                        '<i class="material-icons">archive</i>',
+                    '</a>',
+                '</li>',
+            */
             ].join(''));
             
             $('#sidebar-link').click();

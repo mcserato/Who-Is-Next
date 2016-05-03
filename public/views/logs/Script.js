@@ -8,6 +8,7 @@ $(document).ready( function () {
     $.ajax({
     	url: '/api/logs',
     	method: 'GET',
+        headers: util.headers,
     	type: 'json',
     	success: function (logs) {
     		for (var i in logs) {

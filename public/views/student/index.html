@@ -15,24 +15,17 @@
 
         <div class="container">
             <div id="main-content">
-
                 <h1 class="center">Students</h1>
-
-                <nav>
-                    <div class="nav-wrapper row">
-                        <form>
-                            <div class="input-field">
-                                <input id="search-student" type="search"/>
-                                <label for="search-student"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-
-                <ul id="student-list" class="collapsible" data-collapsible="accordion">
-                </ul>
-
+                <div class="nav-wrapper row">
+                    <form>
+                        <div class="input-field col l12">
+                            <input id="search-student" type="search" placeholder="Search Class" required>
+                            <label for="search-student"><i class="material-icons">search</i></label>
+                            <i class="material-icons waves-effect waves-light">close</i>
+                        </div>
+                    </form>
+                </div>
+                <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
             </div>
         </div>
 
@@ -49,12 +42,15 @@
                 </ul>
             </div>
         </div>
+        <div id="footer">
+        </div>
 
         <script src="../nav_bar/Script.js"></script>
         <script src="../sidebar/Script.js"></script>
         <script src="../../script/Config.js"></script>
         <script src="../../script/Script.js"></script>
         <script src="../../script/Theme.js"></script>
+        <script src="../footer/Script.js"></script>
         <script src="../../script/Util.js"></script>
         <script src="./Script.js"></script>
     </body>

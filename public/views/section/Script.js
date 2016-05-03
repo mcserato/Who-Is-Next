@@ -91,6 +91,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/class/' + class_id,
                     method: 'DELETE',
+                    headers: util.headers,
                     data: {
                         class_id: class_id
                     },
@@ -131,7 +132,8 @@ $(document).ready( function () {
             var i;
             $.ajax({
                 type: "GET",
-                url: "/api/analytics/" + localStorage.class_id
+                url: "/api/analytics/" + localStorage.class_id,
+                headers: util.headers
             }).done(function(data){
                 var data2=[];
                 for(i=0; i<10; i++){
@@ -194,13 +196,15 @@ $(document).ready( function () {
             });
             $.ajax({
                 type: "GET",
-                url: "/api/analyticsGender/"+localStorage.class_id+"/M"
+                url: "/api/analyticsGender/"+localStorage.class_id+"/M",
+                headers: util.headers
             }).done(function(data) {
                 gender_frequency.push(data[0].frequency);
             });
             $.ajax({
                 type: "GET",
-                url: "/api/analyticsGender/"+localStorage.class_id+"/F"
+                url: "/api/analyticsGender/"+localStorage.class_id+"/F",
+                headers: util.headers
             }).done(function(data) {
                 gender_frequency.push(data[0].frequency);
 
@@ -255,7 +259,8 @@ $(document).ready( function () {
 
             $.ajax({
                 type: "GET",
-                url: "/api/analyticsFemale/" + localStorage.class_id
+                url: "/api/analyticsFemale/" + localStorage.class_id,
+                headers: util.headers
             }).done(function(datalang){
                 var data4=[];
                 for(i=0; i<datalang.length; i++){
@@ -312,7 +317,8 @@ $(document).ready( function () {
 
             $.ajax({
                     type: "GET",
-                    url: "/api/analyticsMale/" + localStorage.class_id
+                    url: "/api/analyticsMale/" + localStorage.class_id,
+                    headers: util.headers
                 }).done(function(datagg){
                     var data3=[];
                     for(i=0; i<datagg.length; i++){
@@ -369,7 +375,8 @@ $(document).ready( function () {
 
             $.ajax({
                     type: "GET",
-                    url: "/api/analyticsGetSection/" + localStorage.class_id
+                    url: "/api/analyticsGetSection/" + localStorage.class_id,
+                    headers: util.headers
                  }).done(function(section){
                     var section_list = [];
                     for(var i = 0; i < section.length ; i ++) {
@@ -381,7 +388,8 @@ $(document).ready( function () {
                             var link = "/api/analyticsLab/"+section_list[i];
                             $.ajax({
                                  type: "GET",
-                                 url: link
+                                 url: link,
+                                 headers: util.headers
                               }).done(function(frequency){
                                    var temp = [];
                                    temp.push(frequency[0].section);
@@ -447,6 +455,7 @@ $(document).ready( function () {
         $.ajax({
             type: "POST",
             url: "/api/class/" + localStorage.course_code,
+            headers: util.headers,
             data: {
                 class_section: class_section,
                 section_number: section_number
@@ -475,6 +484,7 @@ $(document).ready( function () {
         $.ajax({
             type: "PUT",
             url: "/api/class",
+            headers: util.headers,
             data: {
                 class_section: class_section,
                 section_number: section_number,
@@ -509,6 +519,7 @@ $(document).ready( function () {
         $.ajax({
             type: "PUT",
             url: "/api/student",
+            headers: util.headers,
             data: {
                 first_name: first_name,
                 middle_name: middle_name,
@@ -534,6 +545,7 @@ $(document).ready( function () {
     $.ajax({
         url: '/api/class/' + localStorage.course_code,
         method: 'GET',
+        headers: util.headers,
         success: function(data){
             $("#course-id").append($("<h3></h3>").text(data[0].course_title));
             if(!data){
@@ -622,6 +634,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/class/' + class_id,
                     method: 'DELETE',
+                    headers: util.headers,
                     data: {
                         class_id: class_id
                     },
@@ -662,7 +675,8 @@ $(document).ready( function () {
                 var i;
                 $.ajax({
                     type: "GET",
-                    url: "/api/analytics/" + localStorage.class_id
+                    url: "/api/analytics/" + localStorage.class_id,
+                    headers: util.headers
                 }).done(function(data){
                     var data2=[];
                     for(i=0; i<data.length; i++){
@@ -726,13 +740,15 @@ $(document).ready( function () {
                 });
                 $.ajax({
                     type: "GET",
-                    url: "/api/analyticsGender/"+localStorage.class_id+"/M"
+                    url: "/api/analyticsGender/"+localStorage.class_id+"/M",
+                    headers: util.headers
                 }).done(function(data) {
                     gender_frequency.push(data[0].frequency);
                 });
                 $.ajax({
                     type: "GET",
-                    url: "/api/analyticsGender/"+localStorage.class_id+"/F"
+                    url: "/api/analyticsGender/"+localStorage.class_id+"/F",
+                    headers: util.headers
                 }).done(function(data) {
                     gender_frequency.push(data[0].frequency);
 
@@ -789,7 +805,8 @@ $(document).ready( function () {
 
                 $.ajax({
                     type: "GET",
-                    url: "/api/analyticsFemale/" + localStorage.class_id
+                    url: "/api/analyticsFemale/" + localStorage.class_id,
+                    headers: util.headers
                 }).done(function(datalang){
                     var data4=[];
                     for(i=0; i<datalang.length; i++){
@@ -848,7 +865,8 @@ $(document).ready( function () {
 
                 $.ajax({
                         type: "GET",
-                        url: "/api/analyticsMale/" + localStorage.class_id
+                        url: "/api/analyticsMale/" + localStorage.class_id,
+                        headers: util.headers
                     }).done(function(datagg){
                         var data3=[];
                         for(i=0; i<datagg.length; i++){
@@ -907,7 +925,8 @@ $(document).ready( function () {
 
                 $.ajax({
                     type: "GET",
-                    url: "/api/analyticsGetSection/" + localStorage.class_id
+                    url: "/api/analyticsGetSection/" + localStorage.class_id,
+                    headers: util.headers
                 }).done(function(section){
                     var section_list = [];
                     for(var i = 0; i < section.length ; i ++) {
@@ -919,7 +938,8 @@ $(document).ready( function () {
                         var link = "/api/analyticsLab/"+section_list[i];
                         $.ajax({
                              type: "GET",
-                             url: link
+                             url: link,
+                             headers: util.headers
                           }).done(function(frequency){
                                var temp = [];
                                temp.push(frequency[0].section);
@@ -1003,6 +1023,7 @@ $(document).ready( function () {
             $.ajax({
                 type: "POST",
                 url: "/api/student",
+                headers: util.headers,
                 data: {
                     student_number: student_number,
                     first_name: first_name,
@@ -1023,6 +1044,7 @@ $(document).ready( function () {
                 $.ajax({
                     type: "POST",
                     url: "/api/class_student",
+                    headers: util.headers,
                     data: {
                         class_id: localStorage.class_id,
                         student_number: student_number,

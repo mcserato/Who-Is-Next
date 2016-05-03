@@ -5,10 +5,16 @@ var util = {
             .replace(/>/g, '&gt;');
     },
 
+    headers: {
+        'Accept': 'application/json;',
+        'Content-Type': 'application/x-www-form-urlencoded'
+    },
+
     errorHandler: function (err) {
 		$.ajax({
 			type: "GET",
-			url: "/api/session/"
+			url: "/api/session/",
+			headers: this.headers,
 		}).done( function(data) {
 
 			if(data=="NO_SESSION"){

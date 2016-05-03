@@ -34,16 +34,18 @@ $(document).ready( function () {
             } else {
                 var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
             }
+
             subject_div.attr("id", data[class_].course_code.replace(' ', ''));
             subject_div.append(subject);
 
             if (num_flag < 3) {
-                var row_div = $("<div class='three'></div>");
-                row_div.append(subject_div);
-                content.append(row_div);
-            } else  content.append(subject_div);
-
-            content.append(options_div);
+                var row_div = $("<div class='three con'></div>");    
+            } else  var row_div = $("<div class='four con'></div>");
+                
+            row_div.append(subject_div);
+            row_div.append(options_div);
+            options_div.hide();
+            content.append(row_div);
 
             color_flag++;
             num_flag++;
@@ -66,6 +68,15 @@ $(document).ready( function () {
                 window.location.href = "/views/section";
             });
 
+         /* Hover options */
+        $('.con').mouseenter(function() { // Show options
+            $(this).find('.options').show();
+        });
+        
+        $('.con').mouseleave(function() { // Hide options
+            $(this).find('.options').hide();
+        });
+
         /* Delete Class*/
         $('.remove')
             .click(function(){
@@ -74,6 +85,7 @@ $(document).ready( function () {
                 $.ajax({
                     url: '/api/class',
                     method: 'DELETE',
+                    headers: util.headers,
                     data: {
                         course_code: course_code
                     },
@@ -115,6 +127,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/class',
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -143,6 +156,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/class/search/' + $(this).val(),
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -179,6 +193,7 @@ $(document).ready( function () {
         $.ajax({
             type: "POST",
             url: "/api/class",
+            headers: util.headers,
             data: {
                 course_code: course_code,
                 course_title: course_title,
@@ -207,6 +222,7 @@ $(document).ready( function () {
         $.ajax({
             type: "PUT",
             url: "/api/class2",
+            headers: util.headers,
             data: {
                 course_code: course_code,
                 course_title: course_title,
@@ -229,6 +245,7 @@ $(document).ready( function () {
     $.ajax({
         url: '/api/class',
         method: 'GET',
+        headers: util.headers,
         success: function(data){
             if(!data){
                 return Materialize.toast("Error in fetching data",2500);
@@ -263,30 +280,32 @@ $(document).ready( function () {
                 subject_div.append(subject);
 
                 if (num_flag < 3) {
-                    var row_div = $("<div class='three'></div>");
-                    row_div.append(subject_div);
-                    content.append(row_div);
-                } else  content.append(subject_div);
-
-                content.append(options_div);
+                    var row_div = $("<div class='three con'></div>");
+                    
+                } else  var row_div = $("<div class='four con'></div>");
+                
+                row_div.append(subject_div);
+                row_div.append(options_div);
+                options_div.hide();
+                content.append(row_div);
 
                 color_flag++;
                 num_flag++;
                 if (num_flag == 7) num_flag = 0;
             }
 
-            $('.options').hide();
-
             $('.courses').click(function(){ // Redirect to View Section in a Class
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
 
-            $('.hex').hover(function() {
-               $('.options').show();
-               $('.options').mouseleave(function() {
-                    $('.options').hide();
-                });
+            /* Hover options */
+            $('.con').mouseenter(function() { // Show options
+                $(this).find('.options').show();
+            });
+            
+            $('.con').mouseleave(function() { // Hide options
+                $(this).find('.options').hide();
             });
 
             /* Delete Class*/
@@ -297,6 +316,7 @@ $(document).ready( function () {
                     $.ajax({
                         url: '/api/class',
                         method: 'DELETE',
+                        headers: util.headers,
                         data: {
                             course_code: course_code
                         },
@@ -322,7 +342,8 @@ $(document).ready( function () {
                     /* Auto-fills up form of selected edit class*/
                     $.ajax({
                         type: "GET",
-                        url: "/api/class/" + localStorage.class_id
+                        url: "/api/class/" + localStorage.class_id,
+                        headers: util.headers,
                     }).done(function(info){
                         $("#course_code_edit").val(info[0].course_code);
                         $("#course_title_edit").val(info[0].course_title);

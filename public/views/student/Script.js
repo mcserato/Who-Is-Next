@@ -19,20 +19,19 @@ $(document).ready( function () {
                     var student_header = $("<div></div>").addClass("collapsible-header");
                         if(data[student].picture == null){
                             var image = $('<img />',{
-                                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                                src: '../../icon/dp.png',
                                 float: 'left',
                                 position: 'relative',
-                                width: '10%'
+                                width: '75px'
                             });
                         }else{
                             var image = $('<img />',{
-                                src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2000px-User_icon_2.svg.png',
+                                src: '../../icon/dp.png',
                                 float: 'left',
                                 position: 'relative',
-                                width: '10%'
+                                width: '75px'
                             });
                         }
-                        image.addClass("circle");
                         var text = $("<span></span>").html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
                         text.addClass("center-align");
                     student_header.append(image);
@@ -46,8 +45,8 @@ $(document).ready( function () {
                     $.ajax({
                         url: '/api/student/' + $(this).attr("id"),
                         method: 'GET',
+                        headers: util.headers,
                         success: function(data_student){
-                            console.log(data_student[0]);
                             $('#student_header').empty();
                             $('#student_number').empty();
                             $('#student_name').empty();
@@ -77,6 +76,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/student',
             method: 'GET',
+            headers: util.headers,
             success: function(data){
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
@@ -93,6 +93,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/student/search/' + str,
             method: 'GET',
+            headers: util.headers,
             success: function(data_student){
                 content.empty();
                 add_data(data_student);

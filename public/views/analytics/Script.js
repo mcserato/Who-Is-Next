@@ -6,7 +6,8 @@ $( document ).ready(function() {
     var gender_frequency=[];
     $.ajax({
         type: "GET",
-        url: "/api/analytics/1"
+        url: "/api/analytics/1",
+        headers: util.headers
     }).done(function(data){
         var data2=[];
         for(i=0; i<10; i++){
@@ -69,13 +70,15 @@ $( document ).ready(function() {
     });
     $.ajax({
         type: "GET",
-        url: "/api/analyticsGender/1/M"
+        url: "/api/analyticsGender/1/M",
+        headers: util.headers
     }).done(function(data) {
         gender_frequency.push(data[0].frequency);
     });
     $.ajax({
         type: "GET",
-        url: "/api/analyticsGender/1/F"
+        url: "/api/analyticsGender/1/F",
+        headers: util.headers
     }).done(function(data) {
         gender_frequency.push(data[0].frequency);
 
@@ -131,6 +134,7 @@ $( document ).ready(function() {
     $.ajax({
         type: "GET",
         url: "/api/analyticsFemale/1"
+        headers: util.headers
     }).done(function(datalang){
         var data4=[];
         for(i=0; i<datalang.length; i++){
@@ -187,7 +191,8 @@ $( document ).ready(function() {
 
     $.ajax({
             type: "GET",
-            url: "/api/analyticsMale/1"
+            url: "/api/analyticsMale/1",
+            headers: util.headers
         }).done(function(datagg){
             var data3=[];
             for(i=0; i<datagg.length; i++){
@@ -245,7 +250,8 @@ $( document ).ready(function() {
 
     $.ajax({
             type: "GET",
-            url: "/api/analyticsGetSection/6"
+            url: "/api/analyticsGetSection/6",
+            headers: util.headers
          }).done(function(section){
             var section_list = [];
             for(var i = 0; i < section.length ; i ++) {
@@ -257,7 +263,8 @@ $( document ).ready(function() {
                     var link = "/api/analyticsLab/"+section_list[i];
                     $.ajax({
                          type: "GET",
-                         url: link
+                         url: link,
+                         headers: util.headers,
                       }).done(function(frequency){
                            var temp = [];
                            temp.push(frequency[0].section);

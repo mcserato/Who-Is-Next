@@ -10,6 +10,7 @@
   "author": "CMSC 128 AB-1L AY 15-16",
   "license": "ISC",
   "dependencies": {
+    "anytv-node-importer": "0.0.0",
     "body-parser": "^1.15.0",
     "cli-color": "^1.1.0",
     "express": "^4.13.4",
