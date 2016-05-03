@@ -70,7 +70,7 @@ module.exports = function (router) {
 
     //New saves
     router.post('/api/save_point',                                             __.SaveDB.save);
-    router.post('/api/save_point/:save_id',                                    __.SaveDB.savestudent);
+    router.post('/api/save_student',                                           __.SaveDB.savestudent);
 
     router.get('/api/logs',                                                    __.Log.read);
 

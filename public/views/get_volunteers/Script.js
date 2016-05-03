@@ -185,19 +185,39 @@ $(document).ready( function () {
                     });
 
                     /*Start of save students in a savepoint*/
+                    $('#save-student').click(function(){
+                        var save_name = $('#save-point').val();
+                        var save_id;
+                        //This function creates the save point
+                        $.ajax({
+                            url: '/api/save_point',
+                            method: 'POST',
+                            data: {
+                                save_name       : save_name,
+                                class_id        : class_id
+                            },
+                            success: function(data){
+                            },
+                            dataType: "JSON"
+                        });
 
-                    $.ajax({
-                        url: '/api/save_point/' + save_id,
-                        method: 'POST',
-                        data: {
-                            student_number         : save_id
-                        },
-                        success: function(data2){
-
-                        },
-                        dataType: "JSON"
+                        //This function adds the students to the save point
+                        
+                        for(var i in data) {
+                            $.ajax({
+                                url: '/api/save_student',
+                                method: 'POST',
+                                data: {
+                                    student_number  : data[i].student_number
+                                },
+                                success: function(data){
+                                },
+                                dataType: "JSON"
+                            });
+                        }
+                        
                     });
-
+                    
                 },
                 dataType: "JSON"
             });
@@ -205,6 +225,7 @@ $(document).ready( function () {
     });
 
 });
+
 
 
 /* RANDOMIZER EFFECTS */

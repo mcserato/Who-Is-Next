@@ -90,8 +90,8 @@ exports.save = function (req, res, next) {
 
 /* This function adds a student to a save point */
 exports.savestudent = function (req, res, next) {
-	db.query("INSERT INTO SAVE_STUDENT VALUES(?, ?)",
-		[req.params.save_id, req.body.student_number],
+	db.query("INSERT INTO SAVE_STUDENT VALUES(LAST_INSERT_ID(), ?)",
+		[req.body.student_number],
 
 		function (err, rows) {
             if (err) {
