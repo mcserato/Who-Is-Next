@@ -32,4 +32,5 @@ app.use(
 );
 
 app.use(require(__dirname + '/lib/Parser')());
+app.use(require(__dirname + '/lib/HeaderCheck')());
 app.use(require(__dirname + '/config/Router')(express.Router()));

@@ -5,31 +5,30 @@ $(document).ready( function () {
         ? ' - ' + config.TITLE
         : config.TITLE;
 
-    $('.modal-trigger').leanModal();
-
     if(!localStorage.user &&
         window.location.href != config.FRONTEND_URL){
         window.location.href = '/';
     }
+    
+    $(document).ready( function () { //to prevent many redirects
+        if (localStorage.user) {   
+            if (JSON.parse(localStorage.user).role === 'ADMIN') {
+                $('.brand-logo').attr('href', '/views/faculty');
+            }
 
-    $('.menu')
-        .hover(
-        function(){
-            $(this).addClass("btn-large");
-        },
-        function(){
-            $(this).removeClass("btn-large");
-        });
-
-    $(window).scroll(function() {
-        if ($(document).scrollTop() > 50) {
-            $(".logo").css("margin-top","0px");
-            $(".logo").css("height","70px");
-            $("nav").css("min-height","5%");
-        } else {
-            $(".logo").css("margin-top","15px");
-            $(".logo").css("height","90px");
-            $("nav").css("min-height","10%");
+            if (JSON.parse(localStorage.user).role === 'FACULTY') {
+                $('.brand-logo').attr('href', '/views/get_volunteers');
+            }
         }
     });
+
 });
+
+    $('#test5').click(function(){
+    
+        if ($('.check_box').is(':checked')){
+            $('#password').attr('type', 'text');
+        }
+        else
+            $('#password').attr('type', 'password');
+    });

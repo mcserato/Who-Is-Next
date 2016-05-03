@@ -21,6 +21,9 @@ $(document).ready( function () {
         }
     }
 
+    $('.modal-trigger').leanModal();
+    
+
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
 
@@ -94,6 +97,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/login',
             method: 'POST',
+            headers: util.headers,
             data: {
                 username: username,
                 password: password
@@ -116,7 +120,7 @@ $(document).ready( function () {
         localStorage.user = JSON.stringify(user);
 
         if(user.role == "ADMIN"){
-            window.location.href = '/views/faculty';
+            window.location.href = '/views/admin';
         }
         if(user.role == "FACULTY"){
             if(!user.is_validated){

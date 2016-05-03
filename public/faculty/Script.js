@@ -10,6 +10,7 @@ $(document).ready( function () {
 			$.ajax({
 	            url: '/api/logout',
 	            method: 'POST',
+                headers: util.headers,
 	            success: function(data){
 	            	if(!data){
 	                	return Materialize.toast("Error in Logout. Please try again !",2500);
