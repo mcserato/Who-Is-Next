@@ -252,6 +252,10 @@ function showVolunteers(data){
 
 }
 
+/*
+    -Randomizer effect that displays floating hexagons with picture
+    -Followed by effects that display the names of the shown pictures
+*/
 function flyingHexagon(data) {
     $('#list').empty();
     $('#start-again-div').hide();
@@ -259,8 +263,7 @@ function flyingHexagon(data) {
     var balloonDiv = $('<div id="balloonDiv"></div>')
 
     var container = $("#list");
-    //var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
-    
+
     container.append(balloonDiv);
 
     var done = [];
@@ -272,7 +275,7 @@ function flyingHexagon(data) {
 
         while(1) {
             flag = 0;
-            randomBalloonNum = parseInt(Math.floor(Math.random() * 28 + 1));
+            randomBalloonNum = parseInt(Math.floor(Math.random() * 20 + 1));
 
             for(x = 0; x < done.length; x++) {
                 if(done[x] == randomBalloonNum) {
@@ -303,6 +306,7 @@ function flyingHexagon(data) {
     }
 
     setTimeout(function() {
+        
         balloonDiv.fadeOut(13000, function() {
             balloonDiv.remove();
 
@@ -314,12 +318,17 @@ function flyingHexagon(data) {
 
         flyingHexagon_after(data);
 
-        $('#start-again-div').fadeIn();
-        $("#start-again-div").css("position", "absolute");
-        $("#start-again-div").css("bottom", "10%");
-        $("#start-again-div").css("left", "40%");
-        $("#list").css("left", "80%");
     }, 10000);
+
+    setTimeout(function() {
+
+        $('#start-again-div').fadeIn();
+        $("#start-again-div").css("position", "relative");
+        //$("#start-again-div").css("bottom", "10%");
+        //$("#start-again-div").css("left", "40%");
+        $("#list").css("left", "80%");
+
+    }, 20000);
 }
 
 function flyingHexagon_after(data){
