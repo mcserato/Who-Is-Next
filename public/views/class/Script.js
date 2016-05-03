@@ -34,16 +34,18 @@ $(document).ready( function () {
             } else {
                 var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
             }
+
             subject_div.attr("id", data[class_].course_code.replace(' ', ''));
             subject_div.append(subject);
 
             if (num_flag < 3) {
-                var row_div = $("<div class='three'></div>");
-                row_div.append(subject_div);
-                content.append(row_div);
-            } else  content.append(subject_div);
-
-            content.append(options_div);
+                var row_div = $("<div class='three con'></div>");    
+            } else  var row_div = $("<div class='four con'></div>");
+                
+            row_div.append(subject_div);
+            row_div.append(options_div);
+            options_div.hide();
+            content.append(row_div);
 
             color_flag++;
             num_flag++;
@@ -58,11 +60,13 @@ $(document).ready( function () {
                 window.location.href = "/views/section";
             });
 
-        $('.hex').hover(function() {
-           $('.options').show();
-           $('.options').mouseleave(function() {
-                $('.options').hide();
-            });
+         /* Hover options */
+        $('.con').mouseenter(function() { // Show options
+            $(this).find('.options').show();
+        });
+        
+        $('.con').mouseleave(function() { // Hide options
+            $(this).find('.options').hide();
         });
 
         /* Delete Class*/
@@ -262,30 +266,32 @@ $(document).ready( function () {
                 subject_div.append(subject);
 
                 if (num_flag < 3) {
-                    var row_div = $("<div class='three'></div>");
-                    row_div.append(subject_div);
-                    content.append(row_div);
-                } else  content.append(subject_div);
-
-                content.append(options_div);
+                    var row_div = $("<div class='three con'></div>");
+                    
+                } else  var row_div = $("<div class='four con'></div>");
+                
+                row_div.append(subject_div);
+                row_div.append(options_div);
+                options_div.hide();
+                content.append(row_div);
 
                 color_flag++;
                 num_flag++;
                 if (num_flag == 7) num_flag = 0;
             }
 
-            $('.options').hide();
-
             $('.courses').click(function(){ // Redirect to View Section in a Class
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
 
-            $('.hex').hover(function() {
-               $('.options').show();
-               $('.options').mouseleave(function() {
-                    $('.options').hide();
-                });
+            /* Hover options */
+            $('.con').mouseenter(function() { // Show options
+                $(this).find('.options').show();
+            });
+            
+            $('.con').mouseleave(function() { // Hide options
+                $(this).find('.options').hide();
             });
 
             /* Delete Class*/
