@@ -29,7 +29,9 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(87,166,17)"
                             });
-
+                        $("a#randomize").css({
+                            "background-color":"rgb(240, 216, 0)"
+                            });
                         string2 = "rgb(89,168,15)";
                         temp = 1;
                     	
@@ -61,6 +63,9 @@ $(document).ready( function () {
                         $("#user-name").css({
                             "color":"white"
                         });
+                        $("a#randomize").css({
+                            "background-color":"rgb(240, 216, 0)"
+                            });
 
                         string2 = "rgb(72,48,0)";
                         temp = 2;

@@ -33,6 +33,10 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(87,166,17)"
                             });
+                        $('#green').css({
+                            opacity: 0.4,
+                            filter: alpha(opacity=40)
+                            });
 
                         string2 = "rgb(89,168,15)";
                         temp = 1;
