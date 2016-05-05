@@ -162,6 +162,7 @@ $(document).ready( function () {
                                 zoomInImage(data);
                             } else {    // Randomize selection of effects
                                 var rand = Math.round(Math.random() * 5);
+                                rand = 2;
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -237,7 +238,7 @@ function insertHexagon(data) {
 
             "</div></div>"
         );
-        $("#volunteer"+i).css("background-image", "url(images/09.png)");
+        $("#volunteer"+i).css("background-image", "url(" + data[i].picture + ")");
 
         if(i == limit){
             if(newline) newline = false;
@@ -325,7 +326,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("../../icon/dp.png")');
+        outerDiv.attr('style', 'background-image: url("' + data[i].picture + '")');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
@@ -398,7 +399,9 @@ function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
-    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>");
+    var img = $("<img class='pic' length=3px width=5px>")
+    img.attr("src", data[0].picture);
+    $('#list').append(img);
     $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
     $(".pic").animate({
         width: "70%",
