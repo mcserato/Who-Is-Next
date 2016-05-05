@@ -44,7 +44,6 @@ $(document).ready( function () {
 
             if (color_flag % 2 == 0) {
                 var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
-
             } else {
                 var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
             }
@@ -52,12 +51,13 @@ $(document).ready( function () {
             section_dv.append(section);
 
             if (num_flag < 3) {
-                var row_div = $("<div class='three'></div>");
-                row_div.append(section_dv);
-                content.append(row_div);
-            } else  content.append(section_dv);
-
-            content.append(options_div);
+                var row_div = $("<div class='three con'></div>");         
+            } else  var row_div = $("<div class='four con'></div>");
+                
+            row_div.append(section_dv);
+            row_div.append(options_div);
+            options_div.hide();
+            content.append(row_div);
 
             color_flag++;
             num_flag++;
@@ -75,12 +75,15 @@ $(document).ready( function () {
                 window.location.href = "/views/class_student";
             });
 
-        $('.hex').hover(function() {
-           $('.options').show();
-           $('.options').mouseleave(function() {
-                $('.options').hide();
-            });
+        /* Hover options */
+        $('.con').mouseenter(function() { // Show options
+            $(this).find('.options').show();
         });
+        
+        $('.con').mouseleave(function() { // Hide options
+            $(this).find('.options').hide();
+        });
+
 
         /* Delete Section*/
         $('.remove')
@@ -587,9 +590,9 @@ $(document).ready( function () {
                 options_div.append(edit_section);
                 options_div.append(delete_section);
 
+                
                 if (color_flag % 2 == 0) {
                     var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
-
                 } else {
                     var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
                 }
@@ -597,12 +600,13 @@ $(document).ready( function () {
                 section_dv.append(section);
 
                 if (num_flag < 3) {
-                    var row_div = $("<div class='three'></div>");
-                    row_div.append(section_dv);
-                    content.append(row_div);
-                } else  content.append(section_dv);
-
-                content.append(options_div);
+                    var row_div = $("<div class='three con'></div>");         
+                } else  var row_div = $("<div class='four con'></div>");
+                    
+                row_div.append(section_dv);
+                row_div.append(options_div);
+                options_div.hide();
+                content.append(row_div);
 
                 color_flag++;
                 num_flag++;
@@ -619,12 +623,15 @@ $(document).ready( function () {
                 window.location.href = "/views/class_student";
             });
 
-            $('.hex').hover(function() {
-               $('.options').show();
-               $('.options').mouseleave(function() {
-                    $('.options').hide();
-                });
+            /* Hover options */
+            $('.con').mouseenter(function() { // Show options
+                $(this).find('.options').show();
             });
+            
+            $('.con').mouseleave(function() { // Hide options
+                $(this).find('.options').hide();
+            });
+
 
             /* Delete Section*/
             $('.remove').click(function(){

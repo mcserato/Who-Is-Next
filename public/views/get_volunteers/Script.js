@@ -162,6 +162,7 @@ $(document).ready( function () {
                                 zoomInImage(data);
                             } else {    // Randomize selection of effects
                                 var rand = Math.round(Math.random() * 5);
+                                rand = 2;
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -237,7 +238,7 @@ function insertHexagon(data) {
 
             "</div></div>"
         );
-        $("#volunteer"+i).css("background-image", "url(images/09.png)");
+        $("#volunteer"+i).css("background-image", "url(" + data[i].picture + ")");
 
         if(i == limit){
             if(newline) newline = false;
@@ -286,6 +287,10 @@ function showVolunteers(data){
 
 }
 
+/*
+    -Randomizer effect that displays floating hexagons with picture
+    -Followed by effects that display the names of the shown pictures
+*/
 function flyingHexagon(data) {
     $('#list').empty();
     $('#start-again-div').hide();
@@ -293,7 +298,6 @@ function flyingHexagon(data) {
     var balloonDiv = $('<div id="balloonDiv"></div>')
 
     var container = $("#list");
-    //var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
 
     container.append(balloonDiv);
 
@@ -305,7 +309,7 @@ function flyingHexagon(data) {
 
         while(1) {
             flag = 0;
-            randomBalloonNum = parseInt(Math.floor(Math.random() * 28 + 1));
+            randomBalloonNum = parseInt(Math.floor(Math.random() * 20 + 1));
 
             for(x = 0; x < done.length; x++) {
                 if(done[x] == randomBalloonNum) {
@@ -322,7 +326,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("../../icon/dp.png")');
+        outerDiv.attr('style', 'background-image: url("' + data[i].picture + '")');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
@@ -336,6 +340,7 @@ function flyingHexagon(data) {
     }
 
     setTimeout(function() {
+        
         balloonDiv.fadeOut(13000, function() {
             balloonDiv.remove();
 
@@ -347,12 +352,17 @@ function flyingHexagon(data) {
 
         flyingHexagon_after(data);
 
-        $('#start-again-div').fadeIn();
-        $("#start-again-div").css("position", "absolute");
-        $("#start-again-div").css("bottom", "10%");
-        $("#start-again-div").css("left", "40%");
-        $("#list").css("left", "80%");
     }, 10000);
+
+    setTimeout(function() {
+
+        $('#start-again-div').fadeIn();
+        $("#start-again-div").css("position", "relative");
+        //$("#start-again-div").css("bottom", "10%");
+        //$("#start-again-div").css("left", "40%");
+        $("#list").css("left", "80%");
+
+    }, 20000);
 }
 
 function flyingHexagon_after(data){
@@ -389,7 +399,9 @@ function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
-    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>");
+    var img = $("<img class='pic' length=3px width=5px>")
+    img.attr("src", data[0].picture);
+    $('#list').append(img);
     $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
     $(".pic").animate({
         width: "70%",
