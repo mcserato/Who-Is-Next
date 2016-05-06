@@ -29,19 +29,20 @@ $(document).ready( function () {
             options_div.append(delete_class);
 
             if (color_flag % 2 == 0) {
-                var subject_div = $("<div class='hex z-depth-2 hexagon-red'></div>");
+                var subject_div = $("<div class='courses_hex hex z-depth-2 hexagon-red'></div>");
 
             } else {
-                var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
+                var subject_div = $("<div class='courses_hex hex z-depth-2 hexagon-grey'></div>");
             }
 
+            subject_div.attr("course_code", data[class_].course_code);
             subject_div.attr("id", data[class_].course_code.replace(' ', ''));
             subject_div.append(subject);
 
             if (num_flag < 3) {
-                var row_div = $("<div class='three con'></div>");    
+                var row_div = $("<div class='three con'></div>");
             } else  var row_div = $("<div class='four con'></div>");
-                
+
             row_div.append(subject_div);
             row_div.append(options_div);
             options_div.hide();
@@ -62,7 +63,7 @@ $(document).ready( function () {
             });
         });
 
-        $('.courses')
+        $('.courses_hex')
             .click(function(){
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
@@ -72,7 +73,7 @@ $(document).ready( function () {
         $('.con').mouseenter(function() { // Show options
             $(this).find('.options').show();
         });
-        
+
         $('.con').mouseleave(function() { // Hide options
             $(this).find('.options').hide();
         });
@@ -166,7 +167,7 @@ $(document).ready( function () {
 
                 add_class(data);
 
-                $('.courses')
+                $('.courses_hex')
                     .click(function(){
                         localStorage.course_code = $(this).attr("course_code");
                         window.location.href = "/views/section";
@@ -271,19 +272,21 @@ $(document).ready( function () {
                 options_div.append(delete_class);
 
                 if (color_flag % 2 == 0) {
-                    var subject_div = $("<div class='hex z-depth-2 hexagon-red'></div>");
+                    var subject_div = $("<div class='courses_hex hex z-depth-2 hexagon-red'></div>");
 
                 } else {
-                    var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
+                    var subject_div = $("<div class='courses_hex hex z-depth-2 hexagon-grey'></div>");
                 }
+
+                subject_div.attr("course_code", data[class_].course_code);
                 subject_div.attr("id", data[class_].course_code.replace(' ', ''));
                 subject_div.append(subject);
 
                 if (num_flag < 3) {
                     var row_div = $("<div class='three con'></div>");
-                    
+
                 } else  var row_div = $("<div class='four con'></div>");
-                
+
                 row_div.append(subject_div);
                 row_div.append(options_div);
                 options_div.hide();
@@ -294,7 +297,7 @@ $(document).ready( function () {
                 if (num_flag == 7) num_flag = 0;
             }
 
-            $('.courses').click(function(){ // Redirect to View Section in a Class
+            $('.courses_hex').click(function(){ // Redirect to View Section in a Class
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });
@@ -303,7 +306,7 @@ $(document).ready( function () {
             $('.con').mouseenter(function() { // Show options
                 $(this).find('.options').show();
             });
-            
+
             $('.con').mouseleave(function() { // Hide options
                 $(this).find('.options').hide();
             });
