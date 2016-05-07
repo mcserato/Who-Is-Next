@@ -128,6 +128,12 @@ $(document).ready( function () {
                     number      :$('#number-filter').val()
                 },
                 success: function(data) {
+                    console.log(data.length, $("#number-filter").val());
+                    if(data.length < $("#number-filter").val()) {
+                        Materialize.toast("Number of volunteers exceeded number of students", 2000);
+                        return;
+                    }
+
                     for(var i in data) {
                         $.ajax({
                             url: '/api/randomizer',
