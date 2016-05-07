@@ -7,7 +7,7 @@ exports.viewAll = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-	db.query("SELECT * FROM SAVEPOINT s WHERE s.emp_num like ?",
+	db.query("SELECT * FROM SAVEPOINT s WHERE s.emp_num like ? ORDER BY save_date DESC;",
 		[req.session.emp_num],
 		function (err, rows) {
 			if(err) {
@@ -42,7 +42,7 @@ exports.rename = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-	db.query("UPDATE SAVEPOINT SET save_name = ? WHERE save_id like ?",
+	db.query("UPDATE SAVEPOINT SET save_name = ?, save_date = NOW() WHERE save_id like ?",
 		[req.body.save_name, req.body.save_id],
 
 		function (err, rows) {
@@ -75,7 +75,7 @@ exports.remove = function (req, res, next) {
 
 /* This function adds an empty save point with no volunteers selected yet*/
 exports.save = function (req, res, next) {
-	db.query("INSERT INTO SAVEPOINT VALUES(DEFAULT, ?, ?, ?)",
+	db.query("INSERT INTO SAVEPOINT VALUES(DEFAULT, ?, DEFAULT, ?, ?)",
 		[req.body.save_name, req.session.emp_num, req.body.class_id],
 
 		function (err, rows) {

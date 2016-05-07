@@ -128,20 +128,6 @@ $(document).ready( function () {
                     number      :$('#number-filter').val()
                 },
                 success: function(data) {
-                    for(var i in data) {
-                        $.ajax({
-                            url: '/api/randomizer',
-                            method: 'PUT',
-                            data: {
-                                class_id        : class_id,
-                                student_number  : data[i].student_number
-                            },
-                            success: function(data2){
-                            },
-                            dataType: "JSON"
-                        });
-                    }
-
                     $('#logo-holder').slideUp();
                     $('#randomize-form').slideUp();
                     $('#header').slideUp();
@@ -192,6 +178,8 @@ $(document).ready( function () {
                                         $("#container-list").show();
                                         jumbleWords(data);
                                 }
+                                
+                                $('#save-point-form').show();
                             }
                         }, 3100);
                     });
@@ -213,6 +201,8 @@ $(document).ready( function () {
                                 class_id        : class_id
                             },
                             success: function(data){
+                                Materialize.toast("Successfully saved!", 1500);
+                                $('#save-point-form').hide();
                             },
                             dataType: "JSON"
                         });
@@ -231,6 +221,20 @@ $(document).ready( function () {
                                 dataType: "JSON"
                             });
                         }
+                        
+                        for(var i in data) {
+                            $.ajax({
+                                url: '/api/randomizer',
+                                method: 'PUT',
+                                data: {
+                                    class_id        : class_id,
+                                    student_number  : data[i].student_number
+                                },
+                                success: function(data2){
+                                },
+                                dataType: "JSON"
+                            });
+                    }
                         
                     });
                     
