@@ -187,7 +187,7 @@ $(document).ready( function () {
                                 }
                                 
                             } else {    // Randomize selection of effects
-                                var rand = Math.round(Math.random() * 4);
+                                var rand = Math.round(Math.random() * 3);
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -241,7 +241,7 @@ function insertHexagon(data) {
     var limit = maxHexagon;
     var val = 6;
 
-    $('#list').html("");
+    $('#list').empty();
     for(var i = 0; i < data.length; i ++){
         $('#list').append(
             "<div class='card-grid' id='card-grid"+i +"'>" +
@@ -348,7 +348,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("' + data[i].picture + '")');
+        outerDiv.attr('style', 'background-image: url("' + data[index].picture + '")');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
@@ -531,6 +531,7 @@ function enterName(data){
 
 
 function startHatch(data){
+    $("#list").empty();
 	var clist = document.getElementById("container-list");
 	var i = 0;
 	while(document.getElementById("list").firstChild){
