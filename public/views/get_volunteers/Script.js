@@ -7,7 +7,7 @@ $(document).ready( function () {
 
     $('.brand-logo').remove();
     $('nav').css({"background-color":""});
-    
+
     $.ajax({
         url: '/api/class2/',
         method: 'GET',
@@ -340,7 +340,7 @@ function flyingHexagon(data) {
     }
 
     setTimeout(function() {
-        
+
         balloonDiv.fadeOut(13000, function() {
             balloonDiv.remove();
 
@@ -399,16 +399,45 @@ function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
+
     var img = $("<img class='pic' length=3px width=5px>")
     img.attr("src", data[0].picture);
+
     $('#list').append(img);
-    $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
+    $('#list').append("<h3 class='name' style='display:none'>" + data[0].first_name + data[0].last_name + '</h3>');
+
+    if(JSON.parse(localStorage.user).current_theme==1){
+        $('.pic').css({
+            "background-color":"rgb(89,168,15)"
+        });
+    }
+    else if(JSON.parse(localStorage.user).current_theme==2){
+        $('.pic').css({
+            "background-color":"rgb(72,48,0)"
+        });
+    }
+    else if(JSON.parse(localStorage.user).current_theme==3){
+        $('.pic').css({
+            "background-color":"rgb(28,11,43)"
+        });
+    }
+    else if(JSON.parse(localStorage.user).current_theme==4){
+        $('.pic').css({
+            "background-color":"rgb(39,42,57)"
+        });
+    }
+    else if(JSON.parse(localStorage.user).current_theme==0){
+        $('.pic').css({
+            "background-color":"#b42529"
+        });
+    }
+
     $(".pic").animate({
-        width: "70%",
-        heigth: "50%",
+        width: "60%",
+        heigth: "40%",
         opacity: 1,
         left: "15%",
-        top:"15%",
+        top:"10%",
         borderWidth: "10px"
     }, 3000);
 
