@@ -202,7 +202,8 @@ $(document).ready( function () {
                             },
                             success: function(data){
                                 Materialize.toast("Successfully saved!", 1500);
-                                $('#save-point-form').hide();
+                                //$('#save-point-form').hide();
+                                window.location.href = '/views/get_volunteers';
                             },
                             dataType: "JSON"
                         });
