@@ -238,10 +238,15 @@ function insertHexagon(data) {
     var newline = true;
     var maxHexagon = 6;
     var minHexagon = maxHexagon-1;
-    var limit = maxHexagon;
-    var val = 6;
+    var limit = minHexagon+1;
+    var val = minHexagon;
 
     $('#list').empty();
+    $('#list').css("width","900px");
+    $('#list').css("display","table");
+    $('#list').css("margin","50px");
+    $('#list').css("position","relative");
+    $('#list').css("left","-50px");
     for(var i = 0; i < data.length; i ++){
         $('#list').append(
             "<div class='card-grid' id='card-grid"+i +"'>" +
@@ -256,13 +261,13 @@ function insertHexagon(data) {
             "<div class='hexTop'></div>"+
             "<div class='hexBottom'></div>"+
             "</div>"+
-            "<p class='volunteer-name'>"+data[i].last_name+"</p>"+
+            "<div class='volunteer-name'>"+data[i].last_name+"</div>"+
 
             "</div></div>"
         );
         $("#volunteer"+i).css("background-image", "url(" + data[i].picture + ")");
 
-        if(i == limit){
+        if(i == (limit-1)){
             if(newline) newline = false;
             else newline = true;
 
@@ -274,13 +279,12 @@ function insertHexagon(data) {
         }
 
 
-        if(newline) $("#card-grid" + i).css("left", "10%");
-        else $("#card-grid" + i).css("left", "16%");
+        if(newline) $("#card-grid" + i).css("left", 55 + "px");
+        
     }
-
-     $("#start-again-div").css("position", "absolute");
-     $("#start-again-div").css("bottom", "10%");
-     $("#start-again-div").css("left", "40%");
+    
+     $('#start-again-div').css("width","900 px"); 
+    
      // Enable flip.js
     $(".card-grid").flip({
        forceWidth: true,
