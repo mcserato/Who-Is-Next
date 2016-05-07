@@ -351,7 +351,7 @@
 .shake-trigger:hover .shake-slow,
 .shake-slow.shake-freeze,
 .shake-slow.shake-constant {
-  animation: shake-slow 3.1s ease-in-out; }
+  animation: shake-slow 2.0s ease-in-out; }
 
 @keyframes shake-hard {
   2% {

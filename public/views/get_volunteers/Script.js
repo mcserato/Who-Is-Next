@@ -155,14 +155,33 @@ $(document).ready( function () {
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
 
-                            if (data.length == 1) {
-                                $('#randomizer-holder').hide();
-                                $('#logo-holder').hide();
-                                $("#container-list").show();
-                                zoomInImage(data);
+                            if (data.length >= 1 && data.length <= 10) {
+                                if(data.length == 1) {
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    zoomInImage(data);
+                                } else {
+                                    var rand = Math.round(Math.random() * 2);
+                                    console.log(rand);
+                                    switch(rand) {
+                                        case 1: $('#randomizer-holder').hide();
+                                                $('#logo-holder').hide();
+                                                $("#container-list").show();
+                                                jumbleWords(data);
+                                                break;
+                                        case 2: startHatch(data);
+                                                break;
+                                        default: $('#randomizer-holder').hide();
+                                                 $('#logo-holder').hide();
+                                                 $("#container-list").show();
+                                                 jumbleWords(data);
+                                                 break;
+                                    }    
+                                }
+                                
                             } else {    // Randomize selection of effects
-                                var rand = Math.round(Math.random() * 5);
-                                rand = 2;
+                                var rand = Math.round(Math.random() * 4);
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -182,9 +201,6 @@ $(document).ready( function () {
                                         $('#logo-holder').hide();
                                         $("#container-list").show();
                                         flyingHexagon(data);
-                                        break;
-                                    case 4:
-                                        startHatch(data);
                                         break;
                                     default:
                                         $('#randomizer-holder').hide();
@@ -542,7 +558,7 @@ function hatch(data,i) {
 			"-webkit-transform":"translateX(65px) rotate(45deg)"
 		})
 		$("#randomizer-holder").attr('class','');
-	},3100);
+	},2100);
 
 	$("#start-again").fadeOut();
 
@@ -582,7 +598,7 @@ function hatch(data,i) {
 	   		hatchEnd(data,list.children.length,limit,i);
 		});
 
-	},3100);
+	},2100);
 
 }
 
@@ -592,7 +608,6 @@ function hatchEnd(data,len,limit,i){
 		data.shift();
 		hatch(data,i);
 	}else{
-
 		list.appendChild(document.createElement("br"));
 		$('#start-again').fadeIn();
 		$('#start-again').click(function(){
