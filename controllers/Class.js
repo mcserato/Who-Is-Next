@@ -7,20 +7,28 @@ exports.add = function (req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
-        + "section_number, emp_num) VALUES(?, ?, ?, ?, ?)",
-        [req.body.course_code, req.body.course_title, req.body.class_section,
-        req.body.section_number, req.session.emp_num],
 
+    db.query("SELECT * FROM CLASS WHERE course_code = ? AND emp_num = ?",
+        [req.body.course_code, req.session.emp_num],
         function (err, rows) {
             if (err) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs(req, "SUCCESS", "Added" + 
-                [req.body.course_code, req.body.class_section, req.body.section_number]
-                .join(' '));
-            res.send(rows);
+            if(rows.length){
+                return res.status(400).send("Class already exist.");
+            }else{
+                db.query("INSERT INTO CLASS(course_code, course_title, emp_num) VALUES(?, ?, ?)",
+                    [req.body.course_code, req.body.course_title, req.session.emp_num],
+                    function (err, rows) {
+                        if (err) {
+                            logs(req, "ERROR", "Error: MySQL Query FAILED.");
+                            return next(err);
+                        }
+                        logs(req, "SUCCESS", "Added" + req.body.course_code );
+                        res.send(rows);
+                });
+            }
     });
 }
 /* Adds the section to a class to the database */
@@ -29,28 +37,46 @@ exports.addSection = function (req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
-        + "section_number, emp_num) SELECT course_code, course_title, ?, ?, ? FROM CLASS WHERE course_code=? LIMIT 1",
-        [req.body.class_section, req.body.section_number, req.session.emp_num, req.params.course_code],
+
+    db.query("SELECT * FROM CLASS WHERE course_code = ? AND class_section = ? "
+        + " AND (section_number = ? or section_number is NULL) AND emp_num = ?",
+        [req.body.course_code, req.body.class_section,
+            (req.body.section_number || null), req.session.emp_num],
         function (err, rows) {
             if (err) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs(req, "SUCCESS", "Added" + 
-                [req.body.course_code, req.body.class_section, req.body.section_number]
-                .join(' '));
-            res.send(rows);
+            if(rows.length){
+                return res.status(400).send("Section already exist.");
+            }else{
+                db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
+                    + "section_number, emp_num) VALUES(?,?,?,?,?)",
+                    [req.body.course_code, req.body.course_title, req.body.class_section,
+                        (req.body.section_number || null), req.session.emp_num],
+
+                    function (err, rows) {
+                        if (err) {
+                            logs(req, "ERROR", "Error: MySQL Query FAILED.");
+                            return next(err);
+                        }
+                        logs(req, "SUCCESS", "Added" + 
+                            [req.body.course_code, req.body.class_section, req.body.section_number]
+                            .join(' '));
+                        res.send(rows);
+                });
+            }
     });
 }
 
 
 /* Edits a specific class in the database */
-exports.edit = function (req, res, next) {
+exports.editSection = function (req, res, next) {
     if (!req.session) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
+
     db.query("UPDATE CLASS SET " +
         "class_section = ?, section_number = ? WHERE class_id = ?",
         [req.body.class_section,
@@ -70,18 +96,32 @@ exports.editClass = function (req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("UPDATE CLASS SET " +
-        "course_code = ?, course_title = ? WHERE course_code = ?",
-        [req.body.course_code,
-        req.body.course_title, req.body.course_code_o],
+
+
+    db.query("SELECT * FROM CLASS WHERE course_code = ? AND emp_num = ?",
+        [req.body.course_code, req.session.emp_num],
         function (err, rows) {
             if (err) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            logs(req, "SUCCESS", 
-                ["Edited",req.body.course_code].join(' ') );
-            res.send(rows);
+            if(rows.length){
+                return res.status(400).send("Class already exist.");
+            }else{
+                db.query("UPDATE CLASS SET " +
+                    "course_code = ?, course_title = ? WHERE course_code = ?",
+                    [req.body.course_code,
+                    req.body.course_title, req.body.course_code_o],
+                    function (err, rows) {
+                        if (err) {
+                            logs(req, "ERROR", "Error: MySQL Query FAILED.");
+                            return next(err);
+                        }
+                        logs(req, "SUCCESS", 
+                            ["Edited",req.body.course_code].join(' ') );
+                        res.send(rows);
+                });
+            }
     });
 }
 /* Removes an entire class and all of its sections */
@@ -141,7 +181,8 @@ exports.viewAll = function(req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("SELECT DISTINCT course_code FROM CLASS where emp_num = ?", [req.session.emp_num], function (err, rows) {
+    db.query("SELECT DISTINCT course_code, course_title FROM CLASS where emp_num = ? ORDER BY course_code",
+        [req.session.emp_num], function (err, rows) {
 		if (err) {
             logs(req, "ERROR", "Error: MySQL Query FAILED.");
 		    return next(err);
@@ -156,12 +197,17 @@ exports.viewAll = function(req, res, next) {
     });
 }
 /* Shows the details of all classes from a course code of a faculty user */
-exports.viewOne = function(req, res, next) {
+exports.viewSections = function(req, res, next) {
     if (!req.session) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("SELECT * FROM CLASS where emp_num = ? and course_code = ?", [req.session.emp_num, req.params.course_code], function (err, rows) {
+    db.query("(SELECT class_id, class_section, section_number FROM CLASS where emp_num = ?"+
+    " and course_code = ? and section_number is NULL ORDER BY class_section) UNION "+
+    "(SELECT class_id, class_section, section_number FROM CLASS where emp_num = ? and "+
+    "course_code = ? GROUP BY class_section, section_number)",
+        [req.session.emp_num, req.params.course_code,req.session.emp_num, req.params.course_code],
+        function (err, rows) {
 		if (err) {
             logs(req, "ERROR", "Error: MySQL Query FAILED.");
 		    return next(err);

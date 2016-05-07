@@ -1,81 +1,210 @@
 'use strict';
 
 $(document).ready( function () {
-    config.checkAuth("FACULTY");
-    const content = $('#class-list');
+    config.checkAuth("FACULTY"); 
 
-    navbar.init('#navbar');
-    sidebar.init('#sidebar');
+    view_class.init('#main-content');
 
-    function add_class (data) {
+});
 
-        var color_flag = 0; // For alternating the color
-        var num_flag = 0;   // For althernating number per row
+
+var view_class = {
+
+    class_data : null,
+
+    init : function( main_content ){
+
+        navbar.init('#navbar');
+        sidebar.init('#sidebar');
+
+        $(main_content).append([
+            '<h1 class="center">Classes</h1>',
+            '<nav>',
+                '<div class="nav-wrapper row">',
+                    '<div class="input-field col l12">',
+                        '<input id="search-class" type="search" placeholder="Search Class" required>',
+                        '<label for="search-class"><i class="material-icons">search</i></label>',
+                        '<i class="material-icons waves-effect waves-light">close</i>',
+                    '</div>',
+                '</div>',
+            '</nav>',
+            '<div id="class-list" class="row"></div>',
+        ].join(''));
+
+
+        $('#search-class').keypress(function () { //need better implementation key press
+
+            if(!view_class.class_data){
+                document.location.reload();
+            }else  if($(this).val()=='' || $(this).val().trim()==''){
+                view_class.manipulateDom(view_class.class_data,"");
+            }else{
+                view_class.manipulateDom(view_class.class_data, $(this).val());
+            }
+
+        });
+
+
+        /* Add Class */
+        $('#add-button').click(function () {
+            var course_code = $("#course_code").val(),
+                course_title = $("#course_title").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/class",
+                headers: util.headers,
+                data: {
+                    course_code: course_code,
+                    course_title: course_title
+                },
+                dataType: "JSON",
+                success: function(){
+                    return Materialize.toast(course_code + " added!" ,1000,"",function(){
+                        window.location.href = "/views/class"
+                    });
+                },
+                error: util.errorHandler
+            });
+            return false;
+        });
+
+
+        /* Edit Class */
+        $('#edit-button').click(function () {
+            var course_code = $("#course_code_edit").val(),
+                course_title = $("#course_title_edit").val(),
+                old_course_code = localStorage.course_code;
+
+            $.ajax({
+                type: "PUT",
+                url: "/api/class",
+                headers: util.headers,
+                data: {
+                    course_code: course_code,
+                    course_title: course_title,
+                    course_code_o: old_course_code
+                },
+                dataType: "JSON",
+                success: function(){
+                     return Materialize.toast(old_course_code + " edited to " + course_code + " !"
+                        ,1000,"",function(){
+                        window.location.href = "/views/class"
+                    });
+                },
+                error: util.errorHandler
+            });
+            return false;
+        });
+
+
+        $.ajax({
+            url: '/api/class',
+            method: 'GET',
+            headers: util.headers,
+            success: view_class.manipulateDom,
+            error: function(err){
+                util.errorHandler(err);
+            }
+        });
+
+    },
+
+    manipulateDom: function( data , search ){
+        if(!data){
+            return Materialize.toast("Error in fetching data",2500);
+        }
+
+        if(!view_class.class_data){
+            view_class.class_data = data;
+        }
+
+        var color_flag = 0,
+            num_flag = 0,
+            content = $('#class-list'),
+            search_string = 
+                (search=="success" || search=="fail" || !search) ?
+                    "" : search.toLowerCase();
+
+        content.empty();
+
         for (var class_ in data){
-            var subject = $("<span></span").text(data[class_].course_code);
-            subject.attr("course_code", data[class_].course_code);
-            subject.addClass("title courses");
 
-            var delete_class = $("<a title='Delete Class'><i class='material-icons options-text'>delete</i></a>");
-             delete_class.addClass("remove");
-            delete_class.attr("course_code", data[class_].course_code);
+            if(search_string &&
+                  !new RegExp(search_string).test(data[class_].course_code.toLowerCase()) ) continue;
 
-            var edit_class = $("<a title='Edit Class' href='#edit_modal'><i class='material-icons options-text'>mode_edit</i></a>");
+            var course_code = data[class_].course_code,
+                course_title = data[class_].course_title,
+                id = course_code.replace(' ', ''),
+                subject = $("<span></span").text(course_code),
+                delete_class = $("<a title='Delete Class' href='#'><i class='material-icons options-text'>delete</i></a>"),
+                edit_class = $("<a title='Edit Class' href='#'><i class='material-icons options-text'>mode_edit</i></a>"),
+                options_div = $("<div class='options'></div>"),
+                subject_div =
+                    ( color_flag == 0 ) ? 
+                        $("<div class='hex z-depth-2 hexagon-red'></div>") : 
+                        $("<div class='hex z-depth-2 hexagon-grey'></div>"),
+                row_div =
+                    (num_flag < 3) ? 
+                        $("<div class='three con'></div>") :
+                        $("<div class='four con'></div>");
+                
+
+            subject.attr("course_code", course_code);
+            subject.attr("course_title", course_title);
+            subject.addClass("courses");
+
+            delete_class.addClass("remove");
+            delete_class.attr("course_code", course_code);
+
             edit_class.addClass("modal-trigger edit");
-            edit_class.attr("course_code", data[class_].course_code);
+            edit_class.attr("course_code", course_code);
+            edit_class.attr("course_title", course_title);
 
-            var options_div = $("<div class='options'></div>");
             options_div.append(edit_class);
             options_div.append(delete_class);
 
-            if (color_flag % 2 == 0) {
-                var subject_div = $("<div class='hex z-depth-2 hexagon-red'></div>");
-
-            } else {
-                var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
-            }
-
-            subject_div.attr("id", data[class_].course_code.replace(' ', ''));
+            subject_div.attr("id", id);
             subject_div.append(subject);
-
-            if (num_flag < 3) {
-                var row_div = $("<div class='three con'></div>");    
-            } else  var row_div = $("<div class='four con'></div>");
                 
             row_div.append(subject_div);
             row_div.append(options_div);
             options_div.hide();
             content.append(row_div);
 
-            color_flag++;
-            num_flag++;
-            if (num_flag == 7) num_flag = 0;
+            color_flag = ( color_flag == 0 ) ? 1 : 0;
+            num_flag = (num_flag == 7) ? 0 : num_flag + 1;
+        
         }
 
         $('.options').hide();
 
-
-        $('.hex,.options').hover(function() {
-           $('.options').show();
-           $('.hex,.options').mouseleave(function() {
-                 $('.options').hide();
+        $('.three,.options')
+            .mouseenter(function() {
+               if($(this).attr("class") == 'three'){
+                $(this).next().show();
+               }else{
+                $(this).css( 'cursor', 'pointer' );
+                $(this).show();
+               } 
+            })
+            .mouseleave(function(){
+                if($(this).attr("class") == "three"){
+                 $(this).next().hide();
+               }
             });
-        });
-
-        $('.courses')
-            .click(function(){
-                localStorage.course_code = $(this).attr("course_code");
-                window.location.href = "/views/section";
-            });
-
-         /* Hover options */
-        $('.con').mouseenter(function() { // Show options
-            $(this).find('.options').show();
-        });
         
-        $('.con').mouseleave(function() { // Hide options
-            $(this).find('.options').hide();
-        });
+        $('.hex.z-depth-2')
+            .mouseenter(function() {
+               if($(this).parent().attr("class") != 'three'){
+                $(this).next().show();
+               }
+            })
+            .mouseleave(function(){
+                if($(this).parent().attr("class") != "three"){
+                 $(this).next().hide();
+               }
+            });
 
         /* Delete Class*/
         $('.remove')
@@ -95,8 +224,9 @@ $(document).ready( function () {
                             return Materialize.toast("Error in deleting. Please try again!",2500);
                         }
 
-                        $('#' + course_code.replace(' ','')).remove();
-                        return Materialize.toast("Successfully deleted class!",2500);
+                        return Materialize.toast("Successfully deleted class!",500,"",function(){
+                            window.location.href = '/views/class/'
+                        });
                     },
                     error: function(err){
                         util.errorHandler(err);
@@ -108,260 +238,25 @@ $(document).ready( function () {
         /* Edit Class */
         $('.edit')
             .click(function(){
-                console.log($(this).attr("course_code"));
-                localStorage.class_id = $(this).attr("course_code");
+                var course_code = $(this).attr("course_code"),
+                    course_title = $(this).attr("course_title");
+
+                localStorage.course_code = course_code;
+
+                $("#course_code_edit").val(course_code);
+                $("#course_title_edit").val(course_title);
+
                 $('#edit_modal').openModal();
             });
 
         /* Link to View Sections of the class clicked */
-        $('.title')
+        $('.courses')
             .click(function(){
-                console.log($(this).attr("course_code"));
                 localStorage.course_code = $(this).attr("course_code");
+                localStorage.course_title = $(this).attr("course_title");
                 window.location.href = "/views/section";
             });
+
     }
 
-
-    function Refresh(){
-        $.ajax({
-            url: '/api/class',
-            method: 'GET',
-            headers: util.headers,
-            success: function(data){
-                if(!data){
-                    return Materialize.toast("Error in fetching data",2500);
-                }
-
-                add_class(data);
-            },
-            error: function(err){
-                util.errorHandler(err);
-            }
-        });
-    }
-
-    $('#search-class').keypress(function (e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-        }
-
-        content.empty();
-
-        if($(this).val() === ''){
-            Refresh();
-            return;
-        }
-
-        $.ajax({
-            url: '/api/class/search/' + $(this).val(),
-            method: 'GET',
-            headers: util.headers,
-            success: function(data){
-                if(!data){
-                    return Materialize.toast("Error in fetching data",2500);
-                }
-
-                content.empty(); //di ko alam kung dinelete ba to or hindi hihi nagmerge kasi ako
-
-                add_class(data);
-
-                $('.courses')
-                    .click(function(){
-                        localStorage.course_code = $(this).attr("course_code");
-                        window.location.href = "/views/section";
-
-                    });
-            },
-            error: function(err){
-                if(e.keyCode == 13){
-                    refresh();
-                    util.errorHandler(err);
-                }
-            }
-        });
-    });
-
-    /* Add Class */
-    $('#add-class-form').submit(function (event) {
-        // Get data from input fields of add class form
-        var course_code = $("#course_code").val();
-        var course_title = $("#course_title").val();
-        var class_section = $("#class_section").val();
-        var section_number = $("#section_number").val();
-
-        $.ajax({
-            type: "POST",
-            url: "/api/class",
-            headers: util.headers,
-            data: {
-                course_code: course_code,
-                course_title: course_title,
-                class_section: class_section,
-                section_number: section_number
-            },
-            success: function(){
-                Materialize.toast(course_code + " added!", 1000);
-            },
-            dataType: "JSON"
-        });
-
-        window.location.href = "/views/class"
-
-        return false;
-    });
-
-
-    /* Edit Class */
-    $('#edit-class-form').submit(function (event) {
-
-        // Get data from input fields of edi class form
-        var course_code = $("#course_code_edit").val();
-        var course_title = $("#course_title_edit").val();
-
-        $.ajax({
-            type: "PUT",
-            url: "/api/class2",
-            headers: util.headers,
-            data: {
-                course_code: course_code,
-                course_title: course_title,
-                course_code_o: localStorage.course_code
-            },
-            success: function(){
-                Materialize.toast(course_code + " edited!", 1000);
-            },
-            dataType: "JSON"
-        });
-
-        window.location.href = "/views/class"
-
-        return false;
-    });
-
-
-    config.checkAuth("FACULTY");
-
-    $.ajax({
-        url: '/api/class',
-        method: 'GET',
-        headers: util.headers,
-        success: function(data){
-            if(!data){
-                return Materialize.toast("Error in fetching data",2500);
-            }
-
-            var color_flag = 0; // For alternating the color
-            var num_flag = 0;   // For althernating number per row
-            for (var class_ in data){
-                var subject = $("<span></span").text(data[class_].course_code);
-                subject.attr("course_code", data[class_].course_code);
-                subject.addClass("title courses");
-
-                var delete_class = $("<a title='Delete Class'><i class='material-icons options-text'>delete</i></a>");
-                delete_class.addClass("remove");
-                delete_class.attr("course_code", data[class_].course_code);
-
-                var edit_class = $("<a title='Edit Class' href='#edit_modal'><i class='material-icons options-text'>mode_edit</i></a>");
-                edit_class.addClass("modal-trigger edit");
-                edit_class.attr("course_code", data[class_].course_code);
-
-                var options_div = $("<div class='options'></div>");
-                options_div.append(edit_class);
-                options_div.append(delete_class);
-
-                if (color_flag % 2 == 0) {
-                    var subject_div = $("<div class='hex z-depth-2 hexagon-red'></div>");
-
-                } else {
-                    var subject_div = $("<div class='hex z-depth-2 hexagon-grey'></div>");
-                }
-                subject_div.attr("id", data[class_].course_code.replace(' ', ''));
-                subject_div.append(subject);
-
-                if (num_flag < 3) {
-                    var row_div = $("<div class='three con'></div>");
-                    
-                } else  var row_div = $("<div class='four con'></div>");
-                
-                row_div.append(subject_div);
-                row_div.append(options_div);
-                options_div.hide();
-                content.append(row_div);
-
-                color_flag++;
-                num_flag++;
-                if (num_flag == 7) num_flag = 0;
-            }
-
-            $('.courses').click(function(){ // Redirect to View Section in a Class
-                localStorage.course_code = $(this).attr("course_code");
-                window.location.href = "/views/section";
-            });
-
-            /* Hover options */
-            $('.con').mouseenter(function() { // Show options
-                $(this).find('.options').show();
-            });
-            
-            $('.con').mouseleave(function() { // Hide options
-                $(this).find('.options').hide();
-            });
-
-            /* Delete Class*/
-            $('.remove')
-                .click(function(){
-                    var course_code = $(this).attr("course_code");
-                    if(!confirm("Are you sure you want to delete this class?")) return false;
-                    $.ajax({
-                        url: '/api/class',
-                        method: 'DELETE',
-                        headers: util.headers,
-                        data: {
-                            course_code: course_code
-                        },
-                        dataType: "JSON",
-                        success: function(data){
-                            if(!data){
-                                return Materialize.toast("Error in deleting. Please try again!",2500);
-                            }
-
-                            $('#' + course_code.replace(' ','')).remove();
-                            return Materialize.toast("Successfully deleted class!",2500);
-                        },
-                        error: function(err){
-                            util.errorHandler(err);
-                        }
-                    });
-                });
-
-            /* Edit Class */
-            $('.edit')
-                .click(function(){
-                    localStorage.class_id = $(this).attr("course_code");
-                    /* Auto-fills up form of selected edit class*/
-                    $.ajax({
-                        type: "GET",
-                        url: "/api/class/" + localStorage.class_id,
-                        headers: util.headers,
-                    }).done(function(info){
-                        $("#course_code_edit").val(info[0].course_code);
-                        $("#course_title_edit").val(info[0].course_title);
-                        $('#edit_modal').openModal();
-                    });
-                });
-
-            /* Link to View Sections of the class clicked */
-            $('.title').click(function(){
-                localStorage.course_code = $(this).attr("course_code");
-                window.location.href = "/views/section";
-            });
-
-
-        },
-        error: function(err){
-            util.errorHandler(err);
-        }
-    });
-
-});
+};

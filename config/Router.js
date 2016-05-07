@@ -24,14 +24,14 @@ module.exports = function (router) {
 
     router.get('/api/class',                                                   __.Class.viewAll);
     router.post('/api/class',                                                  __.Class.add);
-    router.put('/api/class',                                                   __.Class.edit);
+    router.put('/api/class',                                                   __.Class.editClass);
     router.del('/api/class',                                                   __.Class.removeClass);
 
     router.get('/api/class2',                                                  __.Class.viewClasses);
-    router.put('/api/class2',                                                  __.Class.editClass);
+    router.post('/api/class2',                                                 __.Class.addSection);
+    router.put('/api/class2',                                                  __.Class.editSection);
 
-    router.get('/api/class/:course_code',                                      __.Class.viewOne);
-    router.post('/api/class/:course_code',                                     __.Class.addSection);
+    router.get('/api/class/:course_code',                                      __.Class.viewSections);
     router.del('/api/class/:course_code',                                      __.Class.removeSection);
         
     router.get('/api/class/search/:course_code',                               __.Class.search);
