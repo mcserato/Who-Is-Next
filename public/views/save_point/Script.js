@@ -77,6 +77,15 @@ $(document).ready( function () {
                 if(!data){
                     return Materialize.toast("Error in fetching data",2500);
                 }
+                
+                if (data.length === 0) {
+                    return $('#save-list').append([
+                        '<h3 style="text-align: center;">No saved events yet</h3>',
+                        '<p style="text-align: center;">Go ahead and <a href="/views/get_volunteers">randomize</a>!</p>'
+                    ].join(''));
+                }
+                
+                
 
                 add_save(data);
             },
