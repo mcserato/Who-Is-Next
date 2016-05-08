@@ -261,7 +261,7 @@ var view_class_stud = {
                 $('#student-picture').attr("src",data_student.picture);
 
                 $('#student_header').html($("<span></span>").html(data_student.last_name + ", " + data_student.first_name + " " + data_student.middle_name));
-                $('#student_number').html($("<span></span>").html("Student number: " + data_student.student_number));
+                $('#student_no').html($("<span></span>").html("Student number: " + data_student.student_number));
                 $('#student_course').html($("<span></span>").html("Course: " + data_student.course));
                 $('#student_college').html($("<span></span>").html("College: " + data_student.college));
                 $('#student_gender').html($("<span></span>").html("Gender: " + data_student.gender));
