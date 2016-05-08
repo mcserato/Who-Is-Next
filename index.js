@@ -12,6 +12,8 @@ var express = require('express'),
 	        console.log('Example app is listening at http://%s:%s', host, port);
     	});
 
+localStorage.FRONTEND_URL =  process.env.OPENSHIFT_FRONTEND_URL;
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
