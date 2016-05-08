@@ -162,57 +162,75 @@ $(document).ready( function () {
                             document.getElementById("animation-css").remove();
 
                             if (data.length >= 1 && data.length <= 10) {
-                                if(data.length == 1) {
-                                    $('#randomizer-holder').hide();
-                                    $('#logo-holder').hide();
-                                    $("#container-list").show();
-                                    zoomInImage(data);
-                                } else {
-                                    var rand = Math.round(Math.random() * 2);
-                                    console.log(rand);
+                                if(data.length == 1) {  // Get 1 volunteer
+                                    var rand = Math.round(Math.random() * 2);                             
                                     switch(rand) {
-                                        case 1: $('#randomizer-holder').hide();
-                                                $('#logo-holder').hide();
-                                                $("#container-list").show();
-                                                jumbleWords(data);
-                                                break;
-                                        case 2: startHatch(data);
-                                                break;
-                                        default: $('#randomizer-holder').hide();
-                                                 $('#logo-holder').hide();
-                                                 $("#container-list").show();
-                                                 jumbleWords(data);
-                                                 break;
+                                        case 1: 
+                                            $('#randomizer-holder').hide();
+                                            $('#logo-holder').hide();
+                                            $("#container-list").show();
+                                            zoomInImage(data);
+                                            break;
+                                        case 2: 
+                                            startHatch(data);
+                                            break;
+                                        default:
+                                            $('#randomizer-holder').hide();
+                                            $('#logo-holder').hide();
+                                            $("#container-list").show();
+                                            zoomInImage(data);
+                                            break;
+                                    }
+                                } else {    // For get 2-10 volunteers
+                                    var rand = Math.round(Math.random() * 4); 
+                                    switch(rand) {
+                                        case 1:
+                                            $('#randomizer-holder').hide();
+                                            $('#logo-holder').hide();
+                                            $("#container-list").show();
+                                            jumbleWords(data);
+                                            break;
+                                        case 2:
+                                            startHatch(data);
+                                            break;
+                                        case 3:
+                                            $('#randomizer-holder').hide();
+                                            $('#logo-holder').hide();
+                                            $("#container-list").show();
+                                            insertHexagon(data);
+                                            break;
+                                        case 4:
+                                            $('#randomizer-holder').hide();
+                                            $('#logo-holder').hide();
+                                            $("#container-list").show();
+                                            flyingHexagon(data);
+                                            break;
+                                        default:
+                                            $('#randomizer-holder').hide();
+                                            $('#logo-holder').hide();
+                                            $("#container-list").show();
+                                            jumbleWords(data);
+                                            break;
                                     }
                                 }
-
-                            } else {    // Randomize selection of effects
+                            } else {    // Get 11 above volunteers
+                                $('#randomizer-holder').hide();
+                                $('#logo-holder').hide();
+                                $("#container-list").show();
                                 var rand = Math.round(Math.random() * 3);
                                 switch(rand) {
                                     case 1:
-                                        $('#randomizer-holder').hide();
-                                        $('#logo-holder').hide();
-                                        $("#container-list").show();
                                         jumbleWords(data);
                                         break;
                                     case 2:
-                                        $('#randomizer-holder').hide();
-                                        $('#logo-holder').hide();
-                                        $("#container-list").show();
                                         insertHexagon(data);
-                                        $('#randomizer-holder').hide();
                                         break;
                                     case 3:
-                                        $('#randomizer-holder').hide();
-                                        $('#logo-holder').hide();
-                                        $("#container-list").show();
                                         flyingHexagon(data);
                                         break;
                                     default:
-                                        $('#randomizer-holder').hide();
-                                        $('#logo-holder').hide();
-                                        $("#container-list").show();
                                         jumbleWords(data);
+                                        break;
                                 }
                             }
                         }, 3100);
