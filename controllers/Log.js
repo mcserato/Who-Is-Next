@@ -40,12 +40,17 @@ exports.write = function (req, status, message) {
 		color = SUCCESS;
 	}
 
-	else if (status === 'FAILED') {
+	else if (status === 'FAILED' || status === 'ERROR') {
 		color = ERROR;
+        status = 'FAILED';
 	}
 
 	else if (status === 'WARNING') {
 		color = WARNING;
+	}
+
+	else {
+	    return console.error(status, 'is not a valid status');
 	}
 
 	console.log(color(new Date(), req.ip, username, req.method, req.originalUrl, message));

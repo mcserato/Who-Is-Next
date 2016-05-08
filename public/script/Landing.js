@@ -16,11 +16,13 @@ $(document).ready( function () {
             if(!user.is_validated){
                 window.location.href = '/not_validated'
             }else{
-                window.location.href = '/views/class';
+                window.location.href = '/views/get_volunteers';
             }
         }
-
     }
+
+    $('.modal-trigger').leanModal();
+    
 
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
@@ -95,6 +97,7 @@ $(document).ready( function () {
         $.ajax({
             url: '/api/login',
             method: 'POST',
+            headers: util.headers,
             data: {
                 username: username,
                 password: password
@@ -117,16 +120,15 @@ $(document).ready( function () {
         localStorage.user = JSON.stringify(user);
 
         if(user.role == "ADMIN"){
-            window.location.href = '/views/faculty';
+            window.location.href = '/views/admin';
         }
         if(user.role == "FACULTY"){
             if(!user.is_validated){
                 window.location.href = '/not_validated'
             }else{
-                window.location.href = '/views/class';
+                window.location.href = '/views/get_volunteers';
             }
         }
     }
 
-    footer.init('#footer', 'landing');
 });

@@ -14,7 +14,7 @@
 }
 
 #green{
-	background: url("images/green.png");
+	background: url("images/greenDisplay.png");
 	background-size: 100% 100%;
     background-repeat: no-repeat;
 
@@ -22,19 +22,20 @@
 }
 
 #yellow{
-	background:url("images/yellow.png");
+	background:url("images/yellowDisplay.png");
 	background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
+
 #red{
-	background:url("images/red.png");
+	background:url("images/redDisplay.png");
 	background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
 #violet{
-	background:url("images/violet.png");
+	background:url("images/violetDisplay.png");
 	background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -56,4 +57,13 @@
 }
 #po{
 	color:rgb(177,22,35);
+}
+
+.card:hover{
+-webkit-border-radius: 1.5vw;
+-moz-border-radius: 1.5vw;
+border-radius: 1.5vw;
+-webkit-box-shadow: 0vw 0vw 5vw 0vw rgba(0, 0, 0, 0.80);
+-moz-box-shadow:    0vw 0vw 5vw 0vw rgba(0, 0, 0, 0.80);
+box-shadow:         0vw 0vw 5vw 0vw rgba(0, 0, 0, 0.80);
 }

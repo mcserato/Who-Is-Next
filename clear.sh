@@ -3,7 +3,7 @@
 #Counterpart of setup.sh
 #removes any trace of Who-Is-Next in the PC
 echo -n "[root] " #asks the user for the password of root
-mysql -uroot -p < lib/DeleteUser.sql #using the input password
+mysql -uroot -p < database/DeleteUser.sql #using the input password
     #log-ins root and deletes the user and database
 
 #Sequential

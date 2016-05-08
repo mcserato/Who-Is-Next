@@ -1,8 +1,13 @@
 $( document ).ready(function() {
+
+    navbar.init("#navbar");
+    sidebar.init("#sidebar");
+
     var gender_frequency=[];
     $.ajax({
         type: "GET",
-        url: "/api/analytics/1"
+        url: "/api/analytics/1",
+        headers: util.headers
     }).done(function(data){
         var data2=[];
         for(i=0; i<10; i++){
@@ -65,13 +70,15 @@ $( document ).ready(function() {
     });
     $.ajax({
         type: "GET",
-        url: "/api/analyticsGender/1/M"
+        url: "/api/analyticsGender/1/M",
+        headers: util.headers
     }).done(function(data) {
         gender_frequency.push(data[0].frequency);
     });
     $.ajax({
         type: "GET",
-        url: "/api/analyticsGender/1/F"
+        url: "/api/analyticsGender/1/F",
+        headers: util.headers
     }).done(function(data) {
         gender_frequency.push(data[0].frequency);
 
@@ -127,6 +134,7 @@ $( document ).ready(function() {
     $.ajax({
         type: "GET",
         url: "/api/analyticsFemale/1"
+        headers: util.headers
     }).done(function(datalang){
         var data4=[];
         for(i=0; i<datalang.length; i++){
@@ -183,7 +191,8 @@ $( document ).ready(function() {
 
     $.ajax({
             type: "GET",
-            url: "/api/analyticsMale/1"
+            url: "/api/analyticsMale/1",
+            headers: util.headers
         }).done(function(datagg){
             var data3=[];
             for(i=0; i<datagg.length; i++){
@@ -237,84 +246,12 @@ $( document ).ready(function() {
                 }]
             });
         });
-        
-     var emp_no = JSON.parse(localStorage.user).emp_num;
-     var orig_password;
-     
-     /* Fills Up Areas */
-     $.ajax({
-            type: "GET",
-            url: "/api/faculty/"+emp_no
-         }).done(function(info){
-            $("#name_edit").val(info[0].name);
-            $("#email_edit").val(info[0].email);
-            $("#username_edit").val(info[0].username);
-            orig_password = info[0].password;   
-         });   
-        
-        
-     /*Edit User*/   
-     $('#edit-user-form').submit(function (event) {
-        var name = $("#name_edit").val();
-        var email = $("#email_edit").val();
-        var username = $("#username_edit").val();
-        var old_password = $("#current_password").val();
-        var new_password = $("#new_password_edit").val();
-        var cnew_password = $("#cnew_password_edit").val();
-        
-        if(new_password != cnew_password){
-            Materialize.toast("Password does not match !");
-            return false;
-        }
-        else if(old_password !== orig_password){
-            alert(orig_password);
-            Materialize.toast("Wrong password!");
-            return false;
-        }
-        else if(new_password == "" || new_password == null){
-            $.ajax({
-                type: "PUT",
-                url: "/api/faculty",
-                data: {
-                    name: name,
-                    username: username,
-                    password: info[0].password,
-                    email: email,
-                    emp_num: emp_no
-                },
-                success: function(){
-                    Materialize.toast(course_code + " edited!", 1000);   
-                },
-                dataType: "JSON"
-            });
-             return true;
-        }
-        
-        else{ 
-            $.ajax({
-                type: "PUT",
-                url: "/api/faculty",
-                data: {
-                    name: name,
-                    username: username,
-                    password: new_password,
-                    email: email,
-                    emp_num: emp_no
-                },
-                success: function(){
-                    Materialize.toast(course_code + " edited!", 1000);   
-                },
-                dataType: "JSON"
-            });
-             return true;
-        }     
-        
-    }); 
 
 
     $.ajax({
             type: "GET",
-            url: "/api/analyticsGetSection/6"
+            url: "/api/analyticsGetSection/6",
+            headers: util.headers
          }).done(function(section){
             var section_list = [];
             for(var i = 0; i < section.length ; i ++) {
@@ -326,7 +263,8 @@ $( document ).ready(function() {
                     var link = "/api/analyticsLab/"+section_list[i];
                     $.ajax({
                          type: "GET",
-                         url: link
+                         url: link,
+                         headers: util.headers,
                       }).done(function(frequency){
                            var temp = [];
                            temp.push(frequency[0].section);
@@ -367,6 +305,22 @@ $( document ).ready(function() {
                      });
                 }
            });
-           
-       $('.modal-trigger').leanModal();
+});
+
+/////////NAV BAR///////////////////////////
+$(window).scroll(function() {
+   if($(window).scrollTop()) {
+      $('nav.z-depth-0').css({
+        'background': string1
+      });
+   }else if ($(window).scrollTop()==0){
+      $('nav.z-depth-0').css({
+        'background': string2
+      });
+   }
+    if($(window).scrollTop()) {
+            $('.logo').fadeIn('slow');
+            $('.logo')
+                .css({'width':'184px','height':'60px'})    
+        }
 });

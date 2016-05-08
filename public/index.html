@@ -16,7 +16,7 @@
         <div id="landing-page" class="row">
             <div id="log-in-page" class="col s10 push-s1 row">
                 <div class="col s7" id="left">
-                    <h1 class="center">LOG IN</h1>
+                    <h4 class="center">LOG IN</h4>
                     <div class="row ">
                         <form id="log-in-form" class="col s12">
                             <div class="input-field col s8 offset-s2">
@@ -28,6 +28,10 @@
                                 <i class="mdi-action-lock-outline prefix"></i>
                                 <input type='password' id='password' style="margin-bottom: 0px;">
                                 <label class="active" for="password">Password</label>
+                                <div id="show_password">
+							      <input class="check_box" type="checkbox" id="test5" />
+							      <label for="test5">Show Password</label>
+							    </div>
                             </div>
                         </form>
                     </div>
@@ -40,7 +44,7 @@
                 
                 <div class="col s5" id="right">
                     <a href="">
-                        <img id="log-in-logo-link" src="/icon/logo1.png" class="responsive-img landing-link" >
+                        <img id="log-in-logo-link" src="/icon/logo1.png" class="responsive-img" >
                     </a>
                 </div>
             </div>
@@ -56,7 +60,7 @@
                 <div class ="col s6" >
                     <form id="sign-up-form" class="row" >
                         <div class="input-field col s12 ">
-                            <h3 class ="center-align">SIGN UP</h3>
+                            <h4 class ="center">SIGN UP</h4>
                         </div>
                         <div class = "col s12" id = "input-fields-div">
                             <div class="input-field col s12 ">
@@ -85,9 +89,7 @@
                             </div>
                         </div>
                         <div class="input-field center-align col s12 "  >
-                            <button id="sign-up-btn" class="btn waves-effect waves-light" type="submit" name="action" onclick= "return false;">
-                                Sign Up
-                                <i class="material-icons right">send</i>
+                            <button id="sign-up-btn" class="btn waves-effect waves-light" type="submit" name="action" onclick= "return false;">Sign Up
                             </button>
                         </div>
                     </form>
@@ -110,20 +112,75 @@
                         <img src="/icon/LogIn.png" class="responsive-img">
                     </a>
                 </div>
-                <div class="col s6 push-s3 center">
-                    <h1 class="title header bold">Who Is Next</h1>
-                    <h5 class="title header">Classroom Selector of Volunteers</h5>
+                <div class="col s12  center">
+                    <h1 id= "company-title" class="title header bold">
+                    	<span class="span-title">W</span>
+                    	<span class="span-title">h</span>
+                    	<span class="span-title">o</span>
+                    	<span class="span-title">&nbspI</span>
+                    	<span class="span-title">s</span>
+                    	<span class="span-title">&nbspN</span>
+                    	<span class="span-title">e</span>
+                    	<span class="span-title">x</span>
+                    	<span class="span-title">t</span>
+                    </h1>
+                    <h5 id= "description" class="title header">Classroom Selector of Volunteers</h5>
+                </div>
+                <div class="col s12  center"> 
+					  <a id ="about" class="btn modal-trigger" href="#about_whoisnext">ABOUT</a>
+					  <div id="about_whoisnext" class="modal">
+					    <div class="modal-content">
+					      <h3 class="center">WHO IS NEXT</h3>
+					     	<div id="desc">
+                                <h4>What is WIN?</h4>
+					     		<p>The Project WIN aims to develop a system intended to randomly choose volunteers from a list of students in a class. It also aims to help every faculty member and professors to utilize their students for every activity that will need participant(s).</p>
+                                <hr />
+                                <h4>Meet the Team</h4>
+                           
+                                    <ul>
+                                        <li><h5>Project Manager:</h5>
+                                            <li>Mike Edward Serato</li>
+                                        </li>
+                                        <li><h5>Team Leaders:</h5>
+                                            <li>Alyanna Pauline Bascao</li>
+                                            <li>Miles Lawrence Basnilio</li>
+                                            <li>Maru Gabriel Baul</li>
+                                            <li>Mon Cedrick Frias</li>
+                                        </li>
+                                        <li><h5>Developers:</h5>
+                                            <li>Reynaldo Bayeta III</li>
+                                            <li>Ma. Alyssa Chelseah Blaquera</li>
+                                            <li>Adriell Dane de Guzman</li>
+                                            <li>Perico Dan Dionisio</li>
+                                            <li>Jeriel Jaro</li>
+                                            <li>Aleli Legaspi</li>
+                                            <li>Dana Jasmin Magpusao</li>
+                                            <li>Leo Angelo Menguiso</li>
+                                            <li>Karl Omar Obispo</li>
+                                            <li>Alyssa Fae Ocfemia</li>
+                                            <li>Gauven Roy Pascua</li>
+                                            <li>Arth Joseph Sabino</li>
+                                            <li>Charry Vette Serrano</li>
+                                            <li>Christopher Claude Templado</li>
+                                            <li>Aron John Vibar</li>
+                                        </li>
+                                    </ul>
+                               
+                            </div>
+					    </div>
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">X CLOSE</a>
+					  </div>
+          
                 </div>
             </div>
         </div>
-        
-        <div id="footer">
-        </div>
+      
 
         <script src="script/Config.js"></script>
+        <script src="script/Util.js"></script>
         <script src="script/Script.js"></script>
         <script src="script/Landing.js"></script>
-        <script src="/views/footer/Script.js"></script>
         <script src="/views/sign_up/Script.js"></script>
     </body>
 </html>
+
