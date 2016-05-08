@@ -14,6 +14,10 @@
 }
 #dice1 {
 	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform-style: rotate(45deg);
 }
 #dice2 {
 	left: 150px;	
