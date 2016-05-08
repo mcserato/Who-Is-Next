@@ -21,6 +21,12 @@ exports.getVolunteers = function (req, res, next) {
     /*if(req.body.gender!=NULL){
         query += "AND genderlike " + req.body.gender + " ";
     }*/
+    if(req.body.gender == "M"){
+        query += " AND gender = 'M'";
+    }
+    if(req.body.gender == "F"){
+        query += " AND gender = 'F'";
+    }
     if(req.body.last_name!==""){
         query += " AND last_name like '" + req.body.last_name + "%' ";
     }

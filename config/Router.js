@@ -68,6 +68,10 @@ module.exports = function (router) {
     router.del('/api/save_point',                                              __.SaveDB.remove);
     router.get('/api/save_point/:save_id',                                     __.SaveDB.viewOne);
 
+    //New saves
+    router.post('/api/save_point',                                             __.SaveDB.save);
+    router.post('/api/save_student',                                           __.SaveDB.savestudent);
+
     router.get('/api/logs',                                                    __.Log.read);
 
     router.all('*', function(req, res){

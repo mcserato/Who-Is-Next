@@ -56,7 +56,7 @@ var sidebar = {
                     '<a href="/views/student" class="btn-floating black" title="Students">',
                         '<i class="material-icons">face</i>',
                     '</a>',
-                '</li>'
+                '</li>',
             /*Features not working
                 '<li>',
                     '<a href="/views/logs" class="btn-floating black" title="Logs">',
@@ -68,12 +68,13 @@ var sidebar = {
                         '<i class="material-icons">insert_chart</i>',
                     '</a>',
                 '</li>',
+            */
                 '<li>',
-                    '<a href="/views/save_point" class="btn-floating black" title="Analytics">',
+                    '<a href="/views/save_point" class="btn-floating black" title="Save Point">',
                         '<i class="material-icons">archive</i>',
                     '</a>',
-                '</li>',
-            */
+                '</li>'
+            
             ].join(''));
             
             $('#sidebar-link').click();

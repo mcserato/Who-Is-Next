@@ -87,16 +87,33 @@ $(document).ready( function () {
             Materialize.toast("You must choose a class", 2000);
         }
 
-        if(checked == 0) {
-            Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
-        }
+        
 
         if($('#number-filter').val() == ""){
             Materialize.toast("You must choose the number of volunteers", 2000);
         }
 
+        var called = parseInt($('#number-filter').val());
+        if(called < 1){
+            Materialize.toast("You must search for at least one volunteer!", 2000);
+        }
+
+        else if(checked == 0) {
+            Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
+        }
+
         else {
             var class_id = $('#class-filter').val();
+            var gender;
+            if($('#male-filter').is(":checked") && !$('#female-filter').is(":checked")){
+                gender = "M";
+            }
+            if($('#female-filter').is(":checked") && !$('#male-filter').is(":checked")){
+                gender = "F";
+            }
+            if($('#male-filter').is(":checked") && $('#female-filter').is(":checked")){
+                gender = "A";
+            }
 
             $.ajax({
                 url: '/api/randomizer/' + class_id,
@@ -104,6 +121,7 @@ $(document).ready( function () {
                 headers: util.headers,
                 data: {
                     class_id    : class_id,
+                    gender      : gender,
                     last_name   :$('#last-name-filter').val(),
                     first_name  :$('#first-name-filter').val(),
                     birthday    :$('#birthday-filter').val(),
@@ -183,6 +201,41 @@ $(document).ready( function () {
                     $('randomize-btn').click(function(){
                         document.getElementById('animation-css').remove();
                     });
+
+                    /*Start of save students in a savepoint*/
+                    $('#save-student').click(function(){
+                        var save_name = $('#save-point').val();
+                        var save_id;
+                        //This function creates the save point
+                        $.ajax({
+                            url: '/api/save_point',
+                            method: 'POST',
+                            data: {
+                                save_name       : save_name,
+                                class_id        : class_id
+                            },
+                            success: function(data){
+                            },
+                            dataType: "JSON"
+                        });
+
+                        //This function adds the students to the save point
+                        
+                        for(var i in data) {
+                            $.ajax({
+                                url: '/api/save_student',
+                                method: 'POST',
+                                data: {
+                                    student_number  : data[i].student_number
+                                },
+                                success: function(data){
+                                },
+                                dataType: "JSON"
+                            });
+                        }
+                        
+                    });
+                    
                 },
                 dataType: "JSON"
             });
@@ -190,6 +243,7 @@ $(document).ready( function () {
     });
 
 });
+
 
 
 /* RANDOMIZER EFFECTS */
