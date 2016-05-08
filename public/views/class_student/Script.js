@@ -400,6 +400,12 @@ var view_class_stud = {
           return;
         }
 
+        var pattern = /.csv$/g;
+        if (!files[0].name.match(pattern)){
+            alert('Please select a CSV file');
+            return;
+        }
+
         var file = files[0];
         var start = parseInt(opt_startByte) || 0;
         var stop = parseInt(opt_stopByte) || file.size - 1;
@@ -416,6 +422,7 @@ var view_class_stud = {
                     url: "/api/student",
                     method: 'POST',
                     dataType: "JSON",
+                    headers: util.headers,
                     data: {
                         student_number: nope[0 + ( 9 * i ) ],
                         first_name:     nope[1 + ( 9 * i ) ],
@@ -429,8 +436,30 @@ var view_class_stud = {
                     },
                     success: function(data){
                         if(!data){
-                            return Materialize.toast("Error in Logout. Please try again !",2500);
+                            return Materialize.toast("Error in adding a student. Please try again !",2500);
                         }
+                    },
+                    error: function(err){
+                        return Materialize.toast(err.responseText,2500);
+                    }
+                });
+                
+                $.ajax({
+                    url: "/api/class_student/",
+                    method: 'POST',
+                    dataType: "JSON",
+                    headers: util.headers,
+                    data: {
+                        class_id:           localStorage.class_id,
+                        student_number:     nope[0 + ( 9 * i ) ],
+                        no_of_times_called: 0,
+                    },
+                    success: function(data){
+                        if(!data){
+                            return Materialize.toast("Error in adding a student to class. Please try again !",2500);
+                        }
+
+                        document.location.reload();
                     },
                     error: function(err){
                         return Materialize.toast(err.responseText,2500);
@@ -460,5 +489,4 @@ var view_class_stud = {
             }
         );   
     }  
-
 };
