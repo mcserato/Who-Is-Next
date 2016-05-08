@@ -1,20 +1,23 @@
 @font-face{
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 @font-face{
-    font-family: roboto;   
-    src:url(/font/roboto/Roboto-Bold.wof);
+    font-family: roboto;
+    src:url(/font/roboto/Roboto-Bold.woff);
 }
 @font-face{
-    font-family: fredoka;   
+    font-family: fredoka;
     src:url(/font/roboto/FredokaOne-Regular.ttf);
 }
 body {
 	background-color: #f5f6f6;
     padding:auto;
+    overflow-x: scroll;
+    min-width: 700px;
+    display: block;
+  font-family: fredoka
 
-  font-family: fredoka;
 }
 
 
@@ -263,7 +266,7 @@ input[type=password]:focus:not([readonly])+label {
   margin-left:-2.4vw;
   transform-origin: 50% 70%;
    color:black;
-  
+
 }
 
 
@@ -364,7 +367,7 @@ h3.center{
 	height:6vw;
 	background-color: white;
 	box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, 0.2), 0 0.5vw 1vw 0 rgba(0, 0, 0, 0.19);
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 .modal-content{
@@ -372,7 +375,7 @@ h3.center{
 }
 h4.center{
 	font-size:5.5vw;
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 a.modal-action{
@@ -393,11 +396,11 @@ div.modal-footer{
 /* START HERE */
 h1.center{
 	font-size:5.5vw;
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 h5.center{
-    font-family: Markus;   
+    font-family: Markus;
     src:url(/font/roboto/Markus.ttf);
 }
 
@@ -412,23 +415,23 @@ h5.center{
 }
 
 #class-filter{
-     font-family: Walkway;   
+     font-family: Walkway;
     src:url(/font/roboto/Walkway.ttf);
 }
 #birthday-filter{
-     font-family: fredoka;   
+     font-family: fredoka;
 
 }
 #course-filter{
-     font-family: fredoka;   
+     font-family: fredoka;
 
 }
 #college-filter{
-     font-family: fredoka;   
+     font-family: fredoka;
 }
 
 label{
-    font-family: fredoka;     
+    font-family: fredoka;
 
 }
 
@@ -451,14 +454,14 @@ nav.z-depth-0{
 	background: rgb(192,192,192);
 }
 
-.logo:hover { 
+.logo:hover {
   -webkit-animation: 1s rotate infinite linear  ;
-  -webkit-transform-origin: 50% 50%;  
+  -webkit-transform-origin: 50% 50%;
 }
 
 @-webkit-keyframes rotate {
     0%    { -webkit-transform: rotate(0); }
-    100% { -webkit-transform: rotate(360deg); } 
+    100% { -webkit-transform: rotate(360deg); }
 }
 a.brand-logo{
 	padding:0;
@@ -487,7 +490,7 @@ a.brand-logo{
   100% {transform:rotateY(360deg);}
 }
 
-.card:hover{
+.theme-card:hover{
 	cursor: pointer;
 }
 
@@ -505,6 +508,7 @@ a.brand-logo{
 h1#student_header{
   font-family: Scream;
   font-size:5vw;
+  margin-top:1vw;
 }
 #student-list{
   font-size:1.5vw;

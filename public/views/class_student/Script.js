@@ -146,7 +146,12 @@ $(document).ready( function () {
             });
     });
 
-    /* View Students in a Class*/
+
+    $('#randomize')
+        .click(function(){
+            localStorage.class_id_randomize = localStorage.class_id;
+            window.location.href = "/views/get_volunteers";
+        });
 
     //const content = $('#student-list');
     //config.checkAuth("FACULTY");

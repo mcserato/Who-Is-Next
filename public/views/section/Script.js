@@ -6,7 +6,7 @@ $(document).ready( function () {
 
     navbar.init('#navbar');
     sidebar.init('#sidebar');
-    
+
     $("#course-id").append($("<h2></h2>").text(localStorage.course_code));
 
     function addItem (data) {
@@ -43,21 +43,26 @@ $(document).ready( function () {
             options_div.append(delete_section);
 
             if (color_flag % 2 == 0) {
-                var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
-
+                var section_dv = $("<div class='courses_hex hex z-depth-2 hexagon-red'></div>");
             } else {
-                var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
+                var section_dv = $("<div class='courses_hex hex z-depth-2 hexagon-grey'></div>");
             }
+
+            section_dv.attr("class_id", data[class_].class_id);
+            section_dv.attr("course_code", data[class_].course_code);
+            section_dv.attr("class_section", data[class_].class_section);
+            section_dv.attr("section_number", data[class_].section_number);
             section_dv.attr("id", data[class_].course_code.replace(' ', ''));
             section_dv.append(section);
 
             if (num_flag < 3) {
-                var row_div = $("<div class='three'></div>");
-                row_div.append(section_dv);
-                content.append(row_div);
-            } else  content.append(section_dv);
+                var row_div = $("<div class='three con'></div>");
+            } else  var row_div = $("<div class='four con'></div>");
 
-            content.append(options_div);
+            row_div.append(section_dv);
+            row_div.append(options_div);
+            options_div.hide();
+            content.append(row_div);
 
             color_flag++;
             num_flag++;
@@ -66,7 +71,7 @@ $(document).ready( function () {
 
         $('.options').hide();
 
-        $('.courses')
+        $('.courses_hex')
             .click(function(){
                 localStorage.class_id = $(this).attr("class_id");
                 localStorage.course_code = $(this).attr("course_code");
@@ -75,12 +80,15 @@ $(document).ready( function () {
                 window.location.href = "/views/class_student";
             });
 
-        $('.hex').hover(function() {
-           $('.options').show();
-           $('.options').mouseleave(function() {
-                $('.options').hide();
-            });
+        /* Hover options */
+        $('.con').mouseenter(function() { // Show options
+            $(this).find('.options').show();
         });
+
+        $('.con').mouseleave(function() { // Hide options
+            $(this).find('.options').hide();
+        });
+
 
         /* Delete Section*/
         $('.remove')
@@ -587,22 +595,28 @@ $(document).ready( function () {
                 options_div.append(edit_section);
                 options_div.append(delete_section);
 
-                if (color_flag % 2 == 0) {
-                    var section_dv = $("<div class='hex z-depth-2 hexagon-red'></div>");
 
+                if (color_flag % 2 == 0) {
+                    var section_dv = $("<div class='courses_hex hex z-depth-2 hexagon-red'></div>");
                 } else {
-                    var section_dv = $("<div class='hex z-depth-2 hexagon-grey'></div>");
+                    var section_dv = $("<div class='courses_hex hex z-depth-2 hexagon-grey'></div>");
                 }
+
+                section_dv.attr("class_id", data[class_].class_id);
+                section_dv.attr("course_code", data[class_].course_code);
+                section_dv.attr("class_section", data[class_].class_section);
+                section_dv.attr("section_number", data[class_].section_number);
                 section_dv.attr("id", data[class_].course_code.replace(' ', ''));
                 section_dv.append(section);
 
                 if (num_flag < 3) {
-                    var row_div = $("<div class='three'></div>");
-                    row_div.append(section_dv);
-                    content.append(row_div);
-                } else  content.append(section_dv);
+                    var row_div = $("<div class='three con'></div>");
+                } else  var row_div = $("<div class='four con'></div>");
 
-                content.append(options_div);
+                row_div.append(section_dv);
+                row_div.append(options_div);
+                options_div.hide();
+                content.append(row_div);
 
                 color_flag++;
                 num_flag++;
@@ -611,7 +625,7 @@ $(document).ready( function () {
 
             $('.options').hide();
 
-            $('.courses').click(function(){ // Direct to View Students of a section
+            $('.courses_hex').click(function(){ // Direct to View Students of a section
                 localStorage.class_id = $(this).attr("class_id");
                 localStorage.course_code = $(this).attr("course_code");
                 localStorage.class_section = $(this).attr("class_section");
@@ -619,12 +633,15 @@ $(document).ready( function () {
                 window.location.href = "/views/class_student";
             });
 
-            $('.hex').hover(function() {
-               $('.options').show();
-               $('.options').mouseleave(function() {
-                    $('.options').hide();
-                });
+            /* Hover options */
+            $('.con').mouseenter(function() { // Show options
+                $(this).find('.options').show();
             });
+
+            $('.con').mouseleave(function() { // Hide options
+                $(this).find('.options').hide();
+            });
+
 
             /* Delete Section*/
             $('.remove').click(function(){
