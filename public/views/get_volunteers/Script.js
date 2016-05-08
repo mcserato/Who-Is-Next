@@ -145,7 +145,14 @@ $(document).ready( function () {
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
 
-                            if (data.length == 1) {
+                            if (data.length == 0){
+                                $('#randomizer-holder').hide();
+                                $('#logo-holder').hide();
+                                $("#container-list").show();
+                                zoomInImage(data);
+                                console.log("NO STUDENTS FOUND");
+                            }
+                            else if (data.length == 1) {
                                 $('#randomizer-holder').hide();
                                 $('#logo-holder').hide();
                                 $("#container-list").show();
@@ -444,23 +451,42 @@ function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
-    var img = $("<img class='pic' length=3px width=5px>")
-    img.attr("src", data[0].picture);
-    $('#list').append(img);
-    $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
-    $(".pic").animate({
-        width: "70%",
-        heigth: "50%",
-        opacity: 1,
-        left: "15%",
-        top:"15%",
-        borderWidth: "10px"
-    }, 3000);
+    if(data.length == 0){
+        $('#list').append("<h3 class='name' style='display:none'>NO RESULTS FOUND</h3>");
+        $('.name').val("NO RESULTS FOUND");
+        $(".pic").animate({
+            width: "70%",
+            heigth: "50%",
+            opacity: 1,
+            left: "15%",
+            top:"15%",
+            borderWidth: "10px"
+        }, 3000);
 
-    $(".pic").promise().done(function(){
-        $('.name').show();
-    });
+        $(".pic").promise().done(function(){
+            $('.name').show();
+        });
 
+    }else{
+        var img = $("<img class='pic' length=3px width=5px>")
+        img.attr("src", data[0].picture);
+        $('#list').append(img);
+        $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
+        $(".pic").animate({
+            width: "70%",
+            heigth: "50%",
+            opacity: 1,
+            left: "15%",
+            top:"15%",
+            borderWidth: "10px"
+        }, 3000);
+
+        $(".pic").promise().done(function(){
+            $('.name').show();
+        });
+
+    }
+    
 }
 
 function jumbleWords(data){
