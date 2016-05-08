@@ -183,9 +183,9 @@ $(document).ready( function () {
                                                  $("#container-list").show();
                                                  jumbleWords(data);
                                                  break;
-                                    }    
+                                    }
                                 }
-                                
+
                             } else {    // Randomize selection of effects
                                 var rand = Math.round(Math.random() * 3);
                                 switch(rand) {
@@ -280,11 +280,11 @@ function insertHexagon(data) {
 
 
         if(newline) $("#card-grid" + i).css("left", 55 + "px");
-        
+
     }
-    
-     $('#start-again-div').css("width","900 px"); 
-    
+
+     $('#start-again-div').css("width","900 px");
+
      // Enable flip.js
     $(".card-grid").flip({
        forceWidth: true,
@@ -430,7 +430,7 @@ function zoomInImage(data){
     img.attr("src", data[0].picture);
 
     $('#list').append(img);
-    $('#list').append("<h3 class='name' style='display:none'>" + data[0].first_name + data[0].last_name + '</h3>');
+    $('#list').append("<h3 class='name' style='display:none'>" + data[0].first_name + " " + data[0].last_name + '</h3>');
 
     if(JSON.parse(localStorage.user).current_theme==1){
         $('.pic').css({
