@@ -39,6 +39,11 @@ var view_class_stud = {
         $("#course-id").append(localStorage.section_number=="undefined" ?
             '' : '-'+localStorage.section_number);
 
+        $('#randomize').click(function(){
+            localStorage.class_id_randomize = localStorage.class_id;
+            window.location.href = "/views/get_volunteers";
+        });
+
         $('#search-student').keyup(function () {
 
             if(!view_class_stud.student_data){
