@@ -220,7 +220,7 @@ var view_class_stud = {
             var row = $("<li></li>"),
                 student_header = $("<div class='row'></div>"),
                 image = $('<img/>'),
-                text = $("<h4></h4>"),
+                text = $("<div></div>"),
                 edit_student = $(["<a title='Edit Student'>",
                                     "<i class='material-icons options-text'>mode_edit</i>",
                                 "</a>"].join(''));
@@ -230,11 +230,16 @@ var view_class_stud = {
             image.css("height","100px");
             image.addClass("red circle center col s2 push-s1 responsive-img");
 
-            text.html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
+            text.append("<h4>"+
+                data[student].last_name + ", " +
+                data[student].first_name + " " +
+                data[student].middle_name + "</h4>"
+            );
             text.addClass("center-align student-data modal-trigger col s8");
             text.attr("id", data[student].student_number);
             text.attr("href", "#student_modal");
             text.css("width", "80%");
+            text.css("padding", "2%");
 
             edit_student.addClass("modal-trigger edit-student-button right col s1");
             edit_student.attr("student_number", data[student].student_number);
@@ -243,6 +248,7 @@ var view_class_stud = {
             student_header.append(image);
             student_header.append(text);
             student_header.append(edit_student);
+            student_header.css("padding","0");
             row.append(student_header);
             content.append(row);
 
