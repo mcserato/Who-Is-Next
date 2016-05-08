@@ -130,7 +130,34 @@ var view_class_stud = {
                             error: util.errorHandler
                         });
                 },
-                error: util.errorHandler
+                error: function(err){
+                    return Materialize.toast(err.responseText,800,"",function(){
+                        if(!view_class_stud.getStudentInfo(student_number) && 
+                            confirm("Would you like you like to import data of student "+ 
+                            student_number +" to this class ?")){
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/api/class_student",
+                                headers: util.headers,
+                                data: {
+                                    class_id: localStorage.class_id,
+                                    student_number: student_number,
+                                    no_of_times_called: 0
+                                },
+                                dataType: "JSON",
+                                success: function (result) {
+                                     setTimeout(function(){
+                                        return Materialize.toast(student_number + " is added!", 1000,"",function(){
+                                            window.location.href = "/views/class_student";
+                                        });
+                                    },500);
+                                },
+                                error: util.errorHandler
+                            });
+                        };
+                    });
+                }
             });
         });
 
