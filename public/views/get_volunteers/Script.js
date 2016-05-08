@@ -87,9 +87,7 @@ $(document).ready( function () {
             Materialize.toast("You must choose a class", 2000);
         }
 
-        if(checked == 0) {
-            Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
-        }
+        
 
         if($('#number-filter').val() == ""){
             Materialize.toast("You must choose the number of volunteers", 2000);
@@ -98,6 +96,10 @@ $(document).ready( function () {
         var called = parseInt($('#number-filter').val());
         if(called < 1){
             Materialize.toast("You must search for at least one volunteer!", 2000);
+        }
+
+        else if(checked == 0) {
+            Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
         }
 
         else {
