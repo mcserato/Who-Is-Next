@@ -1,0 +1,239 @@
+<!DOCTYPEhtml>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Students</title>
+        <link rel="stylesheet" type="text/css" href="../../style/material-icons.css">
+        <link rel="stylesheet" href="../../style/materialize.css" />
+        <link rel="stylesheet" href="../../style/Style.css" />
+        <link rel="shortcut icon" href="../../favicon/favicon.ico"/>
+        <script src="../../script/Jquery.min.js"></script>
+        <script src="../../script/Materialize.js"></script>
+    </head>
+    <body>
+        <div id="navbar"></div>
+        <div id="sidebar"></div>
+        
+        <div class="container">
+            <div id="main-content" class="center"></div>
+        </div>
+
+        <div id="add-button-div" class="fixed-action-btn horizontal click-to-toggle" >
+            <a class="btn-floating btn-large red">
+              <i class="material-icons">add</i>
+            </a>
+            <ul>
+                <li>
+                    <a title="Add Student" class="btn-floating waves-effect waves-light btn modal-trigger" href="#add_modal">
+                        <i id="add-icon" class="material-icons">add</i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-floating green waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <i class="material-icons">publish</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        
+
+        <!-- Modal Structure -->
+        <div id="add_modal" class="modal">
+           <div class="modal-content">
+               <h2>Add Student in Class</h2>
+               <div class="input-field">
+                   <input id="student_number" type="text" />
+                   <label for="student_number">Student Number</label>
+               </div>
+
+               <div class="input-field">
+                   <input id="first_name" type="text" />
+                   <label for="first_name">First Name</label>
+               </div>
+
+               <div class="input-field">
+                   <input id="middle_name" type="text" />
+                   <label for="middle_name">Middle Name</label>
+               </div>
+
+               <div class="input-field">
+                   <input id="last_name" type="text" />
+                   <label for="last_name">Last Name</label>
+               </div>
+
+               <div class="input-field">
+                <select class="browser-default" id="college">
+                    <option value="" disabled selected>College</option>
+                    <option value="CA" id="ca">CA</option>
+                    <option value="CAS" id="cas">CAS</option>
+                    <option value="CAS" id="cas">CDC</option>
+                    <option value="CEAT" id="ceat">CEAT</option>
+                    <option value="CEM" id="cem">CEM</option>
+                    <option value="CFNR" id="cfnr">CFNR</option>
+                    <option value="CHE" id="che">CHE</option>
+                    <option value="CPAF" id="cpaf">CPAF</option>
+                    <option value="CVM" id="cvm">CVM</option>
+                    <option value="SESAM" id="sesam">SESAM</option>
+                    <option value="GS" id="gs">GS</option>
+                </select>
+              </div> 
+
+               <div class="input-field">
+                   <input id="course" type="text" />
+                   <label for="course">Course</label>
+               </div>
+
+               <div class="row white" style="padding-top:10px;">
+                    <div class="col s6">
+                      <input name="gender" type="radio" id="male" />
+                      <label for="male">Male</label>
+                    </div>
+                    <div class="col s6">
+                      <input name="gender" type="radio" id="female" />
+                      <label for="female">Female</label>
+                    </div>
+               </div>
+
+               <div class="input-field white" style="padding-left:10px;">
+                    <span style="color:#999999;">Birthday</span> 
+                   <input id="birthday" type="date" class ="datepicker" />
+                  
+                   </div>
+           </div>
+           <div class="modal-footer">
+               <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">
+                   <i class="material-icons">done</i>
+               </button>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="edit_student_modal" class="modal">
+           <div class="modal-content">
+               <h2>Edit Student</h2>
+                   <div class="input-field">
+                       <span>Student Number</span>
+                       <input placeholder="" id="student_number_edit" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                       <span>First Name</span>
+                       <input id="first_name_edit" placeholder="" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                       <span>Middle Name</span>
+                       <input id="middle_name_edit" placeholder="" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                       <span>Last Name</span>
+                       <input id="last_name_edit" placeholder="" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college_edit">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div>
+
+                   <div class="input-field">
+                       <span>Course</span>
+                       <input id="course_edit" type="text" placeholder="" required="" />
+                   </div>
+
+                   <span>Gender</span>
+                   <div class="row white" style="padding-top:10px;">
+                        <div class="col s6">
+                          <input name="gender_edit" type="radio" id="male_edit" />
+                          <label for="male_edit">Male</label>
+                        </div>
+                        <div class="col s6">
+                          <input name="gender_edit" type="radio" id="female_edit" />
+                          <label for="female_edit">Female</label>
+                        </div>
+                   </div>
+
+                   <div class="input-field">
+                       <span>Birthday</span>
+                       <input id="birthday_edit" placeholder="" type="text" required="" />
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="edit-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+           </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="student_modal" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s4">
+                        <img id="student-picture" style="margin-top:30%;" class="responsive-img"/>
+                    </div>
+                    <div class="col s8">
+                        <h3 id="student_header" style="text-align:center"></h3>
+                        <ul id="student_list" class="collection">
+                            <li id="student_no" class="collection-item"></li>
+                            <li id="student_course" class="collection-item"></li>
+                            <li id="student_college" class="collection-item"></li>
+                            <li id="student_gender" class="collection-item"></li>
+                            <li id="student_birthday" class="collection-item"></li>
+                        </ul>   
+                    </div>             
+                </div>
+            </div>
+        </div>
+         <div id ="footer">
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Upload CSV File</h4>
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input id="file-path" type="file" name="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    
+                    <div id="byte_content"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Disagree</a>
+                <span class="readBytesButtons">
+                  <button class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+                </span>
+                
+            </div>
+        </div>
+
+        <script src="../footer/Script.js"></script>
+        <script src="../nav_bar/Script.js"></script>
+        <script src="../sidebar/Script.js"></script> 
+        <script src="../../script/Script.js"></script>
+        <script src="../../script/Config.js"></script>
+        <script src="../../script/Theme.js"></script>
+        <script src="../../script/Util.js"></script>
+        <script src="./Script.js"></script>
+    </body>
+</html>
