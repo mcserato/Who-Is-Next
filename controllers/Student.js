@@ -118,7 +118,7 @@ exports.viewAll = function(req, res, next) {
     }
     db.query("SELECT s.* FROM STUDENT s, CLASS_STUDENT cs, CLASS c WHERE " +
         "s.student_number = cs.student_number AND s.emp_num = cs.emp_num AND " +
-        "c.class_id = cs.class_id AND c.emp_num = ?",
+        "c.class_id = cs.class_id AND c.emp_num = ? ORDER BY s.last_name",
         [req.session.emp_num],
         function (err, rows) {
             if (err) {
