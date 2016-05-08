@@ -1,6 +1,6 @@
 #spinner {
-	top: 20%;
-	left: 35%;
+	top: 75px;
+	left: 36%;
 	width: 100px;
 	height: 100px;
 	position: relative;
@@ -23,7 +23,7 @@
 	left: 150px;	
 }
 #arrows {
-	top: -250px;
+	top: -180px;
 	left: 20%;
 	position: relative;	
 	z-index: -1;
