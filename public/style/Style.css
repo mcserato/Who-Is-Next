@@ -72,7 +72,8 @@ body {
 	margin-top: 15%;
 }
 
-#login-btn, #sign-up-btn , #edit-user-button{
+#login-btn, #sign-up-btn , #edit-user-button, 
+#edit-button, #edit-section-button{
 	background-color: #CB494E;
 }
 input[type=text]:focus:not([readonly]),

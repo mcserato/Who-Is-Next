@@ -14,34 +14,99 @@
         <div id="sidebar"></div>
 
         <div class="container">
-            <div id="main-content">
-                <h1 class="center">Students</h1>
-                <div class="nav-wrapper row">
-                    <form>
-                        <div class="input-field col l12">
-                            <input id="search-student" type="search" placeholder="Search Class" required>
-                            <label for="search-student"><i class="material-icons">search</i></label>
-                            <i class="material-icons waves-effect waves-light">close</i>
+            <div id="main-content"></div>
+        </div>
+        
+        <!-- Modal Structure -->
+        <div id="edit_student_modal" class="modal">
+           <div class="modal-content">
+               <h2>Edit Student</h2>
+                   <div class="input-field">
+                       <span>Student Number</span>
+                       <input placeholder="" id="student_number_edit" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                       <span>First Name</span>
+                       <input id="first_name_edit" placeholder="" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                       <span>Middle Name</span>
+                       <input id="middle_name_edit" placeholder="" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                       <span>Last Name</span>
+                       <input id="last_name_edit" placeholder="" type="text" required="" />
+                   </div>
+
+                   <div class="input-field">
+                    <select class="browser-default" id="college_edit">
+                        <option value="" disabled selected>College</option>
+                        <option value="CA" id="ca">CA</option>
+                        <option value="CAS" id="cas">CAS</option>
+                        <option value="CEAT" id="ceat">CEAT</option>
+                        <option value="CEM" id="cem">CEM</option>
+                        <option value="CFNR" id="cfnr">CFNR</option>
+                        <option value="CHE" id="che">CHE</option>
+                        <option value="CPAF" id="cpaf">CPAF</option>
+                        <option value="CVM" id="cvm">CVM</option>
+                        <option value="SESAM" id="sesam">SESAM</option>
+                        <option value="GS" id="gs">GS</option>
+                    </select>
+                  </div>
+
+                   <div class="input-field">
+                       <span>Course</span>
+                       <input id="course_edit" type="text" placeholder="" required="" />
+                   </div>
+
+                   <span>Gender</span>
+                   <div class="row white" style="padding-top:10px;">
+                        <div class="col s6">
+                          <input name="gender_edit" type="radio" id="male_edit" />
+                          <label for="male_edit">Male</label>
                         </div>
-                    </form>
-                </div>
-                <ul id="student-list" class="collapsible" data-collapsible="accordion"></ul>
-            </div>
+                        <div class="col s6">
+                          <input name="gender_edit" type="radio" id="female_edit" />
+                          <label for="female_edit">Female</label>
+                        </div>
+                   </div>
+
+                   <div class="input-field">
+                       <span>Birthday</span>
+                       <input id="birthday_edit" placeholder="" type="text" required="" />
+                   </div>
+           </div>
+           <div class="modal-footer">
+                   <button id="edit-button" type="submit" class="modal-action btn waves-light waves-effect">
+                       <i class="material-icons">done</i>
+                   </button>
+           </div>
         </div>
 
         <!-- Modal Structure -->
         <div id="student_modal" class="modal">
             <div class="modal-content">
-                <h1 id="student_header"class="center"></h1>
-                <ul id="student_list" class="collection">
-                    <li id="student_number" class="collection-item"></li>
-                    <li id="student_course" class="collection-item"></li>
-                    <li id="student_college" class="collection-item"></li>
-                    <li id="student_gender" class="collection-item"></li>
-                    <li id="student_birthday" class="collection-item"></li>
-                </ul>
+                <div class="row">
+                    <div class="col s4">
+                        <img id="student-picture" style="margin-top:30%;" class="responsive-img"/>
+                    </div>
+                    <div class="col s8">
+                        <h3 id="student_header" style="text-align:center"></h3>
+                        <ul id="student_list" class="collection">
+                            <li id="student_no" class="collection-item"></li>
+                            <li id="student_course" class="collection-item"></li>
+                            <li id="student_college" class="collection-item"></li>
+                            <li id="student_gender" class="collection-item"></li>
+                            <li id="student_birthday" class="collection-item"></li>
+                        </ul>   
+                    </div>             
+                </div>
             </div>
         </div>
+        
         <div id="footer">
         </div>
 
