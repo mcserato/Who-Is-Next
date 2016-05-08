@@ -139,7 +139,8 @@ var faculty_student = {
             image.attr("src", data[student].picture);
             image.css("width","100px");
             image.css("height","100px");
-            image.addClass("red circle center col s2 push-s1 responsive-img");
+            image.css("background-color","#b42529");
+            image.addClass("circle center col s2 push-s1 responsive-img");
 
             text.append("<h4>"+
                 data[student].last_name + ", " +
