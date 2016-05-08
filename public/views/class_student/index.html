@@ -10,7 +10,7 @@
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
     </head>
-   <body>
+    <body>
         <div id="navbar"></div>
         <div id="sidebar"></div>
         
@@ -18,13 +18,25 @@
             <div id="main-content" class="center"></div>
         </div>
 
-
-        <div id="add-button-div" class="fixed-action-btn">
-           <!-- Modal Trigger -->
-           <a title="Add Student" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-               <i id="add-icon" class="material-icons">add</i></a>
-           </a>
+        <div id="add-button-div" class="fixed-action-btn horizontal click-to-toggle" >
+            <a class="btn-floating btn-large red">
+              <i class="material-icons">add</i>
+            </a>
+            <ul>
+                <li>
+                    <a title="Add Student" class="btn-floating waves-effect waves-light btn modal-trigger" href="#add_modal">
+                        <i id="add-icon" class="material-icons">add</i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-floating green waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <i class="material-icons">publish</i>
+                    </a>
+                </li>
+            </ul>
         </div>
+
+        
 
         <!-- Modal Structure -->
         <div id="add_modal" class="modal">
@@ -186,6 +198,33 @@
             </div>
         </div>
          <div id ="footer">
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Upload CSV File</h4>
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input id="file-path" type="file" name="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    
+                    <div id="byte_content"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Disagree</a>
+                <span class="readBytesButtons">
+                  <button class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+                </span>
+                
+            </div>
         </div>
 
         <script src="../footer/Script.js"></script>
