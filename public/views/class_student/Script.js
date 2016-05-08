@@ -110,25 +110,25 @@ var view_class_stud = {
                 },
                 dataType: "JSON",
                 success: function() {
-                        $.ajax({
-                            type: "POST",
-                            url: "/api/class_student",
-                            headers: util.headers,
-                            data: {
-                                class_id: localStorage.class_id,
-                                student_number: student_number,
-                                no_of_times_called: 0
-                            },
-                            dataType: "JSON",
-                            success: function (result) {
-                                 setTimeout(function(){
-                                    return Materialize.toast(student_number + " is added!", 1000,"",function(){
-                                        window.location.href = "/views/class_student";
-                                    });
-                                },500);
-                            },
-                            error: util.errorHandler
-                        });
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/class_student",
+                        headers: util.headers,
+                        data: {
+                            class_id: localStorage.class_id,
+                            student_number: student_number,
+                            no_of_times_called: 0
+                        },
+                        dataType: "JSON",
+                        success: function (result) {
+                             setTimeout(function(){
+                                return Materialize.toast(student_number + " is added!", 1000,"",function(){
+                                    window.location.href = "/views/class_student";
+                                });
+                            },500);
+                        },
+                        error: util.errorHandler
+                    });
                 },
                 error: util.errorHandler
             });
@@ -221,8 +221,12 @@ var view_class_stud = {
                 student_header = $("<div class='row'></div>"),
                 image = $('<img/>'),
                 text = $("<div></div>"),
+                options = $("<div></div>"),
                 edit_student = $(["<a title='Edit Student'>",
                                     "<i class='material-icons options-text'>mode_edit</i>",
+                                "</a>"].join('')),
+                delete_student = $(["<a title='Delete Student'>",
+                                    "<i class='material-icons options-text'>delete</i>",
                                 "</a>"].join(''));
 
             image.attr("src", data[student].picture);
@@ -241,23 +245,44 @@ var view_class_stud = {
             text.css("width", "80%");
             text.css("padding", "2%");
 
-            edit_student.addClass("modal-trigger edit-student-button right col s1");
+            edit_student.addClass("modal-trigger edit-student-button");
             edit_student.attr("student_number", data[student].student_number);
 
-            student_header.addClass("collapsible-header");
+            delete_student.addClass("remove");
+            delete_student.attr("student_number", data[student].student_number);
+
+            options.attr("id", data[student].student_number + "-options");
+            options.addClass("options col s1");
+            options.append(edit_student);
+            options.append(delete_student);
+            options.css("margin","0");
+            options.css("padding","0");
+            
+            student_header.attr("student_number", data[student].student_number);
+            student_header.addClass("collapsible-header student-div");
             student_header.append(image);
             student_header.append(text);
-            student_header.append(edit_student);
+            student_header.append(options);
             student_header.css("padding","0");
+
             row.append(student_header);
             content.append(row);
-
         }
 
         if(search_count==0){
             content.append('<br/><h2 class="center">No Students Found</h2>');
             return;
         }
+
+        $('.options').hide();
+
+        $('.student-div').hover(
+            function(){
+                $('#' + $(this).attr("student_number")+"-options").show();
+            },function(){
+                $('#' + $(this).attr("student_number")+"-options").hide();
+            }
+        );
 
         $('.student-data')
             .click(function(){
@@ -298,6 +323,34 @@ var view_class_stud = {
                 }
 
                 $('#edit_student_modal').openModal();
+            });
+
+        $('.remove')
+            .click(function () {
+                var student_number = $(this).attr("student_number"),
+                    class_id = localStorage.class_id;
+
+                if(confirm("Are you sure you want to remove student "+ student_number + " in this class ?")){
+                    $.ajax({
+                        method: "DELETE",
+                        url: "/api/class_student",
+                        headers: util.headers,
+                        data: {
+                            class_id: class_id,
+                            student_number: student_number
+                        },
+                        dataType: "JSON",
+                        success: function (result) {
+                            setTimeout(function(){
+                                return Materialize.toast("Successfully remove - " + student_number + " !", 1000
+                                    ,"",function(){
+                                        window.location.href = "/views/class_student";
+                                });
+                            },500);
+                        },
+                        error: util.errorHandler
+                    });
+                }
             });
     },
 
