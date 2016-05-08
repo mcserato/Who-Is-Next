@@ -11,20 +11,20 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 
-    -webkit-animation: "sk-cubemove1" 1.5s 2 ease-in-out;
-    -moz-animation: "sk-cubemove1" 1.5s 2 ease-in-out;
-    -o-animation: "sk-cubemove1" 1.5s 2 ease-in-out;
-    -ms-animation: "sk-cubemove1" 1.5s 2 ease-in-out;
-    animation: "sk-cubemove1" 1.5s 2 ease-in-out;
+    -webkit-animation: sk-cubemove1 1.5s 2 ease-in-out;
+    -moz-animation: sk-cubemove1 1.5s 2 ease-in-out;
+    -o-animation: sk-cubemove1 1.5s 2 ease-in-out;
+    -ms-animation: sk-cubemove1 1.5s 2 ease-in-out;
+    animation: sk-cubemove1 1.5s 2 ease-in-out;
 }
 #dice2 {
     left: 150px;    
     
-    -webkit-animation: "sk-cubemove2" 1.5s 2 ease-in-out;
-    -moz-animation: "sk-cubemove2" 1.5s 2 ease-in-out;
-    -o-animation: "sk-cubemove2" 1.5s 2 ease-in-out;
-    -ms-animation: "sk-cubemove2" 1.5s 2 ease-in-out;
-    animation: "sk-cubemove2" 1.5s 2 ease-in-out;
+    -webkit-animation: sk-cubemove2 1.5s 2 ease-in-out;
+    -moz-animation: sk-cubemove2 1.5s 2 ease-in-out;
+    -o-animation: sk-cubemove2 1.5s 2 ease-in-out;
+    -ms-animation: sk-cubemove2 1.5s 2 ease-in-out;
+    animation: sk-cubemove2 1.5s 2 ease-in-out;
 }
 @keyframes sk-cubemove1 {
     25% { 
@@ -97,11 +97,11 @@
     left: 20%;
     position: relative;
 
-    -webkit-animation: "sk-arrowsmove" 1s 3 ease-in-out;
-    -moz-animation: "sk-arrowsmove" 1s 3 ease-in-out;
-    -o-animation: "sk-arrowsmove" 1s 3 ease-in-out;
-    -ms-animation: "sk-arrowsmove" 1s 3 ease-in-out;
-    animation: "sk-arrowsmove" 1s 3 ease-in-out;            
+    -webkit-animation: sk-arrowsmove 1s 3 ease-in-out;
+    -moz-animation: sk-arrowsmove 1s 3 ease-in-out;
+    -o-animation: sk-arrowsmove 1s 3 ease-in-out;
+    -ms-animation: sk-arrowsmove 1s 3 ease-in-out;
+    animation: sk-arrowsmove 1s 3 ease-in-out;            
 }
 @keyframes sk-arrowsmove {
     25% { 
