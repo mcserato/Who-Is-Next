@@ -134,7 +134,8 @@ var view_class_stud = {
                 },
                 error: function(err){
                     return Materialize.toast(err.responseText,800,"",function(){
-                        if(confirm("Would you like you like to import data of student "+ 
+                        if(!view_class_stud.getStudentInfo(student_number) && 
+                            confirm("Would you like you like to import data of student "+ 
                             student_number +" to this class ?")){
 
                             $.ajax({
