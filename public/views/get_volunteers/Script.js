@@ -95,8 +95,23 @@ $(document).ready( function () {
             Materialize.toast("You must choose the number of volunteers", 2000);
         }
 
+        var called = parseInt($('#number-filter').val());
+        if(called < 1){
+            Materialize.toast("You must search for at least one volunteer!", 2000);
+        }
+
         else {
             var class_id = $('#class-filter').val();
+            var gender;
+            if($('#male-filter').is(":checked") && !$('#female-filter').is(":checked")){
+                gender = "M";
+            }
+            if($('#female-filter').is(":checked") && !$('#male-filter').is(":checked")){
+                gender = "F";
+            }
+            if($('#male-filter').is(":checked") && $('#female-filter').is(":checked")){
+                gender = "A";
+            }
 
             $.ajax({
                 url: '/api/randomizer/' + class_id,
@@ -104,6 +119,7 @@ $(document).ready( function () {
                 headers: util.headers,
                 data: {
                     class_id    : class_id,
+                    gender      : gender,
                     last_name   :$('#last-name-filter').val(),
                     first_name  :$('#first-name-filter').val(),
                     birthday    :$('#birthday-filter').val(),
