@@ -98,16 +98,20 @@ $(document).ready( function () {
  $('#randomize').click(function(){
         var checked = $('input[type=checkbox]:checked').length;
 
-        if($('#class-filter').val() == ""){
+        if($('#class-filter').val() == "") {
             Materialize.toast("You must choose a class", 2000);
         }
 
-        if(checked == 0) {
+        else if(checked == 0) {
             Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
         }
 
-        if($('#number-filter').val() == ""){
-            Materialize.toast("You must choose the number of volunteers", 2000);
+        else if($('#number-filter').val() < 1) {
+            Materialize.toast("There must be a positive number of volunteers", 2000);
+        }
+        
+        else if($('#number-filter').val().match(/\./)) {
+            Materialize.toast("The number of volunteers must be a whole number", 2000);
         }
 
         else {
