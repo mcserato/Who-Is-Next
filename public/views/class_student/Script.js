@@ -2,10 +2,8 @@
 
 $(document).ready( function () {
     config.checkAuth("FACULTY"); 
-    
 
     view_class_stud.init('#main-content');
-    
 
 });
     
