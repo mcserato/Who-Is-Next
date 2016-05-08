@@ -8,6 +8,7 @@ $(document).ready( function () {
             $.ajax({
                 url: '/api/validate',
                 method: 'POST',
+                headers: util.headers,
                 success: function(data){
                     if(!data){
                         return Materialize.toast("Error in Validation. Please try again !",2500);
@@ -31,6 +32,7 @@ $(document).ready( function () {
             $.ajax({
                 url: '/api/logout',
                 method: 'POST',
+                headers: util.headers,
                 success: function(data){
                     if(!data){
                         return Materialize.toast("Error in Logout. Please try again !",2500);
