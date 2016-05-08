@@ -131,4 +131,5 @@ $(document).ready( function () {
         }
     }
 
+    footer.init('#footer', 'landing');
 });

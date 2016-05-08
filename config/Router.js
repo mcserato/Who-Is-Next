@@ -67,13 +67,12 @@ module.exports = function (router) {
     router.put('/api/save_point',                                              __.SaveDB.rename);
     router.del('/api/save_point',                                              __.SaveDB.remove);
     router.get('/api/save_point/:save_id',                                     __.SaveDB.viewOne);
-    router.post('/api/save_point',                                             __.SaveDB.save);
-    router.post('/api/save_student',                                           __.SaveDB.savestudent);
 
     router.get('/api/student',                                                 __.Student.viewAll);
     router.post('/api/student',                                                __.Student.add);
     router.put('/api/student',                                                 __.Student.edit);
     router.del('/api/student',                                                 __.Student.remove);
+
     router.get('/api/student/:student_number',                                 __.Student.viewOne);
 
     router.get('/api/logs',                                                    __.Log.read);

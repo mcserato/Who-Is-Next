@@ -1,7 +1,5 @@
 var footer = {
     init: function (footer, page) {
-        return console.warn('Footer is not loaded.');
-
         page = page || 'user';
 
         $(footer).append([
@@ -38,7 +36,7 @@ var footer = {
     },
 }
 
-/*
+
 
 $('#footer').append([
         "<div class='row'>",
@@ -89,5 +87,3 @@ $('#intro').css({
  $('#copyright-year').css({
     'text-align':'center'
  });
- 
- */

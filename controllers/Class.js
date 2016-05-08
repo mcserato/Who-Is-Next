@@ -92,7 +92,7 @@ exports.editClass = function (req, res, next) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            if(rows.length && req.body.course_code_o != req.body.course_code){
+            if(rows.length){
                 return res.status(400).send("Class already exist.");
             }else{
                 db.query("UPDATE CLASS SET " +
