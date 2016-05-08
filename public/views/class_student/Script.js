@@ -134,7 +134,7 @@ var view_class_stud = {
             });
         });
 
-        $('#edit-student-form').submit(function (event) {
+        $('#edit-button').click(function () {
             // Get data from input fields of edit student form
             var student_number = $("#student_number_edit").val(),
                 first_name = $("#first_name_edit").val(),
