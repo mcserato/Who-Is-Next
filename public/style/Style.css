@@ -256,6 +256,10 @@ input[type=password]:focus:not([readonly])+label {
     font-weight:900;
     margin: 0.1vw 0 0 4.5vw;
     animation: slide 2s;
+    -webkit-animation:slide 2s;
+    -ms-animation:slide 2s;
+    -o-animation:slide 2s;
+    -moz-animation:slide 2s;
  }
 #landing{
 	margin:0;
@@ -266,7 +270,7 @@ input[type=password]:focus:not([readonly])+label {
   display:inline-block;
   margin-left:-2.4vw;
   transform-origin: 50% 70%;
-   color:black;
+  color:black;
 
 }
 
@@ -277,21 +281,40 @@ input[type=password]:focus:not([readonly])+label {
 }
 .span-title:nth-child(2){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
 }
 
 .span-title:nth-child(3){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
 }
 
 .span-title:nth-child(4){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
 }
 
 .span-title:nth-child(5){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
 }
 
 .span-title:nth-child(6){
+  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
 }
 .span-title:nth-child(7){
