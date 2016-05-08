@@ -95,8 +95,6 @@ var view_class_stud = {
 
             gender = (!$("#male").is(':checked') ? "F" : "M");
 
-            $('#add_modal').closeModal();
-
             $.ajax({
                 type: "POST",
                 url: "/api/student",
@@ -113,6 +111,8 @@ var view_class_stud = {
                 },
                 dataType: "JSON",
                 success: function() {
+                    $('#add_modal').closeModal();
+
                     $.ajax({
                         type: "POST",
                         url: "/api/class_student",
@@ -133,7 +133,33 @@ var view_class_stud = {
                         error: util.errorHandler
                     });
                 },
-                error: util.errorHandler
+                error: function(err){
+                    return Materialize.toast(err.responseText,800,"",function(){
+                        if(confirm("Would you like you like to import data of student "+ 
+                            student_number +" to this class ?")){
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/api/class_student",
+                                headers: util.headers,
+                                data: {
+                                    class_id: localStorage.class_id,
+                                    student_number: student_number,
+                                    no_of_times_called: 0
+                                },
+                                dataType: "JSON",
+                                success: function (result) {
+                                     setTimeout(function(){
+                                        return Materialize.toast(student_number + " is added!", 1000,"",function(){
+                                            window.location.href = "/views/class_student";
+                                        });
+                                    },500);
+                                },
+                                error: util.errorHandler
+                            });
+                        };
+                    });
+                }
             });
         });
 
@@ -235,7 +261,8 @@ var view_class_stud = {
             image.attr("src", data[student].picture);
             image.css("width","100px");
             image.css("height","100px");
-            image.addClass("red circle center col s2 push-s1 responsive-img");
+            image.css("background-color","#b42529");
+            image.addClass("circle center col s2 push-s1 responsive-img");
 
             text.append("<h4>"+
                 data[student].last_name + ", " +

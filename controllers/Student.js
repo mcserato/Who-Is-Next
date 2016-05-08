@@ -17,12 +17,12 @@ exports.add = function (req, res, next) {
         function(err, rows) {
             // Checks if the student already exists
             if (rows.length === 0) {
-                db.query("INSERT INTO STUDENT VALUES " +
-                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, STR_TO_DATE(?, '%Y-%m-%d'))",
+                db.query("INSERT INTO STUDENT ( student_number, emp_num, first_name, " +
+                    "middle_name, last_name, college, course, gender, birthday ) VALUES " +
+                    "(?, ?, ?, ?, ?, ?, ?, ?, STR_TO_DATE(?, '%Y-%m-%d'))",
                     [req.body.student_number, req.session.emp_num,
                     req.body.first_name, req.body.middle_name, req.body.last_name,
-                    req.body.college, req.body.course, req.body.gender,
-                    req.body.picture, req.body.birthday],
+                    req.body.college, req.body.course, req.body.gender, req.body.birthday],
                     function (err, rows) {
                         if (err) {
                             logs(req, "ERROR", "Error: MySQL Query FAILED");
