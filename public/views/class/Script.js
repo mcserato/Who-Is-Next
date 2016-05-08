@@ -32,11 +32,10 @@ var view_class = {
         ].join(''));
 
 
-        $('#search-class').keypress(function () { //need better implementation key press
-
+        $('#search-class').keyup(function () {
             if(!view_class.class_data){
                 document.location.reload();
-            }else  if($(this).val()=='' || $(this).val().trim()==''){
+            }else  if($(this).val().trim()==''){
                 view_class.manipulateDom(view_class.class_data,"");
             }else{
                 view_class.manipulateDom(view_class.class_data, $(this).val());
@@ -87,7 +86,7 @@ var view_class = {
                 },
                 dataType: "JSON",
                 success: function(){
-                     return Materialize.toast(old_course_code + " edited to " + course_code + " !"
+                     return Materialize.toast(old_course_code + "successfully edited!"
                         ,1000,"",function(){
                         window.location.href = "/views/class"
                     });
@@ -124,14 +123,22 @@ var view_class = {
             content = $('#class-list'),
             search_string = 
                 (search=="success" || search=="fail" || !search) ?
-                    "" : search.toLowerCase();
+                    "" : search.toLowerCase(),
+            search_count = data.length;
 
         content.empty();
+
+        if(!data || !data.length){
+            content.append('<br/><br/><h2 class="center">No Class Found</h2>');
+        }
 
         for (var class_ in data){
 
             if(search_string &&
-                  !new RegExp(search_string).test(data[class_].course_code.toLowerCase()) ) continue;
+                  !new RegExp(search_string).test(data[class_].course_code.toLowerCase()) ){
+                search_count--;
+                continue;
+            }
 
             var course_code = data[class_].course_code,
                 course_title = data[class_].course_title,
@@ -142,8 +149,8 @@ var view_class = {
                 options_div = $("<div class='options'></div>"),
                 subject_div =
                     ( color_flag == 0 ) ? 
-                        $("<div class='hex z-depth-2 hexagon-red'></div>") : 
-                        $("<div class='hex z-depth-2 hexagon-grey'></div>"),
+                        $("<div class='courses_hex hex z-depth-2 hexagon-red'></div>") : 
+                        $("<div class='courses_hex hex z-depth-2 hexagon-grey'></div>"),
                 row_div =
                     (num_flag < 3) ? 
                         $("<div class='three con'></div>") :
@@ -165,6 +172,8 @@ var view_class = {
             options_div.append(delete_class);
 
             subject_div.attr("id", id);
+            subject_div.attr("course_code", course_code);
+            subject_div.attr("course_title", course_title);
             subject_div.append(subject);
                 
             row_div.append(subject_div);
@@ -175,6 +184,11 @@ var view_class = {
             color_flag = ( color_flag == 0 ) ? 1 : 0;
             num_flag = (num_flag == 7) ? 0 : num_flag + 1;
         
+        }
+
+        if(search_count==0){
+            content.append('<br/><br/><br/><h2 class="center">No Class Found</h2>');
+            return;
         }
 
         $('.options').hide();
@@ -250,7 +264,7 @@ var view_class = {
             });
 
         /* Link to View Sections of the class clicked */
-        $('.courses')
+        $('.courses_hex')
             .click(function(){
                 localStorage.course_code = $(this).attr("course_code");
                 localStorage.course_title = $(this).attr("course_title");

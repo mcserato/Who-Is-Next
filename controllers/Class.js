@@ -38,35 +38,22 @@ exports.addSection = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-    db.query("SELECT * FROM CLASS WHERE course_code = ? AND class_section = ? "
-        + " AND (section_number = ? or section_number is NULL) AND emp_num = ?",
-        [req.body.course_code, req.body.class_section,
+    db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
+        + "section_number, emp_num) VALUES(?,?,?,?,?)",
+        [req.body.course_code, req.body.course_title, req.body.class_section,
             (req.body.section_number || null), req.session.emp_num],
+
         function (err, rows) {
             if (err) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
                 return next(err);
             }
-            if(rows.length){
-                return res.status(400).send("Section already exist.");
-            }else{
-                db.query("INSERT INTO CLASS(course_code, course_title, class_section,"
-                    + "section_number, emp_num) VALUES(?,?,?,?,?)",
-                    [req.body.course_code, req.body.course_title, req.body.class_section,
-                        (req.body.section_number || null), req.session.emp_num],
-
-                    function (err, rows) {
-                        if (err) {
-                            logs(req, "ERROR", "Error: MySQL Query FAILED.");
-                            return next(err);
-                        }
-                        logs(req, "SUCCESS", "Added" + 
-                            [req.body.course_code, req.body.class_section, req.body.section_number]
-                            .join(' '));
-                        res.send(rows);
-                });
-            }
+            logs(req, "SUCCESS", "Added" + 
+                [req.body.course_code, req.body.class_section, req.body.section_number]
+                .join(' '));
+            res.send(rows);
     });
+
 }
 
 
@@ -77,10 +64,10 @@ exports.editSection = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-    db.query("UPDATE CLASS SET " +
-        "class_section = ?, section_number = ? WHERE class_id = ?",
-        [req.body.class_section,
-        req.body.section_number, req.body.class_id],
+    db.query("UPDATE CLASS SET class_section = ?, section_number = ? " + 
+        "WHERE class_id = ? and emp_num = ?",
+        [req.body.class_section,req.body.section_number,
+            req.body.class_id, req.session.emp_num],
         function (err, rows) {
             if (err) {
                 logs(req, "ERROR", "Error: MySQL Query FAILED.");
