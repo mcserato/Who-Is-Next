@@ -27,5 +27,9 @@ var util = {
 			}
 			
 		});   
+    },
+
+    dateParser : function ( input_date ){
+        return input_date.substring(0,10);
     }
 }

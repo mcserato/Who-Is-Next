@@ -7,7 +7,7 @@ exports.viewAll = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-	db.query("SELECT * FROM SAVEPOINT s WHERE s.emp_num like ?",
+	db.query("SELECT * FROM SAVEPOINT s WHERE s.emp_num like ? ORDER BY save_date DESC;",
 		[req.session.emp_num],
 		function (err, rows) {
 			if(err) {
@@ -42,7 +42,7 @@ exports.rename = function (req, res, next) {
         return res.status(401).send("No one is logged in");
     }
 
-	db.query("UPDATE SAVEPOINT SET save_name = ? WHERE save_id like ?",
+	db.query("UPDATE SAVEPOINT SET save_name = ?, save_date = NOW() WHERE save_id like ?",
 		[req.body.save_name, req.body.save_id],
 
 		function (err, rows) {
@@ -73,19 +73,9 @@ exports.remove = function (req, res, next) {
 	);
 }
 
-/*
-	FOR GAUVEN: Yung view, sure nakong gumagana dahil natest ko na sa mysql console.
-	Di ko lang alam kung pano ayusin yung routes.
-
-	Eto yung add function na tinry kong gawin based sa mga pinagusapan kanina
-	pakicorrect nalang kung may mga mali
-
-*/
-
 /* This function adds an empty save point with no volunteers selected yet*/
 exports.save = function (req, res, next) {
-	//etong query na to is gumagawa ng save point, pero wala pang lamang students
-	db.query("INSERT INTO SAVEPOINT VALUES(DEFAULT, ?, ?, ?)",
+	db.query("INSERT INTO SAVEPOINT VALUES(DEFAULT, ?, DEFAULT, ?, ?)",
 		[req.body.save_name, req.session.emp_num, req.body.class_id],
 
 		function (err, rows) {
@@ -96,9 +86,20 @@ exports.save = function (req, res, next) {
             res.send(rows);
         }
 	);
+}
 
-	//so pano gagawin para malaman kung which students ang dapat iadd sa save point na yan? 
-	//INSERT INTO SAVE_STUDENT VALUES (1, '2013-00014'); ang example ng add sa SAVE_STUDENT
+/* This function adds a student to a save point */
+exports.savestudent = function (req, res, next) {
+	db.query("INSERT INTO SAVE_STUDENT VALUES(LAST_INSERT_ID(), ?)",
+		[req.body.student_number],
+
+		function (err, rows) {
+            if (err) {
+                return next(err);
+            }
+            res.send(rows);
+        }
+    );
 }
 
 /*------------------*/

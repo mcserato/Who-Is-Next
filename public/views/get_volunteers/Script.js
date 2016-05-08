@@ -38,6 +38,11 @@ $(document).ready( function () {
         error: function(err){
             util.errorHandler(err);
         }
+    }).done(function() {
+        if(typeof localStorage.class_id_randomize !== 'undefined'){
+            $("#class-filter").val(localStorage.class_id_randomize);
+            localStorage.removeItem('class_id_randomize');
+        }
     });
 
     $('#logo-holder').hide();
@@ -80,19 +85,33 @@ $(document).ready( function () {
 
     });
 
+    if(typeof localStorage.class_id_randomize !== 'undefined'){
+        console.log("hello");
+        $("#class-filter").val(localStorage.class_id_randomize);
+        $('#randomizer-holder').hide();
+        $('#logo-holder').fadeIn();
+        $("#randomize-form").slideDown(1000);
+        $('#header').slideDown(1000);
+        //localStorage.removeItem('class_id_randomize');
+    }
+
  $('#randomize').click(function(){
         var checked = $('input[type=checkbox]:checked').length;
 
-        if($('#class-filter').val() == ""){
+        if($('#class-filter').val() == "") {
             Materialize.toast("You must choose a class", 2000);
         }
 
-        if(checked == 0) {
+        else if(checked == 0) {
             Materialize.toast("You must check at least one checkbox at the Gender section", 2000);
         }
 
-        if($('#number-filter').val() == ""){
-            Materialize.toast("You must choose the number of volunteers", 2000);
+        else if($('#number-filter').val() < 1) {
+            Materialize.toast("There must be a positive number of volunteers", 2000);
+        }
+        
+        else if($('#number-filter').val().match(/\./)) {
+            Materialize.toast("The number of volunteers must be a whole number", 2000);
         }
 
         else {
@@ -113,20 +132,6 @@ $(document).ready( function () {
                     number      :$('#number-filter').val()
                 },
                 success: function(data) {
-                    for(var i in data) {
-                        $.ajax({
-                            url: '/api/randomizer',
-                            method: 'PUT',
-                            data: {
-                                class_id        : class_id,
-                                student_number  : data[i].student_number
-                            },
-                            success: function(data2){
-                            },
-                            dataType: "JSON"
-                        });
-                    }
-
                     $('#logo-holder').slideUp();
                     $('#randomize-form').slideUp();
                     $('#header').slideUp();
@@ -140,13 +145,21 @@ $(document).ready( function () {
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
 
-                            if (data.length == 1) {
+                            if (data.length == 0){
+                                $('#randomizer-holder').hide();
+                                $('#logo-holder').hide();
+                                $("#container-list").show();
+                                zoomInImage(data);
+                                console.log("NO STUDENTS FOUND");
+                            }
+                            else if (data.length == 1) {
                                 $('#randomizer-holder').hide();
                                 $('#logo-holder').hide();
                                 $("#container-list").show();
                                 zoomInImage(data);
                             } else {    // Randomize selection of effects
                                 var rand = Math.round(Math.random() * 5);
+                                rand = 2;
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -176,6 +189,8 @@ $(document).ready( function () {
                                         $("#container-list").show();
                                         jumbleWords(data);
                                 }
+                                
+                                $('#save-point-form').show();
                             }
                         }, 3100);
                     });
@@ -183,6 +198,58 @@ $(document).ready( function () {
                     $('randomize-btn').click(function(){
                         document.getElementById('animation-css').remove();
                     });
+
+                    /*Start of save students in a savepoint*/
+                    $('#save-student').click(function(){
+                        var save_name = $('#save-point').val();
+                        var save_id;
+                        //This function creates the save point
+                        $.ajax({
+                            url: '/api/save_point',
+                            method: 'POST',
+                            data: {
+                                save_name       : save_name,
+                                class_id        : class_id
+                            },
+                            success: function(data){
+                                Materialize.toast("Successfully saved!", 1500);
+                                //$('#save-point-form').hide();
+                                window.location.href = '/views/get_volunteers';
+                            },
+                            dataType: "JSON"
+                        });
+
+                        //This function adds the students to the save point
+                        
+                        for(var i in data) {
+                            $.ajax({
+                                url: '/api/save_student',
+                                method: 'POST',
+                                data: {
+                                    student_number  : data[i].student_number
+                                },
+                                success: function(data){
+                                },
+                                dataType: "JSON"
+                            });
+                        }
+                        
+                        for(var i in data) {
+                            $.ajax({
+                                url: '/api/randomizer',
+                                method: 'PUT',
+                                data: {
+                                    class_id        : class_id,
+                                    student_number  : data[i].student_number
+                                },
+                                success: function(data2){
+                                },
+                                dataType: "JSON"
+                            });
+                    }
+                        
+                    });
+                    
                 },
                 dataType: "JSON"
             });
@@ -190,6 +257,7 @@ $(document).ready( function () {
     });
 
 });
+
 
 
 /* RANDOMIZER EFFECTS */
@@ -222,7 +290,7 @@ function insertHexagon(data) {
 
             "</div></div>"
         );
-        $("#volunteer"+i).css("background-image", "url(images/09.png)");
+        $("#volunteer"+i).css("background-image", "url(" + data[i].picture + ")");
 
         if(i == limit){
             if(newline) newline = false;
@@ -271,6 +339,10 @@ function showVolunteers(data){
 
 }
 
+/*
+    -Randomizer effect that displays floating hexagons with picture
+    -Followed by effects that display the names of the shown pictures
+*/
 function flyingHexagon(data) {
     $('#list').empty();
     $('#start-again-div').hide();
@@ -278,8 +350,7 @@ function flyingHexagon(data) {
     var balloonDiv = $('<div id="balloonDiv"></div>')
 
     var container = $("#list");
-    //var pics = ['pau.jpg', 'perico.jpg', 'dana.jpg', 'aleli.jpg', 'aron.jpg', 'gio.jpg', 'miles.jpg', 'maru.jpg', 'mike.jpg', 'chris.jpg']
-    
+
     container.append(balloonDiv);
 
     var done = [];
@@ -290,7 +361,7 @@ function flyingHexagon(data) {
 
         while(1) {
             flag = 0;
-            randomBalloonNum = parseInt(Math.floor(Math.random() * 28 + 1));
+            randomBalloonNum = parseInt(Math.floor(Math.random() * 20 + 1));
 
             for(x = 0; x < done.length; x++) {
                 if(done[x] == randomBalloonNum) {
@@ -307,7 +378,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("../../icon/dp.png")');
+        outerDiv.attr('style', 'background-image: url("' + data[i].picture + '")');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
@@ -321,23 +392,29 @@ function flyingHexagon(data) {
     }
 
     setTimeout(function() {
+        
         balloonDiv.fadeOut(13000, function() {
             balloonDiv.remove();
 
         });
-    
+
     }, 10000);
 
     setTimeout(function() {
 
         flyingHexagon_after(data);
 
-        $('#start-again-div').fadeIn();
-        $("#start-again-div").css("position", "absolute");
-        $("#start-again-div").css("bottom", "10%");
-        $("#start-again-div").css("left", "40%");
-        $("#list").css("left", "80%");
     }, 10000);
+
+    setTimeout(function() {
+
+        $('#start-again-div').fadeIn();
+        $("#start-again-div").css("position", "relative");
+        //$("#start-again-div").css("bottom", "10%");
+        //$("#start-again-div").css("left", "40%");
+        $("#list").css("left", "80%");
+
+    }, 20000);
 }
 
 function flyingHexagon_after(data){
@@ -345,7 +422,7 @@ function flyingHexagon_after(data){
     $("#list").append("<h3>Volunteers</h3>")
 
     var i = 0;
-    
+
     for(i = 0; i < data.length; i++){
         if(i%2 ==0){
             $("#list").append("<div><div class='listname_1' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
@@ -354,7 +431,7 @@ function flyingHexagon_after(data){
             $("#list").append("<div><div class='listname_2' id='name"+i+"''> <h4>" + data[i].first_name + " " + data[i].last_name + "</h4> </div></div>");
         }
     }
-    
+
     for(i=0; i<data.length; i++){
         if(i%2==0){
             $("#name"+i).delay(i*1000).animate({
@@ -374,21 +451,42 @@ function zoomInImage(data){
     $("#list").empty();
     /*insert image here*/
     //hypothetical image
-    $('#list').append("<img class='pic' src='sample.jpg' length=3px width=5px>");
-    $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
-    $(".pic").animate({
-        width: "70%",
-        heigth: "50%",
-        opacity: 1,
-        left: "15%",
-        top:"15%",
-        borderWidth: "10px"
-    }, 3000);
+    if(data.length == 0){
+        $('#list').append("<h3 class='name' style='display:none'>NO RESULTS FOUND</h3>");
+        $('.name').val("NO RESULTS FOUND");
+        $(".pic").animate({
+            width: "70%",
+            heigth: "50%",
+            opacity: 1,
+            left: "15%",
+            top:"15%",
+            borderWidth: "10px"
+        }, 3000);
 
-    $(".pic").promise().done(function(){
-        $('.name').show();
-    });
+        $(".pic").promise().done(function(){
+            $('.name').show();
+        });
 
+    }else{
+        var img = $("<img class='pic' length=3px width=5px>")
+        img.attr("src", data[0].picture);
+        $('#list').append(img);
+        $('#list').append("<h3 class='name' style='display:none'>" + data[0].last_name + '</h3>');
+        $(".pic").animate({
+            width: "70%",
+            heigth: "50%",
+            opacity: 1,
+            left: "15%",
+            top:"15%",
+            borderWidth: "10px"
+        }, 3000);
+
+        $(".pic").promise().done(function(){
+            $('.name').show();
+        });
+
+    }
+    
 }
 
 function jumbleWords(data){
@@ -477,29 +575,29 @@ function hatch(data,i) {
 	var limit = $('#number-filter').val();
 
 	container.className += " shake-slow shake-constant";
-	
+
 	setTimeout(function () {
 		$("#dice1").css({
-			"-webkit-transform":"translateX(-55px) rotate(-45deg)"			
+			"-webkit-transform":"translateX(-55px) rotate(-45deg)"
 		});
 		$("#dice2").css({
 			"-webkit-transform":"translateX(65px) rotate(45deg)"
 		})
 		$("#randomizer-holder").attr('class','');
 	},3100);
-	
+
 	$("#start-again").fadeOut();
-	
+
 	setTimeout(function() {
 		$(clist).attr('style','display:block');
 		var volunteer = document.createElement("div");
-		
+
 		if(i%2 == 0){
-			$(volunteer).attr('style','background:#333333;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');		
+			$(volunteer).attr('style','background:#333333;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');
 		}else{
 			$(volunteer).attr('style','background:#b42529;color:white;width:90%;height:55px;position:relative;z-index:-1;margin:auto;display:block;');
 		}
-		
+
 		volunteer.className += "bouncing";
 
 		var name_container = document.createElement("h4");
@@ -508,7 +606,7 @@ function hatch(data,i) {
 
 		var wspace = document.createElement("div");
 		$(wspace).attr('style','width:100%;height:2.5px;color:blue;background:#4c4949;');
-		
+
 		volunteer.appendChild(wspace);
 		volunteer.appendChild(name_container);
 		container.appendChild(volunteer);
@@ -517,7 +615,7 @@ function hatch(data,i) {
 			$(volunteer).attr('class','');
 			list.appendChild(volunteer);
 	   		$("#dice1").css({
-			"-webkit-transform":"translateX(0px) rotate(45deg)"			
+			"-webkit-transform":"translateX(0px) rotate(45deg)"
 			});
 			$("#dice2").css({
 				"-webkit-transform":"translateX(0px) rotate(360deg)"
@@ -527,7 +625,7 @@ function hatch(data,i) {
 		});
 
 	},3100);
-	
+
 }
 
 function hatchEnd(data,len,limit,i){
@@ -548,6 +646,6 @@ function hatchEnd(data,len,limit,i){
         	$('br').remove();
         	$('h2').remove();
         	$('hr').remove();
-		});	
+		});
 	}
 }

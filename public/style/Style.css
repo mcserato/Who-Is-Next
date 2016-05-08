@@ -1,20 +1,23 @@
 @font-face{
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 @font-face{
-    font-family: roboto;   
-    src:url(/font/roboto/Roboto-Bold.wof);
+    font-family: roboto;
+    src:url(/font/roboto/Roboto-Bold.woff);
 }
 @font-face{
-    font-family: fredoka;   
+    font-family: fredoka;
     src:url(/font/roboto/FredokaOne-Regular.ttf);
 }
 body {
 	background-color: #f5f6f6;
     padding:auto;
+    overflow-x: scroll;
+    min-width: 700px;
+    display: block;
+  font-family: fredoka
 
-  font-family: fredoka;
 }
 
 
@@ -69,7 +72,8 @@ body {
 	margin-top: 15%;
 }
 
-#login-btn, #sign-up-btn , #edit-user-button{
+#login-btn, #sign-up-btn , #edit-user-button, 
+#edit-button, #edit-section-button{
 	background-color: #CB494E;
 }
 input[type=text]:focus:not([readonly]),
@@ -252,6 +256,10 @@ input[type=password]:focus:not([readonly])+label {
     font-weight:900;
     margin: 0.1vw 0 0 4.5vw;
     animation: slide 2s;
+    -webkit-animation:slide 2s;
+    -ms-animation:slide 2s;
+    -o-animation:slide 2s;
+    -moz-animation:slide 2s;
  }
 #landing{
 	margin:0;
@@ -262,44 +270,79 @@ input[type=password]:focus:not([readonly])+label {
   display:inline-block;
   margin-left:-2.4vw;
   transform-origin: 50% 70%;
-   color:black;
-  
+  color:black;
+
 }
 
 
 .span-title:nth-child(1){
-	font-size:6.5vw;
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  font-size:6.5vw;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
 }
 .span-title:nth-child(2){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
 }
 
 .span-title:nth-child(3){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
 }
 
 .span-title:nth-child(4){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
 }
 
 .span-title:nth-child(5){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
 }
 
 .span-title:nth-child(6){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
 }
 .span-title:nth-child(7){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
 }
 
 .span-title:nth-child(8){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
 }
 
 .span-title:nth-child(9){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
 }
 
 @keyframes animate{
@@ -364,7 +407,7 @@ h3.center{
 	height:6vw;
 	background-color: white;
 	box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, 0.2), 0 0.5vw 1vw 0 rgba(0, 0, 0, 0.19);
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 .modal-content{
@@ -372,7 +415,7 @@ h3.center{
 }
 h4.center{
 	font-size:5.5vw;
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 a.modal-action{
@@ -393,11 +436,11 @@ div.modal-footer{
 /* START HERE */
 h1.center{
 	font-size:5.5vw;
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 h5.center{
-    font-family: Markus;   
+    font-family: Markus;
     src:url(/font/roboto/Markus.ttf);
 }
 
@@ -412,23 +455,23 @@ h5.center{
 }
 
 #class-filter{
-     font-family: Walkway;   
+     font-family: Walkway;
     src:url(/font/roboto/Walkway.ttf);
 }
 #birthday-filter{
-     font-family: fredoka;   
+     font-family: fredoka;
 
 }
 #course-filter{
-     font-family: fredoka;   
+     font-family: fredoka;
 
 }
 #college-filter{
-     font-family: fredoka;   
+     font-family: fredoka;
 }
 
 label{
-    font-family: fredoka;     
+    font-family: fredoka;
 
 }
 
@@ -451,14 +494,37 @@ nav.z-depth-0{
 	background: rgb(192,192,192);
 }
 
-.logo:hover { 
+.logo:hover {
+  animation: 1s rotate infinite linear  ;
   -webkit-animation: 1s rotate infinite linear  ;
-  -webkit-transform-origin: 50% 50%;  
+  -moz-animation: 1s rotate infinite linear  ;
+  -ms-animation: 1s rotate infinite linear  ;
+  -o-animation: 1s rotate infinite linear  ;
+  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
 }
-
+@keyframes rotate {
+    0%    { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
 @-webkit-keyframes rotate {
     0%    { -webkit-transform: rotate(0); }
-    100% { -webkit-transform: rotate(360deg); } 
+    100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes rotate {
+    0%    { -moz-transform: rotate(0); }
+    100% { -moz-transform: rotate(360deg); }
+}
+@-ms-keyframes rotate {
+    0%    { -ms-transform: rotate(0); }
+    100% { -ms-transform: rotate(360deg); }
+}
+@-o-keyframes rotate {
+    0%    { -o-transform: rotate(0); }
+    100% { -o-transform: rotate(360deg); }
 }
 a.brand-logo{
 	padding:0;
@@ -471,12 +537,14 @@ a.brand-logo{
 }
 
 .logo {
-	height:9.1vw;
-	width:9.1vw;
-	margin:1vw;
-   -webkit-animation: flip 2s;
-  animation: flip 2s;
-  text-align:center;
+    height:9.1vw;
+    width:9.1vw;
+    margin:1vw;
+    text-align:center;
+    -webkit-animation: flip 2s;
+    -ms-animation: flip 2s;
+    -moz-animation: flip 2s;
+    -o-animation: flip 2s;
 }
 @keyframes flip {
   0% { transform: rotateY(0deg);}
@@ -486,8 +554,40 @@ a.brand-logo{
   80% {transform: rotateY(0deg);}
   100% {transform:rotateY(360deg);}
 }
+@-webkit-keyframes flip {
+  0% { -webkit-transform: rotateY(0deg);}
+  20% { -webkit-transform: rotateY(360deg);}
+  40% { -webkit-transform: rotateX(0deg);}
+  60% { -webkit-transform: rotateX(360deg);}
+  80% { -webkit-transform: rotateY(0deg);}
+  100% { -webkit-transform:rotateY(360deg);}
+}
+@-moz-keyframes flip {
+  0% { -moz-transform: rotateY(0deg);}
+  20% { -moz-transform: rotateY(360deg);}
+  40% { -moz-transform: rotateX(0deg);}
+  60% { -moz-transform: rotateX(360deg);}
+  80% { -moz-transform: rotateY(0deg);}
+  100% { -moz-transform:rotateY(360deg);}
+}
+@-ms-keyframes flip {
+  0% { -ms-transform: rotateY(0deg);}
+  20% { -ms-transform: rotateY(360deg);}
+  40% { -ms-transform: rotateX(0deg);}
+  60% { -ms-transform: rotateX(360deg);}
+  80% { -ms-transform: rotateY(0deg);}
+  100% { -ms-transform:rotateY(360deg);}
+}
+@-o-keyframes flip {
+  0% { -o-transform: rotateY(0deg);}
+  20% { -o-transform: rotateY(360deg);}
+  40% { -o-transform: rotateX(0deg);}
+  60% { -o-transform: rotateX(360deg);}
+  80% { -o-transform: rotateY(0deg);}
+  100% { -o-transform:rotateY(360deg);}
+}
 
-.card:hover{
+.theme-card:hover{
 	cursor: pointer;
 }
 
@@ -505,6 +605,7 @@ a.brand-logo{
 h1#student_header{
   font-family: Scream;
   font-size:5vw;
+  margin-top:1vw;
 }
 #student-list{
   font-size:1.5vw;
