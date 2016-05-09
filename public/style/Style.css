@@ -70,7 +70,7 @@ body {
 	margin-top: 15%;
 }
 
-#login-btn, #sign-up-btn , #edit-user-button, 
+#login-btn, #sign-up-btn , #edit-user-button,
 #edit-button, #edit-section-button{
 	background-color: #CB494E;
 }
@@ -405,16 +405,29 @@ input[type=password]:focus:not([readonly])+label {
 	border: 0;
 	background-color: #CB494E;
  	border-radius: 0.3vw;
-  	box-shadow: 0 0.5vw 0 #B42529;
-  	color: white;
-  	cursor: pointer;
-  	font: inherit;
-  	outline: 0;
-  	transition: all .1s linear;
-  	text-align: center;
-  	padding:0.5vw 0 0 0;
-  	font-weight: bold;
-  	font-size:1.4vw;
+	box-shadow: 0 0.5vw 0 #B42529;
+	color: white;
+	cursor: pointer;
+	font: inherit;
+	outline: 0;
+	transition: all .1s linear;
+	text-align: center;
+	padding:0.5vw 0 0 0;
+	font-weight: bold;
+	font-size:1.4vw;
+}
+#randomize, #randomize-btn{
+  background-color: #CB494E;
+  box-shadow: 0 0.5vw 0 rgb(203, 73, 78);
+  transition: all .1s linear;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding:0.7vw 2.6vw;
+  border-radius: 0.3vw;
+  width:auto;
+  height:auto;
+  font-size:1.5vw;
 }
 #about{
  	margin:2.3vw 0 0 0;
@@ -431,7 +444,7 @@ input[type=password]:focus:not([readonly])+label {
 	width: 12vw;
   	height:3.2vw;
 }
-#about:active, #sign-up-btn:active, #about:active, #login-btn:active {
+#about:active, #sign-up-btn:active, #about:active, #login-btn:active,#randomize:active, #randomize-btn:active {
 	box-shadow: 0 0.1vw 0 black;
 	transform: translateY(0.5vw);
 	-webkit-transform: translateY(0.5vw);
@@ -466,9 +479,13 @@ a.modal-action{
 }
 .modal{
 	background-color: #CB494E;
+  border-radius: 1vw;
 }
-div.modal-footer{
-	background-color: blue;
+div .modal-footer{
+	background-color:  #CB494E;
+}
+.modal-content{
+	padding:0 2vw;
 }
 
 #show_password{
@@ -494,10 +511,8 @@ h5.center{
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
-
-#class-filter{
-	font-family: Walkway;
-	src:url(/font/roboto/Walkway.ttf);
+div.row.center h5.center,#class-filter{
+  font-family: fredoka;
 }
 #college-filter, label, #course-filter,#birthday-filter, .modal-content{
 	font-family: fredoka;
@@ -636,4 +651,13 @@ h1#student_header{
 }
 #student-list{
   font-size:1.5vw;
+}
+#course_title, #course_code{
+  padding-left: 2vw;
+  margin-right: 2vw;
+  width:100%;
+  }
+.modal-content{
+  margin:0;
+  padding-right: 5vw;
 }
