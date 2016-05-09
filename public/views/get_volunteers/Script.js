@@ -169,7 +169,7 @@ $(document).ready( function () {
                                 zoomInImage(data);
                             } else {    // Randomize selection of effects
                                 var rand = Math.round(Math.random() * 5);
-                                rand = 2;
+                                console.log(rand);
                                 switch(rand) {
                                     case 1:
                                         $('#randomizer-holder').hide();
@@ -388,7 +388,7 @@ function flyingHexagon(data) {
         var outerDiv = $("<div></div>");
         outerDiv.addClass("balloon");
         outerDiv.addClass("balloon" + randomBalloonNum);
-        outerDiv.attr('style', 'background-image: url("' + data[i].picture + '")');
+        outerDiv.attr('style', 'background-image: url("' + data[index].picture + '")');
         var hexTop = $("<div></div>");
         hexTop.addClass("hex2Top");
 
