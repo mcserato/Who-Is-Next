@@ -87,7 +87,17 @@
                     <span style="color:#999999;">Birthday</span> 
                    <input id="birthday" type="date" class ="datepicker" />
                   
-                   </div>
+               </div>
+               
+               <!--<form id="uploadForm" enctype="multipart/form-data" action="/api/upload" onsubmit="return false;">
+                    <input type="file" name="userPhoto" />
+                    <input type="submit" value="Upload Image" name="submit" id="upload">
+               </form>-->
+               
+               <form id="form1" runat="server">
+                    <input type='file' id="imgInp" />
+                    <img id="blah" src="#" alt="your image" />
+                </form>
            </div>
            <div class="modal-footer">
                <button id="add-button" type="submit" class="modal-action btn waves-light waves-effect">

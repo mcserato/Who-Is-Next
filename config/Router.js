@@ -60,6 +60,8 @@ module.exports = function (router) {
     router.get('/api/switch_theme',                                            __.Faculty.getTheme)
     router.put('/api/switch_theme',                                            __.Faculty.switchTheme);
 
+    router.post('/api/upload',                                                 __.Pictures.upload);
+       
     router.post('/api/randomizer/:class_id',                                   __.Randomizer.getVolunteers);
     router.put('/api/randomizer',                                              __.Randomizer.update);
 

@@ -16,11 +16,10 @@ exports.getVolunteers = function (req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
+    
     var i = 0;
     var query = "";
-    /*if(req.body.gender!=NULL){
-        query += "AND genderlike " + req.body.gender + " ";
-    }*/
+    
     if(req.body.gender == "M"){
         query += " AND gender = 'M'";
     }

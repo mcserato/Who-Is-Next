@@ -163,6 +163,23 @@ var view_class_stud = {
             });
         });
 
+         $('#imgInp').click(function() {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    
+                    reader.onload = function (e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+                    
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+            $("#imgInp").change(function(){
+                readURL(this);
+            });              
+        });
         $('#edit-button').click(function () {
             // Get data from input fields of edit student form
             var student_number = $("#student_number_edit").val(),
@@ -392,5 +409,6 @@ var view_class_stud = {
         }
         return null;
     }
-
+        
+   
 };
