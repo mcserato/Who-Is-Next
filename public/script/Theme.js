@@ -26,7 +26,7 @@ $(document).ready( function () {
                             "background-size":"30%"
                     		});
                         $('.btn').css({
-                            "background-color":"#CFF09E"
+                            "background-color":"rgb(89, 168, 15)"
                             });
                         $('nav').css({
                             "background-color":"rgb(89,168,15)"
@@ -34,6 +34,28 @@ $(document).ready( function () {
                         $("a.brand-logo").css({
                             "background-color":"rgb(87,166,17)"
                             });
+                        $(".hexagon-red").css({
+                            "background": "rgb(240, 216, 0)"
+                        });
+                        $("#class-list.row div .three").css({
+                            "background-color": "rgb(240, 216, 0)"
+                        });
+                        $(".hexagon-red:after").css({
+                            "background-color": "rgb(240, 216, 0)"
+                        });
+                        $("i#add-icon").css({
+                            "background-color": "rgb(89, 168, 15)",
+                            "color": "rgb(72,48,0)"
+                        });
+                        $("#add_modal").css({
+                            "background":"rgb(89, 168, 15)"
+                        });
+                        $("a#randomize,#randomize-btn").css({
+                            "background-color": "rgb(89, 168, 15)",
+                            "color":"white",
+                            "border-radius":" 0.5vw",
+                            "box-shadow": "0 0.5vw 0 rgb(62, 117, 10)"
+                        });
 
                         string2 = "rgb(89,168,15)";
                         temp = 1;
@@ -45,27 +67,58 @@ $(document).ready( function () {
                             "background":"url(../../images/yellowL.png)",
                             "background-size":"30%"
                             });
-                        $('.btn').css({
-                            "background-color":"rgb(240,216,0)"
-                            });
-                        $('.btn.black.right').css({
-                            "background-color":"rgb(240,216,0)"
-                            });
-                         $('a.btn-floating.black').css({
-                            "background-color":"rgb(240,216,0)"
-                            });
-                        $('nav').css({
-                            "background-color":"rgb(72,48,0)"
-                            });
-                        $('.center').css({
-                        	"color":"rgb(96,72,24)"
-                        });
-                        $("a.brand-logo").css({
-                            "background-color":"rgb(70,46,2)"
-                            });
-                        $("#user-name").css({
-                            "color":"white"
-                        });
+                      $('.btn').css({
+                          "background-color":"rgb(240,216,0)"
+                          });
+                      $('.btn.black.right').css({
+                          "background-color":"rgb(240,216,0)"
+                          });
+                       $('a.btn-floating.black').css({
+                          "background-color":"rgb(240,216,0)"
+                          });
+                      $('nav').css({
+                          "background-color":"rgb(72,48,0)"
+                          });
+                      $('.center').css({
+                      	"color":"rgb(96,72,24)"
+                      });
+                      $("a.brand-logo").css({
+                          "background-color":"rgb(70,46,2)"
+                          });
+                      $("#user-name").css({
+                          "color":"white"
+                      });
+                      $(".hexagon-red").css({
+                          "background": "rgb(240, 216, 0)"
+                      });
+                      $("#class-list.row div .three").css({
+                          "background-color": "rgb(240, 216, 0)"
+                      });
+                      $(".hexagon-red:after").css({
+                          "background-color": "rgb(240, 216, 0)"
+                      });
+                      $("i#add-icon").css({
+                          "background-color": "rgb(240, 216, 0)",
+                          "color": "rgb(72,48,0)"
+                      });
+                      $("span.courses").css({
+                          "color":"brown"
+                      });
+                      $("#add_modal").css({
+                          "background":"rgb(240, 216, 0)"
+                      });
+                      $("#add_modal h2").css({
+                        "color": "rgb(72,48,0)"
+                      });
+                      $("label").css({
+                          "color": "rgb(72,48,0)"
+                      });
+                      $("a#randomize,#randomize-btn").css({
+                          "background-color": "rgb(240, 216, 0)",
+                          "color":"white",
+                          "border-radius":" 0.5vw",
+                          "box-shadow": "0 0.5vw 0 rgb(204, 184, 0)"
+                      });
 
                         string2 = "rgb(72,48,0)";
                         temp = 2;
@@ -77,22 +130,52 @@ $(document).ready( function () {
                     		"background":"url(../../images/purpleTriangle.png)",
                             "background-size":"30%"
                     		});
-                        $('nav').css({
-                            "background-color":"rgb(28,11,43)"
-                            });
-                        $('.center').css({
-                            "color":"rgb(48,28,65)"
-                            });
-                        $("a.brand-logo").css({
-                            "background-color":"rgb(26,9,41)"
-                            });
-                        $("#user-name").css({
-                            "color":"white"
-                        });
-                        $("#user-name").css({
-                            "color":"white"
-                        });
-
+                      $('nav').css({
+                          "background-color":"rgb(28,11,43)"
+                          });
+                      $('.center').css({
+                          "color":"rgb(48,28,65)"
+                          });
+                      $("a.brand-logo").css({
+                          "background-color":"rgb(26,9,41)"
+                          });
+                      $("#user-name").css({
+                          "color":"white"
+                      });
+                      $("#user-name").css({
+                          "color":"white"
+                      });
+                      $(".hexagon-red").css({
+                          "background": "rgb(240, 216, 0)"
+                      });
+                      $("#class-list.row div .three").css({
+                          "background-color": "rgb(240, 216, 0)"
+                      });
+                      $(".hexagon-red:after").css({
+                          "background-color": "rgb(240, 216, 0)"
+                      });
+                      $("i#add-icon").css({
+                          "background-color": "rgb(28, 11, 43)",
+                          "color": "white"
+                      });
+                      $("span.courses").css({
+                          "color":"brown"
+                      });
+                      $("#add_modal").css({
+                          "background":"rgb(28, 11, 43)"
+                      });
+                      $("#add_modal h2").css({
+                        "color": "white"
+                      });
+                      $(".btn").css({
+                          "background": "rgb(28, 11, 43)"
+                      });
+                      $("a#randomize,#randomize-btn").css({
+                          "background-color": "rgb(53, 21, 81)",
+                          "color":"white",
+                          "border-radius":" 0.5vw",
+                          "box-shadow": "0 0.5vw 0 rgb(27, 10, 41)"
+                      });
 
                         string2 = "rgb(28,11,43)";
                         temp = 3;
@@ -104,24 +187,61 @@ $(document).ready( function () {
                     		"background":"url(../../images/redDonut.png)",
                             "background-size":"25%"
                     		});
-                         $('nav').css({
-                            "background-color":"rgb(41,44,55)"
-                            });
-                         $('.center').css({
-                         	color:"rgb(41,44,55)"
-                         });
-                         $("a.brand-logo").css({
-                            "background-color":"rgb(39,42,57)"
-                            });
-                        $("#user-name").css({
-                            "color":"white"
+                     $('nav').css({
+                        "background-color":"rgb(41,44,55)"
                         });
+                     $('.center').css({
+                     	color:"rgb(41,44,55)"
+                     });
+                     $("a.brand-logo").css({
+                        "background-color":"rgb(39,42,57)"
+                        });
+                    $("#user-name").css({
+                        "color":"white"
+                    });
+                    $(".hexagon-red").css({
+                        "background": "rgb(240, 216, 0)"
+                    });
+                    $("#class-list.row div .three").css({
+                        "background-color": "rgb(240, 216, 0)"
+                    });
+                    $(".hexagon-red:after").css({
+                        "background-color": "rgb(240, 216, 0)"
+                    });
+                    $("i#add-icon").css({
+                        "background-color": "rgb(41,44,55)",
+                        "color": "white"
+                    });
+                    $(".btn").css({
+                        "background-color": "rgb(41,44,55)"
+                    });
+                    $("a#randomize,#randomize-btn").css({
+                        "background-color": "rgb(41,44,55)",
+                        "color":"white",
+                        "border-radius":" 0.5vw",
+                        "box-shadow": "0 0.5vw 0 rgb(22, 24, 29)"
+                    });
+                    $("span.courses").css({
+                        "color":"brown"
+                    });
+                    $("#add_modal").css({
+                        "background":"rgb(41,44,55)"
+                    });
+                    $("#add_modal h2").css({
+                      "color": "white"
+                    });
+                    $("label").css({
+                        "color": "rgb(72,48,0)"
+                    });
 
                          string2 = "rgb(41,44,55)";
                          temp = 4;
 
                     }else {
                     	//default
+                      $(".hexagon-red,.hexagon-red:before,.hexagon-red:after").css({
+                        "background": "#b42529"
+                      });
                     }
 
                 },
