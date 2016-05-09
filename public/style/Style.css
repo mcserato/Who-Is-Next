@@ -349,13 +349,56 @@ input[type=password]:focus:not([readonly])+label {
   from{transform: rotateX(90deg);}
   to{transform: rotateX(0deg);}
 }
-
+@-webkit-keyframes animate{
+  from{-webkit-transform: rotateX(90deg);}
+  to{-webkit-transform: rotateX(0deg);}
+}
+@-moz-keyframes animate{
+  from{-moz-transform: rotateX(90deg);}
+  to{-moz-transform: rotateX(0deg);}
+}
+@-ms-keyframes animate{
+  from{-ms-transform: rotateX(90deg);}
+  to{-ms-transform: rotateX(0deg);}
+}
+@-o-keyframes animate{
+  from{-o-transform: rotateX(90deg);}
+  to{-o-transform: rotateX(0deg);}
+}
 @keyframes entrance{
   from { opacity:0 };
   to { opacity:1 };
 }
+@-webkit-keyframes entrance{
+  from { -webkit-opacity:0 };
+  to { -webkit-opacity:1 };
+}
+@-moz-keyframes entrance{
+  from { -moz-opacity:0 };
+  to { -moz-opacity:1 };
+}
+@-ms-keyframes entrance{
+  from { -ms-opacity:0 };
+  to { -ms-opacity:1 };
+}
 
 @keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-webkit-keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-moz-keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-ms-keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-o-keyframes slide {
   from { margin-left: 20vw;}
   to {  margin-left: 4.5vw; }
 }
@@ -391,15 +434,19 @@ input[type=password]:focus:not([readonly])+label {
   	height:3.2vw;
 }
 #about:active, #sign-up-btn:active, #about:active, #login-btn:active {
-  box-shadow: 0 0.1vw 0 black;
-  transform: translateY(0.5vw);
+	box-shadow: 0 0.1vw 0 black;
+	transform: translateY(0.5vw);
+	-webkit-transform: translateY(0.5vw);
+	-moz-transform: translateY(0.5vw);
+	-ms-transform: translateY(0.5vw);
+	-o-transform: translateY(0.5vw);
 }
 #desc{
 	padding:1vw 1.5vw;
 	background-color: rgba(255,255,255,0.8);
 	border-radius: 1vw;
-  font-family:roboto;
-  font-weight: bold;
+	font-family:roboto;
+	font-weight: bold;
 	font-weight:900;
 }
 h3.center{
@@ -407,16 +454,13 @@ h3.center{
 	height:6vw;
 	background-color: white;
 	box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, 0.2), 0 0.5vw 1vw 0 rgba(0, 0, 0, 0.19);
-    font-family: Scream;
-    src:url(/font/roboto/Scream.ttf);
-}
-.modal-content{
-	font-family:fredoka;
+	font-family: Scream;
+	src:url(/font/roboto/Scream.ttf);
 }
 h4.center{
 	font-size:5.5vw;
-    font-family: Scream;
-    src:url(/font/roboto/Scream.ttf);
+	font-family: Scream;
+	src:url(/font/roboto/Scream.ttf);
 }
 a.modal-action{
 	margin-bottom: 1vw;
@@ -433,49 +477,34 @@ div.modal-footer{
 	margin:0 0 0 3vw;
 }
 
-/* START HERE */
 h1.center{
 	font-size:5.5vw;
-    font-family: Scream;
-    src:url(/font/roboto/Scream.ttf);
+	font-family: Scream;
+	src:url(/font/roboto/Scream.ttf);
 }
 h5.center{
-    font-family: Markus;
-    src:url(/font/roboto/Markus.ttf);
+	font-family: Markus;
+	src:url(/font/roboto/Markus.ttf);
 }
 
 .row{
-    padding-bottom: 1vw;
+	padding-bottom: 1vw;
 }
 
 .card{
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
 }
 
 #class-filter{
-     font-family: Walkway;
-    src:url(/font/roboto/Walkway.ttf);
+	font-family: Walkway;
+	src:url(/font/roboto/Walkway.ttf);
 }
-#birthday-filter{
-     font-family: fredoka;
-
-}
-#course-filter{
-     font-family: fredoka;
-
-}
-#college-filter{
-     font-family: fredoka;
+#college-filter, label, #course-filter,#birthday-filter, .modal-content{
+	font-family: fredoka;
 }
 
-label{
-    font-family: fredoka;
-
-}
-
-/*=======================*/
 div.navbar-fixed{
 	height:9vw;
 }
@@ -532,19 +561,19 @@ a.brand-logo{
 	background-color:#D0D0D4;
 	border-radius: 70%;
 	box-shadow: 0 0.3vw 0 0 rgba(0, 0, 0, 0.2);
-  height:11vw;
-  width:11vw;
+	height:11vw;
+	width:11vw;
 }
 
 .logo {
-    height:9.1vw;
-    width:9.1vw;
-    margin:1vw;
-    text-align:center;
-    -webkit-animation: flip 2s;
-    -ms-animation: flip 2s;
-    -moz-animation: flip 2s;
-    -o-animation: flip 2s;
+	height:9.1vw;
+	width:9.1vw;
+	margin:1vw;
+	text-align:center;
+	-webkit-animation: flip 2s;
+	-ms-animation: flip 2s;
+	-moz-animation: flip 2s;
+	-o-animation: flip 2s;
 }
 @keyframes flip {
   0% { transform: rotateY(0deg);}
