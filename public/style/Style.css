@@ -12,14 +12,12 @@
 }
 body {
 	background-color: #f5f6f6;
-    padding:auto;
-    overflow-x: scroll;
-    min-width: 700px;
-    display: block;
-  font-family: fredoka
-
+	padding:auto;
+	overflow-x: scroll;
+	 min-width: 700px;
+	display: block;
+	font-family: fredoka
 }
-
 
 #main-content {
 	margin-top: 1%;
@@ -58,10 +56,10 @@ body {
 
 .courses {
 	color: #ffffff;
-    font-size: 20px;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
+	 font-size: 20px;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
 }
 
 #logo {
