@@ -276,8 +276,11 @@ input[type=password]:focus:not([readonly])+label {
 
 
 .span-title:nth-child(1){
-	font-size:6.5vw;
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  font-size:6.5vw;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
 }
 .span-title:nth-child(2){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
@@ -313,20 +316,33 @@ input[type=password]:focus:not([readonly])+label {
 
 .span-title:nth-child(6){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
 }
 .span-title:nth-child(7){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
 }
 
 .span-title:nth-child(8){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
 }
 
 .span-title:nth-child(9){
   animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+  -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
 }
 
 @keyframes animate{
@@ -479,13 +495,36 @@ nav.z-depth-0{
 }
 
 .logo:hover {
+  animation: 1s rotate infinite linear  ;
   -webkit-animation: 1s rotate infinite linear  ;
+  -moz-animation: 1s rotate infinite linear  ;
+  -ms-animation: 1s rotate infinite linear  ;
+  -o-animation: 1s rotate infinite linear  ;
+  transform-origin: 50% 50%;
   -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
 }
-
+@keyframes rotate {
+    0%    { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
 @-webkit-keyframes rotate {
     0%    { -webkit-transform: rotate(0); }
     100% { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes rotate {
+    0%    { -moz-transform: rotate(0); }
+    100% { -moz-transform: rotate(360deg); }
+}
+@-ms-keyframes rotate {
+    0%    { -ms-transform: rotate(0); }
+    100% { -ms-transform: rotate(360deg); }
+}
+@-o-keyframes rotate {
+    0%    { -o-transform: rotate(0); }
+    100% { -o-transform: rotate(360deg); }
 }
 a.brand-logo{
 	padding:0;
@@ -498,12 +537,14 @@ a.brand-logo{
 }
 
 .logo {
-	height:9.1vw;
-	width:9.1vw;
-	margin:1vw;
-   -webkit-animation: flip 2s;
-  animation: flip 2s;
-  text-align:center;
+    height:9.1vw;
+    width:9.1vw;
+    margin:1vw;
+    text-align:center;
+    -webkit-animation: flip 2s;
+    -ms-animation: flip 2s;
+    -moz-animation: flip 2s;
+    -o-animation: flip 2s;
 }
 @keyframes flip {
   0% { transform: rotateY(0deg);}
@@ -512,6 +553,38 @@ a.brand-logo{
   60% {transform: rotateX(360deg);}
   80% {transform: rotateY(0deg);}
   100% {transform:rotateY(360deg);}
+}
+@-webkit-keyframes flip {
+  0% { -webkit-transform: rotateY(0deg);}
+  20% { -webkit-transform: rotateY(360deg);}
+  40% { -webkit-transform: rotateX(0deg);}
+  60% { -webkit-transform: rotateX(360deg);}
+  80% { -webkit-transform: rotateY(0deg);}
+  100% { -webkit-transform:rotateY(360deg);}
+}
+@-moz-keyframes flip {
+  0% { -moz-transform: rotateY(0deg);}
+  20% { -moz-transform: rotateY(360deg);}
+  40% { -moz-transform: rotateX(0deg);}
+  60% { -moz-transform: rotateX(360deg);}
+  80% { -moz-transform: rotateY(0deg);}
+  100% { -moz-transform:rotateY(360deg);}
+}
+@-ms-keyframes flip {
+  0% { -ms-transform: rotateY(0deg);}
+  20% { -ms-transform: rotateY(360deg);}
+  40% { -ms-transform: rotateX(0deg);}
+  60% { -ms-transform: rotateX(360deg);}
+  80% { -ms-transform: rotateY(0deg);}
+  100% { -ms-transform:rotateY(360deg);}
+}
+@-o-keyframes flip {
+  0% { -o-transform: rotateY(0deg);}
+  20% { -o-transform: rotateY(360deg);}
+  40% { -o-transform: rotateX(0deg);}
+  60% { -o-transform: rotateX(360deg);}
+  80% { -o-transform: rotateY(0deg);}
+  100% { -o-transform:rotateY(360deg);}
 }
 
 .theme-card:hover{
