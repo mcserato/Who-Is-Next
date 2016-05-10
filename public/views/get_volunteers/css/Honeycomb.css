@@ -79,18 +79,18 @@
 }
 
 .flipped {
-    background-color: blueviolet;
+    background-color: #b42529;
 }
 
 .flipped:before {
     bottom: 100%;
-    border-bottom: 31.75px solid blueviolet;
+    border-bottom: 31.75px solid #b42529;
 }
 
 .flipped:after {
     top: 100%;
     width: 0;
-    border-top: 31.75px solid blueviolet;
+    border-top: 31.75px solid #b42529;
 }
 
 .unflipped {
