@@ -113,6 +113,8 @@ $(document).ready( function () {
         }
 
         else {
+            var volunteer_array = [];
+            var volunteer_num = $('#number-filter').val();
             var class_id = $('#class-filter').val();
             var gender;
             if($('#male-filter').is(":checked") && !$('#female-filter').is(":checked")){
@@ -140,6 +142,14 @@ $(document).ready( function () {
                     number      :$('#number-filter').val()
                 },
                 success: function(data) {
+                    if (data.length == 0) {
+                        Materialize.toast("No student yet in the selected class", 2000);
+                        return;
+                    } else if (data.length < volunteer_num) {
+                        Materialize.toast("Number of students is only " + data.length, 2000);
+                        return;
+                    }
+
                     $('#logo-holder').slideUp();
                     $('#randomize-form').slideUp();
                     $('#header').slideUp();
@@ -153,24 +163,28 @@ $(document).ready( function () {
                         setTimeout(function(){
                             document.getElementById("animation-css").remove();
 
-                            if (data.length >= 1 && data.length <= 10) {
-                                if(data.length == 1) {  // Get 1 volunteer
+                            for (var i = 0; i < volunteer_num; i++) {
+                                volunteer_array.push(data[i]);
+                            }
+
+                            if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
+                                if(volunteer_array.length == 1) {  // Get 1 volunteer
                                     var rand = Math.round(Math.random() * 2);                        
                                     switch(rand) {
                                         case 1: 
                                             $('#randomizer-holder').hide();
                                             $('#logo-holder').hide();
                                             $("#container-list").show();
-                                            zoomInImage(data);
+                                            zoomInImage(volunteer_array);
                                             break;
                                         case 2: 
-                                            startHatch(data);
+                                            startHatch(volunteer_array);
                                             break;
                                         default:
                                             $('#randomizer-holder').hide();
                                             $('#logo-holder').hide();
                                             $("#container-list").show();
-                                            zoomInImage(data);
+                                            zoomInImage(volunteer_array);
                                             break;
                                     }
                                 } else {    // For get 2-10 volunteers
@@ -180,7 +194,7 @@ $(document).ready( function () {
                                             $('#randomizer-holder').hide();
                                             $('#logo-holder').hide();
                                             $("#container-list").show();
-                                            jumbleWords(data);
+                                            jumbleWords(volunteer_array);
                                             break;
                                         case 2:
                                             startHatch(data);
@@ -195,13 +209,13 @@ $(document).ready( function () {
                                             $('#randomizer-holder').hide();
                                             $('#logo-holder').hide();
                                             $("#container-list").show();
-                                            flyingHexagon(data);
+                                            flyingHexagon(volunteer_array);
                                             break;
                                         default:
                                             $('#randomizer-holder').hide();
                                             $('#logo-holder').hide();
                                             $("#container-list").show();
-                                            jumbleWords(data);
+                                            jumbleWords(volunteer_array);
                                             break;
                                     }
                                 }
@@ -212,16 +226,16 @@ $(document).ready( function () {
                                 var rand = Math.round(Math.random() * 3);
                                 switch(rand) {
                                     case 1:
-                                        jumbleWords(data);
+                                        jumbleWords(volunteer_array);
                                         break;
                                     case 2:
-                                        insertHexagon(data);
+                                        insertHexagon(volunteer_array);
                                         break;
                                     case 3:
-                                        flyingHexagon(data);
+                                        flyingHexagon(volunteer_array);
                                         break;
                                     default:
-                                        jumbleWords(data);
+                                        jumbleWords(volunteer_array);
                                         break;
                                 }
                             }
@@ -236,6 +250,12 @@ $(document).ready( function () {
                     $('#save-student').click(function(){
                         var save_name = $('#save-point').val();
                         var save_id;
+
+                        if (save_name == "") {
+                            Materialize.toast("Please put activity name", 2000);
+                            return;
+                        }
+
                         //This function creates the save point
                         $.ajax({
                             url: '/api/save_point',
@@ -253,12 +273,12 @@ $(document).ready( function () {
                         });
 
                         //This function adds the students to the save point
-                        for(var i in data) {
+                        for(var i in volunteer_array) {
                             $.ajax({
                                 url: '/api/save_student',
                                 method: 'POST',
                                 data: {
-                                    student_number  : data[i].student_number
+                                    student_number  : volunteer_array[i].student_number
                                 },
                                 success: function(data){
                                 },
@@ -266,13 +286,13 @@ $(document).ready( function () {
                             });
                         }
                         
-                        for(var i in data) {
+                        for(var i in volunteer_array) {
                             $.ajax({
                                 url: '/api/randomizer',
                                 method: 'PUT',
                                 data: {
                                     class_id        : class_id,
-                                    student_number  : data[i].student_number
+                                    student_number  : volunteer_array[i].student_number
                                 },
                                 success: function(data2){
                                 },
@@ -347,7 +367,7 @@ function insertHexagon(data) {
 
     }
 
-     $('#start-again-div').css("width","900 px");
+    //$('#start-again-div').css("width","900 px");
 
      // Enable flip.js
     $(".card-grid").flip({
