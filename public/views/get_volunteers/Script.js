@@ -85,7 +85,6 @@ $(document).ready( function () {
     });
 
     if(typeof localStorage.class_id_randomize !== 'undefined'){
-        console.log("hello");
         $("#class-filter").val(localStorage.class_id_randomize);
         $('#randomizer-holder').hide();
         $('#logo-holder').fadeIn();
@@ -175,8 +174,7 @@ $(document).ready( function () {
                                             break;
                                     }
                                 } else {    // For get 2-10 volunteers
-                                    var rand = Math.round(Math.random() * 4); 
-                                    rand = 3;
+                                    var rand = Math.round(Math.random() * 4);
                                     switch(rand) {
                                         case 1:
                                             $('#randomizer-holder').hide();
