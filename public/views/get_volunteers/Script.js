@@ -375,10 +375,6 @@ function showVolunteers(data){
             }
         }, 
     1000);
-
-    setTimeout(function() {
-        showVolunteerList(data);
-    }, data.length * 2000);
 }
 
 /*
