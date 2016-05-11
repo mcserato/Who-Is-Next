@@ -2,11 +2,9 @@
 
 $(document).ready( function () {
     config.checkAuth("FACULTY"); 
-    
 
     view_class_stud.init('#main-content');
-    
-
+    view_class_stud.importCSV();
 });
     
 
@@ -39,6 +37,11 @@ var view_class_stud = {
         $("#course-id").append(localStorage.section_number=="undefined" ?
             '' : '-'+localStorage.section_number);
 
+        $('#randomize').click(function(){
+            localStorage.class_id_randomize = localStorage.class_id;
+            window.location.href = "/views/get_volunteers";
+        });
+
         $('#search-student').keyup(function () {
 
             if(!view_class_stud.student_data){
@@ -60,7 +63,6 @@ var view_class_stud = {
                 course = $("#course").val(),
                 birthday = $("#birthday").val(),
                 gender;
-
             
             if(!student_number){
                 return Materialize.toast("Please enter student number", 1000);
@@ -92,8 +94,6 @@ var view_class_stud = {
 
             gender = (!$("#male").is(':checked') ? "F" : "M");
 
-            $('#add_modal').closeModal();
-
             $.ajax({
                 type: "POST",
                 url: "/api/student",
@@ -110,25 +110,27 @@ var view_class_stud = {
                 },
                 dataType: "JSON",
                 success: function() {
-                        $.ajax({
-                            type: "POST",
-                            url: "/api/class_student",
-                            headers: util.headers,
-                            data: {
-                                class_id: localStorage.class_id,
-                                student_number: student_number,
-                                no_of_times_called: 0
-                            },
-                            dataType: "JSON",
-                            success: function (result) {
-                                 setTimeout(function(){
-                                    return Materialize.toast(student_number + " is added!", 1000,"",function(){
-                                        window.location.href = "/views/class_student";
-                                    });
-                                },500);
-                            },
-                            error: util.errorHandler
-                        });
+                    $('#add_modal').closeModal();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/class_student",
+                        headers: util.headers,
+                        data: {
+                            class_id: localStorage.class_id,
+                            student_number: student_number,
+                            no_of_times_called: 0
+                        },
+                        dataType: "JSON",
+                        success: function (result) {
+                             setTimeout(function(){
+                                return Materialize.toast(student_number + " is added!", 1000,"",function(){
+                                    window.location.href = "/views/class_student";
+                                });
+                            },500);
+                        },
+                        error: util.errorHandler
+                    });
                 },
                 error: function(err){
                     return Materialize.toast(err.responseText,800,"",function(){
@@ -161,7 +163,7 @@ var view_class_stud = {
             });
         });
 
-        $('#edit-student-form').submit(function (event) {
+        $('#edit-button').click(function () {
             // Get data from input fields of edit student form
             var student_number = $("#student_number_edit").val(),
                 first_name = $("#first_name_edit").val(),
@@ -199,6 +201,67 @@ var view_class_stud = {
 
 
             return false;
+        });
+
+        $('#import').click(function(){
+            
+            $('#import-modal').openModal();
+
+            $.ajax({
+                url: '/api/import/'+localStorage.class_id,
+                method: 'GET',
+                headers: util.headers,
+                success: view_class_stud.renderImportData,
+                error: util.errorHandler
+            });
+
+        });
+
+        $('#import-confirm').click(function(){
+            var checked_students = $('.import:checkbox:checked'),
+                import_count = 1;
+
+            if($('#no-import').html().trim()!=""){
+                $('#import-modal').closeModal();
+                return;
+            }
+
+            if(!checked_students || !checked_students.length){
+                return Materialize.toast("Please checked students to be import!", 1500);
+            }
+
+            $('#import-modal').closeModal();
+
+            for(var imports = 0; imports < checked_students.length; imports++){
+                var student_number = checked_students[imports].id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/class_student",
+                    headers: util.headers,
+                    data: {
+                        class_id: localStorage.class_id,
+                        student_number: student_number,
+                        no_of_times_called: 0
+                    },
+                    dataType: "JSON",
+                    success: function (result) {
+                        Materialize.toast(student_number + " is added!", 1000);
+                    },
+                    error: function(err){
+                        Materialize.toast("Failed to add " +student_number + " !", 1000);
+                    },
+                    complete: function(){
+                        if((import_count++)==checked_students.length){
+                            setTimeout(function(){
+                               window.location.href = "/views/class_student";
+                            },1800);
+                        }
+                    }
+                });
+            }
+
+
         });
 
         $.ajax({
@@ -247,38 +310,70 @@ var view_class_stud = {
             var row = $("<li></li>"),
                 student_header = $("<div class='row'></div>"),
                 image = $('<img/>'),
-                text = $("<h4></h4>"),
+                text = $("<div></div>"),
+                options = $("<div></div>"),
                 edit_student = $(["<a title='Edit Student'>",
                                     "<i class='material-icons options-text'>mode_edit</i>",
+                                "</a>"].join('')),
+                delete_student = $(["<a title='Delete Student'>",
+                                    "<i class='material-icons options-text'>delete</i>",
                                 "</a>"].join(''));
 
             image.attr("src", data[student].picture);
             image.css("width","100px");
             image.css("height","100px");
-            image.addClass("red circle center col s2 push-s1 responsive-img");
+            image.css("background-color","#b42529");
+            image.addClass("circle center col s2 push-s1 responsive-img");
 
-            text.html(data[student].last_name + ", " + data[student].first_name + " " + data[student].middle_name );
+            text.append("<h4>"+
+                data[student].last_name + ", " +
+                data[student].first_name + " " +
+                data[student].middle_name + "</h4>"
+            );
             text.addClass("center-align student-data modal-trigger col s8");
             text.attr("id", data[student].student_number);
             text.attr("href", "#student_modal");
             text.css("width", "80%");
+            text.css("padding", "2%");
 
-            edit_student.addClass("modal-trigger edit-student-button right col s1");
+            edit_student.addClass("modal-trigger edit-student-button");
             edit_student.attr("student_number", data[student].student_number);
 
-            student_header.addClass("collapsible-header");
+            delete_student.addClass("remove");
+            delete_student.attr("student_number", data[student].student_number);
+
+            options.attr("id", data[student].student_number + "-options");
+            options.addClass("options col s1");
+            options.append(edit_student);
+            options.append(delete_student);
+            options.css("margin","0");
+            options.css("padding","0");
+            
+            student_header.attr("student_number", data[student].student_number);
+            student_header.addClass("collapsible-header student-div");
             student_header.append(image);
             student_header.append(text);
-            student_header.append(edit_student);
+            student_header.append(options);
+            student_header.css("padding","0");
+
             row.append(student_header);
             content.append(row);
-
         }
 
         if(search_count==0){
             content.append('<br/><h2 class="center">No Students Found</h2>');
             return;
         }
+
+        $('.options').hide();
+
+        $('.student-div').hover(
+            function(){
+                $('#' + $(this).attr("student_number")+"-options").show();
+            },function(){
+                $('#' + $(this).attr("student_number")+"-options").hide();
+            }
+        );
 
         $('.student-data')
             .click(function(){
@@ -320,6 +415,34 @@ var view_class_stud = {
 
                 $('#edit_student_modal').openModal();
             });
+
+        $('.remove')
+            .click(function () {
+                var student_number = $(this).attr("student_number"),
+                    class_id = localStorage.class_id;
+
+                if(confirm("Are you sure you want to remove student "+ student_number + " in this class ?")){
+                    $.ajax({
+                        method: "DELETE",
+                        url: "/api/class_student",
+                        headers: util.headers,
+                        data: {
+                            class_id: class_id,
+                            student_number: student_number
+                        },
+                        dataType: "JSON",
+                        success: function (result) {
+                            setTimeout(function(){
+                                return Materialize.toast("Successfully remove - " + student_number + " !", 1000
+                                    ,"",function(){
+                                        window.location.href = "/views/class_student";
+                                });
+                            },500);
+                        },
+                        error: util.errorHandler
+                    });
+                }
+            });
     },
 
     getStudentInfo : function( student_number ){
@@ -329,6 +452,135 @@ var view_class_stud = {
             if(student_number == data[student].student_number) return data[student];
         }
         return null;
-    }
+    },
 
+    readBlob : function(opt_startByte, opt_stopByte) {
+
+        var files = document.getElementById('file-path').files;
+        if (!files.length) {
+            return Materialize.toast("Please select a file", 1000);
+        }
+
+        var pattern = /.csv$/g;
+        if (!files[0].name.match(pattern)){
+            return Materialize.toast("Please select a CSV file", 1000);
+        }
+
+        $('#modal1').closeModal();
+
+        var file = files[0];
+        var start = parseInt(opt_startByte) || 0;
+        var stop = parseInt(opt_stopByte) || file.size - 1;
+
+        var reader = new FileReader();
+
+        reader.onloadend = function(evt) {
+          if (evt.target.readyState == FileReader.DONE) {
+            let nope = evt.target.result.split(/[ ,\n]+/);
+
+
+            for (var i = 0; i < ( nope.length/9 ); i++) {
+                $.ajax({
+                    url: "/api/student",
+                    method: 'POST',
+                    dataType: "JSON",
+                    headers: util.headers,
+                    data: {
+                        student_number: nope[0 + ( 9 * i ) ],
+                        first_name:     nope[1 + ( 9 * i ) ],
+                        middle_name:    nope[2 + ( 9 * i ) ],
+                        last_name:      nope[3 + ( 9 * i ) ],
+                        college:        nope[4 + ( 9 * i ) ],
+                        course:         nope[5 + ( 9 * i ) ],
+                        gender:         nope[6 + ( 9 * i ) ],
+                        birthday:       nope[7 + ( 9 * i ) ]
+
+                    },
+                    success: function(data){
+                        if(!data){
+                            return Materialize.toast("Error in adding a student. Please try again !",2500);
+                        }
+                    },
+                    error: function(err){
+                        return Materialize.toast(err.responseText,2500);
+                    }
+                });
+                
+                $.ajax({
+                    url: "/api/class_student/",
+                    method: 'POST',
+                    dataType: "JSON",
+                    headers: util.headers,
+                    data: {
+                        class_id:           localStorage.class_id,
+                        student_number:     nope[0 + ( 9 * i ) ],
+                        no_of_times_called: 0,
+                    },
+                    success: function(data){
+                        if(!data){
+                            return Materialize.toast("Error in adding a student to class. Please try again !",2500);
+                        }
+
+                        document.location.reload();
+                    },
+                    error: function(err){
+                        return Materialize.toast(err.responseText,2500);
+                    }
+                });
+            };
+            //$('#byte_content').append($('<span></span>').html(evt.target.result));
+          }
+        };
+
+        var blob = file.slice(start, stop + 1);
+        reader.readAsBinaryString(blob);
+    },
+      
+    importCSV : function(  ){
+        document.querySelector('.readBytesButtons').addEventListener('click', function(evt) {
+            if (evt.target.tagName.toLowerCase() == 'button') {
+              var startByte = evt.target.getAttribute('data-startbyte');
+              var endByte = evt.target.getAttribute('data-endbyte');
+              view_class_stud.readBlob(startByte, endByte);
+            }
+        }, false);
+
+        $('#disagree')
+            .click(function (evt) {
+                $('#byte_content').empty();
+            }
+        );   
+    },
+
+    renderImportData : function(data){
+
+        if(!data) {
+            return Materialize.toast("Error in fetching data",2500);
+        } 
+
+        if(!data.length){
+            $('#import-table').hide();
+            $('#import-confirm').html("OK");
+            $('#no-import').html("<br/><br/><br/>No Students to Import");
+            return;
+        }
+
+        $('#import-data').empty();
+        $('input:checkbox').removeAttr('checked');
+
+        for(var student in data){
+            $('#import-data').append([
+                '<tr>',
+                    '<td style="text-align:left;">',
+                        '<input type="checkbox" class="import filled-in" id="',data[student].student_number,'"/>',
+                        '<label for="',data[student].student_number,'" style="color:black;padding-left:35%;">',
+                            data[student].student_number,
+                        '</label>',
+                    '</td>',
+                    '<td>',data[student].last_name,' ',data[student].first_name,'</td>',
+                '</tr>',
+            ].join(''));
+        }
+
+    }
 };

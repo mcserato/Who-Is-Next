@@ -132,7 +132,7 @@ var view_class = {
             search_string = 
                 (search=="success" || search=="fail" || !search) ?
                     "" : search.toLowerCase(),
-            search_count = data.length;
+            search_count = data.length || -1;
 
         content.empty();
 

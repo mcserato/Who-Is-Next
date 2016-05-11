@@ -109,7 +109,6 @@ $(document).ready( function () {
 
                     }else {
                     	//default
-                    	console.log(data);
                     }
 
                 },
