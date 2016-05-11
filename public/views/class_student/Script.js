@@ -4,7 +4,7 @@ $(document).ready( function () {
     config.checkAuth("FACULTY"); 
 
     view_class_stud.init('#main-content');
-
+    view_class_stud.importCSV();
 });
     
 
@@ -63,7 +63,6 @@ var view_class_stud = {
                 course = $("#course").val(),
                 birthday = $("#birthday").val(),
                 gender;
-
             
             if(!student_number){
                 return Materialize.toast("Please enter student number", 1000);
@@ -135,7 +134,8 @@ var view_class_stud = {
                 },
                 error: function(err){
                     return Materialize.toast(err.responseText,800,"",function(){
-                        if(confirm("Would you like you like to import data of student "+ 
+                        if(!view_class_stud.getStudentInfo(student_number) && 
+                            confirm("Would you like you like to import data of student "+ 
                             student_number +" to this class ?")){
 
                             $.ajax({
@@ -391,6 +391,103 @@ var view_class_stud = {
             if(student_number == data[student].student_number) return data[student];
         }
         return null;
-    }
+    },
 
+    readBlob : function(opt_startByte, opt_stopByte) {
+
+        var files = document.getElementById('file-path').files;
+        if (!files.length) {
+          alert('Please select a file!');
+          return;
+        }
+
+        var pattern = /.csv$/g;
+        if (!files[0].name.match(pattern)){
+            alert('Please select a CSV file');
+            return;
+        }
+
+        var file = files[0];
+        var start = parseInt(opt_startByte) || 0;
+        var stop = parseInt(opt_stopByte) || file.size - 1;
+
+        var reader = new FileReader();
+
+        reader.onloadend = function(evt) {
+          if (evt.target.readyState == FileReader.DONE) {
+            let nope = evt.target.result.split(/[ ,\n]+/);
+
+
+            for (var i = 0; i < ( nope.length/9 ); i++) {
+                $.ajax({
+                    url: "/api/student",
+                    method: 'POST',
+                    dataType: "JSON",
+                    headers: util.headers,
+                    data: {
+                        student_number: nope[0 + ( 9 * i ) ],
+                        first_name:     nope[1 + ( 9 * i ) ],
+                        middle_name:    nope[2 + ( 9 * i ) ],
+                        last_name:      nope[3 + ( 9 * i ) ],
+                        college:        nope[4 + ( 9 * i ) ],
+                        course:         nope[5 + ( 9 * i ) ],
+                        gender:         nope[6 + ( 9 * i ) ],
+                        birthday:       nope[7 + ( 9 * i ) ]
+
+                    },
+                    success: function(data){
+                        if(!data){
+                            return Materialize.toast("Error in adding a student. Please try again !",2500);
+                        }
+                    },
+                    error: function(err){
+                        return Materialize.toast(err.responseText,2500);
+                    }
+                });
+                
+                $.ajax({
+                    url: "/api/class_student/",
+                    method: 'POST',
+                    dataType: "JSON",
+                    headers: util.headers,
+                    data: {
+                        class_id:           localStorage.class_id,
+                        student_number:     nope[0 + ( 9 * i ) ],
+                        no_of_times_called: 0,
+                    },
+                    success: function(data){
+                        if(!data){
+                            return Materialize.toast("Error in adding a student to class. Please try again !",2500);
+                        }
+
+                        document.location.reload();
+                    },
+                    error: function(err){
+                        return Materialize.toast(err.responseText,2500);
+                    }
+                });
+            };
+            //$('#byte_content').append($('<span></span>').html(evt.target.result));
+          }
+        };
+
+        var blob = file.slice(start, stop + 1);
+        reader.readAsBinaryString(blob);
+    },
+      
+    importCSV : function(  ){
+        document.querySelector('.readBytesButtons').addEventListener('click', function(evt) {
+            if (evt.target.tagName.toLowerCase() == 'button') {
+              var startByte = evt.target.getAttribute('data-startbyte');
+              var endByte = evt.target.getAttribute('data-endbyte');
+              view_class_stud.readBlob(startByte, endByte);
+            }
+        }, false);
+
+        $('#disagree')
+            .click(function (evt) {
+                $('#byte_content').empty();
+            }
+        );   
+    }  
 };
