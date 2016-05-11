@@ -175,3 +175,28 @@ exports.search = function(req, res, next) {
         }
     );
 }
+
+exports.importStud = function(req, res, next) {
+    if (!req.session) {
+        logs(req, "ERROR", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+    db.query("SELECT DISTINCT s.student_number, s.first_name, s.last_name FROM " +
+        "STUDENT s where s.emp_num = ? and s.student_number NOT IN " +
+        "(SELECT st.student_number FROM STUDENT st, CLASS_STUDENT cs, CLASS c " + 
+        "WHERE st.student_number = cs.student_number AND " +
+        "st.emp_num = cs.emp_num AND " +
+        "c.class_id = cs.class_id AND c.class_id = ? AND st.emp_num = ? ) ORDER BY "+
+        "s.last_name",
+        [req.session.emp_num, req.params.class_id , req.session.emp_num],
+        function (err, rows) {
+            if (err) {
+                logs(req, "ERROR", "No one is logged in");
+                return next(err);
+            }
+
+            logs(req, "SUCCESS", "Retrieve possible imported students");
+            res.send(rows);
+        }
+    );
+}

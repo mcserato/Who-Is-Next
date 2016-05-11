@@ -203,6 +203,67 @@ var view_class_stud = {
             return false;
         });
 
+        $('#import').click(function(){
+            
+            $('#import-modal').openModal();
+
+            $.ajax({
+                url: '/api/import/'+localStorage.class_id,
+                method: 'GET',
+                headers: util.headers,
+                success: view_class_stud.renderImportData,
+                error: util.errorHandler
+            });
+
+        });
+
+        $('#import-confirm').click(function(){
+            var checked_students = $('.import:checkbox:checked'),
+                import_count = 1;
+
+            if($('#no-import').html().trim()!=""){
+                $('#import-modal').closeModal();
+                return;
+            }
+
+            if(!checked_students || !checked_students.length){
+                return Materialize.toast("Please checked students to be import!", 1500);
+            }
+
+            $('#import-modal').closeModal();
+
+            for(var imports = 0; imports < checked_students.length; imports++){
+                var student_number = checked_students[imports].id;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/api/class_student",
+                    headers: util.headers,
+                    data: {
+                        class_id: localStorage.class_id,
+                        student_number: student_number,
+                        no_of_times_called: 0
+                    },
+                    dataType: "JSON",
+                    success: function (result) {
+                        Materialize.toast(student_number + " is added!", 1000);
+                    },
+                    error: function(err){
+                        Materialize.toast("Failed to add " +student_number + " !", 1000);
+                    },
+                    complete: function(){
+                        if((import_count++)==checked_students.length){
+                            setTimeout(function(){
+                               window.location.href = "/views/class_student";
+                            },1800);
+                        }
+                    }
+                });
+            }
+
+
+        });
+
         $.ajax({
             url: '/api/class_student/' + localStorage.class_id,
             method: 'GET',
@@ -397,15 +458,15 @@ var view_class_stud = {
 
         var files = document.getElementById('file-path').files;
         if (!files.length) {
-          alert('Please select a file!');
-          return;
+            return Materialize.toast("Please select a file", 1000);
         }
 
         var pattern = /.csv$/g;
         if (!files[0].name.match(pattern)){
-            alert('Please select a CSV file');
-            return;
+            return Materialize.toast("Please select a CSV file", 1000);
         }
+
+        $('#modal1').closeModal();
 
         var file = files[0];
         var start = parseInt(opt_startByte) || 0;
@@ -489,5 +550,37 @@ var view_class_stud = {
                 $('#byte_content').empty();
             }
         );   
-    }  
+    },
+
+    renderImportData : function(data){
+
+        if(!data) {
+            return Materialize.toast("Error in fetching data",2500);
+        } 
+
+        if(!data.length){
+            $('#import-table').hide();
+            $('#import-confirm').html("OK");
+            $('#no-import').html("<br/><br/><br/>No Students to Import");
+            return;
+        }
+
+        $('#import-data').empty();
+        $('input:checkbox').removeAttr('checked');
+
+        for(var student in data){
+            $('#import-data').append([
+                '<tr>',
+                    '<td style="text-align:left;">',
+                        '<input type="checkbox" class="import filled-in" id="',data[student].student_number,'"/>',
+                        '<label for="',data[student].student_number,'" style="color:black;padding-left:35%;">',
+                            data[student].student_number,
+                        '</label>',
+                    '</td>',
+                    '<td>',data[student].last_name,' ',data[student].first_name,'</td>',
+                '</tr>',
+            ].join(''));
+        }
+
+    }
 };

@@ -18,25 +18,48 @@
             <div id="main-content" class="center"></div>
         </div>
 
-        <div id="add-button-div" class="fixed-action-btn horizontal click-to-toggle" >
-            <a class="btn-floating btn-large red">
-              <i class="material-icons">add</i>
+        <div id="add-button-div" class="fixed-action-btn horizontal hover-to-toggle" >
+            <a class="btn-floating btn-large">
+              <i id="add-icon" class="material-icons">menu</i>
             </a>
             <ul>
                 <li>
-                    <a title="Add Student" class="btn-floating waves-effect waves-light btn modal-trigger" href="#add_modal">
-                        <i id="add-icon" class="material-icons">add</i>
+                    <a id="import" title="Import Student" class="btn-floating green waves-effect waves-light btn">
+                        <i id="add-icon" class="material-icons">person_add</i>
                     </a>
                 </li>
                 <li>
-                    <a class="btn-floating green waves-effect waves-light btn modal-trigger" href="#modal1">
-                        <i class="material-icons">publish</i>
+                    <a title="Upload CSV" class="btn-floating green waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <i id="add-icon" class="material-icons">publish</i>
+                    </a>
+                </li>
+                <li>
+                    <a title="Add Student" class="btn-floating waves-effect waves-light btn modal-trigger red" href="#add_modal">
+                        <i id="add-icon" class="material-icons">add</i>
                     </a>
                 </li>
             </ul>
         </div>
 
-        
+        <div id="import-modal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <table id="import-table" class="responsive-table centered bordered highlight">
+                  <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="import-data">
+                  </tbody>
+                </table>
+                <h3 id="no-import" style="text-align:center;"></h3>
+            </div>
+            <div class="modal-footer">
+                <a id="import-confirm" class="modal-action waves-effect waves-green btn-flat ">Import</a>
+            </div>
+        </div>
 
         <!-- Modal Structure -->
         <div id="add_modal" class="modal">
@@ -219,9 +242,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Disagree</a>
+                <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                 <span class="readBytesButtons">
-                  <button class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</button>
+                  <button class=" modal-action waves-effect waves-green btn-flat">Done</button>
                 </span>
                 
             </div>
