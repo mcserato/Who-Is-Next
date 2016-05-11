@@ -1,12 +1,12 @@
 'use strict';
 
 $(document).ready( function () {
-    config.checkAuth("FACULTY"); 
+    config.checkAuth("FACULTY");
 
     view_class_stud.init('#main-content');
 
 });
-    
+
 
 var view_class_stud = {
 
@@ -64,7 +64,7 @@ var view_class_stud = {
                 birthday = $("#birthday").val(),
                 gender;
 
-            
+
             if(!student_number){
                 return Materialize.toast("Please enter student number", 1000);
             }
@@ -135,7 +135,7 @@ var view_class_stud = {
                 },
                 error: function(err){
                     return Materialize.toast(err.responseText,800,"",function(){
-                        if(confirm("Would you like you like to import data of student "+ 
+                        if(confirm("Would you like you like to import data of student "+
                             student_number +" to this class ?")){
 
                             $.ajax({
@@ -161,25 +161,12 @@ var view_class_stud = {
                     });
                 }
             });
+
+            
         });
 
-         $('#imgInp').click(function() {
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    
-                    reader.onload = function (e) {
-                        $('#blah').attr('src', e.target.result);
-                    }
-                    
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-            
-            $("#imgInp").change(function(){
-                readURL(this);
-            });              
-        });
+
+
         $('#edit-button').click(function () {
             // Get data from input fields of edit student form
             var student_number = $("#student_number_edit").val(),
@@ -190,7 +177,7 @@ var view_class_stud = {
                 course = $("#course_edit").val(),
                 gender = (!$("#male_edit").is(':checked') ? "F" : "M"),
                 birthday = $("#birthday_edit").val();
-           
+
             $.ajax({
                 type: "PUT",
                 url: "/api/student",
@@ -239,7 +226,7 @@ var view_class_stud = {
         }
 
         var content = $('#student-list'),
-            search_string = 
+            search_string =
                 (search=="success" || search=="fail" || !search) ?
                     "" : search.toLowerCase(),
             search_count = data.length;
@@ -247,7 +234,7 @@ var view_class_stud = {
         if(!data || !data.length){
             content.append('<br/><br/><h2 class="center">No Students Found</h2>');
             return;
-        } 
+        }
 
         content.empty();
 
@@ -304,7 +291,7 @@ var view_class_stud = {
             options.append(delete_student);
             options.css("margin","0");
             options.css("padding","0");
-            
+
             student_header.attr("student_number", data[student].student_number);
             student_header.addClass("collapsible-header student-div");
             student_header.append(image);
@@ -409,6 +396,6 @@ var view_class_stud = {
         }
         return null;
     }
-        
-   
+
+
 };

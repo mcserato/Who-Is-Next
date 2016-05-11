@@ -3,6 +3,7 @@
 var importer = require('anytv-node-importer');
 var path = require('path');
 
+
 module.exports = function (router) {
 
     var __ = importer.dirloadSync(__dirname + '/../controllers');
@@ -33,7 +34,7 @@ module.exports = function (router) {
 
     router.get('/api/class/:course_code',                                      __.Class.viewSections);
     router.del('/api/class/:course_code',                                      __.Class.removeSection);
-        
+
     router.get('/api/class/search/:course_code',                               __.Class.search);
 
     router.post('/api/class_student/',                                         __.ClassStudent.add)
@@ -48,7 +49,7 @@ module.exports = function (router) {
     router.get('/api/faculty',                                                 __.Faculty.viewAll);
     router.put('/api/faculty',                                                 __.Faculty.edit);
     router.del('/api/faculty',                                                 __.Faculty.remove);
- 
+
     router.get('/api/faculty/search/:name',                                    __.Faculty.search);
 
     router.get('/api/faculty/:emp_num',                                        __.Faculty.viewOne);
@@ -60,8 +61,6 @@ module.exports = function (router) {
     router.get('/api/switch_theme',                                            __.Faculty.getTheme)
     router.put('/api/switch_theme',                                            __.Faculty.switchTheme);
 
-    router.post('/api/upload',                                                 __.Pictures.upload);
-       
     router.post('/api/randomizer/:class_id',                                   __.Randomizer.getVolunteers);
     router.put('/api/randomizer',                                              __.Randomizer.update);
 
@@ -79,12 +78,12 @@ module.exports = function (router) {
     router.get('/api/student/:student_number',                                 __.Student.viewOne);
 
     router.get('/api/logs',                                                    __.Log.read);
-
+/*
     router.all('*', function(req, res){
         if (req.get('Accept').match(/application\/json/) === null) {
             res.status(404).sendFile(path.resolve(__dirname + '/../public/404.html'));
         }
     });
-
+*/
     return router;
 };
