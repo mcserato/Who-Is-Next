@@ -10,7 +10,7 @@
         <script src="../../script/Jquery.min.js"></script>
         <script src="../../script/Materialize.js"></script>
     </head>
-   <body>
+    <body>
         <div id="navbar"></div>
         <div id="sidebar"></div>
         
@@ -18,12 +18,47 @@
             <div id="main-content" class="center"></div>
         </div>
 
+        <div id="add-button-div" class="fixed-action-btn horizontal hover-to-toggle" >
+            <a class="btn-floating btn-large">
+              <i id="add-icon" class="material-icons">menu</i>
+            </a>
+            <ul>
+                <li>
+                    <a id="import" title="Import Student" class="btn-floating green waves-effect waves-light btn">
+                        <i id="add-icon" class="material-icons">person_add</i>
+                    </a>
+                </li>
+                <li>
+                    <a title="Upload CSV" class="btn-floating green waves-effect waves-light btn modal-trigger" href="#modal1">
+                        <i id="add-icon" class="material-icons">publish</i>
+                    </a>
+                </li>
+                <li>
+                    <a title="Add Student" class="btn-floating waves-effect waves-light btn modal-trigger red" href="#add_modal">
+                        <i id="add-icon" class="material-icons">add</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
-        <div id="add-button-div" class="fixed-action-btn">
-           <!-- Modal Trigger -->
-           <a title="Add Student" class="btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#add_modal">
-               <i id="add-icon" class="material-icons">add</i></a>
-           </a>
+        <div id="import-modal" class="modal modal-fixed-footer">
+            <div class="modal-content">
+                <table id="import-table" class="responsive-table centered bordered highlight">
+                  <thead>
+                    <tr>
+                        <th>Student Number</th>
+                        <th>Name</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="import-data">
+                  </tbody>
+                </table>
+                <h3 id="no-import" style="text-align:center;"></h3>
+            </div>
+            <div class="modal-footer">
+                <a id="import-confirm" class="modal-action waves-effect waves-green btn-flat ">Import</a>
+            </div>
         </div>
 
         <!-- Modal Structure -->
@@ -100,7 +135,6 @@
         <div id="edit_student_modal" class="modal">
            <div class="modal-content">
                <h2>Edit Student</h2>
-               <form id="edit-student-form">
                    <div class="input-field">
                        <span>Student Number</span>
                        <input placeholder="" id="student_number_edit" type="text" required="" />
@@ -163,7 +197,6 @@
                    <button id="edit-button" type="submit" class="modal-action btn waves-light waves-effect">
                        <i class="material-icons">done</i>
                    </button>
-               </form>
            </div>
         </div>
 
@@ -188,6 +221,33 @@
             </div>
         </div>
          <div id ="footer">
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Upload CSV File</h4>
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input id="file-path" type="file" name="file" />
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                    
+                    <div id="byte_content"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a id="disagree" href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                <span class="readBytesButtons">
+                  <button class=" modal-action waves-effect waves-green btn-flat">Done</button>
+                </span>
+                
+            </div>
         </div>
 
         <script src="../footer/Script.js"></script>
