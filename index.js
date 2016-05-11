@@ -10,8 +10,6 @@ var express = require('express'),
 	        console.log('Example app is listening at http://%s:%s', host, port);
     	});
 
-var LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
 
 var multer  =   require('multer');
 
@@ -40,7 +38,7 @@ app.post('/api/upload',function(req,res){
         }
         //res.end("File is uploaded");
         console.log(req.file.filename);
-        localStorage.setItem("filename", req.file.filename);
+        
     });
 });
 
