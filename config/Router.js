@@ -75,6 +75,8 @@ module.exports = function (router) {
     router.put('/api/student',                                                 __.Student.edit);
     router.del('/api/student',                                                 __.Student.remove);
     router.get('/api/student/:student_number',                                 __.Student.viewOne);
+    
+    router.get('/api/import/:class_id',                                        __.Student.importStud);
 
     router.get('/api/logs',                                                    __.Log.read);
 
