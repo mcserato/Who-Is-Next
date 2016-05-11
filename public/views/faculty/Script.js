@@ -235,7 +235,6 @@ var view_faculty = {
             var logs = view_faculty.faculty_logs;
             for (var log_ in logs) {
                 if(username == logs[log_].username && logs[log_].message == "Successfully logged in." && logs[log_].status == "SUCCESS"){ 
-                    console.log(logs[log_].username+" "+logs[log_].log_number+" "+logs[log_].log_date);
                     return logs[log_].log_date;
                 }
             }
