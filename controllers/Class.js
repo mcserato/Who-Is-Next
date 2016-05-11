@@ -174,13 +174,8 @@ exports.viewAll = function(req, res, next) {
             logs(req, "ERROR", "Error: MySQL Query FAILED.");
 		    return next(err);
 		}
-		if (rows.length === 0) {
-            logs(req,"ERROR", "Error: Classes were not found.");
-		    return res.status(404).send("Error: Classes were not found.");
-		} else {
-		    logs(req, "SUCCESS", "Viewed all classes.");
-			res.send(rows);
-		}
+	    logs(req, "SUCCESS", "Viewed all classes.");
+		res.send(rows);
     });
 }
 /* Shows the details of all classes from a course code of a faculty user */
