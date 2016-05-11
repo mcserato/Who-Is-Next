@@ -116,9 +116,7 @@ exports.viewAll = function(req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("SELECT DISTINCT (s.student_number), s.* FROM STUDENT s, CLASS_STUDENT cs, CLASS c WHERE " +
-        "s.student_number = cs.student_number AND s.emp_num = cs.emp_num AND " +
-        "c.class_id = cs.class_id AND c.emp_num = ? ORDER BY s.last_name",
+    db.query("SELECT DISTINCT * FROM STUDENT WHERE emp_num = ? ORDER BY last_name",
         [req.session.emp_num],
         function (err, rows) {
             if (err) {
