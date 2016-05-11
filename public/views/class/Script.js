@@ -201,7 +201,7 @@ var view_class = {
 
         $('.options').hide();
 
-        $('.three,.options')
+        $('.three, .four, .options')
             .mouseenter(function() {
                if($(this).attr("class") == 'three'){
                 $(this).next().show();
