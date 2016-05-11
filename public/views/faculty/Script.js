@@ -10,6 +10,7 @@ $(document).ready( function () {
 var view_faculty = {
 
     faculty_data : null,
+    faculty_logs : null,
 
     init : function( main_content ){
 
@@ -50,6 +51,17 @@ var view_faculty = {
                 util.errorHandler(err);
             }
         });
+        
+        $.ajax({
+        	url: '/api/logs',
+        	method: 'GET',
+            headers: util.headers,
+        	type: 'json',
+        	success: view_faculty.getLogs,
+        	error: function (err) {
+                util.errorHandler(err);
+        	}
+      });
 
     },
 
@@ -102,7 +114,7 @@ var view_faculty = {
 
             user.attr("name", name);
             user.attr("emp_num", emp_num);
-            user.addClass("courses");
+            user.addClass("courses ");
 
             delete_faculty.addClass("remove");
             delete_faculty.attr("name", name);
@@ -192,8 +204,48 @@ var view_faculty = {
             .click(function(){
                /* localStorage.name = $(this).attr("name");
                 localStorage.emp_num = $(this).attr("emp_num");*/
-            });
+               var emp_num = $(this).attr("emp_num"),
+               data_faculty = view_faculty.getFacultyInfo(emp_num);
+               var date = "";
+               if(view_faculty.getFacultyLogs(data_faculty.username) != null || view_faculty.getFacultyLogs(data_faculty.username) != undefined){
+                    date = util.dateParser(view_faculty.getFacultyLogs(data_faculty.username));
+               }
+               else date = "Have not yet logged in";
+               
+               $('#faculty_name').html($("<span></span>").html(data_faculty.name) );
+               $('#faculty_empnum').html($("<span></span>").html("Employee No.: " + data_faculty.emp_num) );
+               $('#faculty_username').html($("<span></span>").html("Username: " + data_faculty.username) );
+               $('#faculty_email').html($("<span></span>").html("Email: " + data_faculty.email) ); 
+               $('#faculty_lastLoggedIn').html($("<span></span>").html("Last Logged In: " + date )); 
+        
+               $('#faculty_modal').openModal();
+           });   
+        },
+    
+         getFacultyInfo : function( empNo ){
+            var data = view_faculty.faculty_data;
 
-    }
+            for (var faculty_ in data) {
+                if(empNo == data[faculty_].emp_num) return data[faculty_];
+            }
+            return null;
+        },
+        
+         getFacultyLogs : function( username ){
+            var logs = view_faculty.faculty_logs;
+            for (var log_ in logs) {
+                if(username == logs[log_].username && logs[log_].message == "Successfully logged in." && logs[log_].status == "SUCCESS"){ 
+                    console.log(logs[log_].username+" "+logs[log_].log_number+" "+logs[log_].log_date);
+                    return logs[log_].log_date;
+                }
+            }
+            return null;
+        },
+        
+        getLogs: function (logs){
+            if(!view_faculty.faculty_logs){
+                view_faculty.faculty_logs = logs;
+            }
+        }
 
 };
