@@ -1,60 +1,60 @@
 @font-face{
-    font-family: Scream;   
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
+
 @font-face{
-    font-family: roboto;   
-    src:url(/font/roboto/Roboto-Bold.wof);
+    font-family: roboto;
+    src:url(/font/roboto/Roboto-Bold.woff);
 }
+
 @font-face{
-    font-family: fredoka;   
+    font-family: fredoka;
     src:url(/font/roboto/FredokaOne-Regular.ttf);
 }
-body {
-	background-color: #f5f6f6;
-    padding:auto;
 
-  font-family: fredoka;
+body {
+    background-color: #f5f6f6;
+    padding:auto;
+    overflow-x: scroll;
+    min-width: 700px;
+    display: block;
+    font-family: fredoka
 }
 
-
 #main-content {
-	margin-top: 1%;
+    margin-top: 1%;
 }
 
 .fixed-action-btn {
-	top: 20px;
-	left: 23px;
-	width: 55.5px;
-	margin-top:0;
-	padding:0;
+    top: 20px;
+    left: 23px;
+    width: 55.5px;
+    margin-top:0;
+    padding:0;
 }
 
 .fixed-action-btn ul{
-	top: 85px;
-	bottom: 0px;
-	left: 0px;
+    top: 85px;
+    bottom: 0px;
+    left: 0px;
 }
 
 #add-button-div {
-	left: 90%;
-	top: 80%;
+    left: 90%;
+    top: 80%;
 }
 
-#add-icon {
-	background-color: #b42529;
-}
-
-#add-button {
-	background-color: #b42529;
+#add-icon, #add-button {
+    background-color: #b42529;
 }
 
 .title {
-	margin: 0;
+    margin: 0;
 }
 
 .courses {
-	color: #ffffff;
+    color: #ffffff;
     font-size: 20px;
     display: inline-block;
     vertical-align: middle;
@@ -62,32 +62,32 @@ body {
 }
 
 #logo {
-	margin-top: 2%;
+    margin-top: 2%;
 }
 
 #left, #right {
-	margin-top: 15%;
+    margin-top: 15%;
 }
 
 #login-btn, #sign-up-btn , #edit-user-button, 
 #edit-button, #edit-section-button{
-	background-color: #CB494E;
+    background-color: #CB494E;
 }
+
 input[type=text]:focus:not([readonly]),
 input[type=password]:focus:not([readonly]) {
-	border-bottom: 1px solid #CB494E;
-	box-shadow: 0 1px 0 0 #CB494E;
+    border-bottom: 1px solid #CB494E;
+    box-shadow: 0 1px 0 0 #CB494E;
 }
 
 input[type=text]:focus:not([readonly])+label,
 input[type=password]:focus:not([readonly])+label {
-	color: #CB494E;
-
+    color: #CB494E;
 }
 
 .input-field
 .prefix.active{
-	color: #CB494E;
+    color: #CB494E;
 }
 
 #user-settings {
@@ -115,7 +115,7 @@ input[type=password]:focus:not([readonly])+label {
 .input-field input[type=text],
 .input-field input[type=password],
 .input-field input[type=email]{
-  background-color: white;
+    background-color: white;
 }
 
 .dropdown-content li.divider {
@@ -221,22 +221,22 @@ input[type=password]:focus:not([readonly])+label {
     left: 600px;
     margin: 0px 10px 20px -200px;
 }
+
 .options-text {
-	color: #333333;
+    color: #333333;
 }
 
 .three {
-	margin-left: 120px;
-
+    margin-left: 120px;
 }
 
 #landing-page {
-	margin-left: 5%;
-	margin-right: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #sign-up-logo-link {
-	margin-top: 10%;
+    margin-top: 10%;
 }
 
 /*----------------------------*/
@@ -245,160 +245,257 @@ input[type=password]:focus:not([readonly])+label {
     font-family: Scream;
     margin:0;
     font-weight: 900;
- }
- #description{
+}
+
+#description{
     font-size: 1.7vw;
     font-family: roboto;
     letter-spacing: 0.22vw;
     font-weight:900;
     margin: 0.1vw 0 0 4.5vw;
     animation: slide 2s;
- }
-#landing{
-	margin:0;
+    -webkit-animation:slide 2s;
+    -ms-animation:slide 2s;
+    -o-animation:slide 2s;
+    -moz-animation:slide 2s;
 }
 
+#landing{
+    margin:0;
+}
 
 .span-title{
-  display:inline-block;
-  margin-left:-2.4vw;
-  transform-origin: 50% 70%;
-   color:black;
-  
+    display:inline-block;
+    margin-left:-2.4vw;
+    transform-origin: 50% 70%;
+    color:black;
 }
-
 
 .span-title:nth-child(1){
-	font-size:6.5vw;
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+    font-size:6.5vw;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) both, entrance 1s both;
 }
+
 .span-title:nth-child(2){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .2s both, entrance 1s both;
 }
 
 .span-title:nth-child(3){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .4s both, entrance 1s both;
 }
 
 .span-title:nth-child(4){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .6s both, entrance 1s both;
 }
 
 .span-title:nth-child(5){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) .8s both, entrance 1s both;
 }
 
 .span-title:nth-child(6){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1s both, entrance 1s both;
 }
+
 .span-title:nth-child(7){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.2s both, entrance 1s both;
 }
 
 .span-title:nth-child(8){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.4s both, entrance 1s both;
 }
 
 .span-title:nth-child(9){
-  animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+    animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+    -webkit-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+    -moz-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+    -ms-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
+    -o-animation: animate 1s cubic-bezier(0.68, -0.55, 0.26, 1.55) 1.6s both, entrance 1s both;
 }
 
 @keyframes animate{
-  from{transform: rotateX(90deg);}
-  to{transform: rotateX(0deg);}
+    from{transform: rotateX(90deg);}
+    to{transform: rotateX(0deg);}
 }
-
+@-webkit-keyframes animate{
+  from{-webkit-transform: rotateX(90deg);}
+  to{-webkit-transform: rotateX(0deg);}
+}
+@-moz-keyframes animate{
+  from{-moz-transform: rotateX(90deg);}
+  to{-moz-transform: rotateX(0deg);}
+}
+@-ms-keyframes animate{
+  from{-ms-transform: rotateX(90deg);}
+  to{-ms-transform: rotateX(0deg);}
+}
+@-o-keyframes animate{
+  from{-o-transform: rotateX(90deg);}
+  to{-o-transform: rotateX(0deg);}
+}
 @keyframes entrance{
-  from { opacity:0 };
-  to { opacity:1 };
+    from { opacity:0 };
+    to { opacity:1 };
+}
+@-webkit-keyframes entrance{
+  from { -webkit-opacity:0 };
+  to { -webkit-opacity:1 };
+}
+@-moz-keyframes entrance{
+  from { -moz-opacity:0 };
+  to { -moz-opacity:1 };
+}
+@-ms-keyframes entrance{
+  from { -ms-opacity:0 };
+  to { -ms-opacity:1 };
 }
 
 @keyframes slide {
+    from { margin-left: 20vw;}
+    to {  margin-left: 4.5vw; }
+}
+@-webkit-keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-moz-keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-ms-keyframes slide {
+  from { margin-left: 20vw;}
+  to {  margin-left: 4.5vw; }
+}
+@-o-keyframes slide {
   from { margin-left: 20vw;}
   to {  margin-left: 4.5vw; }
 }
 
 #about, #sign-up-btn,#login-btn{
-	border: 0;
-	background-color: #CB494E;
- 	border-radius: 0.3vw;
-  	box-shadow: 0 0.5vw 0 #B42529;
-  	color: white;
-  	cursor: pointer;
-  	font: inherit;
-  	outline: 0;
-  	transition: all .1s linear;
-  	text-align: center;
-  	padding:0.5vw 0 0 0;
-  	font-weight: bold;
-  	font-size:1.4vw;
+    border: 0;
+    background-color: #CB494E;
+    border-radius: 0.3vw;
+    box-shadow: 0 0.5vw 0 #B42529;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    outline: 0;
+    transition: all .1s linear;
+    text-align: center;
+    padding:0.5vw 0 0 0;
+    font-weight: bold;
+    font-size:1.4vw;
 }
+
 #about{
- 	margin:2.3vw 0 0 0;
-  	width: 10vw;
-  	height:2.9vw;
+    margin:2.3vw 0 0 0;
+    width: 10vw;
+    height:2.9vw;
 }
+
 #sign-up-btn{
-	margin:0;
-	width: 12vw;
-  	height:3.2vw;
+    margin:0;
+    width: 12vw;
+    height:3.2vw;
 }
+
 #login-btn{
-	margin:0;
-	width: 12vw;
-  	height:3.2vw;
+    margin:0;
+    width: 12vw;
+    height:3.2vw;
 }
+
 #about:active, #sign-up-btn:active, #about:active, #login-btn:active {
-  box-shadow: 0 0.1vw 0 black;
-  transform: translateY(0.5vw);
+    box-shadow: 0 0.1vw 0 black;
+    transform: translateY(0.5vw);
+    -webkit-transform: translateY(0.5vw);
+    -moz-transform: translateY(0.5vw);
+    -ms-transform: translateY(0.5vw);
+    -o-transform: translateY(0.5vw);
 }
+
 #desc{
-	padding:1vw 1.5vw;
-	background-color: rgba(255,255,255,0.8);
-	border-radius: 1vw;
-  font-family:roboto;
-  font-weight: bold;
-	font-weight:900;
+    padding:1vw 1.5vw;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 1vw;
+    font-family:roboto;
+    font-weight: bold;
+    font-weight:900;
 }
+
 h3.center{
-	font-size:4vw;
-	height:6vw;
-	background-color: white;
-	box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, 0.2), 0 0.5vw 1vw 0 rgba(0, 0, 0, 0.19);
-    font-family: Scream;   
+    font-size:4vw;
+    height:6vw;
+    background-color: white;
+    box-shadow: 0 1vw 1vw 0 rgba(0, 0, 0, 0.2), 0 0.5vw 1vw 0 rgba(0, 0, 0, 0.19);
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
+
 .modal-content{
-	font-family:fredoka;
+    font-family:fredoka;
 }
+
 h4.center{
-	font-size:5.5vw;
-    font-family: Scream;   
+    font-size:5.5vw;
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
+
 a.modal-action{
-	margin-bottom: 1vw;
-	font-weight:bold;
+    margin-bottom: 1vw;
+    font-weight:bold;
 }
+
 .modal{
-	background-color: #CB494E;
+    background-color: #CB494E;
 }
+
 div.modal-footer{
-	background-color: blue;
+    background-color: blue;
 }
 
 #show_password{
-	margin:0 0 0 3vw;
+    margin:0 0 0 3vw;
 }
 
-/* START HERE */
 h1.center{
-	font-size:5.5vw;
-    font-family: Scream;   
+    font-size:5.5vw;
+    font-family: Scream;
     src:url(/font/roboto/Scream.ttf);
 }
 h5.center{
-    font-family: Markus;   
+    font-family: Markus;
     src:url(/font/roboto/Markus.ttf);
 }
 
@@ -413,83 +510,151 @@ h5.center{
 }
 
 #class-filter{
-     font-family: Walkway;   
+    font-family: Walkway;
     src:url(/font/roboto/Walkway.ttf);
 }
+
 #birthday-filter{
-     font-family: fredoka;   
-
+    font-family: fredoka;
 }
+
 #course-filter{
-     font-family: fredoka;   
-
+    font-family: fredoka;
 }
+
 #college-filter{
-     font-family: fredoka;   
+    font-family: fredoka;
 }
 
 label{
-    font-family: fredoka;     
-
+    font-family: fredoka;
 }
 
-/*=======================*/
 div.navbar-fixed{
-	height:9vw;
+    height:9vw;
 }
 
 nav {
-	z-index: 0;
-	color: black;
-	background-color: #f5f6f6;
-	box-shadow: 0 0.5vw 0 0 #CB494E;
-}
-nav.z-depth-0{
-	z-index: 0;
-	color: black;
-	height:7vw;
-	box-shadow: 0 0.5vw 0 0 #CB494E;
-	background: rgb(192,192,192);
+    z-index: 0;
+    color: black;
+    background-color: #f5f6f6;
+    box-shadow: 0 0.5vw 0 0 #CB494E;
 }
 
-.logo:hover { 
-  -webkit-animation: 1s rotate infinite linear  ;
-  -webkit-transform-origin: 50% 50%;  
+nav.z-depth-0{
+    z-index: 0;
+    color: black;
+    height:7vw;
+    box-shadow: 0 0.5vw 0 0 #CB494E;
+    background: #333333;
+}
+
+.logo:hover {
+    animation: 1s rotate infinite linear  ;
+    -webkit-animation: 1s rotate infinite linear  ;
+    -moz-animation: 1s rotate infinite linear  ;
+    -ms-animation: 1s rotate infinite linear  ;
+    -o-animation: 1s rotate infinite linear  ;
+    transform-origin: 50% 50%;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+}
+
+@keyframes rotate {
+    0%    { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
 }
 
 @-webkit-keyframes rotate {
     0%    { -webkit-transform: rotate(0); }
-    100% { -webkit-transform: rotate(360deg); } 
+    100% { -webkit-transform: rotate(360deg); }
 }
+
+@-moz-keyframes rotate {
+    0%    { -moz-transform: rotate(0); }
+    100% { -moz-transform: rotate(360deg); }
+}
+
+@-ms-keyframes rotate {
+    0%    { -ms-transform: rotate(0); }
+    100% { -ms-transform: rotate(360deg); }
+}
+
+@-o-keyframes rotate {
+    0%    { -o-transform: rotate(0); }
+    100% { -o-transform: rotate(360deg); }
+}
+
 a.brand-logo{
-	padding:0;
-	margin:0;
-	background-color:#D0D0D4;
-	border-radius: 70%;
-	box-shadow: 0 0.3vw 0 0 rgba(0, 0, 0, 0.2);
-  height:11vw;
-  width:11vw;
+    padding:0;
+    margin:0;
+    background-color: #f5f6f6;
+    border-radius: 70%;
+    box-shadow: 0 0.3vw 0 0 rgba(0, 0, 0, 0.2);
+    height:11vw;
+    width:11vw;
 }
 
 .logo {
-	height:9.1vw;
-	width:9.1vw;
-	margin:1vw;
-   -webkit-animation: flip 2s;
-  animation: flip 2s;
-  text-align:center;
-}
-@keyframes flip {
-  0% { transform: rotateY(0deg);}
-  20% {transform: rotateY(360deg);}
-  40% {transform: rotateX(0deg);}
-  60% {transform: rotateX(360deg);}
-  80% {transform: rotateY(0deg);}
-  100% {transform:rotateY(360deg);}
+    height:9.1vw;
+    width:9.1vw;
+    margin:1vw;
+    text-align:center;
+    -webkit-animation: flip 2s;
+    -ms-animation: flip 2s;
+    -moz-animation: flip 2s;
+    -o-animation: flip 2s;
 }
 
-.card:hover{
-	cursor: pointer;
+@keyframes flip {
+    0% { transform: rotateY(0deg);}
+    20% {transform: rotateY(360deg);}
+    40% {transform: rotateX(0deg);}
+    60% {transform: rotateX(360deg);}
+    80% {transform: rotateY(0deg);}
+    100% {transform:rotateY(360deg);}
+}
+
+@-webkit-keyframes flip {
+    0% { -webkit-transform: rotateY(0deg);}
+    20% { -webkit-transform: rotateY(360deg);}
+    40% { -webkit-transform: rotateX(0deg);}
+    60% { -webkit-transform: rotateX(360deg);}
+    80% { -webkit-transform: rotateY(0deg);}
+    100% { -webkit-transform:rotateY(360deg);}
+}
+
+@-moz-keyframes flip {
+    0% { -moz-transform: rotateY(0deg);}
+    20% { -moz-transform: rotateY(360deg);}
+    40% { -moz-transform: rotateX(0deg);}
+    60% { -moz-transform: rotateX(360deg);}
+    80% { -moz-transform: rotateY(0deg);}
+    100% { -moz-transform:rotateY(360deg);}
+}
+
+@-ms-keyframes flip {
+    0% { -ms-transform: rotateY(0deg);}
+    20% { -ms-transform: rotateY(360deg);}
+    40% { -ms-transform: rotateX(0deg);}
+    60% { -ms-transform: rotateX(360deg);}
+    80% { -ms-transform: rotateY(0deg);}
+    100% { -ms-transform:rotateY(360deg);}
+}
+
+@-o-keyframes flip {
+    0% { -o-transform: rotateY(0deg);}
+    20% { -o-transform: rotateY(360deg);}
+    40% { -o-transform: rotateX(0deg);}
+    60% { -o-transform: rotateX(360deg);}
+    80% { -o-transform: rotateY(0deg);}
+    100% { -o-transform:rotateY(360deg);}
+}
+
+.theme-card:hover{
+    cursor: pointer;
 }
 
 .validate {
@@ -499,14 +664,19 @@ a.brand-logo{
 .stud-info {
     font-size: 20px !important;
 }
+
 #user-name{
-  font-family:fredoka;
-  font-size:2vw;
+    color: white;
+    font-family:fredoka;
+    font-size:2vw;
 }
+
 h1#student_header{
-  font-family: Scream;
-  font-size:5vw;
+    font-family: Scream;
+    font-size:5vw;
+    margin-top:1vw;
 }
+
 #student-list{
-  font-size:1.5vw;
+    font-size:1.5vw;
 }

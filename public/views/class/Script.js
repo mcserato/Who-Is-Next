@@ -49,6 +49,14 @@ var view_class = {
             var course_code = $("#course_code").val(),
                 course_title = $("#course_title").val();
 
+            if(!course_code || course_code.trim()==""){
+                return Materialize.toast("Please enter course code!", 1500);
+            }
+
+            if(!course_title || course_title.trim()==""){
+                return Materialize.toast("Please enter course title!", 1500);
+            }
+
             $.ajax({
                 type: "POST",
                 url: "/api/class",
@@ -193,7 +201,7 @@ var view_class = {
 
         $('.options').hide();
 
-        $('.three,.options')
+        $('.three, .four, .options')
             .mouseenter(function() {
                if($(this).attr("class") == 'three'){
                 $(this).next().show();

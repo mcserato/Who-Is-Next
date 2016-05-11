@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Admin</title>
+        <title>Faculty</title>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="../../style/Materialize.min.css" />
         <link rel="stylesheet" href="../../style/Style.css" />
@@ -15,28 +15,26 @@
         <div id="sidebar"></div>
 
         <div class="container">
-            <div id="main-content">
-                <h1 class="center">Admin</h1>
-                <nav>
-                    <div class="nav-wrapper row">
-                        <form>
-                            <div class="input-field">
-                                <input id="search-faculty" type="search" name="name"
-                                placeholder="Search Faculty"/>
-                                <label for="search-faculty"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
-                            </div>
-                        </form>  
-                    </div>  
-                </nav>
-                
-                <ul id="faculty-list" class="collapsible" data-collapsible="accordion">    
-                </ul>
-                
+            <div id="main-content"></div>
+        </div>
+        
+        <div id="faculty_modal" class="modal">
+            <div class="modal-content">
+                <div class="row">
+                    <div class="col s12">
+                        <h3 id="faculty_name" style="text-align:center"></h3>
+                        <ul id="faculty_list" class="collection">
+                            <li id="faculty_empnum" class="collection-item"></li>
+                            <li id="faculty_username" class="collection-item"></li>
+                            <li id="faculty_email" class="collection-item"></li>
+                            <li id="faculty_lastLoggedIn" class="collection-item"></li>   
+                        </ul>   
+                    </div>             
+                </div>
             </div>
         </div>
-         <div id ="footer">
-        </div>
+
+        <div id ="footer"></div>
 
         <script src="../footer/Script.js"></script>
         <script src="../nav_bar/Script.js"></script>
