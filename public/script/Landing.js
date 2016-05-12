@@ -1,6 +1,14 @@
 'use strict';
 
 $(document).ready( function () {
+
+	$(".slider").slider({
+               animate:"slow",
+               orientation: "horizontal",
+              full_width: true,
+             	});
+             	
+
     document.title += document.title
         ? ' - ' + config.TITLE
         : config.TITLE;
@@ -131,4 +139,5 @@ $(document).ready( function () {
         }
     }
 
+    footer.init('#footer', 'landing');
 });

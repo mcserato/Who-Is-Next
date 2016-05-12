@@ -18,10 +18,46 @@ body {
 	display: block;
 	font-family: fredoka
 }
+#lefty{
+	width:100px;
+	height: 100px;
+}
+
 
 #main-content {
 	margin-top: 1%;
 }
+
+#leftside{
+	font-family: fredoka;
+	margin-top: 12%;
+	margin-left: -4vw;
+	width: 20vw;
+}
+
+#rightside{
+	font-family: fredoka;
+	margin-top: 12%;
+	width: 20vw;
+	margin-left: 23vw;
+
+}
+
+.intro{
+	font-family: fredoka;
+	color: white;
+}
+
+#frontpg{
+	margin-top: 0.8vw;
+}
+
+#frontlogo{
+	width: 9vw;
+	height: 9vw;
+	margin-bottom: -2vw;
+}
+
 
 .fixed-action-btn {
 	top: 20px;
@@ -405,29 +441,16 @@ input[type=password]:focus:not([readonly])+label {
 	border: 0;
 	background-color: #CB494E;
  	border-radius: 0.3vw;
-	box-shadow: 0 0.5vw 0 #B42529;
-	color: white;
-	cursor: pointer;
-	font: inherit;
-	outline: 0;
-	transition: all .1s linear;
-	text-align: center;
-	padding:0.5vw 0 0 0;
-	font-weight: bold;
-	font-size:1.4vw;
-}
-#randomize, #randomize-btn{
-  background-color: #CB494E;
-  box-shadow: 0 0.5vw 0 rgb(203, 73, 78);
-  transition: all .1s linear;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  padding:0.7vw 2.6vw;
-  border-radius: 0.3vw;
-  width:auto;
-  height:auto;
-  font-size:1.5vw;
+  	box-shadow: 0 0.5vw 0 #B42529;
+  	color: white;
+  	cursor: pointer;
+  	font: inherit;
+  	outline: 0;
+  	transition: all .1s linear;
+  	text-align: center;
+  	padding:0.5vw 0 0 0;
+  	font-weight: bold;
+  	font-size:1.4vw;
 }
 #about{
  	margin:2.3vw 0 0 0;
@@ -444,7 +467,7 @@ input[type=password]:focus:not([readonly])+label {
 	width: 12vw;
   	height:3.2vw;
 }
-#about:active, #sign-up-btn:active, #about:active, #login-btn:active,#randomize:active, #randomize-btn:active {
+#about:active, #sign-up-btn:active, #about:active, #login-btn:active {
 	box-shadow: 0 0.1vw 0 black;
 	transform: translateY(0.5vw);
 	-webkit-transform: translateY(0.5vw);
@@ -476,16 +499,20 @@ h4.center{
 a.modal-action{
 	margin-bottom: 1vw;
 	font-weight:bold;
+  margin-top: 0;
+  position: relative;
+  margin-right:0.5vw;
+  padding-bottom:2vw;
+  background-color: red;
 }
 .modal{
 	background-color: #CB494E;
-  border-radius: 1vw;
+  box-shadow: 0 0.5vw 0 #B42529;
+  border-radius: 3vw;
+  height:auto;
 }
-div .modal-footer{
-	background-color:  #CB494E;
-}
-.modal-content{
-	padding:0 2vw;
+div.modal-footer{
+	background-color: blue;
 }
 
 #show_password{
@@ -511,8 +538,10 @@ h5.center{
 	padding-right: 10px;
 	padding-bottom: 10px;
 }
-div.row.center h5.center,#class-filter{
-  font-family: fredoka;
+
+#class-filter{
+	font-family: Walkway;
+	src:url(/font/roboto/Walkway.ttf);
 }
 #college-filter, label, #course-filter,#birthday-filter, .modal-content{
 	font-family: fredoka;
@@ -652,12 +681,48 @@ h1#student_header{
 #student-list{
   font-size:1.5vw;
 }
-#course_title, #course_code{
-  padding-left: 2vw;
-  margin-right: 2vw;
-  width:100%;
-  }
-.modal-content{
+
+/*------------------------*/
+#about_whoisnext h6, #about_whoisnext h4{
+	font-family: fredoka;
+}
+#about_whoisnext h6{
+
+  font-size:1.3vw;
+}
+#about_whoisnext h4{
+  font-size:2.5vw;
+  font-weight: bold;
+}
+ul.indicators{
+  padding-bottom:1vw;
+}
+.title.header{
+  margin-top:0 ;
+}
+div#title h1 span{
+  color: white;
+  font-size: 5vw;
+}
+div#title h1{
+  margin-top:0;
+  padding-bottom: 0.1vw;
+}
+#frontpg h6{
+  margin-top:0;
+  margin-bottom:0;
+}
+div#frontpg{
   margin:0;
-  padding-right: 5vw;
+  padding:0;
+}
+img#logo{
+  width:15vw;
+  height:15vw;
+  margin: 0;
+  padding:0;
+}
+div.col.s12.center{
+  padding: 0;
+  margin: 0;
 }
