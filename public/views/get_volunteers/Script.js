@@ -1,5 +1,6 @@
     'use strict';
 
+    var volunteer_array = [];
 $(document).ready( function () {
 
     navbar.init('#navbar');
@@ -113,7 +114,6 @@ $(document).ready( function () {
         }
 
         else {
-            var volunteer_array = [];
             var volunteer_num = $('#number-filter').val();
             var class_id = $('#class-filter').val();
             var gender;
@@ -198,13 +198,13 @@ $(document).ready( function () {
                                             jumbleWords(volunteer_array);
                                             break;
                                         case 2:
-                                            startHatch(data);
+                                            startHatch(volunteer_array);
                                             break;
                                         case 3:
                                             $('#randomizer-holder').hide();
                                             $('#logo-holder').hide();
                                             $("#container-list").show();
-                                            insertHexagon(data);
+                                            insertHexagon(volunteer_array);
                                             break;
                                         case 4:
                                             $('#randomizer-holder').hide();
@@ -328,7 +328,7 @@ $(document).ready( function () {
                     }
 
                     else {
-                        updated_array.push(volunteer_array[i])
+                            updated_array.push(volunteer_array[i])
                     }
 
                 }
@@ -729,21 +729,29 @@ function startHatch(data){
     $("#list").empty();
     var clist = document.getElementById("container-list");
     var i = 0;
+    var data_copy = [];
     while(document.getElementById("list").firstChild){
         document.getElementById("list").removeChild(document.getElementById("list").firstChild);
     }
 
-    $(clist).prepend("<hr>");
-    $(clist).prepend("<h2>Volunteers</h2>");
-    $(clist).prepend("<br />");
-    $(clist).prepend("<br />");
-    $(clist).prepend("<br />");
-    $(clist).prepend("<br />");
-    $(clist).prepend("<br />");
-    $(clist).prepend("<br />");
-    $(clist).prepend("<br />");
+    for(var j in data) {
+        data_copy.push(data[j]);
+    }
+
+    if (!document.getElementById('hatching')){
+
+        $(clist).prepend("<hr>");
+        $(clist).prepend("<h2 id='hatching'>Volunteers</h2>");
+        $(clist).prepend("<br />");
+        $(clist).prepend("<br />");
+        $(clist).prepend("<br />");
+        $(clist).prepend("<br />");
+        $(clist).prepend("<br />");
+        $(clist).prepend("<br />");
+        $(clist).prepend("<br />");
+    }
     $("#arrows").fadeOut();
-    hatch(data,i);
+    hatch(data_copy,i);
 }
 
 function hatch(data,i) {
@@ -752,7 +760,7 @@ function hatch(data,i) {
     var d1 = document.getElementById("dice1");
     var d2 = document.getElementById("dice2");
     var list = document.getElementById("list");
-    var limit = $('#number-filter').val();
+    var limit = volunteer_array.length;
 
     container.className += " shake-slow shake-constant";
 
