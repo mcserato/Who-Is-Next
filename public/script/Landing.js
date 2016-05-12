@@ -1,6 +1,14 @@
 'use strict';
 
 $(document).ready( function () {
+
+	$(".slider").slider({
+               animate:"slow",
+               orientation: "horizontal",
+              full_width: true,
+             	});
+
+
     document.title += document.title
         ? ' - ' + config.TITLE
         : config.TITLE;
@@ -8,7 +16,7 @@ $(document).ready( function () {
     if(localStorage.user){
 
         var user = JSON.parse(localStorage.user);
-        
+
         if(user.role == 'ADMIN'){
             window.location.href = '/views/faculty';
         }
@@ -22,7 +30,7 @@ $(document).ready( function () {
     }
 
     $('.modal-trigger').leanModal();
-    
+
 
     $("#log-in-page").hide();
     $("#sign-up-page").hide();
@@ -59,7 +67,7 @@ $(document).ready( function () {
         $("#sign-up-page").slideDown();
         $("#landing").slideUp();
         return false;
-    });    
+    });
 
     function hoverIn(){
         $('#main-logo-link').attr("src", '/icon/logo1.gif');
@@ -112,7 +120,7 @@ $(document).ready( function () {
 
     function login_success(data){
         var user = data[0];
-        
+
         if(!user || !user.role){
             return Materialize.toast("Login failed. Please try again !", 2500);
         }
@@ -131,4 +139,5 @@ $(document).ready( function () {
         }
     }
 
+    footer.init('#footer', 'landing');
 });
