@@ -117,6 +117,7 @@ $(document).ready( function () {
             var volunteer_num = $('#number-filter').val();
             var class_id = $('#class-filter').val();
             var gender;
+            var rand;
             if($('#male-filter').is(":checked") && !$('#female-filter').is(":checked")){
                 gender = "M";
             }
@@ -169,7 +170,7 @@ $(document).ready( function () {
 
                             if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
                                 if(volunteer_array.length == 1) {  // Get 1 volunteer
-                                    var rand = Math.round(Math.random() * 2);                        
+                                    rand = Math.round(Math.random() * 2);                        
                                     switch(rand) {
                                         case 1: 
                                             $('#randomizer-holder').hide();
@@ -188,7 +189,7 @@ $(document).ready( function () {
                                             break;
                                     }
                                 } else {    // For get 2-10 volunteers
-                                    var rand = Math.round(Math.random() * 4);
+                                    rand = Math.round(Math.random() * 4);
                                     switch(rand) {
                                         case 1:
                                             $('#randomizer-holder').hide();
@@ -223,7 +224,7 @@ $(document).ready( function () {
                                 $('#randomizer-holder').hide();
                                 $('#logo-holder').hide();
                                 $("#container-list").show();
-                                var rand = Math.round(Math.random() * 3);
+                                rand = Math.round(Math.random() * 3);
                                 switch(rand) {
                                     case 1:
                                         jumbleWords(volunteer_array);
@@ -304,6 +305,104 @@ $(document).ready( function () {
                     
                 },
                 dataType: "JSON"
+            });
+        
+            $('#delete-btn').click(function(){
+                    $('#delete-volunteers-list').empty();
+                    for(var i in volunteer_array){
+                        $('#delete-volunteers-list').append(
+                            '<p>' +
+                                '<input type="checkbox" id="volunteer-' + i + '"/>' +
+                                '<label class="black-text" for="volunteer-' + i + '">' + volunteer_array[i].first_name + ' '+ volunteer_array[i].last_name + '</label>' +
+                            '</p>'
+                        );    
+                    }
+                    
+
+                });
+            $('#confirm-btn').click(function(){
+                var updated_array = [];
+
+                for(var i in volunteer_array){
+                    if ($('#volunteer-' + i).is(":checked")){
+                    }
+
+                    else {
+                        updated_array.push(volunteer_array[i])
+                    }
+
+                }
+                    volunteer_array = updated_array;
+
+                    if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
+                        if(volunteer_array.length == 1) {  // Get 1 volunteer
+                            switch(rand) {
+                                case 1: 
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    zoomInImage(volunteer_array);
+                                    break;
+                                case 2: 
+                                    startHatch(volunteer_array);
+                                    break;
+                                default:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    zoomInImage(volunteer_array);
+                                    break;
+                            }
+                        } else {    // For get 2-10 volunteers
+                            switch(rand) {
+                                case 1:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    jumbleWords(volunteer_array);
+                                    break;
+                                case 2:
+                                    startHatch(volunteer_array);
+                                    break;
+                                case 3:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    insertHexagon(volunteer_array);
+                                    break;
+                                case 4:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    flyingHexagon(volunteer_array);
+                                    break;
+                                default:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    jumbleWords(volunteer_array);
+                                    break;
+                            }
+                        }
+                    } else {    // Get 11 above volunteers
+                        $('#randomizer-holder').hide();
+                        $('#logo-holder').hide();
+                        $("#container-list").show();
+                        switch(rand) {
+                            case 1:
+                                jumbleWords(volunteer_array);
+                                break;
+                            case 2:
+                                insertHexagon(volunteer_array);
+                                break;
+                            case 3:
+                                flyingHexagon(volunteer_array);
+                                break;
+                            default:
+                                jumbleWords(volunteer_array);
+                                break;
+                        }
+                    }
             });
         }
     });
