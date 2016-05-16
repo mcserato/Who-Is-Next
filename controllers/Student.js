@@ -116,17 +116,35 @@ exports.viewAll = function(req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
-    db.query("SELECT DISTINCT * FROM STUDENT WHERE emp_num = ? ORDER BY last_name",
-        [req.session.emp_num],
-        function (err, rows) {
-            if (err) {
-                logs(req, "ERROR", "No one is logged in");
-                return next(err);
+
+    if (req.session.role === 'FACULTY') {
+        db.query("SELECT DISTINCT * FROM STUDENT WHERE emp_num = ? ORDER BY last_name",
+            [req.session.emp_num],
+            function (err, rows) {
+                if (err) {
+                    logs(req, "ERROR", "MySQL Query Error");
+                    return next(err);
+                }
+                logs(req, "SUCCESS", "RETRIEVED all students.");
+                res.send(rows);
             }
-            logs(req, "SUCCESS", "RETRIEVED all students.");
-            res.send(rows);
-        }
-    );
+        );
+    }
+
+    else if (req.session.role === 'ADMIN') {
+        db.query("SELECT DISTINCT student_number, first_name, middle_name, last_name, " +
+            "college, course, gender, picture, birthday FROM STUDENT ORDER BY last_name;",
+            [],
+            function (err, rows) {
+                if (err) {
+                    logs(req, "ERROR", "MySQL Query Error");
+                    return next(err);
+                }
+                logs(req, "SUCCESS", "RETRIEVED all students.");
+                res.send(rows);
+            }
+        );
+    }
 }
 /* Shows the details of a student */
 exports.viewOne = function(req, res, next) {
@@ -138,7 +156,7 @@ exports.viewOne = function(req, res, next) {
         [req.params.student_number, req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "ERROR", "No one is logged in");
+                logs(req, "ERROR", "MySQL Query Error");
                 return next(err);
             }
             if (rows.length === 0) {
@@ -191,7 +209,7 @@ exports.importStud = function(req, res, next) {
         [req.session.emp_num, req.params.class_id , req.session.emp_num],
         function (err, rows) {
             if (err) {
-                logs(req, "ERROR", "No one is logged in");
+                logs(req, "ERROR", "MySQL Query Error");
                 return next(err);
             }
 
