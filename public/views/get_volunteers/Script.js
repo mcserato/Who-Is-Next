@@ -292,6 +292,7 @@ $(document).ready( function () {
                             $.ajax({
                                 url: '/api/save_student',
                                 method: 'POST',
+                                headers: util.headers,
                                 data: {
                                     student_number  : volunteer_array[i].student_number
                                 },
@@ -305,6 +306,7 @@ $(document).ready( function () {
                             $.ajax({
                                 url: '/api/randomizer',
                                 method: 'PUT',
+                                headers: util.headers,
                                 data: {
                                     class_id        : class_id,
                                     student_number  : volunteer_array[i].student_number

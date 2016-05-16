@@ -17,10 +17,7 @@ exports.add = function (req, res, next) {
                 logs(req, "FAILED", "Error: MysSQL Query Failed.");
                 return next(err);
             }   
-            logs(req, "SUCCESS", "INSERTED new class with "
-                +[req.body.class_id, req.body.student_number, 
-                req.session.emp_num, req.body.no_of_times_called]
-                .join(' '));
+            logs(req, "SUCCESS", "Added student " + req.body.student_number + " to class " + req.body.class_id);
             res.send(rows);
         }
     );

@@ -22,6 +22,18 @@ exports.read = function (req, res, next) {
 			return res.send(result);
 		}
 	}
+
+    if (req.session.role === "FACULTY") {
+		db.query("SELECT username, method, log_date, message, status FROM LOG WHERE username = ? AND method !='GET' ORDER BY log_number DESC", 
+		    [req.session.username],
+		    callback);
+
+		function callback(error, result) {
+			if (error) return next(error);
+
+			return res.send(result);
+		}
+	}
 }
 
 exports.write = function (req, status, message) {
@@ -66,11 +78,4 @@ exports.write = function (req, status, message) {
 
 	    return console.log('[!] LOGGED');
     }
-}
-
-exports.save = function (filters, volunteers) {
-	for (var i in volunteers) {
-		console.log(volunteers[i].first_name, volunteers[i].last_name);
-	}
-
 }
