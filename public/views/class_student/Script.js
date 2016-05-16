@@ -88,6 +88,11 @@ var view_class_stud = {
                 return Materialize.toast("Please select gender", 1000);
             }
 
+            //var bday = parseInt();
+            if((Date.now() - new Date(birthday)) < 0) {
+                return Materialize.toast("Please enter the real birthday", 1000);
+            }
+            
             if(!birthday){
                 return Materialize.toast("Please select birthday", 1000);
             }

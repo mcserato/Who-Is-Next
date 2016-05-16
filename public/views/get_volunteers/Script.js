@@ -21,21 +21,22 @@ $(document).ready( function () {
             var college = data.colleges;
 
             for(var i in classes) {
-                $('#class-filter').append(
-                    '<option value=' + classes[i].class_id + '>' + classes[i].course_code + ' ' + classes[i].class_section + (classes[i].section_number || '') +'</option>'
-                );
+                if(classes[i].class_section != "") {
+                   if(classes[i].section_number != null) {
+                        $('#class-filter').append('<option value=' + classes[i].class_id + '>' + classes[i].course_code + ' ' + classes[i].class_section + '-' + classes[i].section_number + '</option>');
+                   } else {
+                        $('#class-filter').append('<option value=' + classes[i].class_id + '>' + classes[i].course_code + ' ' + classes[i].class_section +'</option>');
+                   }
+                } 
             }
+            
 
             for (var i in courses) {
-                $('#course-filter').append(
-                    '<option value=' + courses[i].course + '>' + courses[i].course + '</option>'
-                );
+                $('#course-filter').append('<option value=' + courses[i].course + '>' + courses[i].course + '</option>');
             }
 
             for (var i in college) {
-                $('#college-filter').append(
-                    '<option value='+ college[i].college + '>' + college[i].college + '</option>'
-                );
+                $('#college-filter').append('<option value='+ college[i].college + '>' + college[i].college + '</option>');
             }
         },
         error: function(err){
