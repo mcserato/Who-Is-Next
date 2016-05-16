@@ -206,6 +206,14 @@ exports.getTheme = function (req, res, next) {
 
 /* Switches the theme */
 exports.switchTheme = function (req, res, next) {
+    var themes = [
+        'default',
+        'Pointy Green',
+        'Lightning Yellow',
+        'Purple Triangle',
+        'Red Donut'        
+    ]
+
     if (!req.session) {
         logs(req, "FAILED", "No one is logged in");
         return res.status(401).send("No one is logged in");
@@ -217,8 +225,8 @@ exports.switchTheme = function (req, res, next) {
 		        logs(req, "FAILED", "MySQL Query FAILED.");
 		        return next(err);
 		    }
-		    
-		    logs(req, "SUCCESS", "Updated theme to " + req.body.current_theme);
+
+		    logs(req, "SUCCESS", "Updated theme to " + themes[req.body.current_theme]);
 		    return res.send(rows);
 	});
 }
