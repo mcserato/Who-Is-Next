@@ -1,6 +1,8 @@
     'use strict';
 
     var volunteer_array = [];
+    var volunteer_all = [];
+    var rand;
 $(document).ready( function () {
 
     navbar.init('#navbar');
@@ -83,6 +85,8 @@ $(document).ready( function () {
         $('#randomize-form').fadeIn();
         $('#header').fadeIn();
         $('#container-list').fadeOut();
+        volunteer_all.splice(0);
+        volunteer_array.splice(0);
     });
 
     if(typeof localStorage.class_id_randomize !== 'undefined'){
@@ -117,7 +121,7 @@ $(document).ready( function () {
             var volunteer_num = $('#number-filter').val();
             var class_id = $('#class-filter').val();
             var gender;
-            var rand;
+            
             if($('#male-filter').is(":checked") && !$('#female-filter').is(":checked")){
                 gender = "M";
             }
@@ -150,6 +154,12 @@ $(document).ready( function () {
                         Materialize.toast("Number of students is only " + data.length, 2000);
                         return;
                     }
+                    volunteer_all.splice(0);
+                    volunteer_array.splice(0);
+
+                    for(var i in data){
+                        volunteer_all.push(data[i]);
+                    }
 
                     $('#logo-holder').slideUp();
                     $('#randomize-form').slideUp();
@@ -165,12 +175,13 @@ $(document).ready( function () {
                             document.getElementById("animation-css").remove();
 
                             for (var i = 0; i < volunteer_num; i++) {
-                                volunteer_array.push(data[i]);
+                                volunteer_array.push(volunteer_all.pop());
                             }
-
+                            
                             if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
                                 if(volunteer_array.length == 1) {  // Get 1 volunteer
-                                    rand = Math.round(Math.random() * 2);                        
+                                    // rand = Math.round(Math.random() * 2);                        
+                                    rand = 1;
                                     switch(rand) {
                                         case 1: 
                                             $('#randomizer-holder').hide();
@@ -189,7 +200,8 @@ $(document).ready( function () {
                                             break;
                                     }
                                 } else {    // For get 2-10 volunteers
-                                    rand = Math.round(Math.random() * 4);
+                                    // rand = Math.round(Math.random() * 4);
+                                    rand = 1;
                                     switch(rand) {
                                         case 1:
                                             $('#randomizer-holder').hide();
@@ -224,7 +236,8 @@ $(document).ready( function () {
                                 $('#randomizer-holder').hide();
                                 $('#logo-holder').hide();
                                 $("#container-list").show();
-                                rand = Math.round(Math.random() * 3);
+                                // rand = Math.round(Math.random() * 3);
+                                rand = 1;
                                 switch(rand) {
                                     case 1:
                                         jumbleWords(volunteer_array);
@@ -320,22 +333,35 @@ $(document).ready( function () {
                     
 
                 });
-            $('#confirm-btn').click(function(){
-                var updated_array = [];
 
-                for(var i in volunteer_array){
-                    if ($('#volunteer-' + i).is(":checked")){
+            $('#add-btn').click(function(){
+                    $('#add-volunteers-list').empty();
+                    for(var i in volunteer_all){
+                        $('#add-volunteers-list').append(
+                            '<p>' +
+                                '<input type="checkbox" id="add-volunteer-' + i + '"/>' +
+                                '<label class="black-text" for="add-volunteer-' + i + '">' + volunteer_all[i].first_name + ' '+ volunteer_all[i].last_name + '</label>' +
+                            '</p>'
+                        );    
                     }
+                    
 
-                    else {
-                            updated_array.push(volunteer_array[i])
+                });
+            $('#confirm-btn-add').click(function(){
+
+                for(var i in volunteer_all){
+                    if ($('#add-volunteer-' + i).is(":checked")){
+                        volunteer_array.push(volunteer_all[i]);
+                        volunteer_all = jQuery.grep(volunteer_all, function(value) {
+                          return value != volunteer_all[i];
+                        });
                     }
-
                 }
-                    volunteer_array = updated_array;
 
-                    if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
+                 if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
                         if(volunteer_array.length == 1) {  // Get 1 volunteer
+                            // rand = Math.round(Math.random() * 2);   
+                            rand = 1;
                             switch(rand) {
                                 case 1: 
                                     $('#randomizer-holder').hide();
@@ -354,6 +380,8 @@ $(document).ready( function () {
                                     break;
                             }
                         } else {    // For get 2-10 volunteers
+                            // rand = Math.round(Math.random() * 3);
+                            rand = 1;
                             switch(rand) {
                                 case 1:
                                     $('#randomizer-holder').hide();
@@ -388,6 +416,105 @@ $(document).ready( function () {
                         $('#randomizer-holder').hide();
                         $('#logo-holder').hide();
                         $("#container-list").show();
+                        // rand = Math.round(Math.random() * 3);
+                        rand = 1;
+                        switch(rand) {
+                            case 1:
+                                jumbleWords(volunteer_array);
+                                break;
+                            case 2:
+                                insertHexagon(volunteer_array);
+                                break;
+                            case 3:
+                                flyingHexagon(volunteer_array);
+                                break;
+                            default:
+                                jumbleWords(volunteer_array);
+                                break;
+                        }
+                    }
+
+
+
+            });
+            $('#confirm-btn').click(function(){
+                var updated_array = [];
+                for(var i in volunteer_array){
+                    if ($('#volunteer-' + i).is(":checked")){
+                        volunteer_all.push(volunteer_array[i]);
+                    }
+
+                    else {
+                         updated_array.push(volunteer_array[i]);
+                    }
+
+                }
+                volunteer_array.splice(0);
+                console.log(updated_array);
+                    for(var i in updated_array){
+                        volunteer_array.push(updated_array[i]);
+                    }
+
+                    if (volunteer_array.length >= 1 && volunteer_array.length <= 10) {
+                        if(volunteer_array.length == 1) {  // Get 1 volunteer
+                            // rand = Math.round(Math.random() * 2);   
+                            rand = 1;
+                            switch(rand) {
+                                case 1: 
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    zoomInImage(volunteer_array);
+                                    break;
+                                case 2: 
+                                    startHatch(volunteer_array);
+                                    break;
+                                default:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    zoomInImage(volunteer_array);
+                                    break;
+                            }
+                        } else {    // For get 2-10 volunteers
+                            // rand = Math.round(Math.random() * 3);
+                            rand = 1;
+                            switch(rand) {
+                                case 1:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    jumbleWords(volunteer_array);
+                                    break;
+                                case 2:
+                                    startHatch(volunteer_array);
+                                    break;
+                                case 3:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    insertHexagon(volunteer_array);
+                                    break;
+                                case 4:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    flyingHexagon(volunteer_array);
+                                    break;
+                                default:
+                                    $('#randomizer-holder').hide();
+                                    $('#logo-holder').hide();
+                                    $("#container-list").show();
+                                    jumbleWords(volunteer_array);
+                                    break;
+                            }
+                        }
+                    } else {    // Get 11 above volunteers
+                        $('#randomizer-holder').hide();
+                        $('#logo-holder').hide();
+                        $("#container-list").show();
+                        // rand = Math.round(Math.random() * 3);
+                        rand = 1;
                         switch(rand) {
                             case 1:
                                 jumbleWords(volunteer_array);
@@ -727,7 +854,8 @@ function enterName(data){
 */
 function startHatch(data){
     $("#list").empty();
-    var clist = document.getElementById("container-list");
+    $('#hatching').remove();
+    var clist = document.getElementById("container-list"); 
     var i = 0;
     var data_copy = [];
     while(document.getElementById("list").firstChild){
@@ -745,7 +873,7 @@ function startHatch(data){
         $(clist).prepend("<br />");
         $(clist).prepend("<br />");
         $(clist).prepend("<br />");
-        $(clist).prepend("<br />");
+        $(clist).prepend("<br />"); 
         $(clist).prepend("<br />");
         $(clist).prepend("<br />");
         $(clist).prepend("<br />");
