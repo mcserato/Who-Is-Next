@@ -1,9 +1,33 @@
 'use strict';
 
 $(document).ready( function () {
+    config.checkAuth();
+
+    var user = JSON.parse(localStorage.user);
 
     navbar.init('#navbar');
     sidebar.init('#sidebar');
+
+    $('#main-content').append([
+        '<div style="max-height: 400px; overflow: auto;">',
+            '<table class="bordered">',
+                '<thead>',
+                    '<tr>',
+                        '<th>Date</th>',
+                        user.role === 'ADMIN' ? '<th>IP Address</th>' : '',
+                        user.role === 'ADMIN' ? '<th>Username</th>' : '',
+                        user.role === 'ADMIN' ? '<th>Method</th>' : '',
+                        user.role === 'ADMIN' ? '<th>Route</th>' : '',
+                        '<th>Message</th>',
+                        user.role === 'ADMIN' ? '<th>Status</th>' : '',
+                    '</tr>',
+                '</thead>',
+                '<tbody id="log-table">',
+                '</tbody>',
+            '</table>',
+            '<div>',
+        '</div>'
+    ]);
     
     $.ajax({
     	url: '/api/logs',
@@ -15,12 +39,12 @@ $(document).ready( function () {
     			$("#log-table").append([
     					'<tr>',
     						'<td>' + new Date(logs[i].log_date) + '</td>',
-    						'<td>' + logs[i].ip_address + '</td>',
-    						'<td>' + logs[i].username + '</td>',
-    						'<td>' + logs[i].method + '</td>',
-    						'<td>' + logs[i].url + '</td>',
+    						user.role === 'ADMIN' ? '<td>' + logs[i].ip_address + '</td>' : '',
+    						user.role === 'ADMIN' ? '<td>' + logs[i].username + '</td>' : '',
+    						user.role === 'ADMIN' ? '<td>' + logs[i].method + '</td>' : '',
+    						user.role === 'ADMIN' ? '<td>' + logs[i].url + '</td>' : '',
     						'<td>' + logs[i].message + '</td>',
-    						'<td>' + logs[i].status + '</td>',
+    						user.role === 'ADMIN' ? '<td>' + logs[i].status + '</td>' : '',
     					'</tr>'
     				].join(''));
     		}
