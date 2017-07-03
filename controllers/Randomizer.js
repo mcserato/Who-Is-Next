@@ -16,11 +16,16 @@ exports.getVolunteers = function (req, res, next) {
         logs(req, "ERROR", "No one is logged in");
         return res.status(401).send("No one is logged in");
     }
+    
     var i = 0;
     var query = "";
-    /*if(req.body.gender!=NULL){
-        query += "AND genderlike " + req.body.gender + " ";
-    }*/
+
+    if(req.body.gender == "M"){
+        query += " AND gender = 'M'";
+    }
+    if(req.body.gender == "F"){
+        query += " AND gender = 'F'";
+    }
     if(req.body.last_name!==""){
         query += " AND last_name like '" + req.body.last_name + "%' ";
     }
@@ -40,11 +45,10 @@ exports.getVolunteers = function (req, res, next) {
         query += " AND s.student_number like '" + req.body.batch + "%' ";
     }
 
-    console.log(query);
     db.query("SELECT * FROM STUDENT s, CLASS_STUDENT cs, " +
     "CLASS c WHERE s.student_number = cs.student_number AND s.emp_num = " +
     "cs.emp_num AND c.class_id = cs.class_id AND c.class_id = ?" + query +
-    "ORDER BY cs.no_of_times_called * rand() desc limit " + req.body.number, [req.body.class_id],
+    "ORDER BY cs.no_of_times_called * rand() desc", [req.body.class_id],
 
         function (err, rows) {
             if (err) {

@@ -11,8 +11,10 @@ exports.viewAll = function (req, res, next) {
 		[req.session.emp_num],
 		function (err, rows) {
 			if(err) {
+			    logs(req, "FAILED", "MySQL Query Error");
 				return next(err);
 			}
+			logs(req, "SUCCESS", "Viewed all save points");
 			res.send(rows);
 		}
 	);
@@ -49,6 +51,7 @@ exports.rename = function (req, res, next) {
 			if (err) {
 				return next(err);
 			}
+			logs(req, "SUCCESS", "Renamed a save point to " + req.body.save_name);
 			res.send(rows);
 		}
 	);
@@ -68,6 +71,7 @@ exports.remove = function (req, res, next) {
 			if (err) {
 				return next(err);
 			}
+			logs(req, "SUCCESS", "Removed a save point (" + req.body.save_id + ")");
 			res.send(rows);
 		}
 	);
@@ -75,6 +79,11 @@ exports.remove = function (req, res, next) {
 
 /* This function adds an empty save point with no volunteers selected yet*/
 exports.save = function (req, res, next) {
+	if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
 	db.query("INSERT INTO SAVEPOINT VALUES(DEFAULT, ?, DEFAULT, ?, ?)",
 		[req.body.save_name, req.session.emp_num, req.body.class_id],
 
@@ -82,7 +91,7 @@ exports.save = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-
+            logs(req, "SUCCESS", "Added a save point " + req.body.save_name);
             res.send(rows);
         }
 	);
@@ -90,6 +99,11 @@ exports.save = function (req, res, next) {
 
 /* This function adds a student to a save point */
 exports.savestudent = function (req, res, next) {
+	if (!req.session) {
+        logs(req, "FAILED", "No one is logged in");
+        return res.status(401).send("No one is logged in");
+    }
+
 	db.query("INSERT INTO SAVE_STUDENT VALUES(LAST_INSERT_ID(), ?)",
 		[req.body.student_number],
 

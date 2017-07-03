@@ -5,6 +5,10 @@ $(document).ready( function () {
     $('#validate-btn')
         .click(function(){
 
+            if(!confirm("This is only a temporary feature just for testing. Would you like to continue?")){
+                return;
+            }
+
             $.ajax({
                 url: '/api/validate',
                 method: 'POST',

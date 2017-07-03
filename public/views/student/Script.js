@@ -1,7 +1,7 @@
 'use strict';
 
 $(document).ready( function () {
-    config.checkAuth("FACULTY");
+    config.checkAuth();
 
     faculty_student.init('#main-content');
 });

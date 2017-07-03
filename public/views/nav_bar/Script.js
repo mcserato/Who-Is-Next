@@ -4,10 +4,10 @@ var navbar = {
         var user = JSON.parse(localStorage.user);
 
         if(user.role == "ADMIN"){
-            
+
             $(navbar).append([
                 '<div class="navbar-fixed">',
-                '<ul id="user-settings" class="dropdown-content">',               
+                '<ul id="user-settings" class="dropdown-content">',
                     '<li><a id="logout-btn" href="#">Logout</a></li>',
                 '</ul>',
                     '<div class="navbar-wrapper">',
@@ -32,7 +32,7 @@ var navbar = {
 
             $(navbar).append([
                 '<div class="navbar-fixed">',
-                '<ul id="user-settings" class="dropdown-content">',               
+                '<ul id="user-settings" class="dropdown-content">',
                     '<li>',
                         '<a id="edit-user-btn" title="Edit User" href="#edit-user-modal" class="modal-trigger">Edit Profile</a>',
                     '</li>',
@@ -100,14 +100,14 @@ var navbar = {
                 '</div>',
             ].join(''));
         }
-        
+
         $('.dropdown-button').dropdown({
                inDuration: 300,
                outDuration: 225,
-               constrain_width: false, 
-               hover: false, 
-               gutter: -20, 
-               belowOrigin: true 
+               constrain_width: false,
+               hover: false,
+               gutter: -20,
+               belowOrigin: true
                }
         );
 
@@ -145,17 +145,17 @@ var navbar = {
 
 
                  /* Fills Up Areas */
-         
+
          if (JSON.parse(localStorage.user).role === 'FACULTY') {
              $.ajax({
                     type: "GET",
                     url: "/api/faculty/"+ JSON.parse(localStorage.user).emp_num,
-                    headers: util.headers,                    
+                    headers: util.headers,
                  }).done(function(info){
                     $("#name_edit").val(info[0].name);
                     $("#email_edit").val(info[0].email);
                     $("#username_edit").val(info[0].username);
-                 });   
+                 });
         }
 
             /*Edit User*/
@@ -168,7 +168,11 @@ var navbar = {
             var cnew_password = $("#cnew_password_edit").val();
             var old_password = $("#current_password").val();
 
-            if (new_password != cnew_password) {
+            if (new_password < 8) {
+                Materialize.toast("New password is too short !",1500);
+                return false;
+            }
+            else if (new_password != cnew_password) {
                 Materialize.toast("New passwords does not match !",1500);
                 return false;
             }else if(old_password == "" || old_password.trim()==""){

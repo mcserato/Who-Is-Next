@@ -1,7 +1,7 @@
 'use strict';
 var temp = 0;
-var string1 = 'linear-gradient(to bottom,   rgba(192,192,192,30)  ,    rgba(192,192,192,0)  )';
-var string2 = 'rgb(192,192,192)';
+var string1 = 'linear-gradient(to bottom,   rgba(51,51,51,30)  ,    rgba(51,51,51,0)  )';
+var string2 = 'rgb(51,51,51)';
 
 $(document).ready( function () {
 
@@ -109,7 +109,6 @@ $(document).ready( function () {
 
                     }else {
                     	//default
-                    	console.log(data);
                     }
 
                 },

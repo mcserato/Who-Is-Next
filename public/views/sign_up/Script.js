@@ -28,19 +28,19 @@ $(document).ready( function () {
             return Materialize.toast("Employee Number is missing!", 2500);
         }
 
-        if(!emp_number.match(/[0-9]{9}/)){
-            return Materialize.toast("Employee Number should be numbers only!", 2500);
-        }
-
         if((emp_number.toString()).length != 9){
             return Materialize.toast("Employee Number should be 9 digits!", 2500);
+        }
+        
+        if(!emp_number.match(/[0-9]{9}/)){
+            return Materialize.toast("Employee Number should be numbers only!", 2500);
         }
 
         if(!email){
             return Materialize.toast("Email Address is missing!", 2500);
         }
-
-        if(!email.match(/\S+@\S+/)){
+        
+        if(!email.match(/\S+@\S+\.\S+/)){
             return Materialize.toast("Invalid Email Address", 2500);
         }
 		

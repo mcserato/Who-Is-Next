@@ -93,7 +93,6 @@ $(document).ready( function () {
         /* Edit Class */
         $('.edit')
             .click(function(){
-                console.log($(this).attr("name"));
                 localStorage.class_id = $(this).attr("course_code");
                 $('#edit_modal').openModal();
             });
@@ -101,7 +100,6 @@ $(document).ready( function () {
         /* Link to View Sections of the class clicked */
         $('.title')
             .click(function(){
-                console.log($(this).attr("name"));
                 localStorage.course_code = $(this).attr("course_code");
                 window.location.href = "/views/section";
             });

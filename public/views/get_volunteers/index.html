@@ -64,11 +64,19 @@
                         </div>
                     </form>
                 </div> 
-                <div id="start-again-div">
-                        <button id="start-again" class="btn waves-effect waves-light cnter">Start again</button>
+                <div id="start-again-div center" class="row">
+                    <div class="col s4">
+                        <button id="add-btn" class="btn waves-effect waves-light modal-trigger" href="#add-volunteers">Add Volunteers</button>
+                    </div>
+                    <div class="col s4">
+                        <button id="start-again" class="btn waves-effect waves-light">Start again</button>
+                    </div>
+                    <div class="col s4">
+                        <button id="delete-btn" class="btn waves-effect waves-light modal-trigger" href="#delete-volunteers">Delete Volunteers</button>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 
     <div id="randomize-form" class = "row center">
@@ -149,14 +157,39 @@
 
         </div>
 
-        <a class="waves-effect waves-light btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
+        <a class="waves-effect waves-light btn btn-large row center" style="background-color: #b42529;" id="randomize"><i class="material-icons right">loop</i>RANDOMIZE</a>
 
             </div>
         </div>
-	
-        <div id ="footer">
+         <!-- Modal Structure -->
+        <div id="delete-volunteers" class="modal">
+            <div class="modal-content">
+                <h2>Delete Volunteers</h2>
+                    <div id="delete-volunteers-list">
+                        
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="confirm-btn" type="submit" class="modal-action btn waves-light waves-effect modal-close">
+                        <i class="material-icons">done</i>
+                    </button>
+            </div>
         </div>
 
+        <div id="add-volunteers" class="modal">
+            <div class="modal-content">
+                <h2>Add Volunteers</h2>
+                    <div id="add-volunteers-list">
+                        
+                    </div>
+            </div>
+            <div class="modal-footer">
+                    <button id="confirm-btn-add" type="submit" class="modal-action btn waves-light waves-effect modal-close">
+                        <i class="material-icons">done</i>
+                    </button>
+            </div>
+        </div>
+        
         <script src="../footer/Script.js"></script>
         <script src="../nav_bar/Script.js"></script>
         <script src="../sidebar/Script.js"></script>
